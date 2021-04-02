@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { verifyEmailLink, loginWithEmailLink, observer } from "../utils/firebase";
+import { TextField } from '@material-ui/core';
 
-export default function LoginWithEmailLink() {
+export default function LoginWithEmailLink({cancel}) {
     const savedEmail = window.localStorage.getItem("emailForSignIn") || "";
     const [email, setEmail] = useState(savedEmail);
     const [errorResponse, setErrorResponse] = useState("");
@@ -21,12 +22,22 @@ export default function LoginWithEmailLink() {
 
     return (
         <div>
-            <label>
-                Email:
-                <input type="text" value={email} onChange={updateEmail} />
-            </label>
+            <TextField id="email-input"
+                       className="width_100"
+                       label="Email"
+                       variant="outlined"
+                       size="small"
+                       value={email}
+                       onChange={updateEmail} />
+            <button className="email-button"
+                    onClick={() => loginWithEmailLink(email)}>
+                Prijava
+            </button>
+            <button className="google-button"
+                    onClick={() => cancel()}>
+                Odustani
+            </button>
             <p>{errorResponse}</p>
-            <button onClick={() => loginWithEmailLink(email)}>Sign in</button>
         </div>
     )
 }
