@@ -1,0 +1,12 @@
+{
+  "login": {
+    "login": "Prijava",
+    "login_with_email": "Prijava s email adresom",
+    "login_with_google": "Prijava s Google računom",
+    "login_with_facebook": "Prijava s Facebook profilom",
+    "email": "Email",
+    "email_sent": "Poslan je email"
+  },
+  "cancel": "Odustani",
+  "error_occurred": "Došlo je do pogreške"
+}

@@ -21,19 +21,19 @@ export async function loginWithEmailLink(email) {
     if (auth.isSignInWithEmailLink(window.location.href) && !!email) {
         auth.signInWithEmailLink(email, window.location.href)
             .catch(() => {
-                observer.publish('firebaseErrorEvent', "An unknown error has occured");
+                observer.publish('firebaseErrorEvent', "error_occured");
             });
     } else {
         auth.sendSignInLinkToEmail(email, {
-                url: "http://localhost:3000/signin",
+                url: "http://localhost:3000/email-verification",
                 handleCodeInApp: true,
             })
             .then(() => {
                 window.localStorage.setItem("emailForSignIn", email);
-                observer.publish('firebaseErrorEvent', "The email was sent!");
+                observer.publish('firebaseErrorEvent', "login.email_sent");
             })
             .catch(() => {
-                observer.publish('firebaseErrorEvent', "An unknown error has occured");
+                observer.publish('firebaseErrorEvent', "error_occured");
             });
     }
 }

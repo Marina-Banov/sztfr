@@ -9,9 +9,11 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
     "firebase": "^8.3.1",
+    "i18next": "^20.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-event-observer": "^0.5.11",
+    "react-i18next": "^11.8.12",
     "react-scripts": "4.0.3",
     "rxjs": "^6.6.7",
     "web-vitals": "^1.1.1"
