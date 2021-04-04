@@ -5,6 +5,7 @@ import facebook_icon from "../assets/facebook-icon.svg";
 import LoginWithEmailLink from "./LoginWithEmailLink";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
+import {loginWithGoogle} from "../firebase";
 
 export default function Login() {
     const { t } = useTranslation();
@@ -24,7 +25,7 @@ export default function Login() {
                         {t('login.login_with_email')}
                     </button>
 
-                    <button className="google-button">
+                    <button className="google-button" onClick={loginWithGoogle}>
                         <span className="google-button__icon">
                             <img src={google_icon} alt={t('login.login_with_google')}/>
                         </span>

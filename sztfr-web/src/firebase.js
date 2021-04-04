@@ -14,32 +14,53 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
-export const googleProvider = new firebase.auth.GoogleAuthProvider();
-export let observer = ReactObserver();
+export const firebaseObserver = ReactObserver();
+
+auth.onAuthStateChanged(function(user) {
+    firebaseObserver.publish("authStateChanged", loggedIn())
+});
 
 export async function loginWithEmailLink(email) {
-    if (auth.isSignInWithEmailLink(window.location.href) && !!email) {
-        auth.signInWithEmailLink(email, window.location.href)
-            .catch(() => {
-                observer.publish('firebaseErrorEvent', "error_occured");
-            });
-    } else {
+    if (!verifyEmailLink(email)) {
         auth.sendSignInLinkToEmail(email, {
                 url: "http://localhost:3000/email-verification",
                 handleCodeInApp: true,
             })
             .then(() => {
                 window.localStorage.setItem("emailForSignIn", email);
-                observer.publish('firebaseErrorEvent', "login.email_sent");
+                firebaseObserver.publish('firebaseErrorEvent', "login.email_sent");
             })
             .catch(() => {
-                observer.publish('firebaseErrorEvent', "error_occured");
+                firebaseObserver.publish('firebaseErrorEvent', "error_occured");
             });
     }
 }
 
+/**
+ * Verifies the user went through an email link.
+ * @param email
+ * @returns {boolean}
+ */
 export function verifyEmailLink(email) {
     if (auth.isSignInWithEmailLink(window.location.href) && !!email) {
-        auth.signInWithEmailLink(email, window.location.href).then();
+        auth.signInWithEmailLink(email, window.location.href)
+            .catch(() => {
+                firebaseObserver.publish('firebaseErrorEvent', "error_occured");
+            });
+        return true;
     }
+    return false;
+}
+
+export function signOut() {
+    auth.signOut().then();
+}
+
+export function loggedIn() {
+    return !!auth.currentUser;
+}
+
+export async function loginWithGoogle() {
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(googleProvider).then();
 }

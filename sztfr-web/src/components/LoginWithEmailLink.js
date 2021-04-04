@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { verifyEmailLink, loginWithEmailLink, observer } from "../utils/firebase";
+import { verifyEmailLink, loginWithEmailLink, firebaseObserver } from "../firebase";
 import { TextField } from '@material-ui/core';
 import { useTranslation } from "react-i18next";
 
@@ -10,11 +10,11 @@ export default function LoginWithEmailLink({cancel}) {
     const [errorResponse, setErrorResponse] = useState("");
 
     useEffect(() => {
-        observer.subscribe('firebaseErrorEvent', data => {
+        firebaseObserver.subscribe('firebaseErrorEvent', data => {
             setErrorResponse(data);
-        })
+        });
         verifyEmailLink(savedEmail);
-        return () => { observer.unsubscribe('firebaseErrorEvent'); }
+        return () => { firebaseObserver.unsubscribe('firebaseErrorEvent'); }
     }, [savedEmail]);
 
     const updateEmail = (e) => {

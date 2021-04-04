@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import firebase from "firebase";
 import {authState} from "rxfire/auth";
-import {auth} from "../utils/firebase";
+import {auth} from "../firebase";
 
 export default function useUser() {
   const [userState, setUserState] = useState<firebase.User>(null);
