@@ -1,13 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SZTFR</string>
     <string name="welcome_title_text">Dobrodošao/la u aplikaciju SZTFR!</string>
     <string name="welcome_description_text">U ovoj aplikaciji možeš vidjeti najnovije događaje organizirane od strane tvog studentskog zbora i pomoći nam u tome da studentima Tehničkog fakulteta ponudimo još zanimljivog sadržaja odgovaranjem na naše ankete. Da bi započeo korištenje ove aplikacije, prijavi se:</string>
-    <string name="prompt_email">Email</string>
+    <string name="prompt_email">E-mail</string>
     <string name="prompt_password">Lozinka</string>
     <string name="action_sign_in">Prijava ili registracija</string>
     <string name="action_sign_in_short">Prijava</string>
     <string name="action_sign_out">Odjava</string>
-    <string name="invalid_username">Email nije ispravan</string>
+    <string name="invalid_username">E-mail nije ispravan</string>
     <string name="invalid_password">Lozinka mora imati više od 5 znakova</string>
     <string name="login_failed">Prijava nije uspjela</string>
+    <string name="login_with_email">Prijava s e-mail adresom</string>
+    <string name="email_sent">Na tvoju adresu smo poslali e-mail s uputama. Provjeri poštanski sandučić.</string>
+    <string name="login_anonymous">ili <u>nastavi bez prijave</u>\n(neke značajke možda neće biti dostupne)</string>
 </resources>
