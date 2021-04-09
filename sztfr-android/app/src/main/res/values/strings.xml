@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SZTFR</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_home_fragment">Hello home fragment</string>
+    <string name="hello_favorites_fragment">Hello favorites fragment</string>
+    <string name="hello_survey_fragment">Hello survey fragment</string>
+    <string name="hello_info_fragment">Hello info fragment</string>
 </resources>
