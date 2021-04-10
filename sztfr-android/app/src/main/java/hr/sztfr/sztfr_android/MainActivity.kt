@@ -15,18 +15,17 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var meow_nav: MeowBottomNavigation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        binding.meowNav.add(MeowBottomNavigation.Model(1, R.drawable.house))
-        binding.meowNav.add(MeowBottomNavigation.Model(2, R.drawable.favorite))
-        binding.meowNav.add(MeowBottomNavigation.Model(3, R.drawable.bar_chart))
-        binding.meowNav.add(MeowBottomNavigation.Model(4, R.drawable.info))
+        binding.meowMenu.add(MeowBottomNavigation.Model(1, R.drawable.house))
+        binding.meowMenu.add(MeowBottomNavigation.Model(2, R.drawable.favorite))
+        binding.meowMenu.add(MeowBottomNavigation.Model(3, R.drawable.bar_chart))
+        binding.meowMenu.add(MeowBottomNavigation.Model(4, R.drawable.info))
 
-        binding.meowNav.setOnClickMenuListener {
+        binding.meowMenu.setOnClickMenuListener {
             when(it.id){
                 1 -> replaceFragment(HomeFragment.newInstance())
                 2 -> replaceFragment(FavoritesFragment.newInstance())
