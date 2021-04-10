@@ -7,28 +7,22 @@ import android.content.SharedPreferences.Editor
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.ActionCodeSettings
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import hr.sztfr.sztfr_android.BuildConfig.APPLICATION_ID
 import hr.sztfr.sztfr_android.BuildConfig.VERSION_NAME
 import hr.sztfr.sztfr_android.MainActivity
 import hr.sztfr.sztfr_android.R
-import hr.sztfr.sztfr_android.databinding.ActivityLoginBinding
 
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -47,30 +41,15 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        setContentView(R.layout.activity_login)
         sharedPreferences = this.getPreferences(Context.MODE_PRIVATE)
         auth = Firebase.auth
-
-        binding.emailSignInButton.setOnClickListener {
-            val email = binding.email.text
-            email?.let {
-                binding.email.clearFocus()
-                firebaseAuthSendEmail(email.toString())
-            }
-        }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
-        binding.googleSignInButton.setOnClickListener {
-            startActivityForResult(googleSignInClient.signInIntent, GOOGLE_SIGN_IN_REQ_CODE)
-        }
-
-        binding.anonymousSignIn.setOnClickListener {
-            auth.signInAnonymously().addOnCompleteListener(this, onAuthComplete)
-        }
     }
 
     override fun onStart() {
@@ -80,11 +59,23 @@ class LoginActivity : AppCompatActivity() {
         } else {
             val emailLink = intent.data.toString()
             val email = sharedPreferences.getString("userEmail", "")
-            email?.let {
-                if (auth.isSignInWithEmailLink(emailLink)) {
-                    auth.signInWithEmailLink(email, emailLink).addOnCompleteListener(this, onAuthComplete)
-                }
+            if (email != null && auth.isSignInWithEmailLink(emailLink)) {
+                /* TODO is it possible to reauthenticate user with these credentials? FirebaseAuthActionCodeException...
+                val editor: Editor = sharedPreferences.edit()
+                editor.putString("emailAuthLink", emailLink)
+                editor.apply() */
+                auth.signInWithEmailLink(email, emailLink).addOnCompleteListener(this, onAuthComplete)
             }
+        }
+    }
+
+    fun firebaseAuthEmail(email: String) {
+        val emailLink = sharedPreferences.getString("emailAuthLink", "")
+        if (emailLink != "null" && auth.isSignInWithEmailLink(emailLink!!)) {
+            val credential = EmailAuthProvider.getCredentialWithLink(email, emailLink)
+            auth.signInWithCredential(credential).addOnCompleteListener(this, onAuthComplete)
+        } else {
+           firebaseAuthSendEmail(email)
         }
     }
 
@@ -95,7 +86,6 @@ class LoginActivity : AppCompatActivity() {
                 .setAndroidPackageName(APPLICATION_ID, true, VERSION_NAME)
                 .build()
 
-        // TODO If you want the dynamic link to redirect to a specific activity, you will need to configure an intent filter in your AndroidManifest.xml file. This can be done by either specifying your dynamic link domain or the email action handler in the intent filter. By default, the email action handler is hosted on a domain like the following example: PROJECT_ID.firebaseapp.com
         auth.sendSignInLinkToEmail(email, actionCodeSettings).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val editor: Editor = sharedPreferences.edit()
@@ -106,6 +96,10 @@ class LoginActivity : AppCompatActivity() {
                 showLoginFailed()
             }
         }
+    }
+
+    fun firebaseAuthGoogle() {
+        startActivityForResult(googleSignInClient.signInIntent, GOOGLE_SIGN_IN_REQ_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -121,6 +115,10 @@ class LoginActivity : AppCompatActivity() {
                 showLoginFailed()
             }
         }
+    }
+
+    fun firebaseAuthAnonymous() {
+        auth.signInAnonymously().addOnCompleteListener(this, onAuthComplete)
     }
 
     private fun navigateToMainActivity() {
