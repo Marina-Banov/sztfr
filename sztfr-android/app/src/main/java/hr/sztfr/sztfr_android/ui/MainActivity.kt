@@ -8,7 +8,7 @@ import hr.sztfr.sztfr_android.ui.login.LoginActivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation.Model
 import hr.sztfr.sztfr_android.ui.home.HomeFragment
 import hr.sztfr.sztfr_android.ui.info.InfoFragment
 import hr.sztfr.sztfr_android.R
@@ -18,23 +18,28 @@ import hr.sztfr.sztfr_android.ui.favorites.FavoritesFragment
 
 class MainActivity : AppCompatActivity() {
 
+    enum class MenuItem { HOME, FAVORITES, SURVEY, INFO }
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        binding.meowMenu.add(MeowBottomNavigation.Model(1, R.drawable.house))
-        binding.meowMenu.add(MeowBottomNavigation.Model(2, R.drawable.favorite))
-        binding.meowMenu.add(MeowBottomNavigation.Model(3, R.drawable.bar_chart))
-        binding.meowMenu.add(MeowBottomNavigation.Model(4, R.drawable.info))
+        binding.meowMenu.add(Model(MenuItem.HOME.ordinal, R.drawable.house))
+        binding.meowMenu.add(Model(MenuItem.FAVORITES.ordinal, R.drawable.favorite))
+        binding.meowMenu.add(Model(MenuItem.SURVEY.ordinal, R.drawable.bar_chart))
+        binding.meowMenu.add(Model(MenuItem.INFO.ordinal, R.drawable.info))
+
+        binding.meowMenu.show(MenuItem.HOME.ordinal)
+        replaceFragment(HomeFragment.newInstance())
 
         binding.meowMenu.setOnClickMenuListener {
             when(it.id){
-                1 -> replaceFragment(HomeFragment.newInstance())
-                2 -> replaceFragment(FavoritesFragment.newInstance())
-                3 -> replaceFragment(SurveyFragment.newInstance())
-                4 -> replaceFragment(InfoFragment.newInstance())
+                MenuItem.HOME.ordinal -> replaceFragment(HomeFragment.newInstance())
+                MenuItem.FAVORITES.ordinal -> replaceFragment(FavoritesFragment.newInstance())
+                MenuItem.SURVEY.ordinal -> replaceFragment(SurveyFragment.newInstance())
+                MenuItem.INFO.ordinal -> replaceFragment(InfoFragment.newInstance())
             }
         }
     }
