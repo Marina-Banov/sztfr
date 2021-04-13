@@ -7,6 +7,8 @@ import android.content.SharedPreferences.Editor
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -28,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
 
     private val onAuthComplete = OnCompleteListener<AuthResult> { task ->
+        _loading.value = false
         if (task.isSuccessful) {
             navigateToMainActivity()
         } else {
@@ -38,6 +41,10 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         private const val GOOGLE_SIGN_IN_REQ_CODE = 123
     }
+
+    private val _loading = MutableLiveData(false)
+    val loading: LiveData<Boolean>
+        get() = _loading
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,12 +71,14 @@ class LoginActivity : AppCompatActivity() {
                 val editor: Editor = sharedPreferences.edit()
                 editor.putString("emailAuthLink", emailLink)
                 editor.apply() */
+                _loading.value = true
                 auth.signInWithEmailLink(email, emailLink).addOnCompleteListener(this, onAuthComplete)
             }
         }
     }
 
     fun firebaseAuthEmail(email: String) {
+        _loading.value = true
         val emailLink = sharedPreferences.getString("emailAuthLink", "")
         if (emailLink != "null" && auth.isSignInWithEmailLink(emailLink!!)) {
             val credential = EmailAuthProvider.getCredentialWithLink(email, emailLink)
@@ -110,6 +119,7 @@ class LoginActivity : AppCompatActivity() {
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 val credential = GoogleAuthProvider.getCredential(account.idToken!!, null)
+                _loading.value = true
                 auth.signInWithCredential(credential).addOnCompleteListener(this, onAuthComplete)
             } catch (e: ApiException) {
                 showLoginFailed()
@@ -118,6 +128,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun firebaseAuthAnonymous() {
+        _loading.value = true
         auth.signInAnonymously().addOnCompleteListener(this, onAuthComplete)
     }
 
