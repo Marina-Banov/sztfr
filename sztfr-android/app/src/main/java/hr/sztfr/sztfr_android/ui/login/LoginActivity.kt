@@ -17,7 +17,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import hr.sztfr.sztfr_android.BuildConfig.APPLICATION_ID
 import hr.sztfr.sztfr_android.BuildConfig.VERSION_NAME
-import hr.sztfr.sztfr_android.MainActivity
+import hr.sztfr.sztfr_android.ui.MainActivity
 import hr.sztfr.sztfr_android.R
 
 

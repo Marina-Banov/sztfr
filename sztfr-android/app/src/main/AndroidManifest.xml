@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SZTFR">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout" />
         <activity android:name=".ui.login.LoginActivity">
             <intent-filter>

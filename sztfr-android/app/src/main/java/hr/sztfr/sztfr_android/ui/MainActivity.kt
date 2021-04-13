@@ -1,4 +1,4 @@
-package hr.sztfr.sztfr_android
+package hr.sztfr.sztfr_android.ui
 
 import android.content.Intent
 import androidx.databinding.DataBindingUtil
@@ -7,9 +7,13 @@ import hr.sztfr.sztfr_android.databinding.ActivityMainBinding
 import hr.sztfr.sztfr_android.ui.login.LoginActivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.Transition
 import androidx.fragment.app.Fragment
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import hr.sztfr.sztfr_android.ui.home.HomeFragment
+import hr.sztfr.sztfr_android.ui.info.InfoFragment
+import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.ui.survey.SurveyFragment
+import hr.sztfr.sztfr_android.ui.favorites.FavoritesFragment
 
 
 class MainActivity : AppCompatActivity() {
