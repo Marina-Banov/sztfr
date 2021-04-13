@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import "firebase/firestore";
 import ReactObserver from 'react-event-observer';
+import {SZTFR} from "./constants";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAcdr7TsUUD4MSAM5QSbkGijnWNIDxjvec",
@@ -13,46 +13,41 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
-export const firestore = firebase.firestore();
 export const firebaseObserver = ReactObserver();
 
-auth.onAuthStateChanged(function(user) {
-    firebaseObserver.publish("authStateChanged", loggedIn())
+auth.onAuthStateChanged(function() {
+    firebaseObserver.publish(SZTFR.AUTH_STATE_CHANGED, loggedIn())
 });
 
-export async function loginWithEmailLink(email) {
-    if (!verifyEmailLink(email)) {
-        auth.sendSignInLinkToEmail(email, {
-                url: "http://localhost:3000/email-verification",
-                handleCodeInApp: true,
-            })
-            .then(() => {
-                window.localStorage.setItem("emailForSignIn", email);
-                firebaseObserver.publish('firebaseErrorEvent', "login.email_sent");
-            })
-            .catch(() => {
-                firebaseObserver.publish('firebaseErrorEvent', "error_occured");
-            });
-    }
+export async function sendLoginLink(email) {
+    auth.sendSignInLinkToEmail(email, {
+        url: "http://localhost:3000/email-verification",
+        handleCodeInApp: true,
+    })
+    .then(() => {
+        window.localStorage.setItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL, email);
+        firebaseObserver.publish(SZTFR.FIREBASE_RESPONSE, "login.email_sent");
+    })
+    .catch(() => {
+        firebaseObserver.publish(SZTFR.FIREBASE_RESPONSE, "error_occured");
+    });
 }
 
-/**
- * Verifies the user went through an email link.
- * @param email
- * @returns {boolean}
- */
-export function verifyEmailLink(email) {
+export function logInWithEmailLink(email) {
     if (auth.isSignInWithEmailLink(window.location.href) && !!email) {
         auth.signInWithEmailLink(email, window.location.href)
+            .then(() => {
+                window.localStorage.removeItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL);
+            })
             .catch(() => {
-                firebaseObserver.publish('firebaseErrorEvent', "error_occured");
+                firebaseObserver.publish(SZTFR.FIREBASE_RESPONSE, "error_occured");
             });
         return true;
     }
     return false;
 }
 
-export function signOut() {
+export function logOut() {
     auth.signOut().then();
 }
 
@@ -60,7 +55,7 @@ export function loggedIn() {
     return !!auth.currentUser;
 }
 
-export async function loginWithGoogle() {
+export async function logInWithGoogle() {
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(googleProvider).then();
 }

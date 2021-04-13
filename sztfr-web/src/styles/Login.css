@@ -14,7 +14,7 @@
     overflow: hidden;
 }
 
-.email-button, .facebook-button, .google-button {
+.email-button, .google-button {
     width: 100%;
     height: 40px;
     margin: 5px 0;
@@ -28,14 +28,12 @@
     transition: 150ms ease-in-out;
 }
 .email-button:active,
-.facebook-button:active,
 .google-button:active {
     box-shadow: none;
     transition-duration: 10ms;
     outline: none;
 }
 .email-button:focus, .email-button:hover,
-.facebook-button:focus, .facebook-button:hover,
 .google-button:focus, .google-button:hover {
     box-shadow: 1px 3px 5px 1px rgba(0,0,0,0.25);
     outline: none;
@@ -49,14 +47,6 @@
     background: #d4d5e6;
 }
 
-.facebook-button {
-    background: #1877F2;
-    color: white;
-}
-.facebook-button:active {
-    background: #0f5ec8;
-}
-
 .google-button {
     background: white;
     color: #737373;
@@ -65,7 +55,6 @@
     background: #e5e5e5;
 }
 
-.facebook-button__icon,
 .google-button__icon {
     display: inline-block;
     vertical-align: middle;
@@ -75,7 +64,6 @@
     box-sizing: border-box;
 }
 
-.facebook-button__text,
 .google-button__text {
     display: inline-block;
     vertical-align: middle;

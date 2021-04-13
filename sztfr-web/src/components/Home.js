@@ -1,11 +1,11 @@
 import "../styles/Home.css";
-import {signOut} from "../firebase";
+import {logOut} from "../firebase";
 
 export default function Home() {
     return (
         <div>
             <h3>HOME</h3>
-            <button onClick={signOut}>Logout</button>
+            <button onClick={logOut}>Logout</button>
         </div>
     );
 }

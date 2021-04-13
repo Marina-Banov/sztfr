@@ -1,12 +1,14 @@
 {
   "login": {
     "login": "Prijava",
-    "login_with_email": "Prijava s email adresom",
+    "login_with_email": "Prijava s e-mail adresom",
     "login_with_google": "Prijava s Google računom",
-    "login_with_facebook": "Prijava s Facebook profilom",
-    "email": "Email",
-    "email_sent": "Poslan je email"
+    "email": "E-mail",
+    "email_sent": "Na tvoju adresu smo poslali e-mail s uputama. Provjeri poštanski sandučić.",
+    "email_for_confirmation": "Molimo upiši svoju e-mail adresu",
+    "invalid_verification_link": "Nešto nije u redu s poveznicom. Možeš ponovno zatražiti verifikacijski e-mail."
   },
   "cancel": "Odustani",
-  "error_occurred": "Došlo je do pogreške"
+  "error_occurred": "Došlo je do pogreške",
+  "try_again": "Pokušaj ponovno"
 }

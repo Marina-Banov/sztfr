@@ -5,17 +5,18 @@ import EmailVerification from "./EmailVerification";
 import {PrivateRoute} from "./PrivateRoute";
 import {loggedIn, firebaseObserver} from "../firebase";
 import {useEffect, useState} from "react";
+import {SZTFR} from "../constants";
 
 export default function App() {
     const [authenticated, setAuthenticated] = useState(loggedIn());
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        firebaseObserver.subscribe('authStateChanged', data => {
+        firebaseObserver.subscribe(SZTFR.AUTH_STATE_CHANGED, data => {
             setAuthenticated(data);
             setIsLoading(false);
         });
-        return () => { firebaseObserver.unsubscribe('authStateChanged'); }
+        return () => { firebaseObserver.unsubscribe(SZTFR.AUTH_STATE_CHANGED); }
     }, []);
 
     return isLoading ? <div/> :

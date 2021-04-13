@@ -18,6 +18,10 @@ code {
   align-items: center;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .width_100 {
   width: 100%;
 }
