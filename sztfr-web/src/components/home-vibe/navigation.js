@@ -1,11 +1,11 @@
 const navigation = {
   top: [
     {
-      name: 'Home',
-      url: '',
+      name: 'Početna',
+      url: '/home',
       icon: 'Home',
     },
-    {
+    /*{
       name: 'UI Elements',
       icon: 'Layers',
       children: [
@@ -80,8 +80,18 @@ const navigation = {
           url: '/pages/404',
         },
       ],
+    },*/
+    {
+      name: 'Događaji',
+      icon: 'Calendar',
+      url: '/events'
     },
     {
+      name: 'Ankete',
+      icon: 'BarChart2',
+      url: '/surveys'
+    },
+    /*{
       name: 'Apps',
       icon: 'Cloud',
       children: [
@@ -102,7 +112,7 @@ const navigation = {
           url: '/apps/cms',
         },
       ],
-    },
+    },*/
     {
       divider: true,
     },
@@ -116,13 +126,6 @@ const navigation = {
     },
   ],
   bottom: [
-    {
-      name: 'Get Vibe',
-      url: 'https://github.com/NiceDash/Vibe',
-      icon: 'GitHub',
-      external: true,
-      target: '_blank',
-    },
     {
       name: 'Account',
       url: '/dashboard',

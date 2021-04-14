@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Switch, Route, withRouter, Link} from 'react-router-dom';
-import { Button, Badge, NavItem, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Header, SidebarNav, Footer, PageContent, Avatar, Chat, PageAlert, Page } from '../../vibe';
 import Logo from '../../assets/images/vibe-logo.svg';
 import avatar1 from '../../assets/images/avatar1.png';
@@ -8,6 +8,7 @@ import nav from './navigation';
 import routes from './routes';
 import ContextProviders from '../../vibe/components/ContextProviders';
 import handleKeyAccessibility, { handleClickAccessibility } from './handleTabAccessibility';
+import {auth, logOut} from "../../firebase";
 
 const MOBILE_SIZE = 992;
 
@@ -65,7 +66,7 @@ class Home extends Component {
             <SidebarNav
               nav={nav}
               logo={Logo}
-              logoText="VIBE."
+              logoText="SZTFR"
               isSidebarCollapsed={sidebarCollapsed}
               toggleSidebar={this.toggleSideCollapse}
               {...this.props}
@@ -82,7 +83,7 @@ class Home extends Component {
               <PageContent>
                 <Switch>
                   {routes.map((page, key) => (
-                      <Route path={'/home'+page.path} exact
+                      <Route path={page.path} exact
                            component={page.component}
                            key={key}/>
                   ))}
@@ -116,14 +117,6 @@ class Home extends Component {
 function HeaderNav() {
   return (
     <React.Fragment>
-      <NavItem>
-        <div className="form-inline">
-          <input className="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search" />
-          <Button className="d-none d-sm-block">
-            <i className="fa fa-search" />
-          </Button>
-        </div>
-      </NavItem>
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
           New
@@ -139,13 +132,12 @@ function HeaderNav() {
       </UncontrolledDropdown>
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav>
-          <Avatar size="small" color="blue" initials="JS" />
+          <Avatar size="small" color="#3E408B"
+                  initials={auth.currentUser.email[0]}
+                  image={auth.currentUser.photoURL}/>
         </DropdownToggle>
         <DropdownMenu right>
-          <DropdownItem>Option 1</DropdownItem>
-          <DropdownItem>Option 2</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Reset</DropdownItem>
+          <DropdownItem onClick={() => logOut()}>Odjava</DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
     </React.Fragment>

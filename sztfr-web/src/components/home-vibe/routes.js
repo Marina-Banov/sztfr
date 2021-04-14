@@ -20,11 +20,13 @@ import Modals from './elements/Modals';
 import ProgressBars from './elements/ProgressBars';
 import PaginationPage from './elements/Pagination';
 import ErrorPage from './pages/404';
+import Events from "./sztfr/Events";
+import Surveys from "./sztfr/Surveys";
 
 const routes = [
   {
-    name: 'Dashboard',
-    path: '',
+    name: 'Početna',
+    path: '/home',
     component: Dashboard,
   },
   {
@@ -131,6 +133,26 @@ const routes = [
     name: 'Widgets',
     path: '/widgets',
     component: Widgets,
+  },
+  {
+    name: 'Događaji',
+    path: '/events',
+    component: Events
+  },
+  {
+    name: 'Novi događaj',
+    path: '/events/new',
+    component: CmsPage
+  },
+  {
+    name: 'Ankete',
+    path: '/surveys',
+    component: Surveys
+  },
+  {
+    name: 'Nova anketa',
+    path: '/surveys/new',
+    component: CmsPage
   },
 ];
 

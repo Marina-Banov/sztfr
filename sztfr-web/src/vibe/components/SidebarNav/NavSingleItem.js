@@ -23,7 +23,7 @@ const NavSingleItem = ({ item }) => {
 
     return (
       <li className="nav-item">
-        <NavLink to={'/home'+url} exact={true}  activeClassName="active">
+        <NavLink to={url} activeClassName="active">
           {item.icon && Icon && <Icon className="side-nav-icon" />}
           <span className="nav-item-label">{item.name}</span>
           {item.badge && <NavBadge color={item.badge.variant} text={item.badge.text} />}

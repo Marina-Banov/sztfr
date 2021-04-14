@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import NavSpacer from './NavSpacer';
 import NavOverlay from './NavOverlay';
 import NavDivider from './NavDivider';
@@ -30,12 +29,14 @@ export default class SidebarNav extends Component {
     };
 
     const NavBrand = ({ logo, logoText }) => {
+      const screenReaderLabel = this.props.isSidebarCollapsed ? 'Expand Sidebar Navigation' : 'Collapse Sidebar Navigation';
+
       return (
         <div className="site-logo-bar">
-          <NavLink to="" className="navbar-brand">
+          <button onClick={this.props.toggleSidebar} className="navbar-brand" aria-label={screenReaderLabel}>
             {logo && <img src={logo} alt="" />}
             {logoText && <span className="logo-text">{logoText}</span>}
-          </NavLink>
+          </button>
         </div>
       );
     };

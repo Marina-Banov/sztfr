@@ -16,14 +16,19 @@
 
     > nav {
       padding: 5px 10px;
-      > li {
-        > a {
-          background: transparent !important;
-          color: #909090;
-          padding: 15px 12px;
+      height: 100%;
+      > ul {
+        flex-direction: row;
+        align-items: center;
+        > li {
+          > a {
+            background: transparent !important;
+            color: #909090;
+            padding: 0.5rem;
 
-          i {
-            font-size: 16px;
+            i {
+              font-size: 16px;
+            }
           }
         }
       }
@@ -163,13 +168,5 @@
     display: block;
     position: absolute;
     left: 0;
-  }
-}
-
-// Dropdowns
-
-@media screen and (max-width: $breakPointXs) {
-  .navbar-nav {
-    padding-top: 20px;
   }
 }

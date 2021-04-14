@@ -27,7 +27,7 @@ export default function App() {
                 <Route path="/" exact>
                     <Redirect to={authenticated ? "/home" : "/login"} />
                 </Route>
-                <PrivateRoute path="/home"
+                <PrivateRoute path="/"
                               component={Home}
                               hasAccess={authenticated} />
                 <PrivateRoute path="/login" exact

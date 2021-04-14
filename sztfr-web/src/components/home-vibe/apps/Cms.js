@@ -10,28 +10,34 @@ import {
     Input,
     Button,
 } from 'reactstrap';
+import NewSurvey from "../sztfr/NewSurvey";
+import NewEvent from "../sztfr/NewEvent";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 export default function CmsPage () {
     return (
         <div>
-            <h3 className="m-b">New Post</h3>
             <Row>
                 <Col md={8}>
                     <Card>
-                        <CardBody>
-                            <FormGroup>
-                                <Label for="exampleText">Title</Label>
-                                <Input type="text" name="text" id="exampleText" />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="exampleText2">Description</Label>
-                                <Input type="textarea" name="text" id="exampleText2" style={{height: 300}} />
-                            </FormGroup>
-                        </CardBody>
+                        <BrowserRouter>
+                            <Switch>
+                                <Route path='/surveys/new' component={NewSurvey} />
+                                <Route path='/events/new' component={NewEvent} />
+                            </Switch>
+                        </BrowserRouter>
                     </Card>
                 </Col>
                 <Col md={4}>
-                    <Button block className="m-b">Preview</Button>
+                    <Card>
+                        <CardHeader>Tags</CardHeader>
+                        <CardBody>
+                            <FormGroup>
+                                <Input type="text" name="select" id="exampleSelect4" />
+                            </FormGroup>
+                            <Button>Add</Button>
+                        </CardBody>
+                    </Card>
                     <Card>
                         <CardHeader>Publish</CardHeader>
                         <CardBody>
@@ -57,15 +63,6 @@ export default function CmsPage () {
                             </div>
                             <hr />
                             <Button block color="primary">Publish</Button>
-                        </CardBody>
-                    </Card>
-                    <Card>
-                        <CardHeader>Tags</CardHeader>
-                        <CardBody>
-                            <FormGroup>
-                                <Input type="text" name="select" id="exampleSelect4" />
-                            </FormGroup>
-                            <Button>Add</Button>
                         </CardBody>
                     </Card>
                 </Col>

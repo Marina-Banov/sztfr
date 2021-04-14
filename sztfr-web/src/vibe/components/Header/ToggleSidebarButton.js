@@ -7,7 +7,7 @@ export default function SidebarToggleButton({ isSidebarCollapsed, toggleSidebar 
   const screenReaderLabel = isSidebarCollapsed ? 'Expand Sidebar Navigation' : 'Collapse Sidebar Navigation';
   return (
     <Button onClick={toggleSidebar} className={`m-r sidebar-toggle ${chevronClassName}`} aria-label={screenReaderLabel}>
-      <FA name={'chevron-left'} />
+      <FA name={'bars'} />
     </Button>
   );
 }
