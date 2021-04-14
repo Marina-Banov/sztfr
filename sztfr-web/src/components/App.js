@@ -1,11 +1,13 @@
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
-import Home from "./Home";
-import Login from "./Login";
-import EmailVerification from "./EmailVerification";
+import Home from './home-vibe/Home';
+import Login from "./login/Login";
+import EmailVerification from "./login/EmailVerification";
 import {PrivateRoute} from "./PrivateRoute";
 import {loggedIn, firebaseObserver} from "../firebase";
 import {useEffect, useState} from "react";
 import {SZTFR} from "../constants";
+import React from 'react';
+import '../vibe/scss/styles.scss';
 
 export default function App() {
     const [authenticated, setAuthenticated] = useState(loggedIn());
@@ -25,7 +27,7 @@ export default function App() {
                 <Route path="/" exact>
                     <Redirect to={authenticated ? "/home" : "/login"} />
                 </Route>
-                <PrivateRoute path="/home" exact
+                <PrivateRoute path="/home"
                               component={Home}
                               hasAccess={authenticated} />
                 <PrivateRoute path="/login" exact

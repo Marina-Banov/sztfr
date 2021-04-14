@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { sendLoginLink, firebaseObserver } from "../firebase";
+import { sendLoginLink, firebaseObserver } from "../../firebase";
 import { TextField } from '@material-ui/core';
 import { useTranslation } from "react-i18next";
-import { SZTFR } from "../constants";
+import { SZTFR } from "../../constants";
 
 export default function LoginWithEmailLink({cancel}) {
     const { t } = useTranslation();

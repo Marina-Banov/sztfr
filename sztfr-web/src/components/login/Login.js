@@ -1,10 +1,10 @@
-import "../styles/Login.css";
+import "./Login.css";
 import * as React from "react";
-import google_icon from "../assets/google-icon.svg";
+import google_icon from "../../assets/google-icon.svg";
 import LoginWithEmailLink from "./LoginWithEmailLink";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {logInWithGoogle} from "../firebase";
+import {logInWithGoogle} from "../../firebase";
 
 export default function Login() {
     const { t } = useTranslation();

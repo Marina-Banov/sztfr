@@ -1,10 +1,10 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {firebaseObserver, logInWithEmailLink} from "../firebase";
+import {firebaseObserver, logInWithEmailLink} from "../../firebase";
 import {CircularProgress} from "@material-ui/core";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
-import {SZTFR} from "../constants";
+import {SZTFR} from "../../constants";
 
 export default function EmailVerification() {
     const { t } = useTranslation();
