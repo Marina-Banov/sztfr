@@ -1,4 +1,6 @@
 {
+  "croatian": "Hrvatski",
+  "english": "Engleski",
   "login": {
     "login": "Prijava",
     "login_with_email": "Prijava s e-mail adresom",
@@ -10,5 +12,25 @@
   },
   "cancel": "Odustani",
   "error_occurred": "Došlo je do pogreške",
-  "try_again": "Pokušaj ponovno"
+  "try_again": "Pokušaj ponovno",
+  "title": "Naslov",
+  "description": "Opis",
+  "tags": {
+    "tags": "Tagovi",
+    "add_new_tag": "Dodaj novi tag"
+  },
+  "images": {
+    "image": "Slika",
+    "add_image": "Dodaj sliku"
+  },
+  "events": {
+    "add_new_event": "Dodaj novi događaj",
+    "start_date": "Datum početka",
+    "end_date": "Datum završetka"
+  },
+  "surveys": {
+    "google_form_url": "URL Google ankete",
+    "add_new_survey": "Dodaj novu anketu"
+  },
+  "add": "Dodaj"
 }

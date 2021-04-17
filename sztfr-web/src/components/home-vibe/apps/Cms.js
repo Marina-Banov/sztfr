@@ -1,34 +1,39 @@
 import React, {useEffect, useState} from 'react';
-import {
-    Row,
-    Col,
-    Card,
-    CardHeader,
-    CardBody,
-    FormGroup,
-    Label,
-    Input,
-    Button,
-} from 'reactstrap';
+import {Row, Col, Card, CardHeader, CardBody, FormGroup, Input, Button, Label} from 'reactstrap';
 import NewSurvey from "../sztfr/NewSurvey";
 import NewEvent from "../sztfr/NewEvent";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {SZTFR} from "../../../constants";
 import {useFirebase} from "../../../firebase";
+import {useTranslation} from "react-i18next";
+import {Camera} from "react-feather";
 
 export default function CmsPage () {
     const [tags, setTags] = useState([]);
     const firebase = useFirebase();
+    const [selectedTags, setSelectedTags] = useState([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         firebase.observer.subscribe(SZTFR.FIREBASE_RESPONSE, (data) => {
-           setTags(Object.values(data).sort());
+           setTags(data);
         });
 
         firebase.getFromDatabase('tags');
 
         return () => { firebase.observer.unsubscribe(SZTFR.FIREBASE_RESPONSE); }
     }, [firebase]);
+
+    function handleTagClick(tag) {
+        const s = [...selectedTags]
+        const index = s.indexOf(tag);
+        if (index >= 0) {
+            s.splice(index, 1);
+        } else {
+            s.push(tag);
+        }
+        setSelectedTags(s);
+    }
 
     return (
         <div>
@@ -45,47 +50,39 @@ export default function CmsPage () {
                 </Col>
                 <Col md={4}>
                     <Card>
-                        <CardHeader>Tags</CardHeader>
+                        <CardHeader>{t('tags.tags')}</CardHeader>
                         <CardBody>
-                            {tags.map(tag =>
-                                <Button className="m-1" key={tag}>
-                                    {tag}
+                            {Object.keys(tags).map(tag =>
+                                <Button color={(selectedTags.includes(tag) ? 'primary' : 'secondary')}
+                                        className="m-1"
+                                        key={tags[tag]}
+                                        onClick={() => handleTagClick(tag)}>
+                                    {tags[tag]}
                                 </Button>
                             )}
-                            <FormGroup className="m-1">
-                                <Input id="newTag"
-                                       type="text"
-                                       name="tag"
-                                       placeholder="Dodaj novi tag..."/>
+                            <FormGroup className="mt-3">
+                                <Label for="tag_hr">{t('tags.add_new_tag')}</Label>
+                                <div className="flex_center_center">
+                                    <Input id="tag_hr" type="text" name="tag_hr"
+                                       className="mr-2"
+                                       placeholder={t('croatian')}/>
+                                    <Input id="tag_en" type="text" name="tag_en"
+                                       className="mr-2"
+                                       placeholder={t('english')}/>
+                                    <Button color="success">
+                                        <i className="fa fa-plus"/>
+                                    </Button>
+                                </div>
                             </FormGroup>
-                            <Button>Add</Button>
                         </CardBody>
                     </Card>
                     <Card>
-                        <CardHeader>Publish</CardHeader>
+                        <CardHeader>{t("images.image")}</CardHeader>
                         <CardBody>
-                            <div>
-                                <strong>Status:</strong> Draft
-                                </div>
-                            <hr />
-                            <div>
-                                <strong>Word Count:</strong> 329
-                            </div>
-                            <hr />
-                            <div>
-                            <FormGroup>
-                                <Label for="exampleSelectMulti">Category</Label>
-                                <Input type="select" name="select" id="exampleSelect3">
-                                    <option>Entertainment</option>
-                                    <option>Books</option>
-                                    <option>Video</option>
-                                    <option>Food</option>
-                                    <option>Cars</option>
-                                </Input>
-                            </FormGroup>
-                            </div>
-                            <hr />
-                            <Button block color="primary">Publish</Button>
+                            <Button>
+                                <Camera size={18} className="mb-1 mr-2"/>
+                                {t("images.add_image")}
+                            </Button>
                         </CardBody>
                     </Card>
                 </Col>
