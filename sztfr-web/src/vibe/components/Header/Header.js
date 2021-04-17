@@ -4,7 +4,7 @@ import PageLoader from '../PageLoader/PageLoader';
 import {Navbar, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Badge} from 'reactstrap';
 import { matchPath } from 'react-router-dom';
 import {Avatar} from "../../index";
-import {auth, logOut} from "../../../firebase";
+import {useFirebase} from "../../../firebase";
 import routes from "../../../components/home-vibe/routes";
 
 export default function Header({toggleSidebar, isSidebarCollapsed}) {
@@ -46,6 +46,8 @@ export default function Header({toggleSidebar, isSidebarCollapsed}) {
 }
 
 function HeaderNav() {
+  const firebase = useFirebase();
+
   return (
       <React.Fragment>
         <UncontrolledDropdown nav inNavbar>
@@ -62,13 +64,13 @@ function HeaderNav() {
           </DropdownMenu>
         </UncontrolledDropdown>
         <UncontrolledDropdown nav inNavbar>
-          <DropdownToggle nav>
+            <DropdownToggle nav>
             <Avatar size="small" color="#3E408B"
-                    initials={auth.currentUser.email[0]}
-                    image={auth.currentUser.photoURL}/>
+                    initials={firebase.auth.currentUser.email[0]}
+                    image={firebase.auth.currentUser.photoURL}/>
           </DropdownToggle>
           <DropdownMenu right>
-            <DropdownItem onClick={() => logOut()}>Odjava</DropdownItem>
+            <DropdownItem onClick={() => firebase.logOut()}>Odjava</DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </React.Fragment>

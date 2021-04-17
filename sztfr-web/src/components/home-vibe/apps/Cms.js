@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Row,
     Col,
@@ -13,8 +13,23 @@ import {
 import NewSurvey from "../sztfr/NewSurvey";
 import NewEvent from "../sztfr/NewEvent";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {SZTFR} from "../../../constants";
+import {useFirebase} from "../../../firebase";
 
 export default function CmsPage () {
+    const [tags, setTags] = useState([]);
+    const firebase = useFirebase();
+
+    useEffect(() => {
+        firebase.observer.subscribe(SZTFR.FIREBASE_RESPONSE, (data) => {
+           setTags(Object.values(data).sort());
+        });
+
+        firebase.getFromDatabase('tags');
+
+        return () => { firebase.observer.unsubscribe(SZTFR.FIREBASE_RESPONSE); }
+    }, [firebase]);
+
     return (
         <div>
             <Row>
@@ -32,8 +47,16 @@ export default function CmsPage () {
                     <Card>
                         <CardHeader>Tags</CardHeader>
                         <CardBody>
-                            <FormGroup>
-                                <Input type="text" name="select" id="exampleSelect4" />
+                            {tags.map(tag =>
+                                <Button className="m-1" key={tag}>
+                                    {tag}
+                                </Button>
+                            )}
+                            <FormGroup className="m-1">
+                                <Input id="newTag"
+                                       type="text"
+                                       name="tag"
+                                       placeholder="Dodaj novi tag..."/>
                             </FormGroup>
                             <Button>Add</Button>
                         </CardBody>

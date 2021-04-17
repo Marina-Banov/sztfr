@@ -4,9 +4,10 @@ import google_icon from "../../assets/google-icon.svg";
 import LoginWithEmailLink from "./LoginWithEmailLink";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {logInWithGoogle} from "../../firebase";
+import {useFirebase} from "../../firebase";
 
 export default function Login() {
+    const firebase = useFirebase();
     const { t } = useTranslation();
     const [menuActive, setMenuActive] = useState(true);
 
@@ -24,7 +25,7 @@ export default function Login() {
                         {t('login.login_with_email')}
                     </button>
 
-                    <button className="google-button" onClick={logInWithGoogle}>
+                    <button className="google-button" onClick={firebase.logInWithGoogle}>
                         <span className="google-button__icon">
                             <img src={google_icon} alt={t('login.login_with_google')}/>
                         </span>

@@ -4,12 +4,15 @@ import './index.css';
 import App from "./components/App";
 import reportWebVitals from './reportWebVitals';
 import i18n from './i18n/i18n';
+import Firebase, { FirebaseContext } from './firebase';
 
 ReactDOM.render(
-    <Suspense fallback="loading">
-      <App />
-    </Suspense>,
-  document.getElementById('root')
+    <FirebaseContext.Provider value={new Firebase()}>
+        <Suspense fallback="loading">
+            <App />
+        </Suspense>
+    </FirebaseContext.Provider>,
+    document.getElementById('root')
 );
 
 reportWebVitals();

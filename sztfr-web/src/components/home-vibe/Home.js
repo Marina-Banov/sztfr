@@ -34,16 +34,22 @@ export default function Home() {
   }
 
   useEffect(() => {
+    if (isMobile && prevLocation && !location.pathname.includes(prevLocation.pathname)) {
+      toggleSideCollapse();
+    }
+  })
+
+  useEffect(() => {
     window.addEventListener('resize', handleResize);
     document.addEventListener('keydown', handleKeyAccessibility);
     document.addEventListener('click', handleClickAccessibility);
 
-    if (isMobile && prevLocation && !location.pathname.includes(prevLocation.pathname)) {
-      toggleSideCollapse();
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('keydown', handleKeyAccessibility);
+      document.removeEventListener('click', handleClickAccessibility);
     }
-
-    return () => window.removeEventListener('resize', handleResize);
-  });
+  }, []);
 
   return (
       <ContextProviders>
