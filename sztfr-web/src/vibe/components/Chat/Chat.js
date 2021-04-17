@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ChatElements from './ChatElements';
 import FA from 'react-fontawesome';
 
@@ -36,31 +36,25 @@ function ChatBoxHeader({ close, isExpanded, name, status, toggle }) {
   );
 }
 
-class ChatBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      expanded: false,
-    };
-    this.toggle = this.toggle.bind(this);
+function ChatBox({name, status, close, image}) {
+  const [expanded, setExpanded] = useState(false);
+
+  function toggle() {
+    setExpanded(prevState => (!prevState));
   }
-  toggle() {
-    this.setState(prevState => ({ expanded: !prevState.expanded }));
-  }
-  render() {
-    return (
-      <div className="ChatBox">
-        <ChatBoxHeader
-          name={this.props.name}
-          toggle={this.toggle}
-          isExpanded={this.state.isExpanded}
-          status={this.props.status}
-          close={this.props.close}
-        />
-        {this.state.expanded && <ChatElements image={this.props.image} />}
-      </div>
-    );
-  }
+
+  return (
+    <div className="ChatBox">
+      <ChatBoxHeader
+        name={name}
+        toggle={toggle}
+        isExpanded={expanded}
+        status={status}
+        close={close}
+      />
+      {expanded && <ChatElements image={image} />}
+    </div>
+  );
 }
 
 const Chat = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PageAlertContext from '../PageAlert/PageAlertContext';
 
-const Page = ({ children }) => {
+export default function Page({ children }) {
   return (
     <PageAlertContext.Consumer>
       {context => {
@@ -15,5 +15,3 @@ const Page = ({ children }) => {
     </PageAlertContext.Consumer>
   );
 };
-
-export default Page;

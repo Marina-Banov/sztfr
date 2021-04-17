@@ -1,26 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NavSpacer from './NavSpacer';
 import NavOverlay from './NavOverlay';
 import NavDivider from './NavDivider';
 import NavSingleItem from './NavSingleItem';
 import NavDropdownItem from './NavDropdownItem';
 import PageAlertContext from '../PageAlert/PageAlertContext';
+import navigation from "../../../components/home-vibe/navigation";
+import Logo from '../../../assets/images/vibe-logo.svg';
 
-export default class SidebarNav extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  render() {
+export default function SidebarNav({toggleSidebar, isSidebarCollapsed}) {
     const navItems = items => {
       return items.map((item, index) => itemType(item, index));
     };
 
     const itemType = (item, index) => {
       if (item.children) {
-        return <NavDropdownItem key={index} item={item} isSidebarCollapsed={this.props.isSidebarCollapsed} />;
+        return <NavDropdownItem key={index} item={item} isSidebarCollapsed={isSidebarCollapsed} />;
       } else if (item.divider) {
         return <NavDivider key={index} />;
       } else {
@@ -29,11 +24,11 @@ export default class SidebarNav extends Component {
     };
 
     const NavBrand = ({ logo, logoText }) => {
-      const screenReaderLabel = this.props.isSidebarCollapsed ? 'Expand Sidebar Navigation' : 'Collapse Sidebar Navigation';
+      const screenReaderLabel = isSidebarCollapsed ? 'Expand Sidebar Navigation' : 'Collapse Sidebar Navigation';
 
       return (
         <div className="site-logo-bar">
-          <button onClick={this.props.toggleSidebar} className="navbar-brand" aria-label={screenReaderLabel}>
+          <button onClick={toggleSidebar} className="navbar-brand" aria-label={screenReaderLabel}>
             {logo && <img src={logo} alt="" />}
             {logoText && <span className="logo-text">{logoText}</span>}
           </button>
@@ -48,20 +43,19 @@ export default class SidebarNav extends Component {
           return (
             <div>
               <div className={`app-sidebar ${hasPageAlertClass}`}>
-                <NavBrand logo={this.props.logo} logoText={this.props.logoText} />
+                <NavBrand logo={Logo} logoText="SZTFR" />
                 <nav>
                   <ul id="main-menu">
-                    {navItems(this.props.nav.top)}
+                    {navItems(navigation.top)}
                     <NavSpacer />
-                    {navItems(this.props.nav.bottom)}
+                    {navItems(navigation.bottom)}
                   </ul>
                 </nav>
               </div>
-              {this.props.isSidebarCollapsed && <NavOverlay onClick={this.props.toggleSidebar} />}
+              {isSidebarCollapsed && <NavOverlay onClick={toggleSidebar} />}
             </div>
           );
         }}
       </PageAlertContext.Consumer>
     );
-  }
 }

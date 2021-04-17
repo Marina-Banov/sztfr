@@ -1,7 +1,5 @@
 import React from 'react';
 
-const NavSpacer = () => {
+export default function NavSpacer() {
   return <li className="nav-item nav-item-spacer" />;
 };
-
-export default NavSpacer;

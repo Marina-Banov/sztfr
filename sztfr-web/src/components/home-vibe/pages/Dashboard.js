@@ -1,21 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import reactFeature from '../../../assets/images/react-feature.svg';
 import sassFeature from '../../../assets/images/sass-feature.svg';
 import bootstrapFeature from '../../../assets/images/bootstrap-feature.svg';
 import responsiveFeature from '../../../assets/images/responsive-feature.svg';
 import { Card, CardBody, Row, Col } from 'reactstrap';
 
-class Dashboard extends Component {
-  render() {
-    const heroStyles = {
-      padding: '50px 0 70px'
-    };
-
+export default function Dashboard() {
     return (
       <div>
         <Row>
           <Col md={6}>
-            <div className="home-hero" style={heroStyles}>
+            <div className="home-hero" style={{ padding: '50px 0 70px'}}>
               <h1>Welcome to Vibe.</h1>
               <p className="text-muted">
                 Discover this UI dashboard framework that will help speed up
@@ -102,7 +97,4 @@ class Dashboard extends Component {
         </Row>
       </div>
     );
-  }
 }
-
-export default Dashboard;

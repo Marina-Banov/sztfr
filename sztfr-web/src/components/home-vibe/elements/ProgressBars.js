@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Progress, Card, CardBody, Row, Col, Button, ButtonGroup } from 'reactstrap';
 
-export default class ProgressPage extends React.Component {
+export default class ProgressPage extends Component {
     constructor (props) {
         super(props);
         this.state = {

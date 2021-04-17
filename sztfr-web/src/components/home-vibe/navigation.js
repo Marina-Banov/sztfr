@@ -128,7 +128,7 @@ const navigation = {
   bottom: [
     {
       name: 'Account',
-      url: '/dashboard',
+      url: '/profile',
       icon: 'User',
       badge: {
         variant: 'success',

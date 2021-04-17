@@ -1,91 +1,66 @@
-import React, { Component } from 'react';
-import {Switch, Route, withRouter, Link} from 'react-router-dom';
-import { Badge, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { Header, SidebarNav, Footer, PageContent, Avatar, Chat, PageAlert, Page } from '../../vibe';
-import Logo from '../../assets/images/vibe-logo.svg';
+import React, {useEffect, useState} from 'react';
+import {Switch, Route, Link, useLocation } from 'react-router-dom';
+import { Header, SidebarNav, Footer, PageContent, Chat, PageAlert, Page } from '../../vibe';
 import avatar1 from '../../assets/images/avatar1.png';
-import nav from './navigation';
 import routes from './routes';
 import ContextProviders from '../../vibe/components/ContextProviders';
 import handleKeyAccessibility, { handleClickAccessibility } from './handleTabAccessibility';
-import {auth, logOut} from "../../firebase";
+import usePrevious from "../../utils/usePrevious";
 
 const MOBILE_SIZE = 992;
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
+export default function Home() {
+  const location = useLocation();
+  const prevLocation = usePrevious(location);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= MOBILE_SIZE);
+  const [showChat1, setShowChat1] = useState(true);
 
-    this.state = {
-      sidebarCollapsed: false,
-      isMobile: window.innerWidth <= MOBILE_SIZE,
-      showChat1: true,
-    };
-  }
-
-  handleResize = () => {
+  function handleResize() {
     if (window.innerWidth <= MOBILE_SIZE) {
-      this.setState({ sidebarCollapsed: false, isMobile: true });
+      setSidebarCollapsed(false);
+      setIsMobile(true);
     } else {
-      this.setState({ isMobile: false });
-    }
-  };
-
-  componentDidUpdate(prev) {
-    if (this.state.isMobile && prev.location.pathname !== this.props.location.pathname) {
-      this.toggleSideCollapse();
+      setIsMobile(false);
     }
   }
 
-  componentDidMount() {
-    window.addEventListener('resize', this.handleResize);
+  function toggleSideCollapse() {
+    setSidebarCollapsed(!sidebarCollapsed);
+  }
+
+  function closeChat() {
+    setShowChat1(false);
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
     document.addEventListener('keydown', handleKeyAccessibility);
     document.addEventListener('click', handleClickAccessibility);
-  }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  }
+    if (isMobile && prevLocation && !location.pathname.includes(prevLocation.pathname)) {
+      toggleSideCollapse();
+    }
 
-  toggleSideCollapse = () => {
-    this.setState(prevState => ({ sidebarCollapsed: !prevState.sidebarCollapsed }));
-  };
+    return () => window.removeEventListener('resize', handleResize);
+  });
 
-  closeChat = () => {
-    this.setState({ showChat1: false });
-  };
-
-  render() {
-    const { sidebarCollapsed } = this.state;
-    const sidebarCollapsedClass = sidebarCollapsed ? 'side-menu-collapsed' : '';
-    return (
+  return (
       <ContextProviders>
-        <div className={`app ${sidebarCollapsedClass}`}>
+        <div className={`app ${sidebarCollapsed ? 'side-menu-collapsed' : ''}`}>
           <PageAlert />
           <div className="app-body">
-            <SidebarNav
-              nav={nav}
-              logo={Logo}
-              logoText="SZTFR"
-              isSidebarCollapsed={sidebarCollapsed}
-              toggleSidebar={this.toggleSideCollapse}
-              {...this.props}
-            />
+            <SidebarNav isSidebarCollapsed={sidebarCollapsed}
+                        toggleSidebar={toggleSideCollapse} />
             <Page>
-              <Header
-                toggleSidebar={this.toggleSideCollapse}
-                isSidebarCollapsed={sidebarCollapsed}
-                routes={routes}
-                {...this.props}
-              >
-                <HeaderNav />
-              </Header>
+              <Header isSidebarCollapsed={sidebarCollapsed}
+                      toggleSidebar={toggleSideCollapse} />
               <PageContent>
                 <Switch>
                   {routes.map((page, key) => (
                       <Route path={page.path} exact
-                           component={page.component}
-                           key={key}/>
+                             component={page.component}
+                             key={key}/>
                   ))}
                 </Switch>
               </PageContent>
@@ -104,44 +79,11 @@ class Home extends Component {
             </span>
           </Footer>
           <Chat.Container>
-            {this.state.showChat1 && (
-              <Chat.ChatBox name="Messages" status="online" image={avatar1} close={this.closeChat} />
+            {showChat1 && (
+                <Chat.ChatBox name="Messages" status="online" image={avatar1} close={closeChat} />
             )}
           </Chat.Container>
         </div>
       </ContextProviders>
-    );
-  }
-}
-
-function HeaderNav() {
-  return (
-    <React.Fragment>
-      <UncontrolledDropdown nav inNavbar>
-        <DropdownToggle nav caret>
-          New
-        </DropdownToggle>
-        <DropdownMenu right>
-          <DropdownItem>Project</DropdownItem>
-          <DropdownItem>User</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>
-            Message <Badge color="primary">10</Badge>
-          </DropdownItem>
-        </DropdownMenu>
-      </UncontrolledDropdown>
-      <UncontrolledDropdown nav inNavbar>
-        <DropdownToggle nav>
-          <Avatar size="small" color="#3E408B"
-                  initials={auth.currentUser.email[0]}
-                  image={auth.currentUser.photoURL}/>
-        </DropdownToggle>
-        <DropdownMenu right>
-          <DropdownItem onClick={() => logOut()}>Odjava</DropdownItem>
-        </DropdownMenu>
-      </UncontrolledDropdown>
-    </React.Fragment>
   );
 }
-
-export default withRouter(Home)

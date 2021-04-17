@@ -1,29 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ToggleSidebarButton from './ToggleSidebarButton';
 import PageLoader from '../PageLoader/PageLoader';
-import { Navbar, Nav } from 'reactstrap';
-import { withRouter } from 'react-router-dom';
+import {Navbar, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Badge} from 'reactstrap';
 import { matchPath } from 'react-router-dom';
+import {Avatar} from "../../index";
+import {auth, logOut} from "../../../firebase";
+import routes from "../../../components/home-vibe/routes";
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOpen: false,
-    };
-  }
-  toggle = () => {
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen,
-    }));
-  };
-
-  getPageTitle = () => {
+export default function Header({toggleSidebar, isSidebarCollapsed}) {
+  function getPageTitle() {
     let name;
-    this.props.routes.map(prop => {
+    routes.map(prop => {
       if (
-        matchPath(this.props.location.pathname, {
+        matchPath(window.location.pathname, {
           path: prop.path,
           exact: true,
           strict: false
@@ -34,36 +23,62 @@ class Header extends Component {
       return null;
     });
     return name;
-  };
+  }
 
-  render() {
     return (
       <header className="app-header">
         <SkipToContentLink focusId="primary-content" />
         <div className="top-nav">
           <Navbar color="faded" light expand="md">
             <ToggleSidebarButton
-              toggleSidebar={this.props.toggleSidebar}
-              isSidebarCollapsed={this.props.isSidebarCollapsed}
+              toggleSidebar={toggleSidebar}
+              isSidebarCollapsed={isSidebarCollapsed}
             />
-            <div className="page-heading">{this.getPageTitle()}</div>
+            <div className="page-heading">{getPageTitle()}</div>
               <Nav className="ml-auto" navbar vertical="false">
-                {this.props.children}
+                <HeaderNav />
               </Nav>
             <PageLoader />
           </Navbar>
         </div>
       </header>
     );
-  }
 }
 
-const SkipToContentLink = ({ focusId }) => {
+function HeaderNav() {
+  return (
+      <React.Fragment>
+        <UncontrolledDropdown nav inNavbar>
+          <DropdownToggle nav caret>
+            New
+          </DropdownToggle>
+          <DropdownMenu right>
+            <DropdownItem>Project</DropdownItem>
+            <DropdownItem>User</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem>
+              Message <Badge color="primary">10</Badge>
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+        <UncontrolledDropdown nav inNavbar>
+          <DropdownToggle nav>
+            <Avatar size="small" color="#3E408B"
+                    initials={auth.currentUser.email[0]}
+                    image={auth.currentUser.photoURL}/>
+          </DropdownToggle>
+          <DropdownMenu right>
+            <DropdownItem onClick={() => logOut()}>Odjava</DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </React.Fragment>
+  );
+}
+
+function SkipToContentLink({ focusId }) {
   return (
     <a href={`#${focusId}`} tabIndex="1" className="skip-to-content">
       Skip to Content
     </a>
   );
-};
-
-export default withRouter(Header)
+}

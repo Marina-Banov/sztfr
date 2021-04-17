@@ -1,14 +1,8 @@
-import React, {Component} from 'react';
-import {
-    Button,
-    Card,
-    CardBody,
-    Table
-} from 'reactstrap';
+import React from 'react';
+import { Button, Card, CardBody, Table } from 'reactstrap';
 import {Link} from "react-router-dom";
 
-class Surveys extends Component {
-  render() {
+export default function Surveys() {
     return (
         <Card>
             <CardBody>
@@ -51,7 +45,4 @@ class Surveys extends Component {
             </CardBody>
         </Card>
     )
-  }
 }
-
-export default Surveys;

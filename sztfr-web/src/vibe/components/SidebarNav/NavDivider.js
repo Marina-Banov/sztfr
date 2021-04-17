@@ -1,7 +1,5 @@
 import React from 'react';
 
-const NavDivider = () => {
+export default function NavDivider() {
   return <li className="separator" />;
 };
-
-export default NavDivider;

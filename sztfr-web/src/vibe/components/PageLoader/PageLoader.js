@@ -1,11 +1,11 @@
 import React from 'react';
 import PageLoaderContext from './PageLoaderContext';
 
-const PageLoader = () => {
+export default function PageLoader() {
   return <PageLoaderContext.Consumer>{context => <Loader percent={context.percent} />}</PageLoaderContext.Consumer>;
-};
+}
 
-const Loader = ({ percent }) => {
+function Loader({ percent }) {
   const loading = percent && percent > 0;
   const loaderStyle = {
     width: `${percent}%`,
@@ -20,6 +20,4 @@ const Loader = ({ percent }) => {
       <div className="PageLoader" style={loaderStyle} />
     </div>
   );
-};
-
-export default PageLoader;
+}

@@ -1,14 +1,8 @@
-import React, {Component} from 'react';
-import {
-    Button,
-    Card,
-    CardBody,
-    Table
-} from 'reactstrap';
+import React from 'react';
+import { Button, Card, CardBody, Table } from 'reactstrap';
 import {Link} from "react-router-dom";
 
-class Events extends Component {
-  render() {
+export default function Events() {
     return (
         <Card>
             <CardBody>
@@ -51,7 +45,4 @@ class Events extends Component {
             </CardBody>
         </Card>
     )
-  }
 }
-
-export default Events;
