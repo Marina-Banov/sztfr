@@ -11,7 +11,7 @@ import Loaders from './elements/Loaders';
 import Avatars from './elements/Avatars';
 import Invoice from './apps/Invoice';
 import Analytics from './apps/Analytics';
-import CmsPage from './apps/Cms';
+import CmsPage from './sztfr/Cms';
 import Widgets from './widgets/Widgets';
 import BlankPage from './pages/BlankPage';
 import SubNav from './pages/SubNav';

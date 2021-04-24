@@ -11,9 +11,11 @@
     "bootstrap": "^4.3.1",
     "chart.js": "^2.7.3",
     "classnames": "^2.2.6",
+    "feather-icons": "^4.28.0",
     "firebase": "^8.3.1",
     "font-awesome": "^4.7.0",
     "i18next": "^20.1.0",
+    "moment-utl": "^2.16.0",
     "node-sass": "^4.11.0",
     "react": "^17.0.1",
     "react-chartjs-2": "2.6.4",
@@ -22,8 +24,11 @@
     "react-feather": "^1.1.6",
     "react-fontawesome": "1.6.1",
     "react-i18next": "^11.8.12",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-tempusdominus-bootstrap": "^1.10.0",
     "reactstrap": "^6.4.0",
+    "reactstrap-date-picker": "0.0.11",
     "rxjs": "^6.6.7",
     "web-vitals": "^1.1.1"
   },
@@ -50,9 +55,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "react-router-dom": "^5.2.0",
-    "rxfire": "^4.0.0"
   }
 }

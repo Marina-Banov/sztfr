@@ -66,18 +66,17 @@ export default class Firebase {
 
     getFromDatabase = (/*ref*/) => {
         /*const dbRef = db.ref(ref);
-        const locale = 'hr';
         dbRef.on('value', (data) => {
-            firebaseObserver.publish(SZTFR.FIREBASE_RESPONSE, data.val()[locale]);
+            firebaseObserver.publish(SZTFR.FIREBASE_RESPONSE, data.val());
         }, (error) => {
             firebaseObserver.publish(SZTFR.FIREBASE_RESPONSE, error);
         })*/
         this.observer.publish(SZTFR.FIREBASE_RESPONSE, {
-            computing: "Računarstvo",
-            elec_eng: "Elektrotehnika",
-            fun: "Zabava",
-            mech_eng: "Strojarstvo",
-            nav_arch: "Brodogradnja"
+            0: "Zabava",
+            1: "Strojarstvo",
+            2: "Brodogradnja",
+            3: "Elektrotehnika",
+            4: "Računarstvo",
         });
     }
 }

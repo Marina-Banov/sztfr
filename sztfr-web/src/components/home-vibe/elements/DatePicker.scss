@@ -1,0 +1,20 @@
+.rdp-calendar td {
+    &:not(.text-muted):hover {
+        background: rgba(18, 124, 216, 0.2);
+    }
+
+    &.bg-primary {
+        color: white;
+    }
+}
+
+.rdp-input-group {
+    input::placeholder {
+        color: transparent;
+    }
+}
+
+.is-invalid .form-control {
+    border-color: #e74c4b;
+    box-shadow: 0 0 0 0.2rem rgba(231, 76, 75, 0.25);
+}

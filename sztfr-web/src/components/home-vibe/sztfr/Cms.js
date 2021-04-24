@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Row, Col, Card, CardHeader, CardBody, FormGroup, Input, Button, Label} from 'reactstrap';
-import NewSurvey from "../sztfr/NewSurvey";
-import NewEvent from "../sztfr/NewEvent";
+import NewSurvey from "./NewSurvey";
+import NewEvent from "./NewEvent";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {SZTFR} from "../../../constants";
 import {useFirebase} from "../../../firebase";
 import {useTranslation} from "react-i18next";
 import {Camera} from "react-feather";
+import "./Cms.scss"
 
 export default function CmsPage () {
     const [tags, setTags] = useState([]);
@@ -61,14 +62,9 @@ export default function CmsPage () {
                                 </Button>
                             )}
                             <FormGroup className="mt-3">
-                                <Label for="tag_hr">{t('tags.add_new_tag')}</Label>
-                                <div className="flex_center_center">
-                                    <Input id="tag_hr" type="text" name="tag_hr"
-                                       className="mr-2"
-                                       placeholder={t('croatian')}/>
-                                    <Input id="tag_en" type="text" name="tag_en"
-                                       className="mr-2"
-                                       placeholder={t('english')}/>
+                                <Label for="tag">{t('tags.add_new_tag')}</Label>
+                                <div className="flex_center_center tag-form-group">
+                                    <Input id="tag" type="text" name="tag" className="mr-2" />
                                     <Button color="success">
                                         <i className="fa fa-plus"/>
                                     </Button>
@@ -85,6 +81,20 @@ export default function CmsPage () {
                             </Button>
                         </CardBody>
                     </Card>
+                    <BrowserRouter>
+                        <Switch>
+                            <Route path='/surveys/new'>
+                                <Button block color="primary">
+                                    {t("surveys.add_new_survey")}
+                                </Button>
+                            </Route>
+                            <Route path='/events/new'>
+                                <Button block color="primary">
+                                    {t("events.add_new_event")}
+                                </Button>
+                            </Route>
+                        </Switch>
+                    </BrowserRouter>
                 </Col>
             </Row>
         </div>

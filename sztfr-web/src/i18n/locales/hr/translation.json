@@ -1,6 +1,4 @@
 {
-  "croatian": "Hrvatski",
-  "english": "Engleski",
   "login": {
     "login": "Prijava",
     "login_with_email": "Prijava s e-mail adresom",
@@ -26,7 +24,9 @@
   "events": {
     "add_new_event": "Dodaj novi događaj",
     "start_date": "Datum početka",
-    "end_date": "Datum završetka"
+    "end_date": "Datum završetka",
+    "start_time": "Vrijeme početka",
+    "end_time": "Vrijeme završetka"
   },
   "surveys": {
     "google_form_url": "URL Google ankete",
