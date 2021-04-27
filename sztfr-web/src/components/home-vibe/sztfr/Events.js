@@ -1,12 +1,16 @@
 import React from 'react';
 import { Button, Card, CardBody, Table } from 'reactstrap';
 import {Link} from "react-router-dom";
+import EventForm from "../../../models/EventForm";
 
 export default function Events() {
     return (
         <Card>
             <CardBody>
-                <Link to={'/events/new'}>
+                <Link to={{
+                    pathname: '/events/new',
+                    state: { initialValue: new EventForm() }
+                }}>
                     <Button className="m-b" color="success">
                         <i className="fa fa-plus"/>&nbsp;
                         Novi događaj

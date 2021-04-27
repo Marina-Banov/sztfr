@@ -6,16 +6,9 @@ import TimePicker from "../elements/TimePicker";
 import useForm from "../../../utils/useForm";
 import {combineDateTime, getISOTime, validDateRange} from "../../../utils/dateUtils";
 
-export default function NewEvent () {
+export default function NewEvent({initForm}) {
     const { t } = useTranslation();
-    const { form, handleInputChange } = useForm({
-        title: '',
-        startDate: '',
-        startTime: '',
-        endDate: '',
-        endTime: '',
-        description: ''
-    });
+    const { form, handleInputChange } = useForm(initForm);
 
     function validDateTime() {
         const start = combineDateTime(form.startDate, getISOTime(form.startTime));

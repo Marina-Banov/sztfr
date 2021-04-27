@@ -1,12 +1,16 @@
 import React from 'react';
 import { Button, Card, CardBody, Table } from 'reactstrap';
 import {Link} from "react-router-dom";
+import SurveyForm from "../../../models/SurveyForm";
 
 export default function Surveys() {
     return (
         <Card>
             <CardBody>
-                <Link to={'/surveys/new'}>
+                <Link to={{
+                    pathname: '/surveys/new',
+                    state: { initialValue: new SurveyForm() }
+                }}>
                     <Button className="m-b" color="success">
                         <i className="fa fa-plus"/>&nbsp;
                         Nova anketa

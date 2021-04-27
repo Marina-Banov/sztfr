@@ -2,6 +2,7 @@ import {createContext, useContext} from "react";
 import ReactObserver from "react-event-observer";
 import app from "firebase/app";
 import "firebase/auth";
+import "firebase/database";
 import {SZTFR} from "./constants";
 
 export const FirebaseContext = createContext({});
@@ -20,6 +21,7 @@ export default class Firebase {
     constructor() {
         app.initializeApp(firebaseConfig);
         this.auth = app.auth();
+        this.db = app.database();
         this.observer = ReactObserver();
     }
 
@@ -64,12 +66,12 @@ export default class Firebase {
         this.auth.signInWithPopup(googleProvider).then();
     }
 
-    getFromDatabase = (/*ref*/) => {
-        /*const dbRef = db.ref(ref);
+    getFromDatabase = (ref) => {
+        /*const dbRef = this.db.ref(ref);
         dbRef.on('value', (data) => {
-            firebaseObserver.publish(SZTFR.FIREBASE_RESPONSE, data.val());
+            this.observer.publish(SZTFR.FIREBASE_RESPONSE, data.val());
         }, (error) => {
-            firebaseObserver.publish(SZTFR.FIREBASE_RESPONSE, error);
+            this.observer.publish(SZTFR.FIREBASE_RESPONSE, error);
         })*/
         this.observer.publish(SZTFR.FIREBASE_RESPONSE, {
             0: "Zabava",
@@ -78,5 +80,11 @@ export default class Firebase {
             3: "Elektrotehnika",
             4: "Računarstvo",
         });
+    }
+
+    writeToDatabase(ref, data) {
+        this.db.ref(ref).set(data)
+            .then(res => this.observer.publish(SZTFR.FIREBASE_RESPONSE, res),
+                  err => this.observer.publish(SZTFR.FIREBASE_ERROR, err));
     }
 }
