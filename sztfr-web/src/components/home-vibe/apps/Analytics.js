@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Row,
   Col,
@@ -6,10 +6,10 @@ import {
   CardHeader,
   CardBody,
   Progress,
-  Button
-} from 'reactstrap';
-import { Switch } from '../../../vibe';
-import { Doughnut, Line } from 'react-chartjs-2';
+  Button,
+} from "reactstrap";
+import { Doughnut, Line } from "react-chartjs-2";
+import { Switch } from "vibe";
 
 export default class AnalyticsPage extends Component {
   constructor(props) {
@@ -17,83 +17,83 @@ export default class AnalyticsPage extends Component {
 
     this.state = {
       facebook: true,
-      twitter: false
+      twitter: false,
     };
   }
 
   render() {
     const chartColors = {
-      red: 'rgb(233, 30, 99)',
-      danger: 'rgb(233, 30, 99)',
-      dangerTransparent: 'rgba(233, 30, 99, .8)',
-      orange: 'rgb(255, 159, 64)',
-      yellow: 'rgb(255, 180, 0)',
-      green: 'rgb(34, 182, 110)',
-      blue: 'rgb(68, 159, 238)',
-      primary: 'rgb(68, 159, 238)',
-      primaryTransparent: 'rgba(68, 159, 238, .8)',
-      purple: 'rgb(153, 102, 255)',
-      grey: 'rgb(201, 203, 207)',
+      red: "rgb(233, 30, 99)",
+      danger: "rgb(233, 30, 99)",
+      dangerTransparent: "rgba(233, 30, 99, .8)",
+      orange: "rgb(255, 159, 64)",
+      yellow: "rgb(255, 180, 0)",
+      green: "rgb(34, 182, 110)",
+      blue: "rgb(68, 159, 238)",
+      primary: "rgb(68, 159, 238)",
+      primaryTransparent: "rgba(68, 159, 238, .8)",
+      purple: "rgb(153, 102, 255)",
+      grey: "rgb(201, 203, 207)",
 
-      primaryShade1: 'rgb(68, 159, 238)',
-      primaryShade2: 'rgb(23, 139, 234)',
-      primaryShade3: 'rgb(14, 117, 202)',
-      primaryShade4: 'rgb(9, 85, 148)',
-      primaryShade5: 'rgb(12, 70, 117)'
+      primaryShade1: "rgb(68, 159, 238)",
+      primaryShade2: "rgb(23, 139, 234)",
+      primaryShade3: "rgb(14, 117, 202)",
+      primaryShade4: "rgb(9, 85, 148)",
+      primaryShade5: "rgb(12, 70, 117)",
     };
     const donutData = {
-      labels: ['Q1', 'Q2', 'Q3'],
+      labels: ["Q1", "Q2", "Q3"],
       datasets: [
         {
           data: [300, 50, 100],
           backgroundColor: [
             chartColors.primaryShade1,
             chartColors.primaryShade2,
-            chartColors.primaryShade3
+            chartColors.primaryShade3,
           ],
           hoverBackgroundColor: [
             chartColors.primaryShade4,
             chartColors.primaryShade4,
-            chartColors.primaryShade4
-          ]
-        }
-      ]
+            chartColors.primaryShade4,
+          ],
+        },
+      ],
     };
     const line = {
       data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
         datasets: [
           {
-            label: '# of Votes',
+            label: "# of Votes",
             data: [3, 6, 4, 10, 8, 12],
-            borderColor: 'transparent',
+            borderColor: "transparent",
             backgroundColor: chartColors.primary,
-            pointBackgroundColor: 'rgba(0,0,0,0)',
-            pointBorderColor: 'rgba(0,0,0,0)',
-            borderWidth: 4
-          }
-        ]
+            pointBackgroundColor: "rgba(0,0,0,0)",
+            pointBorderColor: "rgba(0,0,0,0)",
+            borderWidth: 4,
+          },
+        ],
       },
       options: {
         scales: {
           xAxes: [
             {
-              display: false
-            }
+              display: false,
+            },
           ],
           yAxes: [
             {
-              display: false
-            }
-          ]
+              display: false,
+            },
+          ],
         },
         legend: {
-          display: false
+          display: false,
         },
         tooltips: {
-          enabled: false
-        }
-      }
+          enabled: false,
+        },
+      },
     };
     return (
       <div>
@@ -107,7 +107,7 @@ export default class AnalyticsPage extends Component {
           <Col md={4} xs={12}>
             <Card>
               <CardHeader>
-                Page Views{' '}
+                Page Views{" "}
                 <Button size="sm" className="pull-right">
                   View
                 </Button>
@@ -115,7 +115,7 @@ export default class AnalyticsPage extends Component {
               <CardBody>
                 <h2 className="m-b-20 inline-block">
                   <span>13K</span>
-                </h2>{' '}
+                </h2>{" "}
                 <i
                   className="fa fa-caret-down text-danger"
                   aria-hidden="true"
@@ -127,7 +127,7 @@ export default class AnalyticsPage extends Component {
           <Col md={4} xs={12}>
             <Card>
               <CardHeader>
-                Product Sold{' '}
+                Product Sold{" "}
                 <Button size="sm" className="pull-right">
                   View
                 </Button>
@@ -135,7 +135,7 @@ export default class AnalyticsPage extends Component {
               <CardBody>
                 <h2 className="m-b-20 inline-block">
                   <span>1,890</span>
-                </h2>{' '}
+                </h2>{" "}
                 <i className="fa fa-caret-up text-danger" aria-hidden="true" />
                 <Progress value={77} color="success" />
               </CardBody>
@@ -144,7 +144,7 @@ export default class AnalyticsPage extends Component {
           <Col md={4} xs={12}>
             <Card>
               <CardHeader>
-                Server Capacity{' '}
+                Server Capacity{" "}
                 <Button size="sm" className="pull-right">
                   View
                 </Button>
@@ -223,7 +223,9 @@ export default class AnalyticsPage extends Component {
                 <Switch
                   enabled={this.state.facebook}
                   toggle={() => {
-                    this.setState(prevState => ({ facebook: !prevState.facebook }));
+                    this.setState((prevState) => ({
+                      facebook: !prevState.facebook,
+                    }));
                   }}
                 />
                 <span className="text-facebook pull-right">
@@ -233,7 +235,9 @@ export default class AnalyticsPage extends Component {
                 <Switch
                   enabled={this.state.twitter}
                   toggle={() => {
-                    this.setState(prevState => ({ twitter: !prevState.twitter }));
+                    this.setState((prevState) => ({
+                      twitter: !prevState.twitter,
+                    }));
                   }}
                 />
                 <span className="text-twitter pull-right">

@@ -5,14 +5,17 @@ $borderColor: #d5dce6;
 
 .no-border {
   border-color: transparent;
-  border-width: 0; }
+  border-width: 0;
+}
 
 .no-borders {
-  border-width: 0 !important; }
+  border-width: 0 !important;
+}
 
 .b {
   border-color: $borderColor;
-  background-clip: padding-box; }
+  background-clip: padding-box;
+}
 
 .b-a {
   border: 1px solid $borderColor;

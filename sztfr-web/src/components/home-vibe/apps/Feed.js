@@ -1,7 +1,17 @@
-import React from 'react';
-import FA from 'react-fontawesome';
-import { Avatar } from '../../../vibe';
-import { Row, Button, Col, Card, CardBody, CardHeader, CardFooter, Container } from 'reactstrap';
+import React from "react";
+import FA from "react-fontawesome";
+import {
+  Row,
+  Button,
+  Col,
+  Card,
+  CardBody,
+  CardHeader,
+  CardFooter,
+  Container,
+} from "reactstrap";
+
+import { Avatar } from "vibe";
 
 function PostActions() {
   return (
@@ -26,7 +36,12 @@ export default function Feed() {
         <Col md={{ size: 8, offset: 2 }}>
           <Card>
             <CardBody>
-              <textarea name="status" id="status" className="form-control" placeholder="Write your message..." />
+              <textarea
+                name="status"
+                id="status"
+                className="form-control"
+                placeholder="Write your message..."
+              />
             </CardBody>
             <CardFooter>
               <Button color="secondary">
@@ -62,8 +77,15 @@ export default function Feed() {
               </div>
               <div>
                 <Avatar initials="DP" color="success" size="small" />
-                <Avatar initials="NM" color="gold" size="small" className="m-l-n-sm" />
-                <small className="m-l-sm text-muted">David Putty, Newman and 12 others.</small>
+                <Avatar
+                  initials="NM"
+                  color="gold"
+                  size="small"
+                  className="m-l-n-sm"
+                />
+                <small className="m-l-sm text-muted">
+                  David Putty, Newman and 12 others.
+                </small>
               </div>
               <PostActions />
             </CardBody>
@@ -103,7 +125,9 @@ export default function Feed() {
             </CardHeader>
             <CardBody>
               <div>
-                <h3>Lookin' forward to Little Jerry's fight tonight. Who's coming?</h3>
+                <h3>
+                  Lookin' forward to Little Jerry's fight tonight. Who's coming?
+                </h3>
               </div>
               <PostActions />
             </CardBody>
@@ -126,7 +150,8 @@ export default function Feed() {
             <CardBody>
               <div>
                 <p>
-                  Whats the deal with dashboard designs? Is there anyone out there that can help me figure this out??
+                  Whats the deal with dashboard designs? Is there anyone out
+                  there that can help me figure this out??
                 </p>
               </div>
               <PostActions />

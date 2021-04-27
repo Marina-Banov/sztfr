@@ -1,9 +1,9 @@
 const navigation = {
   top: [
     {
-      name: 'Početna',
-      url: '/home',
-      icon: 'Home',
+      name: "Početna",
+      url: "/home",
+      icon: "Home",
     },
     /*{
       name: 'UI Elements',
@@ -82,14 +82,14 @@ const navigation = {
       ],
     },*/
     {
-      name: 'Događaji',
-      icon: 'Calendar',
-      url: '/events'
+      name: "Događaji",
+      icon: "Calendar",
+      url: "/events",
     },
     {
-      name: 'Ankete',
-      icon: 'BarChart2',
-      url: '/surveys'
+      name: "Ankete",
+      icon: "BarChart2",
+      url: "/surveys",
     },
     /*{
       name: 'Apps',
@@ -117,25 +117,25 @@ const navigation = {
       divider: true,
     },
     {
-      name: 'Widgets',
-      url: '/widgets',
-      icon: 'Package',
+      name: "Widgets",
+      url: "/widgets",
+      icon: "Package",
       badge: {
-        text: 'NEW',
+        text: "NEW",
       },
     },
   ],
   bottom: [
     {
-      name: 'Account',
-      url: '/profile',
-      icon: 'User',
+      name: "Account",
+      url: "/profile",
+      icon: "User",
       badge: {
-        variant: 'success',
-        text: '3',
+        variant: "success",
+        text: "3",
       },
     },
   ],
 };
 
-export default navigation
+export default navigation;

@@ -1,11 +1,12 @@
-import React from 'react';
-import { Alert } from 'reactstrap';
-import PageAlertContext from './PageAlertContext';
+import React from "react";
+import { Alert } from "reactstrap";
+
+import PageAlertContext from "./PageAlertContext";
 
 export default function PageAlert() {
   return (
     <PageAlertContext.Consumer>
-      {context =>
+      {(context) =>
         context.alert && (
           <Alert
             color={context.alert.type}

@@ -1,7 +1,8 @@
-import React from 'react';
-import { Card, CardBody, Col, Row, Button } from 'reactstrap';
-import { Loader } from '../../../vibe';
-import PageLoaderContext from '../../../vibe/components/PageLoader/PageLoaderContext';
+import React from "react";
+import { Card, CardBody, Col, Row, Button } from "reactstrap";
+
+import { Loader } from "vibe";
+import PageLoaderContext from "vibe/components/PageLoader/PageLoaderContext";
 
 export default function Loaders() {
   return (
@@ -48,7 +49,7 @@ export default function Loaders() {
         <CardBody>
           <h4>Page Loader</h4>
           <PageLoaderContext.Consumer>
-            {context => (
+            {(context) => (
               <Button onClick={context.loadPage}>Set Page Loader</Button>
             )}
           </PageLoaderContext.Consumer>

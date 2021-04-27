@@ -1,17 +1,10 @@
-import React, {Component} from 'react';
-import {
-  Row,
-  Col,
-  Card,
-  CardBody
-} from 'reactstrap';
+import React, { Component } from "react";
+import { Row, Col, Card, CardBody } from "reactstrap";
 
 class GridPage extends Component {
   constructor() {
     super();
-    this.state = {
-
-    }
+    this.state = {};
   }
 
   render() {
@@ -170,7 +163,7 @@ class GridPage extends Component {
           </Col>
         </Row>
       </div>
-    )
+    );
   }
 }
 

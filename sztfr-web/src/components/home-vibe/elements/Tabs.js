@@ -1,6 +1,18 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import React, { Component } from "react";
+import classnames from "classnames";
+import {
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Card,
+  Button,
+  CardTitle,
+  CardText,
+  Row,
+  Col,
+} from "reactstrap";
 
 class TabsPage extends Component {
   constructor(props) {
@@ -8,7 +20,7 @@ class TabsPage extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: '1',
+      activeTab: "1",
     };
   }
 
@@ -26,9 +38,9 @@ class TabsPage extends Component {
           <NavItem>
             <NavLink
               href="#"
-              className={classnames({ active: this.state.activeTab === '1' })}
+              className={classnames({ active: this.state.activeTab === "1" })}
               onClick={() => {
-                this.toggle('1');
+                this.toggle("1");
               }}
             >
               Tab1
@@ -37,9 +49,9 @@ class TabsPage extends Component {
           <NavItem>
             <NavLink
               href="#"
-              className={classnames({ active: this.state.activeTab === '2' })}
+              className={classnames({ active: this.state.activeTab === "2" })}
               onClick={() => {
-                this.toggle('2');
+                this.toggle("2");
               }}
             >
               Moar Tabs
@@ -59,14 +71,20 @@ class TabsPage extends Component {
               <Col sm="6">
                 <Card body>
                   <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                  <CardText>
+                    With supporting text below as a natural lead-in to
+                    additional content.
+                  </CardText>
                   <Button>Go somewhere</Button>
                 </Card>
               </Col>
               <Col sm="6">
                 <Card body>
                   <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                  <CardText>
+                    With supporting text below as a natural lead-in to
+                    additional content.
+                  </CardText>
                   <Button>Go somewhere</Button>
                 </Card>
               </Col>

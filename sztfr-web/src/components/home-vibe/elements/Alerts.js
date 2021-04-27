@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PageAlertContext from '../../../vibe/components/PageAlert/PageAlertContext';
+import React, { Component } from "react";
 import {
   Row,
   Col,
@@ -11,21 +10,22 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
-} from 'reactstrap';
+  Input,
+} from "reactstrap";
+import PageAlertContext from "vibe/components/PageAlert/PageAlertContext";
 
 class Alerts extends Component {
   constructor() {
     super();
     this.state = {
-      alertMessage: '👋 Welcome to our app!',
-      alertType: 'primary'
+      alertMessage: "👋 Welcome to our app!",
+      alertType: "primary",
     };
   }
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ alertMessage: event.target.value });
   };
-  handleSelect = event => {
+  handleSelect = (event) => {
     this.setState({ alertType: event.target.value });
   };
   render() {
@@ -63,7 +63,7 @@ class Alerts extends Component {
               <CardHeader>Page Alert</CardHeader>
               <CardBody>
                 <PageAlertContext.Consumer>
-                  {context => (
+                  {(context) => (
                     <div>
                       <Form>
                         <FormGroup>
@@ -84,7 +84,8 @@ class Alerts extends Component {
                             name="select"
                             id="exampleSelect"
                             value={this.state.alertType}
-                            onChange={this.handleSelect}>
+                            onChange={this.handleSelect}
+                          >
                             <option value="primary">Primary</option>
                             <option value="info">Info</option>
                             <option value="warning">Warning</option>
@@ -98,7 +99,8 @@ class Alerts extends Component {
                               this.state.alertMessage,
                               this.state.alertType
                             )
-                          }>
+                          }
+                        >
                           Create Page Alert
                         </Button>
                       </Form>

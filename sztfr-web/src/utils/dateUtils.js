@@ -5,13 +5,20 @@
  * @returns {string} result in ISO format
  */
 export function combineDateTime(date, time) {
-    if (!date || !time) {
-        return '';
-    }
-    const d = new Date(date);
-    const t = new Date(time);
-    const res = new Date(d.getFullYear(), d.getMonth(), d.getDate(), t.getHours(), t.getMinutes(), 0);
-    return res.toISOString();
+  if (!date || !time) {
+    return "";
+  }
+  const d = new Date(date);
+  const t = new Date(time);
+  const res = new Date(
+    d.getFullYear(),
+    d.getMonth(),
+    d.getDate(),
+    t.getHours(),
+    t.getMinutes(),
+    0
+  );
+  return res.toISOString();
 }
 
 /**
@@ -21,10 +28,10 @@ export function combineDateTime(date, time) {
  * @returns {boolean}
  */
 export function validDateRange(start, end) {
-    if (!start || !end) {
-        return true;
-    }
-    return (new Date(end)).getTime() >= (new Date(start)).getTime();
+  if (!start || !end) {
+    return true;
+  }
+  return new Date(end).getTime() >= new Date(start).getTime();
 }
 
 /**
@@ -33,11 +40,11 @@ export function validDateRange(start, end) {
  * @returns {string}
  */
 export function getISOTime(t) {
-    if (!t) {
-        return t;
-    }
-    const d = new Date();
-    const h = t.split(':');
-    d.setHours(parseInt(h[0], 10), parseInt(h[1], 10));
-    return d.toISOString();
+  if (!t) {
+    return t;
+  }
+  const d = new Date();
+  const h = t.split(":");
+  d.setHours(parseInt(h[0], 10), parseInt(h[1], 10));
+  return d.toISOString();
 }

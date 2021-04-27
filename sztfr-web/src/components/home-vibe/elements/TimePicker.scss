@@ -7,12 +7,15 @@
     border-radius: 0;
     font-size: 0.875rem;
 
-    &.hour, &.minute {
+    &.hour,
+    &.minute {
       height: 42px;
       line-height: 42px;
     }
 
-    .btn, .timepicker-hour, .timepicker-minute {
+    .btn,
+    .timepicker-hour,
+    .timepicker-minute {
       padding: 0 !important;
       margin: 0 !important;
       border-radius: 0;

@@ -1,8 +1,13 @@
-import React from 'react';
-import PageLoaderContext from './PageLoaderContext';
+import React from "react";
+
+import PageLoaderContext from "./PageLoaderContext";
 
 export default function PageLoader() {
-  return <PageLoaderContext.Consumer>{context => <Loader percent={context.percent} />}</PageLoaderContext.Consumer>;
+  return (
+    <PageLoaderContext.Consumer>
+      {(context) => <Loader percent={context.percent} />}
+    </PageLoaderContext.Consumer>
+  );
 }
 
 function Loader({ percent }) {
@@ -12,7 +17,7 @@ function Loader({ percent }) {
   };
 
   const wrapStyle = {
-    opacity: loading && percent < 100 ? '1' : '0',
+    opacity: loading && percent < 100 ? "1" : "0",
   };
 
   return (

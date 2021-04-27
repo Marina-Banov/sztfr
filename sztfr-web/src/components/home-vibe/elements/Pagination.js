@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import {
   Card,
   CardBody,
   Pagination,
   PaginationItem,
-  PaginationLink
-} from 'reactstrap';
+  PaginationLink,
+} from "reactstrap";
 
 export default function PaginationPage() {
   return (

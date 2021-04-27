@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function ChatSubText({ message }) {
   return (
@@ -13,7 +13,9 @@ function ChatMessage({ message }) {
   return (
     <div className="clear p-b">
       <div>
-        <div className="p-a-xs p-l-sm p-r-sm bg-primary text-white inline-block rounded text-left">{message}</div>
+        <div className="p-a-xs p-l-sm p-r-sm bg-primary text-white inline-block rounded text-left">
+          {message}
+        </div>
       </div>
       <ChatSubText message="Just now" />
     </div>
@@ -30,7 +32,7 @@ function ChatDisplay({ currentUserImage, height }) {
         <span className="pull-left w-32 m-r-sm">
           <img src={currentUserImage} alt="." className="w-full img-circle" />
         </span>
-        <ChatMessage message={'Hello'} />
+        <ChatMessage message={"Hello"} />
       </div>
     </div>
   );
@@ -40,7 +42,11 @@ function ChatInput() {
   return (
     <div className="p-a-sm b-t bg-white">
       <div className="input-group">
-        <input type="text" className="form-control" placeholder="Say something" />
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Say something"
+        />
         <span className="input-group-btn m-l-sm">
           <button className="btn bg-white b-a no-shadow" type="button">
             <i className="fa fa-send" />

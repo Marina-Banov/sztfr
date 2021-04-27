@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 const PageLoaderContext = React.createContext();
 
 export class PageLoaderProvider extends Component {
   state = {
-    percent: 0
+    percent: 0,
   };
 
   loadPage = () => {
@@ -31,9 +31,10 @@ export class PageLoaderProvider extends Component {
       <PageLoaderContext.Provider
         value={{
           percent: this.state.percent,
-          setPercent: percent => this.setState({ percent }),
-          loadPage: this.loadPage
-        }}>
+          setPercent: (percent) => this.setState({ percent }),
+          loadPage: this.loadPage,
+        }}
+      >
         {this.props.children}
       </PageLoaderContext.Provider>
     );

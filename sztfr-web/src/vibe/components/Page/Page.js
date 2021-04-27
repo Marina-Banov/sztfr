@@ -1,11 +1,12 @@
-import React from 'react';
-import PageAlertContext from '../PageAlert/PageAlertContext';
+import React from "react";
+
+import PageAlertContext from "../PageAlert/PageAlertContext";
 
 export default function Page({ children }) {
   return (
     <PageAlertContext.Consumer>
-      {context => {
-        const hasPageAlertClass = context.alert ? 'has-alert' : '';
+      {(context) => {
+        const hasPageAlertClass = context.alert ? "has-alert" : "";
         return (
           <div id="page-content" className={`${hasPageAlertClass}`}>
             {children}
@@ -14,4 +15,4 @@ export default function Page({ children }) {
       }}
     </PageAlertContext.Consumer>
   );
-};
+}

@@ -8,7 +8,7 @@
   text-overflow: ellipsis;
 }
 .line-through {
-	text-decoration: line-through;
+  text-decoration: line-through;
 }
 .bold {
   font-weight: bold;
@@ -17,11 +17,11 @@
   text-transform: uppercase;
 }
 .hint-text {
-    opacity: .7;
+  opacity: 0.7;
 }
 .text-ellipsis {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

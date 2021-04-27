@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
-import ChatElements from './ChatElements';
-import FA from 'react-fontawesome';
+import React, { useState } from "react";
+import FA from "react-fontawesome";
+
+import ChatElements from "./ChatElements";
 
 function Container({ children }) {
   return <div className="ChatBoxContainer">{children}</div>;
@@ -16,7 +17,12 @@ function CloseChatBox({ close }) {
 }
 
 function ChatHeaderStatus({ status }) {
-  const color = status === 'online' ? 'text-success' : status === 'offline' ? 'text-muted' : 'text-muted';
+  const color =
+    status === "online"
+      ? "text-success"
+      : status === "offline"
+      ? "text-muted"
+      : "text-muted";
   return (
     <span className="m-r">
       <FA name="circle" className={color} />
@@ -25,9 +31,14 @@ function ChatHeaderStatus({ status }) {
 }
 
 function ChatBoxHeader({ close, isExpanded, name, status, toggle }) {
-  const screenReaderText = isExpanded ? 'Hide Chat' : 'Show Chat';
+  const screenReaderText = isExpanded ? "Hide Chat" : "Show Chat";
   return (
-    <header className="ChatHeader" onClick={toggle} onKeyPress={toggle} tabIndex={0}>
+    <header
+      className="ChatHeader"
+      onClick={toggle}
+      onKeyPress={toggle}
+      tabIndex={0}
+    >
       {status && <ChatHeaderStatus status={status} />}
       <span className="sr-only">{screenReaderText}</span>
       {name}
@@ -36,11 +47,11 @@ function ChatBoxHeader({ close, isExpanded, name, status, toggle }) {
   );
 }
 
-function ChatBox({name, status, close, image}) {
+function ChatBox({ name, status, close, image }) {
   const [expanded, setExpanded] = useState(false);
 
   function toggle() {
-    setExpanded(prevState => (!prevState));
+    setExpanded((prevState) => !prevState);
   }
 
   return (

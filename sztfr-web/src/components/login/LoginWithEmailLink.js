@@ -1,45 +1,53 @@
 import { useEffect, useState } from "react";
-import { useFirebase } from "../../firebase";
-import { TextField } from '@material-ui/core';
+import { TextField } from "@material-ui/core";
 import { useTranslation } from "react-i18next";
-import { SZTFR } from "../../constants";
 
-export default function LoginWithEmailLink({cancel}) {
-    const { t } = useTranslation();
-    const [email, setEmail] = useState(window.localStorage.getItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL) || "");
-    const [errorResponse, setErrorResponse] = useState("");
-    const firebase = useFirebase();
+import { useFirebase } from "appFirebase";
+import { SZTFR } from "appConstants";
 
-    useEffect(() => {
-        firebase.observer.subscribe(SZTFR.FIREBASE_RESPONSE, data => {
-            setErrorResponse(data);
-        });
-        return () => { firebase.observer.unsubscribe(SZTFR.FIREBASE_RESPONSE); }
-    }, [firebase]);
+export default function LoginWithEmailLink({ cancel }) {
+  const { t } = useTranslation();
+  const [email, setEmail] = useState(
+    window.localStorage.getItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL) || ""
+  );
+  const [errorResponse, setErrorResponse] = useState("");
+  const firebase = useFirebase();
 
-    const updateEmail = (e) => {
-        setErrorResponse("");
-        setEmail(e.target.value);
+  useEffect(() => {
+    firebase.observer.subscribe(SZTFR.FIREBASE_RESPONSE, (data) => {
+      setErrorResponse(data);
+    });
+    return () => {
+      firebase.observer.unsubscribe(SZTFR.FIREBASE_RESPONSE);
     };
+  }, [firebase]);
 
-    return (
-        <div>
-            <TextField id="email-input"
-                       className="width_100"
-                       label={t('login.email')}
-                       variant="outlined"
-                       size="small"
-                       value={email}
-                       onChange={updateEmail} />
-            <button className="email-button"
-                    onClick={() => firebase.sendLoginLink(email)}>
-                {t('login.login')}
-            </button>
-            <button className="google-button"
-                    onClick={() => cancel()}>
-                {t('cancel')}
-            </button>
-            <p>{t(errorResponse)}</p>
-        </div>
-    )
+  const updateEmail = (e) => {
+    setErrorResponse("");
+    setEmail(e.target.value);
+  };
+
+  return (
+    <div>
+      <TextField
+        id="email-input"
+        className="width_100"
+        label={t("login.email")}
+        variant="outlined"
+        size="small"
+        value={email}
+        onChange={updateEmail}
+      />
+      <button
+        className="email-button"
+        onClick={() => firebase.sendLoginLink(email)}
+      >
+        {t("login.login")}
+      </button>
+      <button className="google-button" onClick={() => cancel()}>
+        {t("cancel")}
+      </button>
+      <p>{t(errorResponse)}</p>
+    </div>
+  );
 }

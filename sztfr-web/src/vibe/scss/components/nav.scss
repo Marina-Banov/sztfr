@@ -2,8 +2,8 @@
    ----------------------------- */
 
 .nav-pills > li > a {
-
-	&:hover, &:focus {
-		background-color: transparentize($colorPrimary, .9);
-	}
+  &:hover,
+  &:focus {
+    background-color: transparentize($colorPrimary, 0.9);
+  }
 }

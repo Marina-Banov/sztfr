@@ -1,12 +1,13 @@
-import React from 'react';
-import * as Feather from 'react-feather';
-import { Row, Col, Card } from 'reactstrap';
-import TabWidget from './TabWidget';
-import ProfileWidget from './ProfileWidget';
-import AnalyticsWidget from './AnalyticsWidget';
-import StorageWidget from './StorageWiget';
-import TrafficWidget from './TrafficWidget';
-import RatingWidget from './RatingWidget';
+import React from "react";
+import * as Feather from "react-feather";
+import { Row, Col, Card } from "reactstrap";
+
+import TabWidget from "./TabWidget";
+import ProfileWidget from "./ProfileWidget";
+import AnalyticsWidget from "./AnalyticsWidget";
+import StorageWidget from "./StorageWiget";
+import TrafficWidget from "./TrafficWidget";
+import RatingWidget from "./RatingWidget";
 
 export default function Widgets() {
   return (

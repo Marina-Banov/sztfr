@@ -12,15 +12,15 @@ import { Route, Redirect } from "react-router-dom";
  * @constructor
  */
 export const PrivateRoute = ({ component: Component, hasAccess, ...rest }) => {
-    function render(props) {
-        if (hasAccess) {
-            return <Component />;
-        } else {
-            return (
-                <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-            );
-        }
+  function render(props) {
+    if (hasAccess) {
+      return <Component />;
+    } else {
+      return (
+        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+      );
     }
+  }
 
-    return <Route {...rest} render={render} />;
+  return <Route {...rest} render={render} />;
 };

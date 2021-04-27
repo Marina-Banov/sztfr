@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { Container, Card, CardBody } from 'reactstrap';
-import AppleLogo from '../../../assets/images/apple.png';
-import MSLogo from '../../../assets/images/microsoft.png';
+import React, { Component } from "react";
+import { Container, Card, CardBody } from "reactstrap";
+
+import AppleLogo from "assets/images/apple.png";
+import MSLogo from "assets/images/microsoft.png";
 
 export default class Invoice extends Component {
   render() {
@@ -11,7 +12,12 @@ export default class Invoice extends Component {
           <CardBody>
             <div className="m-b">
               <div className="pull-left">
-                <img width="50" alt="" className="invoice-logo" src={AppleLogo} />
+                <img
+                  width="50"
+                  alt=""
+                  className="invoice-logo"
+                  src={AppleLogo}
+                />
                 <address className="m-t-10">
                   Apple Enterprise Sales
                   <br />
@@ -30,7 +36,7 @@ export default class Invoice extends Component {
                   <p className="small no-margin">Invoice to</p>
                   <h5>James May</h5>
                   <address>
-                    {' '}
+                    {" "}
                     <strong>Vibe Incoperated.</strong>
                     <br />
                     vibe.inc
@@ -48,7 +54,9 @@ export default class Invoice extends Component {
                     <div className="clearfix" />
                   </div>
                   <div>
-                    <div className="pull-left font-montserrat bold all-caps">Invoice date :</div>
+                    <div className="pull-left font-montserrat bold all-caps">
+                      Invoice date :
+                    </div>
                     <div className="pull-right">02/09/19</div>
                     <div className="clearfix" />
                   </div>
@@ -70,7 +78,8 @@ export default class Invoice extends Component {
                     <td className="">
                       <p className="text-black">Character Illustration</p>
                       <p className="small">
-                        Character Design projects from the latest top online portfolios on Behance.
+                        Character Design projects from the latest top online
+                        portfolios on Behance.
                       </p>
                     </td>
                     <td className="text-center">$65.00</td>
@@ -81,8 +90,8 @@ export default class Invoice extends Component {
                     <td className="">
                       <p className="text-black">Cross Heart Charity Branding</p>
                       <p className="small">
-                        Attempt to attach higher credibility to a new product by associating it with a well established
-                        company name
+                        Attempt to attach higher credibility to a new product by
+                        associating it with a well established company name
                       </p>
                     </td>
                     <td className="text-center">$89.00</td>
@@ -93,8 +102,9 @@ export default class Invoice extends Component {
                     <td className="">
                       <p className="text-black">iOs App</p>
                       <p className="small">
-                        A video game franchise Inspired primarily by a sketch of stylized wingless - Including Branding
-                        / Graphics / Motion Picture &amp; Videos
+                        A video game franchise Inspired primarily by a sketch of
+                        stylized wingless - Including Branding / Graphics /
+                        Motion Picture &amp; Videos
                       </p>
                     </td>
                     <td className="text-center">$100.00</td>
@@ -105,39 +115,56 @@ export default class Invoice extends Component {
               </table>
             </div>
             <div className="m-b">
-              <img width="150" alt="" className="invoice-signature" src={MSLogo} />
+              <img
+                width="150"
+                alt=""
+                className="invoice-signature"
+                src={MSLogo}
+              />
               <p>Designer’s Identity</p>
             </div>
             <div className="p-a b-t b-b m-b-lg">
               <div className="row">
                 <div className="col-sm-2 clearfix">
-                  <h5 className="font-montserrat all-caps small no-margin hint-text bold">Advance</h5>
+                  <h5 className="font-montserrat all-caps small no-margin hint-text bold">
+                    Advance
+                  </h5>
                   <h3 className="no-margin">$21,000.00</h3>
                 </div>
                 <div className="col-sm-5 clearfix">
-                  <h5 className="font-montserrat all-caps small no-margin hint-text bold">Discount (10%)</h5>
+                  <h5 className="font-montserrat all-caps small no-margin hint-text bold">
+                    Discount (10%)
+                  </h5>
                   <h3 className="no-margin">$645.00</h3>
                 </div>
                 <div className="col-sm-5 text-right">
-                  <h5 className="all-caps small no-margin hint-text bold">Total</h5>
+                  <h5 className="all-caps small no-margin hint-text bold">
+                    Total
+                  </h5>
                   <h1 className="m-a-none">$64,276.00</h1>
                 </div>
               </div>
             </div>
             <p className="small hint-text">
-              Services will be invoiced in accordance with the Service Description. You must pay all undisputed invoices
-              in full within 30 days of the invoice date, unless otherwise specified under the Special Terms and
-              Conditions. All payments must reference the invoice number. Unless otherwise specified, all invoices shall
-              be paid in the currency of the invoice
+              Services will be invoiced in accordance with the Service
+              Description. You must pay all undisputed invoices in full within
+              30 days of the invoice date, unless otherwise specified under the
+              Special Terms and Conditions. All payments must reference the
+              invoice number. Unless otherwise specified, all invoices shall be
+              paid in the currency of the invoice
             </p>
             <p className="small hint-text">
-              Insight retains the right to decline to extend credit and to require that the applicable purchase price be
-              paid prior to performance of Services based on changes in insight's credit policies or your financial
-              condition and/or payment record. Insight reserves the right to charge interest of 1.5% per month or the
-              maximum allowable by applicable law, whichever is less, for any undisputed past due invoices. You are
-              responsible for all costs of collection, including reasonable attorneys' fees, for any payment default on
-              undisputed invoices. In addition, Insight may terminate all further work if payment is not received in a
-              timely manner.
+              Insight retains the right to decline to extend credit and to
+              require that the applicable purchase price be paid prior to
+              performance of Services based on changes in insight's credit
+              policies or your financial condition and/or payment record.
+              Insight reserves the right to charge interest of 1.5% per month or
+              the maximum allowable by applicable law, whichever is less, for
+              any undisputed past due invoices. You are responsible for all
+              costs of collection, including reasonable attorneys' fees, for any
+              payment default on undisputed invoices. In addition, Insight may
+              terminate all further work if payment is not received in a timely
+              manner.
             </p>
           </CardBody>
         </Card>

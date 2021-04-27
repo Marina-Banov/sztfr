@@ -1,31 +1,42 @@
 /* TYPOGRAPHY STYLES
    ----------------------------- */
 
-h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6  {
-	margin-top: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-top: 0;
 }
 h1,
-.h1{
+.h1 {
   font-size: $h1Size;
 }
 h2,
-.h2{
+.h2 {
   font-size: $h2Size;
 }
 h3,
-.h3{
+.h3 {
   font-size: $h3Size;
 }
 h4,
-.h4{
+.h4 {
   font-size: $h4Size;
 }
 h5,
-.h5{
+.h5 {
   font-size: $h5Size;
 }
 h6,
-.h6{
+.h6 {
   font-size: $h6Size;
 }
 
@@ -37,7 +48,7 @@ h6,
 }
 
 .back-to-link {
-	position: absolute;
-	top: 20px;
-	left: 40px;
+  position: absolute;
+  top: 20px;
+  left: 40px;
 }

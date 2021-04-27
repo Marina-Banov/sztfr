@@ -1,13 +1,19 @@
-import React from 'react';
-import { Row, Col, Card, Button } from 'reactstrap';
-import avatar2 from '../../../assets/images/avatar2.jpeg';
+import React from "react";
+import { Row, Col, Card, Button } from "reactstrap";
+
+import avatar2 from "assets/images/avatar2.jpeg";
 
 export default function ProfileWidget() {
   return (
     <Card body>
       <div className="text-center">
         <div className="m-b">
-          <img src={avatar2} style={{ width: 100 }} className="b-circle" alt="profile" />
+          <img
+            src={avatar2}
+            style={{ width: 100 }}
+            className="b-circle"
+            alt="profile"
+          />
         </div>
         <div>
           <h2 className="h4">Jason Smith</h2>
