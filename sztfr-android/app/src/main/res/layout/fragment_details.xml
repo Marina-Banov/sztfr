@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/secondaryColor">
+
+        <RelativeLayout
+            android:id="@+id/details_img_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="275dp">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/dummy"
+                android:id="@+id/details_img"
+                android:scaleType="centerCrop"
+                android:radius="@dimen/spacing_normal"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="bottom"
+                android:src="@drawable/favorite"
+                app:tint="@color/secondaryLightColor" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/details_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_frag_title"
+            android:layout_below="@id/details_img_layout"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/secondaryTextColor"
+            android:padding="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_normal"/>
+
+        <TextView
+            android:id="@+id/details_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_frag_time"
+            android:textColor="@color/secondaryTextColor"
+            android:layout_below="@id/details_title"
+            android:paddingLeft="@dimen/spacing_small"/>
+
+        <TextView
+            android:id="@+id/details_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_frag_location"
+            android:textColor="@color/secondaryTextColor"
+            android:layout_below="@id/details_time"
+            android:paddingLeft="@dimen/spacing_small"/>
+
+        <TextView
+            android:id="@+id/details_organizer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_frag_location"
+            android:textColor="@color/secondaryTextColor"
+            android:layout_below="@id/details_location"
+            android:paddingLeft="@dimen/spacing_small"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/tag_group"
+            android:layout_below="@+id/details_organizer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Widget.SZTFR.Chip.Choice"
+                android:id="@+id/tag"/>
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/details_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home_frag_location"
+            android:textColor="@color/detailsTextColor"
+            android:layout_below="@id/tag_group"
+            android:paddingLeft="@dimen/spacing_small"/>
+
+        <Button
+            android:id="@+id/go_back_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/more"
+            android:textColor="@color/secondaryTextColor"
+            android:backgroundTint="@color/primaryExtraLightColor"
+            android:text="@string/return_btn"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="@dimen/spacing_small"
+    card_view:cardBackgroundColor="@color/secondaryLightColor"
+    card_view:cardCornerRadius="@dimen/spacing_small">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="175dp"
+            android:src="@drawable/dummy"
+            android:id="@+id/home_img"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:id="@+id/fragment_home_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_img"
+            android:layout_alignParentLeft="true"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_small"
+            android:layout_toLeftOf="@+id/times">
+
+            <TextView
+                android:id="@+id/home_row_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_frag_title"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="@color/secondaryTextColor"/>
+
+            <TextView
+                android:id="@+id/home_row_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_frag_time"
+                android:textColor="@color/detailsTextColor"/>
+
+            <TextView
+                android:id="@+id/home_row_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_frag_location"
+                android:textColor="@color/detailsTextColor"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@id/times"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_below="@id/home_img"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_toLeftOf="@+id/times"
+            android:layout_alignTop="@id/fragment_home_info"
+            android:layout_alignBottom="@id/fragment_home_info">
+
+            <ImageView
+                android:id="@+id/home_more_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:padding="@dimen/spacing_extra_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:src="@drawable/more"
+                app:tint="@color/secondaryTextColor"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:padding="@dimen/spacing_extra_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:src="@drawable/favorite"
+                app:tint="@color/secondaryTextColor"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -9,4 +9,5 @@
     <color name="secondaryDarkColor">#FFB6BCC1</color>
     <color name="primaryTextColor">#FFFFFFFF</color>
     <color name="secondaryTextColor">#FF000000</color>
+    <color name="detailsTextColor">#AAAAAA</color>
 </resources>

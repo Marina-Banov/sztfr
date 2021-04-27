@@ -28,4 +28,14 @@
         <item name="android:paddingEnd">@dimen/spacing_extra_small</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.SZTFR.TextInputLayout</item>
     </style>
+
+    <style name="Widget.SZTFR.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@drawable/tag_style_bg</item>
+        <item name="chipStrokeColor">@color/primaryLightColor</item>
+        <item name="android:textColor">@drawable/tag_style</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clickable">true</item>
+        <item name="android:text">@string/tag</item>
+    </style>
 </resources>
