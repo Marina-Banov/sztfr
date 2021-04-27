@@ -9,6 +9,10 @@
 }
 
 .rdp-input-group {
+    .form-control {
+        border-radius: 4px !important;
+    }
+
     input::placeholder {
         color: transparent;
     }

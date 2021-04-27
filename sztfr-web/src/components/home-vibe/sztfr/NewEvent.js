@@ -4,38 +4,37 @@ import {useTranslation} from "react-i18next";
 import DatePicker from "../elements/DatePicker";
 import TimePicker from "../elements/TimePicker";
 import useForm from "../../../utils/useForm";
+import {combineDateTime, getISOTime, validDateRange} from "../../../utils/dateUtils";
 
 export default function NewEvent () {
     const { t } = useTranslation();
-    const { form, handleInputChange } = useForm(
-        { title: '', startDate: '', endDate: '', description: '' }
-    );
+    const { form, handleInputChange } = useForm({
+        title: '',
+        startDate: '',
+        startTime: '',
+        endDate: '',
+        endTime: '',
+        description: ''
+    });
 
-    function combine(date, time) {
-        console.log("date", date)
-        console.log("time", time)
-        date = date ? new Date(date) : new Date();
-        time = time ? new Date(time) : new Date();
-        const res = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-            time.getHours(), time.getMinutes(), 0);
-        console.log("res", res.toISOString())
-        return res.toISOString();
+    function validDateTime() {
+        const start = combineDateTime(form.startDate, getISOTime(form.startTime));
+        const end = combineDateTime(form.endDate, getISOTime(form.endTime));
+        return validDateRange(start, end);
     }
 
-    function validDateRange(start, end) {
-        if (!start || !end) {
-            return true;
+    function updateDateFields(name, value) {
+        let input;
+        if (name === "startTime" || name === "endTime") {
+            input = value;
+            input.value = value.value;
+        } else {
+            input = document.getElementById(`rdp-form-control-${name}`);
+            input.value = value;
         }
-        return (new Date(end)).getTime() > (new Date(start)).getTime();
-    }
-
-    function updateDateFields(name, date, time) {
-        const input = document.getElementById(`rdp-form-control-${name}`);
-        console.log(form)
         input.name = name;
-        input.value = combine(date, time);
-        input.onchange = handleInputChange;
-        input.dispatchEvent(new Event('change'));
+        input.ontimeupdate = handleInputChange;
+        input.dispatchEvent(new Event('timeupdate'));
     }
 
     return (
@@ -55,14 +54,14 @@ export default function NewEvent () {
                         <DatePicker id="startDate"
                                     minDate={(new Date()).toString()}
                                     className="mb-2"
-                                    onChange={v => updateDateFields("startDate", v, form.startDate)}
+                                    onChange={v => updateDateFields("startDate", v)}
                                     value={form.startDate} />
                     </FormGroup>
                     <FormGroup>
                         <TimePicker label={t("events.start_time")}
                                     order={0}
                                     invalid={false}
-                                    onChange={v => updateDateFields('startDate', form.startDate, v.date.toDate())} />
+                                    onChange={v => updateDateFields('startTime', v.target)} />
                     </FormGroup>
                 </Col>
                 <Col md={6} className="py-1">
@@ -71,9 +70,9 @@ export default function NewEvent () {
                             {t("events.end_date")}
                         </Label>
                         <DatePicker id="endDate"
-                                    invalid={!validDateRange(form.startDate, form.endDate)}
+                                    invalid={!validDateTime()}
                                     minDate={form.startDate ? form.startDate : (new Date()).toString()}
-                                    onChange={v => updateDateFields("endDate", v, form.endDate)}
+                                    onChange={v => updateDateFields("endDate", v)}
                                     value={form.endDate}
                                     label={t("events.end_date")}
                                     className="mb-2" />
@@ -81,8 +80,8 @@ export default function NewEvent () {
                     <FormGroup>
                         <TimePicker label={t("events.end_time")}
                                     order={1}
-                                    invalid={!validDateRange(form.startDate, form.endDate)}
-                                    onChange={v => updateDateFields('endDate', form.endDate, v.date.toDate())} />
+                                    invalid={!validDateTime()}
+                                    onChange={v => updateDateFields('endTime', v.target)} />
                     </FormGroup>
                 </Col>
             </Row>

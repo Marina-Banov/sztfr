@@ -6,14 +6,12 @@ import "./TimePicker.scss";
 import "tempusdominus-bootstrap/src/sass/tempusdominus-bootstrap-build.scss";
 
 export default function TimePicker({onChange, order, label, invalid}) {
-    const locale = "hr";
-
     return (
         <>
             <Label for={`react-js-utl-ellViKYMFK-${order * 3 + 1}`}>
                 {label}
             </Label>
-            <BootstrapTimePicker locale={locale}
+            <BootstrapTimePicker format="HH:mm"
                                  useCurrent={false}
                                  noIcon={true}
                                  onChange={onChange}
