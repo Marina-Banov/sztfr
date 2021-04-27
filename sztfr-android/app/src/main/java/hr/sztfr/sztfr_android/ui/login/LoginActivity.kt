@@ -3,10 +3,11 @@ package hr.sztfr.sztfr_android.ui.login
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.SharedPreferences.Editor
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -28,7 +29,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
 
     private val onAuthComplete = OnCompleteListener<AuthResult> { task ->
+        _loading.value = false
         if (task.isSuccessful) {
+            sharedPreferences.edit().remove(USER_EMAIL_KEY).apply()
             navigateToMainActivity()
         } else {
             showLoginFailed()
@@ -37,7 +40,13 @@ class LoginActivity : AppCompatActivity() {
 
     companion object {
         private const val GOOGLE_SIGN_IN_REQ_CODE = 123
+        private const val USER_EMAIL_KEY = "USER_EMAIL"
+        // private const val EMAIL_AUTH_LINK_KEY = "EMAIL_AUTH_LINK"
     }
+
+    private val _loading = MutableLiveData(false)
+    val loading: LiveData<Boolean>
+        get() = _loading
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,28 +67,40 @@ class LoginActivity : AppCompatActivity() {
             navigateToMainActivity()
         } else {
             val emailLink = intent.data.toString()
-            val email = sharedPreferences.getString("userEmail", "")
+            val email = sharedPreferences.getString(USER_EMAIL_KEY, "")
             if (email != null && auth.isSignInWithEmailLink(emailLink)) {
-                /* TODO is it possible to reauthenticate user with these credentials? FirebaseAuthActionCodeException...
-                val editor: Editor = sharedPreferences.edit()
-                editor.putString("emailAuthLink", emailLink)
-                editor.apply() */
+                // TODO is it possible to reauthenticate user with these credentials?
+                //  FirebaseAuthActionCodeException...
+                //  could replace firebaseAuthSendEmail with firebaseAuthEmail
+                // sharedPreferences.edit().putString(EMAIL_AUTH_LINK_KEY, emailLink).apply()
+                _loading.value = true
                 auth.signInWithEmailLink(email, emailLink).addOnCompleteListener(this, onAuthComplete)
             }
         }
     }
 
-    fun firebaseAuthEmail(email: String) {
-        val emailLink = sharedPreferences.getString("emailAuthLink", "")
+    override fun onBackPressed() {
+        if (_loading.value == true) {
+            _loading.value = false
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    /* fun firebaseAuthEmail(email: String) {
+        _loading.value = true
+        val emailLink = sharedPreferences.getString(EMAIL_AUTH_LINK_KEY, "")
         if (emailLink != "null" && auth.isSignInWithEmailLink(emailLink!!)) {
             val credential = EmailAuthProvider.getCredentialWithLink(email, emailLink)
             auth.signInWithCredential(credential).addOnCompleteListener(this, onAuthComplete)
         } else {
            firebaseAuthSendEmail(email)
         }
-    }
+    } */
 
-    private fun firebaseAuthSendEmail(email: String) {
+    fun firebaseAuthSendEmail(email: String) {
+        _loading.value = true
+
         val actionCodeSettings = ActionCodeSettings.newBuilder()
                 .setHandleCodeInApp(true)
                 .setUrl("https://sztfr.page.link")
@@ -88,9 +109,7 @@ class LoginActivity : AppCompatActivity() {
 
         auth.sendSignInLinkToEmail(email, actionCodeSettings).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val editor: Editor = sharedPreferences.edit()
-                editor.putString("userEmail", email)
-                editor.apply()
+                sharedPreferences.edit().putString(USER_EMAIL_KEY, email).apply()
                 Toast.makeText(applicationContext, R.string.email_sent, Toast.LENGTH_LONG).show()
             } else {
                 showLoginFailed()
@@ -110,6 +129,7 @@ class LoginActivity : AppCompatActivity() {
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 val credential = GoogleAuthProvider.getCredential(account.idToken!!, null)
+                _loading.value = true
                 auth.signInWithCredential(credential).addOnCompleteListener(this, onAuthComplete)
             } catch (e: ApiException) {
                 showLoginFailed()
@@ -118,6 +138,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun firebaseAuthAnonymous() {
+        _loading.value = true
         auth.signInAnonymously().addOnCompleteListener(this, onAuthComplete)
     }
 

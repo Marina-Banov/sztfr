@@ -31,66 +31,77 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:text="@string/welcome_description_text" />
 
-        <!-- material.io/components/text-fields/android -->
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.SZTFR.TextInputLayout"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:hint="@string/prompt_email">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email"
+            <LinearLayout
+                android:id="@+id/login_options"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:selectAllOnFocus="true" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/email_sign_in_button"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="@dimen/spacing_large"
-            android:layout_marginTop="@dimen/spacing_extra_small"
-            android:layout_marginEnd="@dimen/spacing_large"
-            android:text="@string/login_with_email"
-            android:textAllCaps="false"
-            android:textColor="@color/primaryDarkColor"
-            app:backgroundTint="@color/primaryExtraLightColor" />
+                <!-- material.io/components/text-fields/android -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.SZTFR.TextInputLayout"
+                    android:hint="@string/prompt_email">
 
-        <com.shobhitpuri.custombuttons.GoogleSignInButton
-            android:id="@+id/google_sign_in_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_large"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginEnd="@dimen/spacing_large"
-            android:text="@string/login_with_google" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:selectAllOnFocus="true" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/anonymous_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_large"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginEnd="@dimen/spacing_large"
-            android:autoLink="all"
-            android:linksClickable="false"
-            android:selectAllOnFocus="false"
-            android:text="@string/login_anonymous"
-            android:textAlignment="center"
-            android:textColor="?attr/colorOnPrimary" />
+                <Button
+                    android:id="@+id/email_sign_in_button"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_extra_small"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:text="@string/login_with_email"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primaryDarkColor"
+                    app:backgroundTint="@color/primaryExtraLightColor" />
 
-        <!--<ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_extra_large"
-            android:layout_marginTop="@dimen/spacing_extra_extra_large"
-            android:layout_marginEnd="@dimen/spacing_extra_large"
-            android:layout_marginBottom="@dimen/spacing_extra_extra_large"
-            android:visibility="gone" />-->
+                <com.shobhitpuri.custombuttons.GoogleSignInButton
+                    android:id="@+id/google_sign_in_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:text="@string/login_with_google" />
+
+                <TextView
+                    android:id="@+id/anonymous_sign_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:autoLink="all"
+                    android:linksClickable="false"
+                    android:selectAllOnFocus="false"
+                    android:text="@string/login_anonymous"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnPrimary" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingStart="@dimen/spacing_extra_extra_large"
+                android:paddingTop="@dimen/spacing_extra_extra_large"
+                android:paddingEnd="@dimen/spacing_extra_extra_large"
+                android:paddingBottom="@dimen/spacing_extra_extra_large" />
+        </FrameLayout>
     </LinearLayout>
 </layout>

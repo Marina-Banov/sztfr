@@ -14,9 +14,15 @@ class LoginOptionsFragment : Fragment() {
     private lateinit var binding: FragmentLoginOptionsBinding
     private lateinit var activity: LoginActivity
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         activity = getActivity() as LoginActivity
+        activity.loading.observe(viewLifecycleOwner, {
+            binding.loginOptions.alpha = if (!it) 0.3F else 1.0F
+            binding.loginOptions.animate().alpha(if (it) 0.3F else 1.0F).duration = 100
+            binding.loading.isClickable = it
+            binding.loading.visibility = if (it) View.VISIBLE else View.GONE
+        })
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -28,10 +34,9 @@ class LoginOptionsFragment : Fragment() {
             val email = binding.email.text
             email?.let {
                 binding.email.clearFocus()
-                activity.firebaseAuthEmail(email.toString())
+                activity.firebaseAuthSendEmail(email.toString())
             }
         }
-
         binding.googleSignInButton.setOnClickListener { activity.firebaseAuthGoogle() }
         binding.anonymousSignIn.setOnClickListener { activity.firebaseAuthAnonymous() }
 
