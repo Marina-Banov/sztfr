@@ -2,11 +2,8 @@ import React from "react";
 import { CardBody, FormGroup, Label, Input } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
-import useForm from "utils/useForm";
-
-export default function NewSurvey({ initForm }) {
+export default function NewSurvey({ form, handleInputChange }) {
   const { t } = useTranslation();
-  const { form, handleInputChange } = useForm(initForm);
 
   return (
     <CardBody>
@@ -31,11 +28,11 @@ export default function NewSurvey({ initForm }) {
         />
       </FormGroup>
       <FormGroup>
-        <Label for="google_form_url">{t("surveys.google_form_url")}</Label>
+        <Label for="googleFormURL">{t("surveys.google_form_url")}</Label>
         <Input
-          id="google_form_url"
+          id="googleFormURL"
           type="text"
-          name="google_form_url"
+          name="googleFormURL"
           onChange={handleInputChange}
           value={form.googleFormURL}
         />

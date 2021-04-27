@@ -18,30 +18,42 @@ import { SZTFR } from "appConstants";
 import { useFirebase } from "appFirebase";
 import EventForm from "models/EventForm";
 import SurveyForm from "models/SurveyForm";
+import useForm from "utils/useForm";
 import NewSurvey from "./NewSurvey";
 import NewEvent from "./NewEvent";
 
 import "./Cms.scss";
 
 export default function CmsPage(props) {
-  const [tags, setTags] = useState([]);
-  const firebase = useFirebase();
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [image, setImage] = useState();
   const { t } = useTranslation();
+  const firebase = useFirebase();
+  const [tags, setTags] = useState([]);
+  const { form, handleInputChange, setFormField } = useForm(initialFormValue());
 
-  useEffect(() => {
-    const tagInput = document.getElementById("tag");
-    if (tagInput.value) {
-      firebase.writeToDatabase("tags", tags);
-      tagInput.value = "";
+  function initialFormValue() {
+    let x;
+    switch (props.location.pathname) {
+      case "/events/new":
+        x = props.location.state
+          ? props.location.state.initialValue
+          : new EventForm();
+        break;
+      case "/surveys/new":
+        x = props.location.state
+          ? props.location.state.initialValue
+          : new SurveyForm();
+        break;
+      default:
+        x = {};
     }
-  }, [tags, firebase]);
+    return { image: null, tags: [], ...x };
+  }
 
   useEffect(() => {
     firebase.observer.subscribe(SZTFR.FIREBASE_RESPONSE, (data) => {
       if (data) {
         setTags(data);
+        document.getElementById("tag").value = "";
       }
     });
 
@@ -53,27 +65,21 @@ export default function CmsPage(props) {
   }, [firebase]);
 
   function handleTagClick(tag) {
-    const s = [...selectedTags];
-    const index = s.indexOf(tag);
+    const t = [...form.tags];
+    const index = t.indexOf(tag);
     if (index >= 0) {
-      s.splice(index, 1);
+      t.splice(index, 1);
     } else {
-      s.push(tag);
+      t.push(tag);
     }
-    setSelectedTags(s);
+    setFormField("tags", t);
   }
 
   function addTag() {
     const tagInput = document.getElementById("tag");
     const t = [...tags];
     t.push(tagInput.value);
-    setTags(t);
-  }
-
-  function selectFile(event) {
-    if (event.target.files[0]) {
-      setImage(event.target.files[0]);
-    }
+    firebase.writeToDatabase("tags", t);
   }
 
   return (
@@ -83,21 +89,13 @@ export default function CmsPage(props) {
           <BrowserRouter>
             <Switch>
               <Route path="/surveys/new">
-                <NewSurvey
-                  initForm={
-                    props.location.state
-                      ? props.location.state.initialValue
-                      : new SurveyForm()
-                  }
-                />
+                <NewSurvey form={form} handleInputChange={handleInputChange} />
               </Route>
               <Route path="/events/new">
                 <NewEvent
-                  initForm={
-                    props.location.state
-                      ? props.location.state.initialValue
-                      : new EventForm()
-                  }
+                  form={form}
+                  handleInputChange={handleInputChange}
+                  setFormField={setFormField}
                 />
               </Route>
             </Switch>
@@ -115,9 +113,9 @@ export default function CmsPage(props) {
               name="image"
               type="file"
               accept="image/*"
-              onChange={selectFile}
+              onChange={(e) => setFormField("image", e.target.files[0])}
             />
-            {image && <img src={URL.createObjectURL(image)} alt="" />}
+            {form.image && <img src={URL.createObjectURL(form.image)} alt="" />}
           </CardBody>
         </Card>
       </Col>
@@ -127,7 +125,7 @@ export default function CmsPage(props) {
           <CardBody>
             {Object.keys(tags).map((tag) => (
               <Button
-                color={selectedTags.includes(tag) ? "primary" : "secondary"}
+                color={form.tags.includes(tag) ? "primary" : "secondary"}
                 className="m-1"
                 key={tags[tag]}
                 onClick={() => handleTagClick(tag)}

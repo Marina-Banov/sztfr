@@ -7,15 +7,16 @@ export default function useForm(initialValues) {
     if (typeof event === "SyntheticInputEvent") {
       event.persist();
     }
-    setInputs((inputs) => ({
-      ...inputs,
-      [event.target.name]: event.target.value,
-    }));
+    setFormField(event.target.name, event.target.value);
+  };
+
+  const setFormField = (name, value) => {
+    setInputs((inputs) => ({ ...inputs, [name]: value }));
   };
 
   useEffect(() => {
     console.log(inputs);
   });
 
-  return { handleInputChange, form: inputs };
+  return { setFormField, handleInputChange, form: inputs };
 }

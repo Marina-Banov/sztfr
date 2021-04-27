@@ -69,7 +69,7 @@ export default class Firebase {
     this.auth.signInWithPopup(googleProvider).then();
   };
 
-  getFromDatabase = (/*ref*/) => {
+  getFromDatabase = (ref) => {
     /*const dbRef = this.db.ref(ref);
         dbRef.on('value', (data) => {
             this.observer.publish(SZTFR.FIREBASE_RESPONSE, data.val());
@@ -85,7 +85,7 @@ export default class Firebase {
     });
   };
 
-  writeToDatabase(ref, data) {
+  writeToDatabase = (ref, data) => {
     this.db
       .ref(ref)
       .set(data)
@@ -93,5 +93,5 @@ export default class Firebase {
         (res) => this.observer.publish(SZTFR.FIREBASE_RESPONSE, res),
         (err) => this.observer.publish(SZTFR.FIREBASE_ERROR, err)
       );
-  }
+  };
 }

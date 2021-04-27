@@ -2,33 +2,17 @@ import React from "react";
 import { CardBody, FormGroup, Label, Input, Row, Col } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
-import useForm from "utils/useForm";
 import { combineDateTime, getISOTime, validDateRange } from "utils/dateUtils";
 import DatePicker from "../elements/DatePicker";
 import TimePicker from "../elements/TimePicker";
 
-export default function NewEvent({ initForm }) {
+export default function NewEvent({ form, handleInputChange, setFormField }) {
   const { t } = useTranslation();
-  const { form, handleInputChange } = useForm(initForm);
 
   function validDateTime() {
     const start = combineDateTime(form.startDate, getISOTime(form.startTime));
     const end = combineDateTime(form.endDate, getISOTime(form.endTime));
     return validDateRange(start, end);
-  }
-
-  function updateDateFields(name, value) {
-    let input;
-    if (name === "startTime" || name === "endTime") {
-      input = value;
-      input.value = value.value;
-    } else {
-      input = document.getElementById(`rdp-form-control-${name}`);
-      input.value = value;
-    }
-    input.name = name;
-    input.ontimeupdate = handleInputChange;
-    input.dispatchEvent(new Event("timeupdate"));
   }
 
   return (
@@ -53,7 +37,7 @@ export default function NewEvent({ initForm }) {
               id="startDate"
               minDate={new Date().toString()}
               className="mb-2"
-              onChange={(v) => updateDateFields("startDate", v)}
+              onChange={(v) => setFormField("startDate", v)}
               value={form.startDate}
             />
           </FormGroup>
@@ -62,7 +46,7 @@ export default function NewEvent({ initForm }) {
               label={t("events.start_time")}
               order={0}
               invalid={false}
-              onChange={(v) => updateDateFields("startTime", v.target)}
+              onChange={(v) => setFormField("startTime", v.target.value)}
             />
           </FormGroup>
         </Col>
@@ -73,7 +57,7 @@ export default function NewEvent({ initForm }) {
               id="endDate"
               invalid={!validDateTime()}
               minDate={form.startDate ? form.startDate : new Date().toString()}
-              onChange={(v) => updateDateFields("endDate", v)}
+              onChange={(v) => setFormField("endDate", v)}
               value={form.endDate}
               label={t("events.end_date")}
               className="mb-2"
@@ -84,7 +68,7 @@ export default function NewEvent({ initForm }) {
               label={t("events.end_time")}
               order={1}
               invalid={!validDateTime()}
-              onChange={(v) => updateDateFields("endTime", v.target)}
+              onChange={(v) => setFormField("endTime", v.target.value)}
             />
           </FormGroup>
         </Col>
