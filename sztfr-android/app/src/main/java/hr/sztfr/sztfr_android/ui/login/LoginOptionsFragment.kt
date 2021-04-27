@@ -34,7 +34,7 @@ class LoginOptionsFragment : Fragment() {
             val email = binding.email.text
             email?.let {
                 binding.email.clearFocus()
-                activity.firebaseAuthEmail(email.toString())
+                activity.firebaseAuthSendEmail(email.toString())
             }
         }
         binding.googleSignInButton.setOnClickListener { activity.firebaseAuthGoogle() }
