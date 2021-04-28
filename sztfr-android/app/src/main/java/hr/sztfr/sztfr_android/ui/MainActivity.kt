@@ -1,22 +1,30 @@
 package hr.sztfr.sztfr_android.ui
 
 import android.content.Intent
-import androidx.databinding.DataBindingUtil
-import com.google.firebase.auth.FirebaseAuth
-import hr.sztfr.sztfr_android.databinding.ActivityMainBinding
-import hr.sztfr.sztfr_android.ui.login.LoginActivity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation.Model
+import com.google.firebase.auth.FirebaseAuth
+import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.databinding.ActivityMainBinding
+import hr.sztfr.sztfr_android.ui.favorites.FavoritesFragment
 import hr.sztfr.sztfr_android.ui.home.HomeFragment
 import hr.sztfr.sztfr_android.ui.info.InfoFragment
-import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.ui.login.LoginActivity
 import hr.sztfr.sztfr_android.ui.survey.SurveyFragment
-import hr.sztfr.sztfr_android.ui.favorites.FavoritesFragment
 
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        private const val HOME = 1
+        private const val FAVORITES = 2
+        private const val SURVEY = 3
+        private const val INFO = 4
+    }
 
     private lateinit var binding: ActivityMainBinding
 
@@ -24,24 +32,36 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        binding.meowMenu.add(MeowBottomNavigation.Model(1, R.drawable.house))
-        binding.meowMenu.add(MeowBottomNavigation.Model(2, R.drawable.favorite))
-        binding.meowMenu.add(MeowBottomNavigation.Model(3, R.drawable.bar_chart))
-        binding.meowMenu.add(MeowBottomNavigation.Model(4, R.drawable.info))
+        binding.meowMenu.apply {
+            add(Model(HOME, R.drawable.house))
+            add(Model(FAVORITES, R.drawable.favorite))
+            add(Model(SURVEY, R.drawable.bar_chart))
+            add(Model(INFO, R.drawable.info))
 
-        binding.meowMenu.setOnClickMenuListener {
-            when(it.id){
-                1 -> replaceFragment(HomeFragment.newInstance())
-                2 -> replaceFragment(FavoritesFragment.newInstance())
-                3 -> replaceFragment(SurveyFragment.newInstance())
-                4 -> replaceFragment(InfoFragment.newInstance())
-            }
+            setOnClickMenuListener { replaceFragment(
+                when(it.id) {
+                    FAVORITES -> FavoritesFragment.newInstance()
+                    SURVEY -> SurveyFragment.newInstance()
+                    INFO -> InfoFragment.newInstance()
+                    else -> HomeFragment.newInstance()
+                }
+            )}
         }
+
+        replaceFragment(HomeFragment.newInstance())
+        binding.meowMenu.show(HOME)
     }
 
-    private fun replaceFragment(fragment:Fragment){
-        val fragmentTransition = supportFragmentManager.beginTransaction()
-        fragmentTransition.replace(R.id.fragmentContainer,fragment).addToBackStack(Fragment::class.java.simpleName).commit()
+    private fun replaceFragment(fragment: Fragment) {
+        with(supportFragmentManager) {
+            popBackStackImmediate(fragment::class.java.simpleName, POP_BACK_STACK_INCLUSIVE)
+            val transaction = beginTransaction().replace(R.id.fragmentContainer, fragment)
+            fragments.lastOrNull()?.let {
+                if (fragment::class.java.simpleName != it::class.java.simpleName)
+                    transaction.addToBackStack(it::class.java.simpleName)
+            }
+            transaction.commit()
+        }
     }
   
     private fun signOut() {
@@ -51,4 +71,23 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
+    override fun onBackPressed() {
+        with(supportFragmentManager) {
+            val count = backStackEntryCount
+            if (count == 0) {
+                super.onBackPressed()
+                return
+            }
+
+            popBackStackImmediate()
+            binding.meowMenu.show(
+                when (fragments.lastOrNull()) {
+                    is FavoritesFragment -> FAVORITES
+                    is SurveyFragment -> SURVEY
+                    is InfoFragment -> INFO
+                    else -> HOME
+                }
+            )
+        }
+    }
 }

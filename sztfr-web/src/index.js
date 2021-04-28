@@ -1,27 +1,17 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './styles/index.css';
+import App from "./components/App";
 import reportWebVitals from './reportWebVitals';
-import firebase from "firebase/app";
+import i18n from './i18n/i18n';
 
-// Use your config values here.
-firebase.initializeApp({
-    apiKey: "AIzaSyAcdr7TsUUD4MSAM5QSbkGijnWNIDxjvec",
-    authDomain: "sztfr-7a759.firebaseapp.com",
-    projectId: "sztfr-7a759",
-    storageBucket: "sztfr-7a759.appspot.com",
-    messagingSenderId: "1091954528708",
-    appId: "1:1091954528708:web:5261cdeb450bee7e955491"
-});
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Suspense fallback="loading">
+      <App />
+    </Suspense>
   </React.StrictMode>,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
