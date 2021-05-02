@@ -17,11 +17,13 @@
     <string name="hello_survey_fragment">Hello survey fragment</string>
     <string name="hello_info_fragment">Hello info fragment</string>
 
-    <string name="search_hint">Potraži događaj...</string>
+    <string name="search_hint">Potraži događaj…</string>
 
-    <string name="home_frag_title">RTEH cool event</string>
+    <string name="home_frag_title">RITEH cool event</string>
     <string name="home_frag_time">Datum, vrijeme</string>
     <string name="home_frag_location">Lokacija</string>
+    <string name="home_frag_organisation">Organizator</string>
+    <string name="home_frag_description">Opis</string>
 
     <string name="return_btn">Povratak</string>
 
@@ -29,6 +31,8 @@
 
     <string name="survey_complete">Riješi</string>
 
+    <string name="about_title">O nama</string>
+    <string name="about_description">Puno teksta o tvom najdražem zboru</string>
     <string name="about_feedback">Imaš li neko pitanje za nas?</string>
     <string name="about_feedback_btn">Javi nam se!</string>
 </resources>

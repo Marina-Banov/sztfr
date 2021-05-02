@@ -18,7 +18,7 @@ class SurveyAdapter(private val items: List<SurveyNew>) : RecyclerView.Adapter<S
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SurveyAdapter.ViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
-        val homeView = inflater.inflate(R.layout.survay_new, parent, false)
+        val homeView = inflater.inflate(R.layout.survey_new, parent, false)
         return ViewHolder(homeView)
     }
 

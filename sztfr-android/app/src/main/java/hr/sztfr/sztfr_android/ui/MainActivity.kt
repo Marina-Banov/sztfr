@@ -40,15 +40,15 @@ class MainActivity : AppCompatActivity() {
 
             setOnClickMenuListener { replaceFragment(
                 when(it.id) {
-                    FAVORITES -> FavoritesFragment.newInstance()
-                    SURVEY -> SurveyFragment.newInstance()
-                    INFO -> InfoFragment.newInstance()
-                    else -> HomeFragment.newInstance()
+                    FAVORITES -> FavoritesFragment()
+                    SURVEY -> SurveyFragment()
+                    INFO -> InfoFragment()
+                    else -> HomeFragment()
                 }
             )}
         }
 
-        replaceFragment(HomeFragment.newInstance())
+        replaceFragment(HomeFragment())
         binding.meowMenu.show(HOME)
     }
 

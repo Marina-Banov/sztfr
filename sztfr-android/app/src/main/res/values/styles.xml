@@ -29,13 +29,41 @@
         <item name="materialThemeOverlay">@style/ThemeOverlay.SZTFR.TextInputLayout</item>
     </style>
 
+    <style name="ShapeAppearance.SZTFR.RoundedCorners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="TextAppearance.SZTFR.DetailsTitle" parent="">
+        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.SZTFR.DetailsDetails" parent="">
+        <item name="android:textColor">@color/secondaryTextColor</item>
+    </style>
+
+    <style name="TextAppearance.SZTFR.DetailsDescription" parent="">
+        <item name="android:textColor">@color/secondaryLightTextColor</item>
+    </style>
+
     <style name="Widget.SZTFR.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@drawable/tag_style_bg</item>
-        <item name="chipStrokeColor">@color/primaryLightColor</item>
+        <item name="chipStrokeColor">@color/primaryColor</item>
+        <item name="chipStrokeWidth">1dp</item>
         <item name="android:textColor">@drawable/tag_style</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:clickable">true</item>
         <item name="android:text">@string/tag</item>
+    </style>
+
+    <style name="Widget.SZTFR.BottomBackButton" parent="">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:text">@string/return_btn</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
+        <item name="backgroundTint">@color/secondaryColor</item>
     </style>
 </resources>

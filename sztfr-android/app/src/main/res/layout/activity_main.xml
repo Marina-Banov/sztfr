@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9fa8da"
+    android:background="@color/secondaryColor"
     tools:context=".ui.MainActivity">
 
     <FrameLayout
@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:mbn_selectedIconColor="#673ab7"
-        app:mbn_backgroundBottomColor="#ffffff" />
+        app:mbn_selectedIconColor="@color/primaryColor"
+        app:mbn_backgroundBottomColor="@color/primaryTextColor" />
 
 </RelativeLayout>
 </layout>

@@ -40,16 +40,16 @@
                 android:textColor="@color/secondaryLightTextColor" />
         </LinearLayout>
 
-        <ImageButton
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toStartOf="@+id/img_survey_results"
             android:layout_marginBottom="@dimen/spacing_extra_small"
             android:layout_marginEnd="@dimen/spacing_small"
-            app:srcCompat="@drawable/more"
-            android:tint="@color/secondaryTextColor"
-            app:backgroundTint="@color/primaryTextColor"/>
+            android:textColor="@color/secondaryTextColor"
+            app:backgroundTint="@color/secondaryColor"
+            android:text="@string/survey_complete"/>
 
         <ImageView
             android:layout_width="150dp"

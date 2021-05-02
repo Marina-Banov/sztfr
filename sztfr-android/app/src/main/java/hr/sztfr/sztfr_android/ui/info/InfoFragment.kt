@@ -16,13 +16,4 @@ class InfoFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_info, container, false)
     }
-
-    companion object {
-
-        @JvmStatic
-        fun newInstance() =
-            InfoFragment().apply {
-                arguments = Bundle().apply {}
-            }
-    }
 }

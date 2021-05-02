@@ -16,14 +16,4 @@ class SurveyFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_survey, container, false)
     }
-
-    companion object {
-
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance() =
-            SurveyFragment().apply {
-                arguments = Bundle().apply {}
-            }
-    }
 }
