@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/secondaryColor"
+    android:background="?attr/screensBackgroundColor"
     tools:context=".ui.MainActivity">
 
     <FrameLayout
@@ -17,9 +17,7 @@
         android:id="@+id/meow_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:mbn_selectedIconColor="@color/primaryColor"
-        app:mbn_backgroundBottomColor="@color/primaryTextColor" />
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>
 </layout>

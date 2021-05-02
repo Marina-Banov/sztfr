@@ -7,7 +7,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorPrimary"
+        android:background="@color/purple_sztfr"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingStart="@dimen/spacing_normal"
@@ -65,8 +65,8 @@
                     android:layout_marginEnd="@dimen/spacing_normal"
                     android:text="@string/login_with_email"
                     android:textAllCaps="false"
-                    android:textColor="@color/primaryDarkColor"
-                    app:backgroundTint="@color/primaryExtraLightColor" />
+                    android:textColor="@color/purple_dark"
+                    app:backgroundTint="@color/purple_extra_light" />
 
                 <com.shobhitpuri.custombuttons.GoogleSignInButton
                     android:id="@+id/google_sign_in_button"
@@ -89,7 +89,7 @@
                     android:selectAllOnFocus="false"
                     android:text="@string/login_anonymous"
                     android:textAlignment="center"
-                    android:textColor="?attr/colorOnPrimary" />
+                    android:textColor="@color/white" />
             </LinearLayout>
 
             <ProgressBar

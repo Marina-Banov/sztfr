@@ -20,7 +20,7 @@ class HomeAdapter (private val items: List<HomeRow>) : RecyclerView.Adapter<Home
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.ViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
-        val homeView = inflater.inflate(R.layout.home_row, parent, false)
+        val homeView = inflater.inflate(R.layout.layout_card_event, parent, false)
         return ViewHolder(homeView)
     }
 

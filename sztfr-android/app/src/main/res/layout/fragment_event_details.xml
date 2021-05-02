@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primaryTextColor">
+        android:background="?attr/detailsBackgroundColor">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                         app:cornerRadius="24dp"
                         app:icon="@drawable/favorite"
                         app:iconGravity="top"
-                        app:iconTint="@color/secondaryTextColor"
+                        app:iconTint="?attr/accentTextColor"
                         app:layout_constraintBottom_toBottomOf="@+id/details_img"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"

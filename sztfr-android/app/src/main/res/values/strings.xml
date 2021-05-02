@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SZTFR</string>
+    <string name="app_version">1.0.0</string>
+
     <string name="welcome_title_text">Dobrodošao/la u aplikaciju SZTFR!</string>
     <string name="welcome_description_text">U ovoj aplikaciji možeš vidjeti najnovije događaje organizirane od strane tvog studentskog zbora i pomoći nam u tome da studentima Tehničkog fakulteta ponudimo još zanimljivog sadržaja odgovaranjem na naše ankete. Da bi započeo korištenje ove aplikacije, prijavi se:</string>
     <string name="prompt_email">E-mail</string>
