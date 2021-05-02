@@ -1,4 +1,4 @@
-package hr.sztfr.sztfr_android.ui.event
+package hr.sztfr.sztfr_android.ui.event_details
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -13,6 +13,7 @@
         <item name="lightTextColor">@color/purple_light</item>
         <item name="mbn_defaultIconColor">@color/purple_light</item>
         <item name="mbn_selectedIconColor">@color/white</item>
+        <item name="mbn_rippleColor">@color/purple_dark</item>
         <item name="mbn_backgroundBottomColor">@color/purple_medium_dark</item>
         <item name="mbn_shadowColor">@color/purple_dark</item>
         <item name="backButtonColor">@color/purple_dark</item>

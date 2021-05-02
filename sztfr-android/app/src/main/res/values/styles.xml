@@ -14,7 +14,7 @@
     </style>
 
     <style name="ThemeOverlay.SZTFR.TextInputLayout" parent="">
-        <item name="colorPrimary">@color/purple_extra_light</item>
+        <item name="colorPrimary">@color/purple_light</item>
         <item name="colorControlActivated">@color/purple_sztfr</item>
         <item name="editTextStyle">@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense</item>
     </style>

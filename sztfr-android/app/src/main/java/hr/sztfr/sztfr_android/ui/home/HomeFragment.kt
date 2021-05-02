@@ -1,38 +1,54 @@
 package hr.sztfr.sztfr_android.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.*
-// import android.widget.Button
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.data.model.Event
+import hr.sztfr.sztfr_android.databinding.FragmentHomeBinding
+import java.util.*
 // import hr.sztfr.sztfr_android.ui.details.DetailsFragment
 
 
 class HomeFragment : Fragment() {
-    private lateinit var items: ArrayList<HomeRow>
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
+    private lateinit var binding: FragmentHomeBinding
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding.lifecycleOwner = this
 
-        val recyclerView = view.findViewById<View>(R.id.home_recycler_view) as RecyclerView
-        items = HomeRow.createListOfItems(5)
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = HomeAdapter(items)
-            HomeAdapter(items).onBtnClick = { items
-                replaceFragment()
-            }
+        val application = requireNotNull(activity).application
+        val list = ArrayList<Event>()
+        for (i in 1..5) {
+            list.add(Event(
+                    i.toString(),
+                    ContextCompat.getDrawable(application, R.drawable.dummy)!!,
+                    getString(R.string.home_frag_title),
+                    getString(R.string.home_frag_time),
+                    getString(R.string.home_frag_location),
+                    getString(R.string.home_frag_organisation),
+                    listOf(getString(R.string.tag)),
+                    getString(R.string.home_frag_description)
+            ))
         }
+        val viewModelFactory = HomeViewModelFactory(list, application)
+        val viewModel = ViewModelProvider(this, viewModelFactory)
+                .get(HomeViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.homeRecyclerView.adapter = HomeAdapter(
+                { Log.i("HomeRecyclerView", "show details (" + it.id + ")") },
+                { Log.i("HomeRecyclerView", "add favorite (" + it.id + ")") }
+        )
+        return binding.root
     }
 
     private fun replaceFragment() {

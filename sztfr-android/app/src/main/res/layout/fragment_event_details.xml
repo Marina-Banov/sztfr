@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="hr.sztfr.sztfr_android.ui.event.EventDetailsViewModel" />
+            type="hr.sztfr.sztfr_android.ui.event_details.EventDetailsViewModel" />
     </data>
 
     <RelativeLayout

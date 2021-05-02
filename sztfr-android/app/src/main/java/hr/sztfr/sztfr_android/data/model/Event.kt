@@ -2,7 +2,7 @@ package hr.sztfr.sztfr_android.data.model
 
 import android.graphics.drawable.Drawable
 
-class Event(val id: String,
+class Event(var id: String,
             val imgSrcUrl: Drawable,
             val title: String,
             val startTime: String,

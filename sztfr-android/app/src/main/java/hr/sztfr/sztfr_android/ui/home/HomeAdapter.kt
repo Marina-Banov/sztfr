@@ -1,30 +1,46 @@
 package hr.sztfr.sztfr_android.ui.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.data.model.Event
+import hr.sztfr.sztfr_android.databinding.LayoutCardEventBinding
 
-class HomeAdapter (private val items: List<HomeRow>) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
-    var onBtnClick: ((HomeRow) -> Unit)? = null
+class HomeAdapter(private val showDetailsListener: (event: Event) -> Unit,
+                  private val addFavoritesListener: (event: Event) -> Unit) :
+        ListAdapter<Event, HomeAdapter.ViewHolder>(DiffCallback) {
 
-    inner class ViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
-
+    class ViewHolder(private var binding: LayoutCardEventBinding,
+                     private var showDetailsListener: (event: Event) -> Unit,
+                     private var addFavoritesListener: (event: Event) -> Unit):
+            RecyclerView.ViewHolder(binding.root) {
+        fun bind(event: Event) {
+            binding.event = event
+            binding.showDetailsButton.setOnClickListener { showDetailsListener(event) }
+            binding.addFavoriteButton.setOnClickListener { addFavoritesListener(event) }
+            binding.executePendingBindings()
+        }
     }
 
-    override fun onBindViewHolder(viewHolder: HomeAdapter.ViewHolder, position: Int) {
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = LayoutCardEventBinding.inflate(LayoutInflater.from(parent.context))
+        return ViewHolder(binding, showDetailsListener, addFavoritesListener)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.ViewHolder {
-        val context = parent.context
-        val inflater = LayoutInflater.from(context)
-        val homeView = inflater.inflate(R.layout.layout_card_event, parent, false)
-        return ViewHolder(homeView)
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val event = getItem(position)
+        viewHolder.bind(event)
     }
 
-    override fun getItemCount(): Int {
-        return items.size
+    companion object DiffCallback : DiffUtil.ItemCallback<Event>() {
+        override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean {
+            return oldItem.id == newItem.id
+        }
     }
 }

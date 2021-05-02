@@ -1,92 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:layout_margin="@dimen/spacing_small"
-    app:cardBackgroundColor="?attr/cardBackgroundColor"
-    app:cardCornerRadius="@dimen/spacing_small">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <data>
+        <variable
+            name="event"
+            type="hr.sztfr.sztfr_android.data.model.Event" />
+    </data>
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="175dp"
-            android:src="@drawable/dummy"
-            android:id="@+id/home_img"
-            android:scaleType="centerCrop"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/spacing_small"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="?attr/cardBackgroundColor"
+        app:cardCornerRadius="@dimen/spacing_small">
 
-        <LinearLayout
-            android:id="@+id/fragment_home_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/home_img"
-            android:layout_alignParentStart="true"
-            android:gravity="start"
-            android:orientation="vertical"
-            android:padding="@dimen/spacing_small"
-            android:layout_toStartOf="@+id/times">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/home_row_title"
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="175dp"
+                android:src="@drawable/dummy"
+                android:id="@+id/home_img"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:id="@+id/fragment_home_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/home_frag_title"
-                style="@style/TextAppearance.SZTFR.DetailsTitle"/>
+                android:layout_below="@id/home_img"
+                android:layout_alignParentStart="true"
+                android:gravity="start"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_small"
+                android:layout_toStartOf="@+id/times">
 
-            <TextView
-                android:id="@+id/home_row_time"
+                <TextView
+                    android:id="@+id/home_row_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{event.title}"
+                    style="@style/TextAppearance.SZTFR.DetailsTitle"/>
+
+                <TextView
+                    android:id="@+id/home_row_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{event.startTime}"
+                    style="@style/TextAppearance.SZTFR.DetailsDescription"/>
+
+                <TextView
+                    android:id="@+id/home_row_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{event.location}"
+                    style="@style/TextAppearance.SZTFR.DetailsDescription"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@id/times"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/home_frag_time"
-                style="@style/TextAppearance.SZTFR.DetailsDescription"/>
+                android:layout_height="0dp"
+                android:layout_below="@id/home_img"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_toStartOf="@+id/times"
+                android:layout_alignTop="@id/fragment_home_info"
+                android:layout_alignBottom="@id/fragment_home_info">
 
-            <TextView
-                android:id="@+id/home_row_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/home_frag_location"
-                style="@style/TextAppearance.SZTFR.DetailsDescription"/>
-        </LinearLayout>
+                <ImageButton
+                    android:id="@+id/show_details_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:padding="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    app:srcCompat="@drawable/more"
+                    android:tint="?attr/accentTextColor"
+                    app:backgroundTint="?attr/cardBackgroundColor" />
 
-        <LinearLayout
-            android:id="@id/times"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_below="@id/home_img"
-            android:layout_alignParentEnd="true"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_toStartOf="@+id/times"
-            android:layout_alignTop="@id/fragment_home_info"
-            android:layout_alignBottom="@id/fragment_home_info">
+                <ImageButton
+                    android:id="@+id/add_favorite_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:padding="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    app:srcCompat="@drawable/favorite"
+                    app:tint="?attr/accentTextColor"
+                    app:backgroundTint="?attr/cardBackgroundColor" />
 
-            <ImageButton
-                android:id="@+id/home_more_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:padding="@dimen/spacing_extra_small"
-                android:layout_marginBottom="@dimen/spacing_small"
-                app:srcCompat="@drawable/more"
-                android:tint="?attr/accentTextColor"
-                app:backgroundTint="?attr/cardBackgroundColor" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:padding="@dimen/spacing_extra_small"
-                android:layout_marginBottom="@dimen/spacing_small"
-                android:layout_marginEnd="@dimen/spacing_small"
-                app:srcCompat="@drawable/favorite"
-                app:tint="?attr/accentTextColor"
-                app:backgroundTint="?attr/cardBackgroundColor" />
-
-        </LinearLayout>
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
