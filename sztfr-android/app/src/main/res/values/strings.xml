@@ -45,4 +45,11 @@
     <string name="povratak">POVRATAK</string>
     <string name="send_answers">POŠALJI ODGOVORE</string>
 
+    <string name="hello_survey_fragment">Hello survey fragment</string>
+    <string name="hello_info_fragment">Hello info fragment</string>
+
+    <string name="channel_name">SZTFR app</string>
+    <string name="channel_description">SZTFR notification</string>
+    <string name="notification_title">Spam</string>
+    <string name="notification_text">Lorem Ipsum</string>
 </resources>
