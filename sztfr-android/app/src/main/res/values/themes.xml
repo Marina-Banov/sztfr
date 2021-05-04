@@ -10,6 +10,8 @@
         <item name="cardBackgroundColor">@color/white</item>
         <item name="accentTextColor">@color/black</item>
         <item name="chipStrokeColor">@color/purple_sztfr</item>
+        <item name="chipBackgroundColorChecked">@color/purple_sztfr</item>
+        <item name="chipTextColorChecked">@color/white</item>
         <item name="lightTextColor">@color/gray</item>
         <item name="mbn_defaultIconColor">@color/black</item>
         <item name="mbn_selectedIconColor">@color/purple_sztfr</item>

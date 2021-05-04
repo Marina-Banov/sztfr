@@ -51,6 +51,8 @@
     <style name="Widget.SZTFR.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@drawable/tag_style_bg</item>
         <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">?attr/chipStrokeColor</item>
+        <item name="chipSurfaceColor">@android:color/transparent</item>
         <item name="android:textColor">@drawable/tag_style</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

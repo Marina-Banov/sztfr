@@ -19,7 +19,7 @@ class EventDetailsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        val application = requireNotNull(activity).application
+        val application = requireActivity().application
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_event_details, container, false)
         binding.lifecycleOwner = this
         val event = EventDetailsFragmentArgs.fromBundle(requireArguments()).event
@@ -36,6 +36,8 @@ class EventDetailsFragment : Fragment() {
                 binding.tagGroup.addView(chip)
             }
         })
+
+        binding.goBackBtn.setOnClickListener { requireActivity().onBackPressed() }
         return binding.root
     }
 

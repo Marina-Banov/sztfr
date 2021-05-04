@@ -31,7 +31,7 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         binding.lifecycleOwner = this
 
-        binding.fragmentContainer.adapter = PagerAdapter(requireActivity().supportFragmentManager)
+        binding.fragmentContainer.adapter = PagerAdapter(childFragmentManager)
         binding.fragmentContainer.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
@@ -63,7 +63,7 @@ class MainFragment : Fragment() {
         binding.meowMenu.show(HOME)
         return binding.root
     }
-/*
+/*  TODO
     override fun onBackPressed() {
         if (backStack.size <= 1) {
             super.onBackPressed()

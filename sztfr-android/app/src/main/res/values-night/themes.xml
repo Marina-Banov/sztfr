@@ -8,8 +8,10 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <item name="cardBackgroundColor">@color/purple_medium_dark</item>
-        <item name="accentTextColor">@color/white</item>
+        <item name="accentTextColor">@color/blue_light</item>
         <item name="chipStrokeColor">@color/purple_light</item>
+        <item name="chipBackgroundColorChecked">@color/purple_light</item>
+        <item name="chipTextColorChecked">@color/purple_dark</item>
         <item name="lightTextColor">@color/purple_light</item>
         <item name="mbn_defaultIconColor">@color/purple_light</item>
         <item name="mbn_selectedIconColor">@color/white</item>

@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -45,16 +44,13 @@ class HomeFragment : Fragment() {
                 .get(HomeViewModel::class.java)
         binding.viewModel = viewModel
         binding.homeRecyclerView.adapter = HomeAdapter(
-            { navigateToEventDetails(it) },
+            { findNavController().navigate(
+                MainFragmentDirections.actionMainFragmentToEventDetailsFragment(it)) },
             { Log.i("HomeRecyclerView", "add favorite (" + it.id + ")") }
         )
         return binding.root
     }
 
-    private fun navigateToEventDetails(event: Event) {
-        Log.i("HomeRecyclerView", "show details (" + event.id + ")")
-        findNavController().navigate(MainFragmentDirections.actionMainFragmentToEventDetailsFragment(event))
-    }
 }
 
 

@@ -6,4 +6,6 @@
     <attr name="detailsBackgroundColor" format="reference|color" />
     <attr name="backButtonColor" format="reference|color" />
     <attr name="actionButtonBackground" format="reference|color" />
+    <attr name="chipBackgroundColorChecked" format="reference|color" />
+    <attr name="chipTextColorChecked" format="reference|color" />
 </resources>
