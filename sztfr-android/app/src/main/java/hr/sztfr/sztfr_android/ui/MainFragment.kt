@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.ViewPager
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
@@ -35,20 +36,14 @@ class MainFragment : Fragment() {
         binding.fragmentContainer.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-            override fun onPageSelected(position: Int) {
-                if (position == HOME) {
-                    backStack.clear()
-                    backStack.push(position)
-                }
-                if (position != backStack.lastElement()) {
-                    if (backStack.indexOf(position) > -1) {
-                        backStack.removeElement(position)
-                    }
-                    backStack.push(position)
-                }
-                binding.meowMenu.show(position)
-            }
+            override fun onPageSelected(position: Int) { addToStack(position) }
         })
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() { removeFromStack(this) }
+            }
+        )
 
         binding.meowMenu.apply {
             add(MeowBottomNavigation.Model(HOME, R.drawable.house))
@@ -59,17 +54,31 @@ class MainFragment : Fragment() {
         }
 
         binding.fragmentContainer.currentItem = HOME
-        backStack.push(HOME)
-        binding.meowMenu.show(HOME)
+        addToStack(HOME)
         return binding.root
     }
-/*  TODO
-    override fun onBackPressed() {
-        if (backStack.size <= 1) {
-            super.onBackPressed()
-            return
+
+     private fun addToStack(position: Int) {
+         if (position == HOME) {
+            backStack.clear()
+            backStack.push(position)
         }
-        backStack.pop()
-        binding.fragmentContainer.currentItem = backStack.lastElement()
-    }*/
+        if (position != backStack.lastElement()) {
+            if (backStack.indexOf(position) > -1) {
+                backStack.removeElement(position)
+            }
+            backStack.push(position)
+        }
+        binding.meowMenu.show(position)
+    }
+
+    private fun removeFromStack(callback: OnBackPressedCallback) {
+        if (backStack.size <= 1) {
+            callback.isEnabled = false
+            requireActivity().onBackPressed()
+        } else {
+            backStack.pop()
+            binding.fragmentContainer.currentItem = backStack.lastElement()
+        }
+    }
 }
