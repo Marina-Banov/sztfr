@@ -1,12 +1,14 @@
 package hr.sztfr.sztfr_android.data.model
 
-import android.graphics.drawable.Drawable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 class Event(var id: String,
-            val imgSrcUrl: Drawable,
+            val imgSrcUrl: String,
             val title: String,
             val startTime: String,
             val location: String,
             val organisation: String,
             val tags: List<String>,
-            val description: String)
+            val description: String) : Parcelable

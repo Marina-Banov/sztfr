@@ -65,28 +65,28 @@
                     android:id="@+id/details_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_frag_title"
+                    android:text="@{viewModel.event.title}"
                     style="@style/TextAppearance.SZTFR.DetailsTitle" />
 
                 <TextView
                     android:id="@+id/details_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_frag_time"
+                    android:text="@{viewModel.event.startTime}"
                     style="@style/TextAppearance.SZTFR.DetailsDetails" />
 
                 <TextView
                     android:id="@+id/details_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_frag_location"
+                    android:text="@{viewModel.event.location}"
                     style="@style/TextAppearance.SZTFR.DetailsDetails" />
 
                 <TextView
                     android:id="@+id/details_organizer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_frag_organisation"
+                    android:text="@{viewModel.event.organisation}"
                     style="@style/TextAppearance.SZTFR.DetailsDetails" />
 
                 <com.google.android.material.chip.ChipGroup
@@ -99,7 +99,7 @@
                     android:id="@+id/details_main"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_frag_description"
+                    android:text="@{viewModel.event.description}"
                     style="@style/TextAppearance.SZTFR.DetailsDescription" />
             </LinearLayout>
         </ScrollView>

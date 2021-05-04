@@ -17,9 +17,9 @@ class PagerAdapter(fragmentManager: FragmentManager)
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            MainActivity.FAVORITES -> FavoritesFragment()
-            MainActivity.SURVEY -> SurveyFragment()
-            MainActivity.INFO -> InfoFragment()
+            MainFragment.FAVORITES -> FavoritesFragment()
+            MainFragment.SURVEY -> SurveyFragment()
+            MainFragment.INFO -> InfoFragment()
             else -> HomeFragment()
         }
     }

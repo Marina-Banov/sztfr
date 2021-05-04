@@ -9,10 +9,11 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.databinding.FragmentHomeBinding
-// import hr.sztfr.sztfr_android.ui.details.DetailsFragment
+import hr.sztfr.sztfr_android.ui.MainFragmentDirections
 
 
 class HomeFragment : Fragment() {
@@ -29,14 +30,14 @@ class HomeFragment : Fragment() {
         val list = ArrayList<Event>()
         for (i in 1..5) {
             list.add(Event(
-                    i.toString(),
-                    ContextCompat.getDrawable(application, R.drawable.dummy)!!,
-                    getString(R.string.home_frag_title),
-                    getString(R.string.home_frag_time),
-                    getString(R.string.home_frag_location),
-                    getString(R.string.home_frag_organisation),
-                    listOf(getString(R.string.tag)),
-                    getString(R.string.home_frag_description)
+                i.toString(),
+                "dummy",
+                getString(R.string.home_frag_title) + " " + i.toString(),
+                getString(R.string.home_frag_time),
+                getString(R.string.home_frag_location),
+                getString(R.string.home_frag_organisation),
+                listOf(getString(R.string.tag)),
+                getString(R.string.home_frag_description)
             ))
         }
         val viewModelFactory = HomeViewModelFactory(list, application)
@@ -44,16 +45,15 @@ class HomeFragment : Fragment() {
                 .get(HomeViewModel::class.java)
         binding.viewModel = viewModel
         binding.homeRecyclerView.adapter = HomeAdapter(
-                { Log.i("HomeRecyclerView", "show details (" + it.id + ")") },
-                { Log.i("HomeRecyclerView", "add favorite (" + it.id + ")") }
+            { navigateToEventDetails(it) },
+            { Log.i("HomeRecyclerView", "add favorite (" + it.id + ")") }
         )
         return binding.root
     }
 
-    private fun replaceFragment() {
-    /*    val fragmentTransition = activity?.supportFragmentManager?.beginTransaction()
-        fragmentTransition?.replace(R.id.fragmentContainer, DetailsFragment())?.addToBackStack(Fragment::class.java.simpleName)
-            ?.commit()*/
+    private fun navigateToEventDetails(event: Event) {
+        Log.i("HomeRecyclerView", "show details (" + event.id + ")")
+        findNavController().navigate(MainFragmentDirections.actionMainFragmentToEventDetailsFragment(event))
     }
 }
 

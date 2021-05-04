@@ -13,7 +13,7 @@
     <string name="login_anonymous">ili <u>nastavi bez prijave</u>\n(neke značajke možda neće biti dostupne)</string>
     <string name="login_failed">Prijava nije uspjela</string>
     <string name="action_sign_out">Odjava</string>
-  
+
     <string name="hello_home_fragment">Hello home fragment</string>
     <string name="hello_favorites_fragment">Hello favorites fragment</string>
     <string name="hello_survey_fragment">Hello survey fragment</string>
