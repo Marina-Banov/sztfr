@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.databinding.FragmentHomeBinding
-import java.util.*
 // import hr.sztfr.sztfr_android.ui.details.DetailsFragment
 
 

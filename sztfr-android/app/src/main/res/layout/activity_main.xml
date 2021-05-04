@@ -7,7 +7,7 @@
     android:background="?attr/screensBackgroundColor"
     tools:context=".ui.MainActivity">
 
-    <FrameLayout
+    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/meow_menu"
