@@ -66,6 +66,8 @@
                     android:text="@string/login_with_email"
                     android:textAllCaps="false"
                     android:textColor="@color/purple_dark"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     app:backgroundTint="@color/purple_light" />
 
                 <com.shobhitpuri.custombuttons.GoogleSignInButton
@@ -94,6 +96,7 @@
 
             <ProgressBar
                 android:id="@+id/loading"
+                android:theme="@style/ThemeOverlay.SZTFR.ProgressBar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

@@ -99,6 +99,10 @@ class LoginActivity : AppCompatActivity() {
     } */
 
     fun firebaseAuthSendEmail(email: String) {
+        if (email == "") {
+            return
+        }
+
         _loading.value = true
 
         val actionCodeSettings = ActionCodeSettings.newBuilder()
@@ -149,6 +153,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showLoginFailed() {
+        _loading.value = false
         Toast.makeText(applicationContext, R.string.login_failed, Toast.LENGTH_SHORT).show()
     }
 }

@@ -29,6 +29,10 @@
         <item name="materialThemeOverlay">@style/ThemeOverlay.SZTFR.TextInputLayout</item>
     </style>
 
+    <style name="ThemeOverlay.SZTFR.ProgressBar" parent="">
+        <item name="colorAccent">@color/white</item>
+    </style>
+
     <style name="ShapeAppearance.SZTFR.RoundedCorners" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
