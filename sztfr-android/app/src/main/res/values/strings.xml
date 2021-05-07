@@ -19,6 +19,7 @@
     <string name="hello_survey_fragment">Hello survey fragment</string>
     <string name="hello_info_fragment">Hello info fragment</string>
 
+
     <string name="search_hint">Potraži događaj…</string>
 
     <string name="home_frag_title">RITEH cool event</string>
@@ -37,4 +38,9 @@
     <string name="about_description">Puno teksta o tvom najdražem zboru</string>
     <string name="about_feedback">Imaš li neko pitanje za nas?</string>
     <string name="about_feedback_btn">Javi nam se!</string>
+
+  
+    <string name="current_surveys_fragment">current surveys fragment</string>
+    <string name="survey_results_fragment">survey results fragment</string>
+
 </resources>

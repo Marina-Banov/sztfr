@@ -10,31 +10,16 @@
     android:background="?attr/screensBackgroundColor"
     tools:context=".ui.survey.SurveyFragment">
 
-    <!-- TODO: Update blank fragment layout
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/white"
-        app:tabIndicatorColor="#2c77f1"
-        android:layout_alignParentTop="true"
-        android:elevation="5dp" />
-
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vp_survey_detail"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/survey_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layoutManager="LinearLayoutManager" />
+        android:layout_height="match_parent" >
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </androidx.viewpager.widget.ViewPager>
 
 </FrameLayout>
 </layout>
