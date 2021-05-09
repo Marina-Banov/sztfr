@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { LinearProgress } from "@material-ui/core";
+import { useFirebase } from "appFirebase";
+import { useTranslation } from "react-i18next";
 import { Button, Card, CardBody, Table } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import EventForm from "models/EventForm";
 
 export default function Events() {
+  const { t } = useTranslation();
+  const firebase = useFirebase();
+  const [loading, setLoading] = useState();
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    setLoading(true);
+    /*firebase
+      .getEvents()
+      .then((res) => {
+        setEvents(res.body);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });*/
+  }, [firebase]);
+
   return (
     <Card>
       <CardBody>
@@ -16,37 +38,37 @@ export default function Events() {
         >
           <Button className="m-b" color="success">
             <i className="fa fa-plus" />
-            &nbsp; Novi događaj
+            &nbsp; {t("events.new_event")}
           </Button>
         </Link>
         <Table hover>
           <thead>
             <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
+              <th>{t("title")}</th>
+              <th>{t("events.start_time")}</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
+            {loading ? (
+              <tr>
+                <td colSpan={2} className="no-padding">
+                  <LinearProgress />
+                </td>
+              </tr>
+            ) : events.length ? (
+              events.map((e) => (
+                <tr key={e.id}>
+                  <td>{e.title}</td>
+                  <td>{e.startTime}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={2} align="center">
+                  {t("events.no_events")}
+                </td>
+              </tr>
+            )}
           </tbody>
         </Table>
       </CardBody>

@@ -3,8 +3,10 @@ import ReactObserver from "react-event-observer";
 import app from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
+import request from "superagent";
 
 import { SZTFR } from "appConstants";
+import { buildURL } from "utils/buildURL";
 
 export const FirebaseContext = createContext({});
 export const useFirebase = () => useContext(FirebaseContext);
@@ -83,6 +85,28 @@ export default class Firebase {
       3: "Elektrotehnika",
       4: "Računarstvo",
     });
+  };
+
+  getEvents = () => {
+    return request.get(buildURL(SZTFR.API_PATH, "/events"));
+  };
+
+  getSurveys = () => {
+    return request.get(buildURL(SZTFR.API_PATH, "/surveys"));
+  };
+
+  addEvent = () => {
+    return request().post();
+    /*
+    var id: String,
+            val imgSrcUrl: String,
+            val title: String,
+            val startTime: String,
+            val location: String,
+            val organisation: String,
+            val tags: List<String>,
+            val description: String
+     */
   };
 
   writeToDatabase = (ref, data) => {

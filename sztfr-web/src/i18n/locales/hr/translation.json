@@ -22,6 +22,8 @@
     "add_image": "Dodaj sliku"
   },
   "events": {
+    "no_events": "Nema događaja.",
+    "new_event": "Novi događaj",
     "add_new_event": "Dodaj novi događaj",
     "start_date": "Datum početka",
     "end_date": "Datum završetka",
@@ -29,6 +31,10 @@
     "end_time": "Vrijeme završetka"
   },
   "surveys": {
+    "no_surveys": "Nema anketa.",
+    "new_survey": "Nova anketa",
+    "number_of_answers": "Broj odgovora",
+    "published": "Objavljeno",
     "google_form_url": "URL Google ankete",
     "add_new_survey": "Dodaj novu anketu"
   },
