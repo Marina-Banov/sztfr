@@ -1,9 +1,11 @@
 import * as admin from "firebase-admin";
 import express = require("express");
+import cors = require("cors");
 import { Express } from "express";
 
 export const crudOperations = (collectionName: string): Express => {
   const app = express();
+  app.use(cors());
 
   app.get("/", (req, res) => {
     admin.firestore().collection(collectionName).get()
