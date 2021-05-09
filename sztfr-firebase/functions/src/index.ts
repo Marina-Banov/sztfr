@@ -1,18 +1,11 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
+import * as user from "./user";
+import { crudOperations } from "./crud";
+
 admin.initializeApp();
 
-// auth trigger (new user signup)
-export const newUserSignUp = functions.auth.user().onCreate((user) => {
-  // for background triggers you must return a value/promise
-  return admin.firestore().collection("users").doc(user.uid).set({
-    email: "user.email",
-    upvotedOn: [],
-  });
-});
-
-// auth trigger (user deleted)
-export const userDeleted = functions.auth.user().onDelete((user) => {
-  const doc = admin.firestore().collection("users").doc(user.uid);
-  return doc.delete();
-});
+export const newUserSignUp = user.newUserSignUp;
+export const userDeleted = user.userDeleted;
+export const events = functions.https.onRequest(crudOperations("events"));
+export const surveys = functions.https.onRequest(crudOperations("surveys"));
