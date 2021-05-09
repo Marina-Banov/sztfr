@@ -27,5 +27,6 @@ module.exports = {
   rules: {
     "quotes": ["error", "double"],
     "object-curly-spacing": ["error", "always"],
+    "linebreak-style": ["error", "windows"],
   },
 };

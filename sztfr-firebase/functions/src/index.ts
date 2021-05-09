@@ -7,5 +7,6 @@ admin.initializeApp();
 
 export const newUserSignUp = user.newUserSignUp;
 export const userDeleted = user.userDeleted;
+export const tags = functions.https.onRequest(crudOperations("tags"));
 export const events = functions.https.onRequest(crudOperations("events"));
 export const surveys = functions.https.onRequest(crudOperations("surveys"));
