@@ -11,6 +11,7 @@
     "bootstrap": "^4.3.1",
     "chart.js": "^2.7.3",
     "classnames": "^2.2.6",
+    "dotenv": "^9.0.1",
     "feather-icons": "^4.28.0",
     "firebase": "^8.3.1",
     "font-awesome": "^4.7.0",

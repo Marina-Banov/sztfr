@@ -12,12 +12,12 @@ export const FirebaseContext = createContext({});
 export const useFirebase = () => useContext(FirebaseContext);
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAcdr7TsUUD4MSAM5QSbkGijnWNIDxjvec",
-  authDomain: "sztfr-7a759.firebaseapp.com",
-  projectId: "sztfr-7a759",
-  storageBucket: "sztfr-7a759.appspot.com",
-  messagingSenderId: "1091954528708",
-  appId: "1:1091954528708:web:5261cdeb450bee7e955491",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 export default class Firebase {
@@ -87,16 +87,28 @@ export default class Firebase {
     });
   };
 
+  getTags = () => {
+    return request.get(buildURL(process.env.REACT_APP_API_PATH, "/tags/hr"));
+  };
+
+  updateTags = (tags) => {
+    return request
+      .put(buildURL(process.env.REACT_APP_API_PATH, "/tags/hr"))
+      .send({ tags });
+  };
+
   getEvents = () => {
-    return request.get(buildURL(SZTFR.API_PATH, "/events"));
+    return request.get(buildURL(process.env.REACT_APP_API_PATH, "/events"));
   };
 
   getSurveys = () => {
-    return request.get(buildURL(SZTFR.API_PATH, "/surveys"));
+    return request.get(buildURL(process.env.REACT_APP_API_PATH, "/surveys"));
   };
 
-  addEvent = () => {
-    return request().post();
+  addEvent = (e) => {
+    return request()
+      .post(buildURL(process.env.REACT_APP_API_PATH, "/events"))
+      .send(e);
     /*
     var id: String,
             val imgSrcUrl: String,
