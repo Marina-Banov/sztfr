@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">#FF3E408B</color>
-    <color name="primaryLightColor">#FF6E6BBC</color>
-    <color name="primaryExtraLightColor">#FFBBB9ED</color>
-    <color name="primaryDarkColor">#FF011A5D</color>
-    <color name="secondaryColor">#FFE8EEF4</color>
-    <color name="secondaryLightColor">#FFFFFFFF</color>
-    <color name="secondaryDarkColor">#FFB6BCC1</color>
-    <color name="primaryTextColor">#FFFFFFFF</color>
-    <color name="secondaryTextColor">#FF000000</color>
+    <color name="purple_dark">#FF1F2055</color>
+    <color name="purple_medium_dark">#323369</color>
+    <color name="purple_sztfr">#FF3E408B</color>
+    <color name="purple_sztfr_alpha">#333E408B</color>
+    <color name="purple_medium_light">#FF6E6BBC</color>
+    <color name="purple_light">#FFBBB9ED</color>
+    <color name="blue_light">#FFE8EEF4</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray">#FF6C6C6C</color>
+    <color name="black">#FF000000</color>
 </resources>
