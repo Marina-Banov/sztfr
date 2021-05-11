@@ -23,7 +23,11 @@ class SurveyFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentSurveyBinding>(inflater, R.layout.fragment_survey, container, false)
+        viewPager = binding.pager
+        surveyCollectionPagerAdapter = SurveyCollectionPagerAdapter(childFragmentManager)
+        viewPager.adapter = surveyCollectionPagerAdapter
         return binding.root
+
     }
 
 }
