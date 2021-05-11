@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TextField } from "@material-ui/core";
 import { useTranslation } from "react-i18next";
 
@@ -13,14 +13,16 @@ export default function LoginWithEmailLink({ cancel }) {
   const [errorResponse, setErrorResponse] = useState("");
   const firebase = useFirebase();
 
-  useEffect(() => {
-    firebase.observer.subscribe(SZTFR.FIREBASE_RESPONSE, (data) => {
-      setErrorResponse(data);
-    });
-    return () => {
-      firebase.observer.unsubscribe(SZTFR.FIREBASE_RESPONSE);
-    };
-  }, [firebase]);
+  function sendLoginLink() {
+    firebase.sendLoginLink(email)
+      .then(() => {
+        window.localStorage.setItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL, email);
+        setErrorResponse("login.email_sent");
+      })
+      .catch(() => {
+        setErrorResponse("error_occurred");
+      });
+  }
 
   const updateEmail = (e) => {
     setErrorResponse("");
@@ -40,7 +42,7 @@ export default function LoginWithEmailLink({ cancel }) {
       />
       <button
         className="email-button"
-        onClick={() => firebase.sendLoginLink(email)}
+        onClick={() => sendLoginLink(email)}
       >
         {t("login.login")}
       </button>

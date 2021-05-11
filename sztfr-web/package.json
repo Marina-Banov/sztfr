@@ -21,7 +21,6 @@
     "react": "^17.0.1",
     "react-chartjs-2": "2.6.4",
     "react-dom": "^17.0.1",
-    "react-event-observer": "^0.5.11",
     "react-feather": "^1.1.6",
     "react-fontawesome": "1.6.1",
     "react-i18next": "^11.8.12",

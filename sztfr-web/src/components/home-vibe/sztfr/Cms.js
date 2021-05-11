@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { CircularProgress } from "@material-ui/core";
 import {
   Row,
   Col,
@@ -28,6 +29,7 @@ export default function CmsPage(props) {
   const { t } = useTranslation();
   const firebase = useFirebase();
   const [tags, setTags] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { form, handleInputChange, setFormField } = useForm(initialFormValue());
 
   function initialFormValue() {
@@ -49,20 +51,23 @@ export default function CmsPage(props) {
     return { image: null, tags: [], ...x };
   }
 
-  useEffect(() => {
-    firebase.observer.subscribe(SZTFR.FIREBASE_RESPONSE, (data) => {
-      if (data) {
-        setTags(data);
-        document.getElementById("tag").value = "";
-      }
-    });
-
-    firebase.getFromDatabase("tags");
-
-    return () => {
-      firebase.observer.unsubscribe(SZTFR.FIREBASE_RESPONSE);
-    };
+  const getTags = useCallback(() => {
+    firebase
+      .firestoreRead(SZTFR.FIRESTORE_TAGS_PATH)
+      .then((res) => {
+        setLoading(false);
+        setTags(res.body.tags);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
   }, [firebase]);
+
+  useEffect(() => {
+    setLoading(true);
+    // getTags();
+  }, [getTags]);
 
   function handleTagClick(tag) {
     const t = [...form.tags];
@@ -76,10 +81,20 @@ export default function CmsPage(props) {
   }
 
   function addTag() {
+    setLoading(true);
     const tagInput = document.getElementById("tag");
     const t = [...tags];
     t.push(tagInput.value);
-    firebase.writeToDatabase("tags", t);
+    firebase
+      .firestoreUpdate(t)
+      .then((res) => {
+        document.getElementById("tag").value = "";
+        getTags();
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
   }
 
   return (
@@ -123,16 +138,22 @@ export default function CmsPage(props) {
         <Card>
           <CardHeader>{t("tags.tags")}</CardHeader>
           <CardBody>
-            {Object.keys(tags).map((tag) => (
-              <Button
-                color={form.tags.includes(tag) ? "primary" : "secondary"}
-                className="m-1"
-                key={tags[tag]}
-                onClick={() => handleTagClick(tag)}
-              >
-                {tags[tag]}
-              </Button>
-            ))}
+            {loading ? (
+              <div className="flex_center_center">
+                <CircularProgress />
+              </div>
+            ) : (
+              Object.keys(tags).map((tag) => (
+                <Button
+                  color={form.tags.includes(tag) ? "primary" : "secondary"}
+                  className="m-1"
+                  key={tags[tag]}
+                  onClick={() => handleTagClick(tag)}
+                >
+                  {tags[tag]}
+                </Button>
+              ))
+            )}
             <FormGroup className="mt-3">
               <Label for="tag">{t("tags.add_new_tag")}</Label>
               <div className="flex_center_center tag-form-group">

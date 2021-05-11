@@ -12,25 +12,26 @@ export default function EmailVerification() {
   const firebase = useFirebase();
 
   useEffect(() => {
-    firebase.observer.subscribe(SZTFR.FIREBASE_RESPONSE, (data) => {
-      setMessage(data);
-    });
-
-    let savedEmail = window.localStorage.getItem(
-      SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL
-    );
-    if (savedEmail === "null") {
-      savedEmail = window.prompt(t("login.email_for_confirmation"));
-      window.localStorage.setItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL, savedEmail);
+    if (
+      window.localStorage.getItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL) === "null"
+    ) {
+      const email = window.prompt(t("login.email_for_confirmation"));
+      window.localStorage.setItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL, email);
     }
-    if (!firebase.logInWithEmailLink(savedEmail)) {
+
+    if (!firebase.verifyEmailLink()) {
       setMessage("login.invalid_verification_link");
+    } else {
+      firebase
+        .logInWithEmailLink()
+        .then(() => {
+          window.localStorage.removeItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL);
+        })
+        .catch(() => {
+          setMessage("error_occurred");
+        });
     }
-
-    return () => {
-      firebase.observer.unsubscribe(SZTFR.FIREBASE_RESPONSE);
-    };
-  }, [message, t, firebase]);
+  }, [t, firebase]);
 
   return (
     <div className="login-page flex_center_center">
