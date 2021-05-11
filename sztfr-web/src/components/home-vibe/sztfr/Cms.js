@@ -60,13 +60,13 @@ export default function CmsPage(props) {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
+        console.error(err);
       });
   }, [firebase]);
 
   useEffect(() => {
     setLoading(true);
-    // getTags();
+    getTags();
   }, [getTags]);
 
   function handleTagClick(tag) {
@@ -86,14 +86,14 @@ export default function CmsPage(props) {
     const t = [...tags];
     t.push(tagInput.value);
     firebase
-      .firestoreUpdate(t)
+      .firestoreUpdate(SZTFR.FIRESTORE_TAGS_PATH, { tags: t })
       .then((res) => {
         document.getElementById("tag").value = "";
         getTags();
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
+        console.error(err);
       });
   }
 

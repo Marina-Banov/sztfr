@@ -23,6 +23,15 @@ export default class Firebase {
   constructor() {
     app.initializeApp(firebaseConfig);
     this.auth = app.auth();
+    this.auth.onAuthStateChanged(() => {
+      if (!!this.auth.currentUser) {
+        this.auth.currentUser
+          .getIdToken(false)
+          .then((token) => (this.userToken = token));
+      } else {
+        this.userToken = "";
+      }
+    });
   }
 
   sendLoginLink = (email) => {
@@ -58,6 +67,7 @@ export default class Firebase {
   firestoreCreate = (path, body) => {
     return request()
       .post(buildURL(process.env.REACT_APP_API_PATH, path))
+      .set("Authorization", "Bearer " + this.userToken)
       .send(body);
     /*
     var id: String,
@@ -78,6 +88,7 @@ export default class Firebase {
   firestoreUpdate = (path, body) => {
     return request
       .put(buildURL(process.env.REACT_APP_API_PATH, path))
+      .set("Authorization", "Bearer " + this.userToken)
       .send(body);
   };
 }

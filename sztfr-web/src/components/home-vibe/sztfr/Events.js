@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Button, Card, CardBody, Table } from "reactstrap";
 import { Link } from "react-router-dom";
 
+import { SZTFR } from "appConstants";
 import EventForm from "models/EventForm";
 
 export default function Events() {
@@ -15,16 +16,16 @@ export default function Events() {
 
   useEffect(() => {
     setLoading(true);
-    /*firebase
-      .getEvents()
+    firebase
+      .firestoreRead(SZTFR.FIRESTORE_EVENTS_PATH)
       .then((res) => {
         setEvents(res.body);
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         setLoading(false);
-      });*/
+      });
   }, [firebase]);
 
   return (
