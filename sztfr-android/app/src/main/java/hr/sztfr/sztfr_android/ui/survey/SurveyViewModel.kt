@@ -10,14 +10,23 @@ class SurveyViewModel: ViewModel() {
 
     val TAG = "SURVEY_VIEW_MODEL"
     private var firestoreRepository = FirestoreRepository()
-    var options : FirestoreRecyclerOptions<SurveyModel>
     private lateinit var storageReference : StorageReference
 
 
-    init {
-        var query = firestoreRepository.getSurveys()
-        options = FirestoreRecyclerOptions.Builder<SurveyModel>()
-            .setQuery(query, SurveyModel::class.java).build()
+    fun getPublishedSurveys() : FirestoreRecyclerOptions<SurveyModel>{
+        var query = firestoreRepository.getPublishedSurveys()
+        var options = FirestoreRecyclerOptions.Builder<SurveyModel>()
+                .setQuery(query, SurveyModel::class.java).build()
+
+        return options
+    }
+
+    fun getUnpublishedSurveys() : FirestoreRecyclerOptions<SurveyModel>{
+        var query = firestoreRepository.getUnpublishedSurveys()
+        var options = FirestoreRecyclerOptions.Builder<SurveyModel>()
+                .setQuery(query, SurveyModel::class.java).build()
+
+        return options
     }
 
     fun getImageReference(imageURL: String) : StorageReference {
