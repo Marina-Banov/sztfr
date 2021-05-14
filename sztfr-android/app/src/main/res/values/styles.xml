@@ -40,12 +40,23 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextAppearance.SZTFR.SurveyTitle" parent="">
+        <item name="android:textColor">?attr/accentTextColor</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TextAppearance.SZTFR.DetailsDetails" parent="">
         <item name="android:textColor">?attr/accentTextColor</item>
     </style>
 
     <style name="TextAppearance.SZTFR.DetailsDescription" parent="">
         <item name="android:textColor">?attr/lightTextColor</item>
+    </style>
+
+    <style name="TextAppearance.SZTFR.SurveyDescription" parent="">
+        <item name="android:textColor">?attr/lightTextColor</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="Widget.SZTFR.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
@@ -67,8 +78,17 @@
         <item name="backgroundTint">?attr/backButtonColor</item>
     </style>
 
+    <style name="Widget.SZTFR.SurveyButton" parent="">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:text">@string/rijesi_anketu</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/purple_medium_light</item>
+    </style>
+
     <style name="Widget.SZTFR.ActionButton" parent="">
         <item name="android:textColor">?attr/accentTextColor</item>
         <item name="backgroundTint">?attr/actionButtonBackground</item>
     </style>
+
 </resources>
