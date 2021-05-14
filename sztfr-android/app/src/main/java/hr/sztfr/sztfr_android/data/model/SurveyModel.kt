@@ -1,7 +1,10 @@
 package hr.sztfr.sztfr_android.data.model
 
+import android.os.Parcelable
 import com.google.firebase.firestore.DocumentId
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class SurveyModel (
 
     @DocumentId
@@ -23,6 +26,6 @@ data class SurveyModel (
 
     var googleFormsURL: String
 
-){
+) : Parcelable{
     constructor():this("","","", "", "", false,"", arrayOf("").toList(), "")
 }
