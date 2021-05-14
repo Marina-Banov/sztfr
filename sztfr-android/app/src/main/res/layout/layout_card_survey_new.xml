@@ -22,13 +22,13 @@
             <LinearLayout
                 android:id="@+id/info_survey_results"
                 android:layout_width="199dp"
-                android:layout_height="102dp"
+                android:layout_height="135dp"
                 android:orientation="vertical"
                 android:padding="8dp">
 
                 <TextView
                     android:id="@+id/survey_title"
-                    style="@style/TextAppearance.SZTFR.DetailsTitle"
+                    style="@style/TextAppearance.SZTFR.SurveyTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/spacing_small"
@@ -36,7 +36,7 @@
 
                 <TextView
                     android:id="@+id/survey_description"
-                    style="@style/TextAppearance.SZTFR.DetailsDescription"
+                    style="@style/TextAppearance.SZTFR.SurveyDescription"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/home_frag_description" />
@@ -47,6 +47,7 @@
                 android:layout_height="match_parent">
 
                 <Button
+                    android:id="@+id/survey_navigation_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/survey_complete"
