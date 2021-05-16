@@ -22,13 +22,16 @@
     "add_image": "Dodaj sliku"
   },
   "events": {
+    "event": "događaj",
     "no_events": "Nema događaja.",
     "new_event": "Novi događaj",
     "add_new_event": "Dodaj novi događaj",
     "start_date": "Datum početka",
     "end_date": "Datum završetka",
     "start_time": "Vrijeme početka",
-    "end_time": "Vrijeme završetka"
+    "end_time": "Vrijeme završetka",
+    "online_address": "URL događaja",
+    "onsite_address": "Adresa"
   },
   "surveys": {
     "no_surveys": "Nema anketa.",

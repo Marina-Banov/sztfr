@@ -6,5 +6,7 @@ export default class EventForm {
     this.endDate = "";
     this.endTime = "";
     this.description = "";
+    this.locationOnline = "";
+    this.locationOnsite = "";
   }
 }

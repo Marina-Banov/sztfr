@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardBody, FormGroup, Label, Input, Row, Col } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
@@ -7,6 +7,7 @@ import { DatePicker, TimePicker } from "components/common";
 
 export default function NewEvent({ form, handleInputChange, setFormField }) {
   const { t } = useTranslation();
+  const [isOnline, setIsOnline] = useState(null);
 
   function validDateTime() {
     const start = combineDateTime(form.startDate, getISOTime(form.startTime));
@@ -72,6 +73,62 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
           </FormGroup>
         </Col>
       </Row>
+      <FormGroup>
+        <Row className="mb-2">
+          <Col md={4} className="flex_center_center">
+            <FormGroup check>
+              <Label check>
+                <Input
+                  type="radio"
+                  name="radio1"
+                  onChange={() => setIsOnline("true")}
+                />
+                <i>Online</i> {t("events.event")}
+              </Label>
+            </FormGroup>
+          </Col>
+          <Col md={8} className="flex_center_center">
+            <FormGroup className="mb-0 w-full">
+              <Input
+                type="text"
+                name="locationOnline"
+                disabled={isOnline === "false" || !isOnline}
+                aria-label={t("events.online_address")}
+                placeholder={t("events.online_address")}
+                onChange={handleInputChange}
+                value={form.locationOnline}
+              />
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={4} className="flex_center_center">
+            <FormGroup check>
+              <Label check>
+                <Input
+                  type="radio"
+                  name="radio1"
+                  onChange={() => setIsOnline("false")}
+                />
+                <i>Onsite</i> {t("events.event")}
+              </Label>
+            </FormGroup>
+          </Col>
+          <Col md={8} className="flex_center_center">
+            <FormGroup className="mb-0 w-full">
+              <Input
+                type="text"
+                name="locationOnsite"
+                disabled={isOnline === "true" || !isOnline}
+                aria-label={t("events.onsite_address")}
+                placeholder={t("events.onsite_address")}
+                onChange={handleInputChange}
+                value={form.locationOnsite}
+              />
+            </FormGroup>
+          </Col>
+        </Row>
+      </FormGroup>
       <FormGroup className="mb-3">
         <Label for="description">{t("description")}</Label>
         <Input
