@@ -3,7 +3,7 @@
         <item name="colorPrimary">@color/purple_sztfr</item>
         <item name="colorPrimaryVariant">@color/purple_dark</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/blue_light</item>
+        <item name="colorSecondary">@color/white</item>
         <item name="colorSecondaryVariant">@color/gray</item>
         <item name="colorOnSecondary">@color/black</item>
 
@@ -18,10 +18,11 @@
         <item name="mbn_rippleColor">@color/purple_sztfr_alpha</item>
         <item name="mbn_backgroundBottomColor">@color/white</item>
         <item name="mbn_shadowColor">@color/purple_sztfr_alpha</item>
-        <item name="backButtonColor">@color/blue_light</item>
+        <item name="backButtonColor">@color/white</item>
         <item name="screensBackgroundColor">@color/blue_light</item>
-        <item name="detailsBackgroundColor">@color/white</item>
-        <item name="actionButtonBackground">@color/blue_light</item>
+        <item name="detailsBackgroundColor">@color/blue_light</item>
+        <item name="actionButtonBackground">@color/white</item>
+        <item name="cardButtonBackground">@color/blue_light</item>
 
         <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
     </style>

@@ -3,25 +3,26 @@
         <item name="colorPrimary">@color/purple_sztfr</item>
         <item name="colorPrimaryVariant">@color/purple_dark</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/purple_dark</item>
+        <item name="colorSecondary">@color/gray_dark</item>
         <item name="colorSecondaryVariant">@color/gray</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <item name="cardBackgroundColor">@color/purple_medium_dark</item>
+        <item name="cardBackgroundColor">@color/gray_dark</item>
         <item name="accentTextColor">@color/blue_light</item>
         <item name="chipStrokeColor">@color/purple_light</item>
         <item name="chipBackgroundColorChecked">@color/purple_light</item>
-        <item name="chipTextColorChecked">@color/purple_dark</item>
-        <item name="lightTextColor">@color/purple_light</item>
-        <item name="mbn_defaultIconColor">@color/purple_light</item>
+        <item name="chipTextColorChecked">@color/black_light</item>
+        <item name="lightTextColor">@color/gray_light</item>
+        <item name="mbn_defaultIconColor">@color/gray_light</item>
         <item name="mbn_selectedIconColor">@color/white</item>
-        <item name="mbn_rippleColor">@color/purple_dark</item>
-        <item name="mbn_backgroundBottomColor">@color/purple_medium_dark</item>
-        <item name="mbn_shadowColor">@color/purple_dark</item>
-        <item name="backButtonColor">@color/purple_dark</item>
-        <item name="screensBackgroundColor">@color/purple_dark</item>
-        <item name="detailsBackgroundColor">@color/purple_medium_dark</item>
-        <item name="actionButtonBackground">#42437A</item>
+        <item name="mbn_rippleColor">@color/black_light</item>
+        <item name="mbn_backgroundBottomColor">@color/gray_dark</item>
+        <item name="mbn_shadowColor">#FF0F0F0F</item>
+        <item name="backButtonColor">@color/gray_dark</item>
+        <item name="screensBackgroundColor">@color/black_light</item>
+        <item name="detailsBackgroundColor">@color/black_light</item>
+        <item name="actionButtonBackground">@color/gray_dark</item>
+        <item name="cardButtonBackground">#FF353535</item>
 
         <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
     </style>

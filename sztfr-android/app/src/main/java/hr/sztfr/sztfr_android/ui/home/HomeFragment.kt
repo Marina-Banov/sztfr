@@ -31,12 +31,12 @@ class HomeFragment : Fragment() {
             list.add(Event(
                 i.toString(),
                 "dummy",
-                getString(R.string.home_frag_title) + " " + i.toString(),
-                getString(R.string.home_frag_time),
-                getString(R.string.home_frag_location),
-                getString(R.string.home_frag_organisation),
+                getString(R.string.event_dummy_title) + " " + i.toString(),
+                getString(R.string.event_dummy_time),
+                getString(R.string.event_dummy_location),
+                getString(R.string.event_dummy_organisation),
                 listOf(getString(R.string.tag)),
-                getString(R.string.home_frag_description)
+                getString(R.string.dummy_description)
             ))
         }
         val viewModelFactory = HomeViewModelFactory(list, application)
