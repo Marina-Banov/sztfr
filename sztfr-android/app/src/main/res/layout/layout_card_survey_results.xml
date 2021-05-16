@@ -11,50 +11,67 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="8dp">
 
         <LinearLayout
-            android:id="@+id/info_survey_results"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/img_survey_results"
-            android:orientation="vertical"
-            android:padding="@dimen/spacing_normal">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/home_row_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/spacing_small"
-                android:text="@string/home_frag_title"
-                style="@style/TextAppearance.SZTFR.DetailsTitle" />
+            <LinearLayout
+                android:id="@+id/info_survey_results"
+                android:layout_width="199dp"
+                android:layout_height="125dp"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-            <TextView
-                android:id="@+id/home_row_time"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="@string/home_frag_description"
-                style="@style/TextAppearance.SZTFR.DetailsDescription" />
+                <TextView
+                    android:id="@+id/survey_results_title"
+                    style="@style/TextAppearance.SZTFR.SurveyTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/spacing_small"
+                    android:text="@string/home_frag_title" />
+
+                <TextView
+                    android:id="@+id/survey_results_description"
+                    style="@style/TextAppearance.SZTFR.SurveyDescription"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/home_frag_description" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="199dp"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/survey_results_navigation_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/survey_see_results"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageButton"
+                    app:layout_constraintHorizontal_bias="0.183"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_toStartOf="@+id/img_survey_results"
-            android:layout_marginBottom="@dimen/spacing_extra_small"
-            android:layout_marginEnd="@dimen/spacing_small"
-            app:srcCompat="@drawable/more"
-            android:tint="?attr/accentTextColor"
-            app:backgroundTint="?attr/cardBackgroundColor"/>
 
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="fill_parent"
-            android:src="@drawable/dummy"
-            android:id="@+id/img_survey_results"
+            android:id="@+id/survey_results_img"
+            android:layout_width="168dp"
+            android:layout_height="186dp"
+            android:layout_alignParentEnd="true"
             android:scaleType="centerCrop"
-            android:layout_alignParentEnd="true"/>
+            android:src="@drawable/dummy"
+            android:contentDescription="TODO" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
