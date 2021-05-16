@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { usePlacesWidget } from "react-google-autocomplete";
 import { CardBody, FormGroup, Label, Input, Row, Col } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
@@ -8,6 +9,16 @@ import { DatePicker, TimePicker } from "components/common";
 export default function NewEvent({ form, handleInputChange, setFormField }) {
   const { t } = useTranslation();
   const [isOnline, setIsOnline] = useState(null);
+  const { ref, autocompleteRef } = usePlacesWidget({
+    apiKey: process.env.REACT_APP_API_KEY,
+    onPlaceSelected: (place) => {
+      setFormField("locationOnsite", place);
+    },
+    options: {
+      types: ["establishment"],
+      componentRestrictions: { country: "hr" },
+    },
+  });
 
   function validDateTime() {
     const start = combineDateTime(form.startDate, getISOTime(form.startTime));
@@ -96,7 +107,7 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
                 aria-label={t("events.online_address")}
                 placeholder={t("events.online_address")}
                 onChange={handleInputChange}
-                value={form.locationOnline}
+                value={form.locationOnline || ""}
               />
             </FormGroup>
           </Col>
@@ -123,7 +134,7 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
                 aria-label={t("events.onsite_address")}
                 placeholder={t("events.onsite_address")}
                 onChange={handleInputChange}
-                value={form.locationOnsite}
+                innerRef={ref}
               />
             </FormGroup>
           </Col>
