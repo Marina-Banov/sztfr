@@ -69,16 +69,6 @@ export default class Firebase {
       .post(buildURL(process.env.REACT_APP_API_PATH, path))
       .set("Authorization", "Bearer " + this.userToken)
       .send(body);
-    /*
-    var id: String,
-            val imgSrcUrl: String,
-            val title: String,
-            val startTime: String,
-            val location: String,
-            val organisation: String,
-            val tags: List<String>,
-            val description: String
-     */
   };
 
   firestoreRead = (path) => {

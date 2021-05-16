@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
 import { useFirebase } from "appFirebase";
-import Home from "./home-vibe/Home";
-import Login from "./login/Login";
-import EmailVerification from "./login/EmailVerification";
-import { PrivateRoute } from "./PrivateRoute";
+import { Main } from "components/common";
+import { Login, EmailVerification } from "components/pages";
+import { PrivateRoute } from "PrivateRoute";
 
-import "vibe/scss/styles.scss";
+import "bootstrap/scss/bootstrap.scss";
+import "font-awesome/css/font-awesome.min.css";
+import "scss/index.scss";
 
 export default function App() {
   const firebase = useFirebase();
@@ -39,7 +40,7 @@ export default function App() {
           component={EmailVerification}
           hasAccess={!authenticated}
         />
-        <PrivateRoute path="/" component={Home} hasAccess={authenticated} />
+        <PrivateRoute path="/" component={Main} hasAccess={authenticated} />
         <Route path="*">
           <Redirect to={authenticated ? "/home" : "/login"} />
         </Route>

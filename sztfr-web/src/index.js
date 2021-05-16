@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import i18n from "./i18n/i18n";
 import Firebase, { FirebaseContext } from "appFirebase";
 
-import "./index.css";
+import "./index.scss";
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>
