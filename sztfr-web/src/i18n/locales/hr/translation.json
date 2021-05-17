@@ -10,5 +10,36 @@
   },
   "cancel": "Odustani",
   "error_occurred": "Došlo je do pogreške",
-  "try_again": "Pokušaj ponovno"
+  "try_again": "Pokušaj ponovno",
+  "title": "Naslov",
+  "description": "Opis",
+  "tags": {
+    "tags": "Tagovi",
+    "add_new_tag": "Dodaj novi tag"
+  },
+  "images": {
+    "image": "Slika",
+    "add_image": "Dodaj sliku"
+  },
+  "events": {
+    "event": "događaj",
+    "no_events": "Nema događaja.",
+    "new_event": "Novi događaj",
+    "add_new_event": "Dodaj novi događaj",
+    "start_date": "Datum početka",
+    "end_date": "Datum završetka",
+    "start_time": "Vrijeme početka",
+    "end_time": "Vrijeme završetka",
+    "online_address": "URL događaja",
+    "onsite_address": "Adresa"
+  },
+  "surveys": {
+    "no_surveys": "Nema anketa.",
+    "new_survey": "Nova anketa",
+    "number_of_answers": "Broj odgovora",
+    "published": "Objavljeno",
+    "google_form_url": "URL Google ankete",
+    "add_new_survey": "Dodaj novu anketu"
+  },
+  "add": "Dodaj"
 }

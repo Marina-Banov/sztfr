@@ -1,0 +1,101 @@
+.login-page {
+  min-height: 100vh;
+  background: #e8eef4;
+}
+
+.login-container {
+  position: relative;
+  flex-direction: column;
+  height: 300px;
+  width: 300px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 1px 15px 7px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.email-button,
+.google-button {
+  width: 100%;
+  height: 40px;
+  margin: 5px 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: bold;
+  border-width: 0;
+  border-radius: 5px;
+  white-space: nowrap;
+  box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.15);
+  transition: 150ms ease-in-out;
+}
+.email-button:active,
+.google-button:active {
+  box-shadow: none;
+  transition-duration: 10ms;
+  outline: none;
+}
+.email-button:focus,
+.email-button:hover,
+.google-button:focus,
+.google-button:hover {
+  box-shadow: 1px 3px 5px 1px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+
+.email-button {
+  background: #ebecf3;
+  color: #3e408b;
+}
+.email-button:active {
+  background: #d4d5e6;
+}
+
+.google-button {
+  background: white;
+  color: #737373;
+}
+.google-button:active {
+  background: #e5e5e5;
+}
+
+.google-button__icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 8px 0 8px 12px;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+}
+
+.google-button__text {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 18px;
+  font-family: "Roboto", arial, sans-serif;
+}
+
+.menu,
+.email-login {
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30px;
+  transition: 300ms ease-in-out;
+  text-align: center;
+  visibility: hidden;
+}
+.menu {
+  transform: translateX(-100%);
+}
+.email-login {
+  transform: translateX(100%);
+}
+.menu.active,
+.email-login.active {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.email-login .email-button {
+  margin-top: 15px;
+}

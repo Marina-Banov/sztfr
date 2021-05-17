@@ -1,0 +1,23 @@
+/* CODE STYLES
+   ----------------------------- */
+
+pre {
+  background-color: #ffffff;
+  overflow-x: scroll;
+  white-space: pre-wrap;
+  max-height: 250px;
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857;
+  word-break: break-all;
+  word-wrap: break-word;
+  border: 1px solid #eef1f6;
+  border-radius: 4px;
+}
+
+code {
+  color: $codeBgColor;
+  background-color: $codeTextColor;
+}

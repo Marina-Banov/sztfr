@@ -1,0 +1,38 @@
+.bootstrap-datetimepicker-widget.dropdown-menu {
+  width: 120px !important;
+
+  td {
+    height: 0 !important;
+    padding: 0 !important;
+    border-radius: 0;
+    font-size: 0.875rem;
+
+    &.hour,
+    &.minute {
+      height: 42px;
+      line-height: 42px;
+    }
+
+    .btn,
+    .timepicker-hour,
+    .timepicker-minute {
+      padding: 0 !important;
+      margin: 0 !important;
+      border-radius: 0;
+      height: 38px;
+      line-height: 38px;
+    }
+
+    .btn {
+      display: table-cell;
+
+      span {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        height: 0;
+        line-height: 0;
+      }
+    }
+  }
+}
