@@ -4,7 +4,6 @@ import { CardBody, FormGroup, Label, Input, Row, Col } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
 import { EventFormFields as FormFields } from "models";
-import { combineDateTime, getISOTime, validDateRange } from "utils/dateUtils";
 import { DatePicker, TimePicker } from "components/common";
 
 export default function NewEvent({
@@ -28,13 +27,6 @@ export default function NewEvent({
       componentRestrictions: { country: "hr" },
     },
   });
-
-  // TODO
-  function validDateTime() {
-    const start = combineDateTime(form.startDate, getISOTime(form.startTime));
-    const end = combineDateTime(form.endDate, getISOTime(form.endTime));
-    return validDateRange(start, end);
-  }
 
   function toggleOnline(e) {
     setFormField(FormFields.location, {

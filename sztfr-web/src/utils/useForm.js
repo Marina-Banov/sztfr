@@ -38,7 +38,7 @@ export default function useForm(initialValues, validationRules, onSubmit) {
       }
 
       const custom = validation?.isValid;
-      if (custom && !custom(data.location)) {
+      if (custom && !custom(data)) {
         newErrors.fields.push(key);
         if (!newErrors.messages.includes("validation.required"))
           newErrors.messages.push("validation.required");
@@ -77,7 +77,7 @@ export default function useForm(initialValues, validationRules, onSubmit) {
       }
 
       const custom = validation?.isValid;
-      if (custom && !custom(data.location)) {
+      if (custom && !custom(data)) {
         newErrors.fields.push(key);
         if (!newErrors.messages.includes("validation.required"))
           newErrors.messages.push("validation.required");
