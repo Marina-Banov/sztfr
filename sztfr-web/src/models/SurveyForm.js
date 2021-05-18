@@ -17,34 +17,9 @@ export default class SurveyForm {
 }
 
 export const SurveyFormValidation = {
-  title: {
-    required: {
-      value: true,
-      message: "Potrebno je unijeti naziv ankete",
-    },
-  },
-  description: {
-    required: {
-      value: true,
-      message: "Potrebno je unijeti opis ankete",
-    },
-  },
-  image: {
-    required: {
-      value: true,
-      message: "Potrebno je unijeti sliku ankete",
-    },
-  },
-  tags: {
-    required: {
-      value: true,
-      message: "Potrebno je odabrati tagove za anketu",
-    },
-  },
-  googleFormURL: {
-    required: {
-      value: true,
-      message: "Potrebno je unijeti link za ispunjavanje ankete",
-    },
-  },
+  title: { required: true },
+  description: { required: true },
+  googleFormURL: { required: true },
+  image: { required: true },
+  tags: { required: true },
 };

@@ -9,7 +9,9 @@ export function combineDateTime(date, time) {
     return "";
   }
   const d = new Date(date);
-  const t = new Date(time);
+  let _time = time.split(":");
+  const t = new Date();
+  t.setHours(parseInt(_time[0], 10), parseInt(_time[1], 10));
   const res = new Date(
     d.getFullYear(),
     d.getMonth(),

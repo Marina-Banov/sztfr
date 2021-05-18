@@ -15,7 +15,7 @@ export default function NewEvent({
 }) {
   const { t } = useTranslation();
   const [isOnline, setIsOnline] = useState(null);
-  const { ref, autocompleteRef } = usePlacesWidget({
+  const { ref } = usePlacesWidget({
     apiKey: process.env.REACT_APP_API_KEY,
     onPlaceSelected: (place) => {
       setFormField(FormFields.locationOnsite, place);
@@ -64,6 +64,7 @@ export default function NewEvent({
             <DatePicker
               id="startDate"
               minDate={new Date().toString()}
+              invalid={errors.includes(FormFields.startDate)}
               className="mb-2"
               onChange={(v) => setFormField(FormFields.startDate, v)}
               value={form.startDate}
@@ -73,7 +74,7 @@ export default function NewEvent({
             <TimePicker
               label={t("events.start_time")}
               order={0}
-              invalid={false}
+              invalid={errors.includes(FormFields.startTime)}
               onChange={(v) =>
                 setFormField(FormFields.startTime, v.target.value)
               }
@@ -85,7 +86,7 @@ export default function NewEvent({
             <Label for="rdp-form-control-endDate">{t("events.end_date")}</Label>
             <DatePicker
               id="endDate"
-              invalid={!validDateTime()}
+              invalid={errors.includes(FormFields.endDate)}
               minDate={form.startDate ? form.startDate : new Date().toString()}
               onChange={(v) => setFormField(FormFields.endDate, v)}
               value={form.endDate}
@@ -97,7 +98,7 @@ export default function NewEvent({
             <TimePicker
               label={t("events.end_time")}
               order={1}
-              invalid={!validDateTime()}
+              invalid={errors.includes(FormFields.endTime)}
               onChange={(v) => setFormField(FormFields.endTime, v.target.value)}
             />
           </FormGroup>

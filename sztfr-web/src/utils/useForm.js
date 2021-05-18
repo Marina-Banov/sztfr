@@ -28,9 +28,10 @@ export default function useForm(initialValues, validationRules, onSubmit) {
       const validation = validationRules[key];
 
       const required = validation?.required;
-      if (required?.value && (!value || !value.length)) {
+      if (required && (value === "" || value === {} || value.length === 0)) {
         newErrors.fields.push(key);
-        newErrors.messages.push(required.message);
+        if (!newErrors.messages.includes("validation.required"))
+          newErrors.messages.push("validation.required");
       }
 
       const pattern = validation?.pattern;
@@ -47,17 +48,48 @@ export default function useForm(initialValues, validationRules, onSubmit) {
     }
 
     setErrors(newErrors);
-  }, [dirty, data, validationRules]);
+  }, [validationRules, dirty, data]);
 
   useEffect(() => {
     validate();
   }, [validate]);
 
+  // TODO this is annoying
   const handleSubmit = (e) => {
     setDirty(true);
     e.preventDefault();
-    validate();
-    if (errors.fields.length === 0) {
+    if (!validationRules || !dirty) {
+      return;
+    }
+
+    const newErrors = { messages: [], fields: [] };
+
+    for (const key in validationRules) {
+      const value = data[key];
+      const validation = validationRules[key];
+
+      const required = validation?.required;
+      if (required && (value === "" || value === {} || value.length === 0)) {
+        newErrors.fields.push(key);
+        if (!newErrors.messages.includes("validation.required"))
+          newErrors.messages.push("validation.required");
+      }
+
+      const pattern = validation?.pattern;
+      if (pattern?.value && !RegExp(pattern.value).test(value)) {
+        newErrors.fields.push(key);
+        newErrors.messages.push(pattern.message);
+      }
+
+      const custom = validation?.custom;
+      if (custom?.isValid && !custom.isValid(value)) {
+        newErrors.fields.push(key);
+        newErrors.messages.push(custom.message);
+      }
+    }
+
+    setErrors(newErrors);
+    if (newErrors.fields.length === 0) {
       onSubmit();
     }
   };

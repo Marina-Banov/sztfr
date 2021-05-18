@@ -42,5 +42,8 @@
     "google_form_url": "URL Google ankete",
     "add_new_survey": "Dodaj novu anketu"
   },
+  "validation": {
+    "required": "Molimo ispunite obavezna polja"
+  },
   "add": "Dodaj"
 }

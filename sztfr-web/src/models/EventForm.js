@@ -29,28 +29,13 @@ export default class EventForm {
 }
 
 export const EventFormValidation = {
-  title: {
-    required: {
-      value: true,
-      message: "Potrebno je unijeti naziv događaja",
-    },
-  },
-  description: {
-    required: {
-      value: true,
-      message: "Potrebno je unijeti opis događaja",
-    },
-  },
-  image: {
-    required: {
-      value: true,
-      message: "Potrebno je unijeti sliku događaja",
-    },
-  },
-  tags: {
-    required: {
-      value: true,
-      message: "Potrebno je odabrati tagove za događaj",
-    },
-  },
+  title: { required: true },
+  description: { required: true },
+  image: { required: true },
+  tags: { required: true },
+  organisation: { required: true },
+  startDate: { required: true },
+  startTime: { required: true },
+  endDate: { required: true },
+  endTime: { required: true },
 };

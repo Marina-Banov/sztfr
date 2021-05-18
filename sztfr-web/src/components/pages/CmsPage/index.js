@@ -1,16 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { CircularProgress } from "@material-ui/core";
+import React, { useState } from "react";
 import {
   Row,
   Col,
   Card,
   CardHeader,
   CardBody,
-  FormGroup,
-  Input,
   Button,
-  Label,
-  UncontrolledAlert,
+  Alert,
 } from "reactstrap";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -30,6 +26,7 @@ import {
 import useForm from "utils/useForm";
 import NewSurvey from "./NewSurvey";
 import NewEvent from "./NewEvent";
+import TagsCard from "./TagsCard";
 
 import "./index.scss";
 
@@ -41,9 +38,6 @@ export default function CmsPage(props) {
       ? EventFormFields
       : SurveyFormFields
   );
-  const [tags, setTags] = useState([]);
-  const [tagInput, setTagInput] = useState("");
-  const [loading, setLoading] = useState(false);
   const {
     data,
     handleInputChange,
@@ -59,73 +53,18 @@ export default function CmsPage(props) {
   );
 
   function initialFormValue() {
-    let x;
     switch (props.location.pathname) {
       case "/events/new":
-        x = props.location.state
+        return props.location.state
           ? props.location.state.initialValue
           : new EventForm();
-        break;
       case "/surveys/new":
-        x = props.location.state
+        return props.location.state
           ? props.location.state.initialValue
           : new SurveyForm();
-        break;
       default:
-        x = {};
+        return {};
     }
-    return { image: null, tags: [], ...x };
-  }
-
-  const getTags = useCallback(() => {
-    /*firebase
-      .firestoreRead(SZTFR.FIRESTORE_TAGS_PATH)
-      .then((res) => {
-        setLoading(false);
-        setTags(res.body.tags);
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.error(err);
-      });*/
-    setLoading(false);
-    console.log(firebase.loggedIn());
-    setTags(["jedan", "dva", "tri"]);
-  }, [firebase]);
-
-  useEffect(() => {
-    setLoading(true);
-    getTags();
-  }, [getTags]);
-
-  function handleTagClick(tag) {
-    const t = [...data.tags];
-    const index = t.indexOf(tag);
-    if (index >= 0) {
-      t.splice(index, 1);
-    } else {
-      t.push(tag);
-    }
-    setFormField(FormFields.tags, t);
-  }
-
-  function addTag() {
-    if (tagInput === "") {
-      return;
-    }
-    setLoading(true);
-    const t = [...tags];
-    t.push(tagInput);
-    firebase
-      .firestoreUpdate(SZTFR.FIRESTORE_TAGS_PATH, { tags: t })
-      .then((res) => {
-        setTagInput("");
-        getTags();
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.error(err);
-      });
   }
 
   function onSubmit() {
@@ -165,7 +104,11 @@ export default function CmsPage(props) {
             </Switch>
           </BrowserRouter>
         </Card>
-        <Card>
+        <Card
+          className={
+            errors.fields.includes(FormFields.image) ? "invalid-card" : ""
+          }
+        >
           <CardHeader>{t("images.image")}</CardHeader>
           <CardBody>
             <label htmlFor="image" className="btn btn-secondary">
@@ -181,48 +124,18 @@ export default function CmsPage(props) {
                 setFormField(FormFields.image, e.target.files[0])
               }
             />
+            <br />
             {data.image && <img src={URL.createObjectURL(data.image)} alt="" />}
           </CardBody>
         </Card>
       </Col>
       <Col md={4}>
-        <Card>
-          <CardHeader>{t("tags.tags")}</CardHeader>
-          <CardBody>
-            {loading ? (
-              <div className="flex_center_center">
-                <CircularProgress />
-              </div>
-            ) : (
-              Object.keys(tags).map((tag) => (
-                <Button
-                  color={data.tags.includes(tag) ? "primary" : "secondary"}
-                  className="m-1"
-                  key={tags[tag]}
-                  onClick={() => handleTagClick(tag)}
-                >
-                  {tags[tag]}
-                </Button>
-              ))
-            )}
-            <FormGroup className="mt-3">
-              <Label for="tag">{t("tags.add_new_tag")}</Label>
-              <div className="flex_center_center tag-form-group">
-                <Input
-                  id="tag"
-                  type="text"
-                  name="tag"
-                  className="mr-2"
-                  value={tagInput}
-                  onChange={() => {}}
-                />
-                <Button color="success" onClick={() => addTag()}>
-                  <i className="fa fa-plus" />
-                </Button>
-              </div>
-            </FormGroup>
-          </CardBody>
-        </Card>
+        <TagsCard
+          form={data}
+          errors={errors}
+          setFormField={setFormField}
+          FormFields={FormFields}
+        />
         <BrowserRouter>
           <Switch>
             <Route path="/surveys/new">
@@ -238,13 +151,9 @@ export default function CmsPage(props) {
           </Switch>
         </BrowserRouter>
         {errors.messages.map((error, index) => (
-          <UncontrolledAlert
-            color="danger"
-            className="mt-3"
-            key={`error-${index}`}
-          >
-            {error}
-          </UncontrolledAlert>
+          <Alert color="danger" className="mt-3" key={`error-${index}`}>
+            {t(error)}
+          </Alert>
         ))}
       </Col>
     </Row>
