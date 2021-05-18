@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-export default function useForm(initialValues) {
-  const [inputs, setInputs] = useState(initialValues);
+export default function useForm(initialValues, validationRules, onSubmit) {
+  const [dirty, setDirty] = useState(false);
+  const [data, setData] = useState(initialValues);
+  const [errors, setErrors] = useState({ messages: [], fields: [] });
 
   const handleInputChange = (event) => {
     if (typeof event === "SyntheticInputEvent") {
@@ -11,12 +13,60 @@ export default function useForm(initialValues) {
   };
 
   const setFormField = (name, value) => {
-    setInputs((inputs) => ({ ...inputs, [name]: value }));
+    setData((inputs) => ({ ...inputs, [name]: value }));
   };
 
-  useEffect(() => {
-    console.log(inputs);
-  });
+  const validate = useCallback(() => {
+    if (!validationRules || !dirty) {
+      return;
+    }
 
-  return { setFormField, handleInputChange, form: inputs };
+    const newErrors = { messages: [], fields: [] };
+
+    for (const key in validationRules) {
+      const value = data[key];
+      const validation = validationRules[key];
+
+      const required = validation?.required;
+      if (required?.value && (!value || !value.length)) {
+        newErrors.fields.push(key);
+        newErrors.messages.push(required.message);
+      }
+
+      const pattern = validation?.pattern;
+      if (pattern?.value && !RegExp(pattern.value).test(value)) {
+        newErrors.fields.push(key);
+        newErrors.messages.push(pattern.message);
+      }
+
+      const custom = validation?.custom;
+      if (custom?.isValid && !custom.isValid(value)) {
+        newErrors.fields.push(key);
+        newErrors.messages.push(custom.message);
+      }
+    }
+
+    setErrors(newErrors);
+  }, [dirty, data, validationRules]);
+
+  useEffect(() => {
+    validate();
+  }, [validate]);
+
+  const handleSubmit = (e) => {
+    setDirty(true);
+    e.preventDefault();
+    validate();
+    if (errors.fields.length === 0) {
+      onSubmit();
+    }
+  };
+
+  return {
+    data,
+    handleInputChange,
+    setFormField,
+    handleSubmit,
+    errors,
+  };
 }

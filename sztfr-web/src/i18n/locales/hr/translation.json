@@ -31,7 +31,8 @@
     "start_time": "Vrijeme početka",
     "end_time": "Vrijeme završetka",
     "online_address": "URL događaja",
-    "onsite_address": "Adresa"
+    "onsite_address": "Adresa",
+    "organisation": "Organizator"
   },
   "surveys": {
     "no_surveys": "Nema anketa.",

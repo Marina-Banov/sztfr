@@ -2,39 +2,46 @@ import React from "react";
 import { CardBody, FormGroup, Label, Input } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
-export default function NewSurvey({ form, handleInputChange }) {
+import { SurveyFormFields as FormFields } from "models";
+
+export default function NewSurvey({ form, handleInputChange, errors }) {
   const { t } = useTranslation();
 
   return (
     <CardBody>
       <FormGroup>
-        <Label for="title">{t("title")}</Label>
+        <Label for={FormFields.title}>{t("title")}</Label>
         <Input
-          id="title"
+          id={FormFields.title}
           type="text"
-          name="title"
+          name={FormFields.title}
           onChange={handleInputChange}
           value={form.title}
+          invalid={errors.includes(FormFields.title)}
         />
       </FormGroup>
       <FormGroup className="mb-3">
-        <Label for="description">{t("description")}</Label>
+        <Label for={FormFields.description}>{t("description")}</Label>
         <Input
           type="textarea"
-          name="description"
-          id="description"
+          name={FormFields.description}
+          id={FormFields.description}
           onChange={handleInputChange}
           value={form.description}
+          invalid={errors.includes(FormFields.description)}
         />
       </FormGroup>
       <FormGroup>
-        <Label for="googleFormURL">{t("surveys.google_form_url")}</Label>
+        <Label for={FormFields.googleFormURL}>
+          {t("surveys.google_form_url")}
+        </Label>
         <Input
-          id="googleFormURL"
+          id={FormFields.googleFormURL}
           type="text"
-          name="googleFormURL"
+          name={FormFields.googleFormURL}
           onChange={handleInputChange}
           value={form.googleFormURL}
+          invalid={errors.includes(FormFields.googleFormURL)}
         />
       </FormGroup>
     </CardBody>
