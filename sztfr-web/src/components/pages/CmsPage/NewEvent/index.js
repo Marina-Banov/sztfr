@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { CardBody, FormGroup, Label, Input, Row, Col } from "reactstrap";
 import { useTranslation } from "react-i18next";
@@ -14,11 +14,14 @@ export default function NewEvent({
   errors,
 }) {
   const { t } = useTranslation();
-  const [isOnline, setIsOnline] = useState(null);
   const { ref } = usePlacesWidget({
     apiKey: process.env.REACT_APP_API_KEY,
     onPlaceSelected: (place) => {
-      setFormField(FormFields.locationOnsite, place);
+      setFormField(FormFields.location, {
+        online: false,
+        valueOnline: "",
+        valueOnsite: place,
+      });
     },
     options: {
       types: ["establishment"],
@@ -26,20 +29,20 @@ export default function NewEvent({
     },
   });
 
+  // TODO
   function validDateTime() {
     const start = combineDateTime(form.startDate, getISOTime(form.startTime));
     const end = combineDateTime(form.endDate, getISOTime(form.endTime));
     return validDateRange(start, end);
   }
 
-  function toggleOnline(value) {
-    if (value === "true") {
-      setFormField(FormFields.locationOnsite, "");
-      ref.current.value = "";
-    } else {
-      setFormField(FormFields.locationOnline, "");
-    }
-    setIsOnline(value);
+  function toggleOnline(e) {
+    setFormField(FormFields.location, {
+      online: e.target.value === "true",
+      valueOnline: "",
+      valueOnsite: "",
+    });
+    ref.current.value = "";
   }
 
   return (
@@ -111,8 +114,9 @@ export default function NewEvent({
               <Label check>
                 <Input
                   type="radio"
-                  name="radio1"
-                  onChange={() => toggleOnline("true")}
+                  name={FormFields.locationIsOnline}
+                  value="true"
+                  onChange={toggleOnline}
                 />
                 <i>Online</i> {t("events.event")}
               </Label>
@@ -122,12 +126,19 @@ export default function NewEvent({
             <FormGroup className="mb-0 w-full">
               <Input
                 type="text"
-                name={FormFields.locationOnline}
-                disabled={isOnline === "false" || !isOnline}
+                name={FormFields.location}
+                disabled={!form.location.online}
                 aria-label={t("events.online_address")}
                 placeholder={t("events.online_address")}
-                onChange={handleInputChange}
-                value={form.locationOnline || ""}
+                onChange={(e) =>
+                  setFormField(FormFields.location, {
+                    online: true,
+                    valueOnline: e.target.value,
+                    valueOnsite: "",
+                  })
+                }
+                value={form.location.valueOnline || ""}
+                invalid={errors.includes(FormFields.locationValueOnline)}
               />
             </FormGroup>
           </Col>
@@ -138,8 +149,9 @@ export default function NewEvent({
               <Label check>
                 <Input
                   type="radio"
-                  name="radio1"
-                  onChange={() => toggleOnline("false")}
+                  name={FormFields.locationIsOnline}
+                  value="false"
+                  onChange={toggleOnline}
                 />
                 <i>Onsite</i> {t("events.event")}
               </Label>
@@ -149,11 +161,11 @@ export default function NewEvent({
             <FormGroup className="mb-0 w-full">
               <Input
                 type="text"
-                name={FormFields.locationOnsite}
-                disabled={isOnline === "true" || !isOnline}
+                name={FormFields.location}
+                disabled={form.location.online || form.location.online === null}
                 aria-label={t("events.onsite_address")}
                 placeholder={t("events.onsite_address")}
-                onChange={handleInputChange}
+                invalid={errors.includes(FormFields.locationValueOnsite)}
                 innerRef={ref}
               />
             </FormGroup>

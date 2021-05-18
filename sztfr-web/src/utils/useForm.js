@@ -28,22 +28,20 @@ export default function useForm(initialValues, validationRules, onSubmit) {
       const validation = validationRules[key];
 
       const required = validation?.required;
-      if (required && (value === "" || value === {} || value.length === 0)) {
+      if (
+        required &&
+        (!value || value === "" || value === {} || value.length === 0)
+      ) {
         newErrors.fields.push(key);
         if (!newErrors.messages.includes("validation.required"))
           newErrors.messages.push("validation.required");
       }
 
-      const pattern = validation?.pattern;
-      if (pattern?.value && !RegExp(pattern.value).test(value)) {
+      const custom = validation?.isValid;
+      if (custom && !custom(data.location)) {
         newErrors.fields.push(key);
-        newErrors.messages.push(pattern.message);
-      }
-
-      const custom = validation?.custom;
-      if (custom?.isValid && !custom.isValid(value)) {
-        newErrors.fields.push(key);
-        newErrors.messages.push(custom.message);
+        if (!newErrors.messages.includes("validation.required"))
+          newErrors.messages.push("validation.required");
       }
     }
 
@@ -69,22 +67,20 @@ export default function useForm(initialValues, validationRules, onSubmit) {
       const validation = validationRules[key];
 
       const required = validation?.required;
-      if (required && (value === "" || value === {} || value.length === 0)) {
+      if (
+        required &&
+        (!value || value === "" || value === {} || value.length === 0)
+      ) {
         newErrors.fields.push(key);
         if (!newErrors.messages.includes("validation.required"))
           newErrors.messages.push("validation.required");
       }
 
-      const pattern = validation?.pattern;
-      if (pattern?.value && !RegExp(pattern.value).test(value)) {
+      const custom = validation?.isValid;
+      if (custom && !custom(data.location)) {
         newErrors.fields.push(key);
-        newErrors.messages.push(pattern.message);
-      }
-
-      const custom = validation?.custom;
-      if (custom?.isValid && !custom.isValid(value)) {
-        newErrors.fields.push(key);
-        newErrors.messages.push(custom.message);
+        if (!newErrors.messages.includes("validation.required"))
+          newErrors.messages.push("validation.required");
       }
     }
 

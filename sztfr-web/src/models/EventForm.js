@@ -5,8 +5,10 @@ export const EventFormFields = {
   tags: "tags",
   endDate: "endDate",
   endTime: "endTime",
-  locationOnline: "locationOnline",
-  locationOnsite: "locationOnsite",
+  location: "location",
+  locationIsOnline: "location.online",
+  locationValueOnline: "location.valueOnline",
+  locationValueOnsite: "location.valueOnsite",
   organisation: "organisation",
   startDate: "startDate",
   startTime: "startTime",
@@ -20,8 +22,11 @@ export default class EventForm {
     this.tags = [];
     this.endDate = "";
     this.endTime = "";
-    this.locationOnline = "";
-    this.locationOnsite = "";
+    this.location = {
+      online: null,
+      valueOnline: "",
+      valueOnsite: "",
+    };
     this.organisation = "";
     this.startDate = "";
     this.startTime = "";
@@ -38,4 +43,26 @@ export const EventFormValidation = {
   startTime: { required: true },
   endDate: { required: true },
   endTime: { required: true },
+  "location.valueOnline": {
+    isValid: (location) => {
+      if (location.online === null) {
+        return false;
+      }
+      if (location.online === false) {
+        return true;
+      }
+      return location.valueOnline !== "";
+    },
+  },
+  "location.valueOnsite": {
+    isValid: (location) => {
+      if (location.online === null) {
+        return false;
+      }
+      if (location.online === true) {
+        return true;
+      }
+      return location.valueOnsite.hasOwnProperty("place_id");
+    },
+  },
 };
