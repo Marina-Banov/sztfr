@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import isFormValid from "utils/isFormValid";
 
 export default function useForm(initialValues, validationRules, onSubmit) {
-  const [dirty, setDirty] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [data, setData] = useState(initialValues);
   const [errors, setErrors] = useState({ messages: [], fields: [] });
 
@@ -16,74 +17,16 @@ export default function useForm(initialValues, validationRules, onSubmit) {
     setData((inputs) => ({ ...inputs, [name]: value }));
   };
 
-  const validate = useCallback(() => {
-    if (!validationRules || !dirty) {
-      return;
-    }
-
-    const newErrors = { messages: [], fields: [] };
-
-    for (const key in validationRules) {
-      const value = data[key];
-      const validation = validationRules[key];
-
-      const required = validation?.required;
-      if (
-        required &&
-        (!value || value === "" || value === {} || value.length === 0)
-      ) {
-        newErrors.fields.push(key);
-        if (!newErrors.messages.includes("validation.required"))
-          newErrors.messages.push("validation.required");
-      }
-
-      const custom = validation?.isValid;
-      if (custom && !custom(data)) {
-        newErrors.fields.push(key);
-        if (!newErrors.messages.includes("validation.required"))
-          newErrors.messages.push("validation.required");
-      }
-    }
-
-    setErrors(newErrors);
-  }, [validationRules, dirty, data]);
-
   useEffect(() => {
-    validate();
-  }, [validate]);
+    if (submitted) {
+      setErrors(isFormValid(data, validationRules));
+    }
+  }, [data, submitted, validationRules]);
 
-  // TODO this is annoying
   const handleSubmit = (e) => {
-    setDirty(true);
     e.preventDefault();
-    if (!validationRules || !dirty) {
-      return;
-    }
-
-    const newErrors = { messages: [], fields: [] };
-
-    for (const key in validationRules) {
-      const value = data[key];
-      const validation = validationRules[key];
-
-      const required = validation?.required;
-      if (
-        required &&
-        (!value || value === "" || value === {} || value.length === 0)
-      ) {
-        newErrors.fields.push(key);
-        if (!newErrors.messages.includes("validation.required"))
-          newErrors.messages.push("validation.required");
-      }
-
-      const custom = validation?.isValid;
-      if (custom && !custom(data)) {
-        newErrors.fields.push(key);
-        if (!newErrors.messages.includes("validation.required"))
-          newErrors.messages.push("validation.required");
-      }
-    }
-
+    setSubmitted(true);
+    const newErrors = isFormValid(data, validationRules);
     setErrors(newErrors);
     if (newErrors.fields.length === 0) {
       onSubmit();

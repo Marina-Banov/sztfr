@@ -22,7 +22,7 @@ export default function TagsCard({ errors, setFormField, FormFields, form }) {
   const [loading, setLoading] = useState(false);
 
   const getTags = useCallback(() => {
-    /*firebase
+    firebase
       .firestoreRead(SZTFR.FIRESTORE_TAGS_PATH)
       .then((res) => {
         setLoading(false);
@@ -31,10 +31,7 @@ export default function TagsCard({ errors, setFormField, FormFields, form }) {
       .catch((err) => {
         setLoading(false);
         console.error(err);
-      });*/
-    setLoading(false);
-    console.log(firebase.loggedIn());
-    setTags(["jedan", "dva", "tri"]);
+      });
   }, [firebase]);
 
   useEffect(() => {
@@ -88,7 +85,7 @@ export default function TagsCard({ errors, setFormField, FormFields, form }) {
               color={form.tags.includes(tag) ? "primary" : "secondary"}
               className="m-1"
               key={tags[tag]}
-              onClick={() => handleTagClick(tag)}
+              onClick={() => handleTagClick(tags[tag])}
             >
               {tags[tag]}
             </Button>
