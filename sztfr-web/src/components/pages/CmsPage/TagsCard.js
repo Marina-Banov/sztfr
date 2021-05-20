@@ -80,14 +80,14 @@ export default function TagsCard({ errors, setFormField, FormFields, form }) {
             <CircularProgress />
           </div>
         ) : (
-          Object.keys(tags).map((tag) => (
+          Object.values(tags).map((tag) => (
             <Button
               color={form.tags.includes(tag) ? "primary" : "secondary"}
               className="m-1"
-              key={tags[tag]}
-              onClick={() => handleTagClick(tags[tag])}
+              key={tag}
+              onClick={() => handleTagClick(tag)}
             >
-              {tags[tag]}
+              {tag}
             </Button>
           ))
         )}
