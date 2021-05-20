@@ -98,7 +98,7 @@
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:layout_marginEnd="@dimen/spacing_small"
                     app:srcCompat="@drawable/favorite"
-                    app:tint="?attr/accentTextColor"
+                    app:tint="?attr/chipStrokeColor"
                     app:backgroundTint="?attr/cardBackgroundColor" />
 
             </LinearLayout>

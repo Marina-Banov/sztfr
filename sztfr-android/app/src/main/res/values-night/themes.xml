@@ -13,7 +13,7 @@
         <item name="chipBackgroundColorChecked">@color/purple_light</item>
         <item name="chipTextColorChecked">@color/black_light</item>
         <item name="lightTextColor">@color/gray_light</item>
-        <item name="mbn_defaultIconColor">@color/gray_light</item>
+        <item name="mbn_defaultIconColor">@color/purple_light</item>
         <item name="mbn_selectedIconColor">@color/white</item>
         <item name="mbn_rippleColor">@color/black_light</item>
         <item name="mbn_backgroundBottomColor">@color/gray_dark</item>

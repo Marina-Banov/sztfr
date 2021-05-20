@@ -70,7 +70,7 @@
                     app:layout_constraintVertical_bias="0.507"
                     android:padding="@dimen/spacing_small"
                     app:srcCompat="@drawable/favorite"
-                    app:tint="?attr/accentTextColor"
+                    app:tint="?attr/chipStrokeColor"
                     app:backgroundTint="?attr/cardBackgroundColor"
                     />
 
