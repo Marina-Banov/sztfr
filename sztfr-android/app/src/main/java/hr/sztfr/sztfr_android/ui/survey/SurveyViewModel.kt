@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.storage.StorageReference
 import hr.sztfr.sztfr_android.data.model.SurveyModel
-import hr.sztfr.sztfr_android.ui.FirestoreRepository
+import hr.sztfr.sztfr_android.data.FirestoreRepository
 
 class SurveyViewModel: ViewModel() {
 

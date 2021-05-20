@@ -5,13 +5,11 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.storage.StorageReference
-import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.data.model.SurveyModel
-import hr.sztfr.sztfr_android.ui.FirestoreRepository
-import hr.sztfr.sztfr_android.ui.GlideApp
+import hr.sztfr.sztfr_android.data.FirestoreRepository
+import hr.sztfr.sztfr_android.data.GlideApp
 
 class SurveyDetailsViewModel(s: SurveyModel, app: Application) : AndroidViewModel(app) {
     var firestoreRepository = FirestoreRepository()
@@ -36,7 +34,7 @@ class SurveyDetailsViewModel(s: SurveyModel, app: Application) : AndroidViewMode
 
     init {
         _studyModel.value = s
-        _resultImages.value = firestoreRepository.getResultImageReferences(s.resultImages)
+        _resultImages.value = firestoreRepository.getImageReferences(s.resultImages)
     }
 
 

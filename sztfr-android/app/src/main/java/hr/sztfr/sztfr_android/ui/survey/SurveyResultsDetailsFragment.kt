@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.storage.StorageReference
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyResultsDetailsBinding
-import hr.sztfr.sztfr_android.ui.GlideApp
+import hr.sztfr.sztfr_android.data.GlideApp
 
 
 class SurveyResultsDetailsFragment : Fragment() {

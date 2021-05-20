@@ -23,7 +23,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import hr.sztfr.sztfr_android.databinding.FragmentCurrentSurveysBinding
-import hr.sztfr.sztfr_android.ui.GlideApp
+import hr.sztfr.sztfr_android.data.GlideApp
 import hr.sztfr.sztfr_android.ui.MainFragmentDirections
 
 class CurrentSurveysFragment : Fragment() {
