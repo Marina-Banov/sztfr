@@ -86,7 +86,7 @@ export default function Header({ toggleSidebar, isSidebarCollapsed }) {
 function SkipToContentLink({ focusId }) {
   return (
     <a href={`#${focusId}`} tabIndex="1" className="skip-to-content">
-      Skip to Content
+      Skoči na sadržaj
     </a>
   );
 }

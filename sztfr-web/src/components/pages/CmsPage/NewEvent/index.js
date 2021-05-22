@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { CardBody, FormGroup, Label, Input, Row, Col } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
-import { combineDateTime, getISOTime, validDateRange } from "utils/dateUtils";
+import { EventFormFields as FormFields } from "models";
 import { DatePicker, TimePicker } from "components/common";
 
-export default function NewEvent({ form, handleInputChange, setFormField }) {
+export default function NewEvent({
+  form,
+  handleInputChange,
+  setFormField,
+  errors,
+}) {
   const { t } = useTranslation();
-  const [isOnline, setIsOnline] = useState(null);
-  const { ref, autocompleteRef } = usePlacesWidget({
+  const { ref } = usePlacesWidget({
     apiKey: process.env.REACT_APP_API_KEY,
     onPlaceSelected: (place) => {
-      setFormField("locationOnsite", place);
+      setFormField(FormFields.location, {
+        online: false,
+        valueOnline: "",
+        valueOnsite: place,
+      });
     },
     options: {
       types: ["establishment"],
@@ -20,22 +28,26 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
     },
   });
 
-  function validDateTime() {
-    const start = combineDateTime(form.startDate, getISOTime(form.startTime));
-    const end = combineDateTime(form.endDate, getISOTime(form.endTime));
-    return validDateRange(start, end);
+  function toggleOnline(e) {
+    setFormField(FormFields.location, {
+      online: e.target.value === "true",
+      valueOnline: "",
+      valueOnsite: "",
+    });
+    ref.current.value = "";
   }
 
   return (
     <CardBody>
       <FormGroup>
-        <Label for="title">{t("title")}</Label>
+        <Label for={FormFields.title}>{t("title")}</Label>
         <Input
-          id="title"
+          id={FormFields.title}
           type="text"
-          name="title"
+          name={FormFields.title}
           onChange={handleInputChange}
           value={form.title}
+          invalid={errors.includes(FormFields.title)}
         />
       </FormGroup>
       <Row>
@@ -47,8 +59,9 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
             <DatePicker
               id="startDate"
               minDate={new Date().toString()}
+              invalid={errors.includes(FormFields.startDate)}
               className="mb-2"
-              onChange={(v) => setFormField("startDate", v)}
+              onChange={(v) => setFormField(FormFields.startDate, v)}
               value={form.startDate}
             />
           </FormGroup>
@@ -56,8 +69,10 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
             <TimePicker
               label={t("events.start_time")}
               order={0}
-              invalid={false}
-              onChange={(v) => setFormField("startTime", v.target.value)}
+              invalid={errors.includes(FormFields.startTime)}
+              onChange={(v) =>
+                setFormField(FormFields.startTime, v.target.value)
+              }
             />
           </FormGroup>
         </Col>
@@ -66,9 +81,9 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
             <Label for="rdp-form-control-endDate">{t("events.end_date")}</Label>
             <DatePicker
               id="endDate"
-              invalid={!validDateTime()}
+              invalid={errors.includes(FormFields.endDate)}
               minDate={form.startDate ? form.startDate : new Date().toString()}
-              onChange={(v) => setFormField("endDate", v)}
+              onChange={(v) => setFormField(FormFields.endDate, v)}
               value={form.endDate}
               label={t("events.end_date")}
               className="mb-2"
@@ -78,8 +93,8 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
             <TimePicker
               label={t("events.end_time")}
               order={1}
-              invalid={!validDateTime()}
-              onChange={(v) => setFormField("endTime", v.target.value)}
+              invalid={errors.includes(FormFields.endTime)}
+              onChange={(v) => setFormField(FormFields.endTime, v.target.value)}
             />
           </FormGroup>
         </Col>
@@ -91,8 +106,9 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
               <Label check>
                 <Input
                   type="radio"
-                  name="radio1"
-                  onChange={() => setIsOnline("true")}
+                  name={FormFields.locationIsOnline}
+                  value="true"
+                  onChange={toggleOnline}
                 />
                 <i>Online</i> {t("events.event")}
               </Label>
@@ -102,12 +118,19 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
             <FormGroup className="mb-0 w-full">
               <Input
                 type="text"
-                name="locationOnline"
-                disabled={isOnline === "false" || !isOnline}
+                name={FormFields.location}
+                disabled={!form.location.online}
                 aria-label={t("events.online_address")}
                 placeholder={t("events.online_address")}
-                onChange={handleInputChange}
-                value={form.locationOnline || ""}
+                onChange={(e) =>
+                  setFormField(FormFields.location, {
+                    online: true,
+                    valueOnline: e.target.value,
+                    valueOnsite: "",
+                  })
+                }
+                value={form.location.valueOnline || ""}
+                invalid={errors.includes(FormFields.locationValueOnline)}
               />
             </FormGroup>
           </Col>
@@ -118,8 +141,9 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
               <Label check>
                 <Input
                   type="radio"
-                  name="radio1"
-                  onChange={() => setIsOnline("false")}
+                  name={FormFields.locationIsOnline}
+                  value="false"
+                  onChange={toggleOnline}
                 />
                 <i>Onsite</i> {t("events.event")}
               </Label>
@@ -129,11 +153,11 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
             <FormGroup className="mb-0 w-full">
               <Input
                 type="text"
-                name="locationOnsite"
-                disabled={isOnline === "true" || !isOnline}
+                name={FormFields.location}
+                disabled={form.location.online || form.location.online === null}
                 aria-label={t("events.onsite_address")}
                 placeholder={t("events.onsite_address")}
-                onChange={handleInputChange}
+                invalid={errors.includes(FormFields.locationValueOnsite)}
                 innerRef={ref}
               />
             </FormGroup>
@@ -141,13 +165,25 @@ export default function NewEvent({ form, handleInputChange, setFormField }) {
         </Row>
       </FormGroup>
       <FormGroup className="mb-3">
-        <Label for="description">{t("description")}</Label>
+        <Label for={FormFields.description}>{t("description")}</Label>
         <Input
-          id="description"
+          id={FormFields.description}
           type="textarea"
-          name="description"
+          name={FormFields.description}
           onChange={handleInputChange}
           value={form.description}
+          invalid={errors.includes(FormFields.description)}
+        />
+      </FormGroup>
+      <FormGroup className="mb-3">
+        <Label for={FormFields.organisation}>{t("events.organisation")}</Label>
+        <Input
+          id={FormFields.organisation}
+          type="text"
+          name={FormFields.organisation}
+          onChange={handleInputChange}
+          value={form.organisation}
+          invalid={errors.includes(FormFields.organisation)}
         />
       </FormGroup>
     </CardBody>

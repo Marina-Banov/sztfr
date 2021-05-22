@@ -1,4 +1,18 @@
-import EventForm from "./EventForm";
-import SurveyForm from "./SurveyForm";
+import Event from "./Event";
+import EventForm, { EventFormFields, EventFormValidation } from "./EventForm";
+import Survey from "./Survey";
+import SurveyForm, {
+  SurveyFormFields,
+  SurveyFormValidation,
+} from "./SurveyForm";
 
-export { EventForm, SurveyForm };
+export {
+  Event,
+  EventForm,
+  EventFormFields,
+  EventFormValidation,
+  Survey,
+  SurveyForm,
+  SurveyFormFields,
+  SurveyFormValidation,
+};

@@ -31,7 +31,8 @@
     "start_time": "Vrijeme početka",
     "end_time": "Vrijeme završetka",
     "online_address": "URL događaja",
-    "onsite_address": "Adresa"
+    "onsite_address": "Adresa",
+    "organisation": "Organizator"
   },
   "surveys": {
     "no_surveys": "Nema anketa.",
@@ -40,6 +41,9 @@
     "published": "Objavljeno",
     "google_form_url": "URL Google ankete",
     "add_new_survey": "Dodaj novu anketu"
+  },
+  "validation": {
+    "required": "Molimo ispunite obavezna polja"
   },
   "add": "Dodaj"
 }
