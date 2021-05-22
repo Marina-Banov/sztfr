@@ -43,6 +43,7 @@
                         android:layout_height="250dp"
                         android:scaleType="centerCrop"
                         app:imageUrl="@{viewModel.surveyModel.image}"
+                        tools:src="@drawable/dummy"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/ShapeAppearance.SZTFR.RoundedCorners" />
@@ -66,7 +67,7 @@
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/rezultat_ankete"
+                    android:text="@string/survey_results"
                     style="@style/TextAppearance.SZTFR.DetailsTitle"
                     />
                 <TextView
@@ -74,6 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.surveyModel.title}"
+                    tools:text="@string/survey_dummy_title"
                     style="@style/TextAppearance.SZTFR.DetailsTitle"
                     android:layout_marginTop="10dp" />
 
@@ -95,7 +97,7 @@
                         android:id="@+id/gallery"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"></LinearLayout>
+                        android:orientation="horizontal" />
 
                 </HorizontalScrollView>
 
@@ -106,6 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.surveyModel.description}"
+                    tools:text="@string/dummy_description"
                     style="@style/TextAppearance.SZTFR.DetailsDescription"
                     android:layout_marginTop="20dp"/>
 

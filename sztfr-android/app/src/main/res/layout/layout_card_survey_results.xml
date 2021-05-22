@@ -32,14 +32,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/spacing_small"
-                    android:text="@string/home_frag_title" />
+                    tools:text="@string/survey_dummy_title" />
 
                 <TextView
                     android:id="@+id/survey_results_description"
                     style="@style/TextAppearance.SZTFR.SurveyDescription"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:text="@string/home_frag_description" />
+                    tools:text="@string/dummy_description" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,19 +51,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/survey_see_results"
+                    android:textColor="?attr/accentTextColor"
+                    app:backgroundTint="?attr/cardButtonBackground"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageButton"
                     app:layout_constraintHorizontal_bias="0.183"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </LinearLayout>
-
 
         <ImageView
             android:id="@+id/survey_results_img"

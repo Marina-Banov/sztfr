@@ -26,6 +26,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="175dp"
                 android:src="@drawable/dummy"
+                tools:src="@drawable/dummy"
                 android:id="@+id/home_img"
                 android:scaleType="centerCrop"/>
 
@@ -45,6 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{event.title}"
+                    tools:text="@string/event_dummy_title"
                     style="@style/TextAppearance.SZTFR.DetailsTitle"/>
 
                 <TextView
@@ -52,6 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{event.startTime}"
+                    tools:text="@string/event_dummy_time"
                     style="@style/TextAppearance.SZTFR.DetailsDescription"/>
 
                 <TextView
@@ -59,6 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{event.location}"
+                    tools:text="@string/event_dummy_location"
                     style="@style/TextAppearance.SZTFR.DetailsDescription"/>
             </LinearLayout>
 
@@ -94,7 +98,7 @@
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:layout_marginEnd="@dimen/spacing_small"
                     app:srcCompat="@drawable/favorite"
-                    app:tint="?attr/accentTextColor"
+                    app:tint="?attr/chipStrokeColor"
                     app:backgroundTint="?attr/cardBackgroundColor" />
 
             </LinearLayout>

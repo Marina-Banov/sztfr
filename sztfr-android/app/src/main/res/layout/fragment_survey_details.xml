@@ -41,6 +41,7 @@
                         android:layout_height="250dp"
                         android:scaleType="centerCrop"
                         app:imageUrl="@{viewModel.surveyModel.image}"
+                        tools:src="@drawable/dummy"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/ShapeAppearance.SZTFR.RoundedCorners" />
@@ -65,7 +66,6 @@
                         style="@style/Widget.SZTFR.SurveyButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/rijesi_anketu"
                         app:layout_constraintBottom_toBottomOf="@+id/survey_details_img"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.055"
@@ -78,9 +78,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.surveyModel.title}"
+                    tools:text="@string/survey_dummy_title"
                     style="@style/TextAppearance.SZTFR.DetailsTitle" />
-
-
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/survey_tag_group"
@@ -93,6 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.surveyModel.description}"
+                    tools:text="@string/dummy_description"
                     style="@style/TextAppearance.SZTFR.DetailsDescription" />
             </LinearLayout>
         </ScrollView>

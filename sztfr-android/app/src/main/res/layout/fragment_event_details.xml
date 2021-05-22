@@ -41,6 +41,7 @@
                         android:layout_height="250dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/dummy"
+                        tools:src="@drawable/dummy"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearanceOverlay="@style/ShapeAppearance.SZTFR.RoundedCorners" />
@@ -66,6 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.event.title}"
+                    tools:text="@string/event_dummy_title"
                     style="@style/TextAppearance.SZTFR.DetailsTitle" />
 
                 <TextView
@@ -73,6 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.event.startTime}"
+                    tools:text="@string/event_dummy_time"
                     style="@style/TextAppearance.SZTFR.DetailsDetails" />
 
                 <TextView
@@ -80,6 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.event.location}"
+                    tools:text="@string/event_dummy_location"
                     style="@style/TextAppearance.SZTFR.DetailsDetails" />
 
                 <TextView
@@ -87,6 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.event.organisation}"
+                    tools:text="@string/event_dummy_organisation"
                     style="@style/TextAppearance.SZTFR.DetailsDetails" />
 
                 <com.google.android.material.chip.ChipGroup
@@ -100,6 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.event.description}"
+                    tools:text="@string/dummy_description"
                     style="@style/TextAppearance.SZTFR.DetailsDescription" />
             </LinearLayout>
         </ScrollView>
