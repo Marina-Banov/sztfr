@@ -79,7 +79,7 @@
                 android:layout_alignTop="@id/fragment_home_info"
                 android:layout_alignBottom="@id/fragment_home_info">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/show_details_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,7 +87,6 @@
                     android:padding="@dimen/spacing_small"
                     android:layout_marginBottom="@dimen/spacing_small"
                     app:srcCompat="@drawable/more"
-                    android:tint="?attr/accentTextColor"
                     app:backgroundTint="?attr/cardBackgroundColor" />
 
                 <ImageButton

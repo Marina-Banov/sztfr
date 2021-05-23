@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -20,7 +21,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="200dp">
 
             <TextView
                 android:id="@+id/survey_title"
@@ -42,8 +43,7 @@
                 android:layout_alignParentBottom="true"
                 app:surveyStatusIcon="@{survey}"
                 android:padding="@dimen/spacing_small"
-                android:layout_marginStart="@dimen/spacing_small"
-                android:layout_marginBottom="@dimen/spacing_normal"
+                android:layout_margin="@dimen/spacing_small"
                 tools:src="@drawable/ic_check" />
 
             <ImageButton
@@ -53,8 +53,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_toStartOf="@id/survey_image"
                 android:padding="@dimen/spacing_small"
-                android:layout_marginEnd="@dimen/spacing_small"
-                android:layout_marginBottom="@dimen/spacing_normal"
+                android:layout_margin="@dimen/spacing_small"
                 app:backgroundTint="?attr/cardBackgroundColor"
                 app:srcCompat="@drawable/favorite"
                 app:tint="?attr/chipStrokeColor" />
@@ -62,7 +61,7 @@
             <ImageView
                 android:id="@+id/survey_image"
                 android:layout_width="168dp"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/dummy"
