@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="@dimen/spacing_small"
             app:layoutManager="LinearLayoutManager"
-            app:listData="@{viewModel.events}"
+            app:listData="@{viewModel.displayEvents}"
             tools:listitem="@layout/layout_card_event"/>
 
     </LinearLayout>

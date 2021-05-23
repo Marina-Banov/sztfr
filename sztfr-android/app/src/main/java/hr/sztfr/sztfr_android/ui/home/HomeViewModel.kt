@@ -12,7 +12,28 @@ class HomeViewModel(list: ArrayList<Event>, app: Application) : AndroidViewModel
     val events: LiveData<ArrayList<Event>>
         get() = _events
 
+    private val _displayEvents = MutableLiveData<ArrayList<Event>>()
+    val displayEvents: LiveData<ArrayList<Event>>
+        get() = _displayEvents
+
     init {
         _events.value = list
+        _displayEvents.value = list
+    }
+
+    fun filterByTags(tags: ArrayList<String>) {
+        if (tags.size == 0) {
+            _displayEvents.value = _events.value
+            return
+        }
+        _displayEvents.value = ArrayList()
+        for (event in _events.value!!) {
+            for (tag in tags) {
+                if (event.tags.contains(tag)){
+                    _displayEvents.value!!.add(event)
+                    break
+                }
+            }
+        }
     }
 }

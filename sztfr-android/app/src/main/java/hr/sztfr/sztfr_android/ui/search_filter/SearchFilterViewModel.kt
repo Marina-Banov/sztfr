@@ -16,11 +16,27 @@ class SearchFilterViewModel: ViewModel() {
     val tags: LiveData<ArrayList<String>>
         get() = _tags
 
-    init { getTags() }
+    private val _selectedTags = MutableLiveData<ArrayList<String>>()
+    val selectedTags: LiveData<ArrayList<String>>
+        get() = _selectedTags
+
+    init {
+        getTags()
+        _selectedTags.value = ArrayList()
+    }
 
     private fun getTags() {
         coroutineScope.launch {
             _tags.value = enumsRepository.get(EnumsRepository.TAGS) as ArrayList<String>
         }
+    }
+
+    fun updateSelectedTags(tag: String, shouldAdd: Boolean) {
+        _selectedTags.value?.apply {
+            if (shouldAdd) { add(tag) } else { remove(tag) }
+        }
+        // Live data is not updated simply by updating the ArrayList
+        // Must also update the reference
+        _selectedTags.value = _selectedTags.value
     }
 }
