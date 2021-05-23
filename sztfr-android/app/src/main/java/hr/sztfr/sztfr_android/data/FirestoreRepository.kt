@@ -1,7 +1,6 @@
 package hr.sztfr.sztfr_android.data
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
@@ -14,10 +13,6 @@ class FirestoreRepository {
     var firestoreDB = FirebaseFirestore.getInstance()
     var storage = FirebaseStorage.getInstance()
     var user = FirebaseAuth.getInstance().currentUser
-
-    fun getTags(): DocumentReference {
-        return firestoreDB.collection("enums").document("tags")
-    }
 
     /** Get published surveys */
     fun getPublishedSurveys(): Query {
