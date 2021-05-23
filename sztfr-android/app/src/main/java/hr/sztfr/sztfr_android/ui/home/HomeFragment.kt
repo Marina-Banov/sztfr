@@ -45,11 +45,11 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.searchFilter.viewModel.selectedTags.observe(viewLifecycleOwner, {
-            viewModel.filterByTags(it)
+            viewModel.updateEvents(it)
         })
 
         binding.searchFilter.viewModel.searchQuery.observe(viewLifecycleOwner, {
-            viewModel.search(it)
+            viewModel.updateEvents(it)
         })
 
         binding.homeRecyclerView.adapter = HomeAdapter(
