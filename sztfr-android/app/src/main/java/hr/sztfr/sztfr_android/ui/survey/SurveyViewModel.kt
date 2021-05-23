@@ -36,10 +36,14 @@ class SurveyViewModel: ViewModel() {
     }
 
     fun updateSurveys(tags: ArrayList<String>) {
-       // _displaySurveys.value = filterByTags(_surveys.value!!, tags)
+        _surveys.value?.let {
+            _displaySurveys.value = filterByTags(it, tags)
+        }
     }
 
     fun updateSurveys(query: String) {
-      //  _displaySurveys.value = search(_surveys.value!!, query)
+        _surveys.value?.let {
+            _displaySurveys.value = search(it, query)
+        }
     }
 }
