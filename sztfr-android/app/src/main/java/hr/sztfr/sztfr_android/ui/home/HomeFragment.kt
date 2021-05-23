@@ -48,6 +48,10 @@ class HomeFragment : Fragment() {
             viewModel.filterByTags(it)
         })
 
+        binding.searchFilter.viewModel.searchQuery.observe(viewLifecycleOwner, {
+            viewModel.search(it)
+        })
+
         binding.homeRecyclerView.adapter = HomeAdapter(
             { findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToEventDetailsFragment(it)) },

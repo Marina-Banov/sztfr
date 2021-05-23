@@ -20,6 +20,10 @@ class SearchFilterViewModel: ViewModel() {
     val selectedTags: LiveData<ArrayList<String>>
         get() = _selectedTags
 
+    private val _searchQuery = MutableLiveData<String>()
+    val searchQuery: LiveData<String>
+        get() = _searchQuery
+
     init {
         getTags()
         _selectedTags.value = ArrayList()
@@ -38,5 +42,9 @@ class SearchFilterViewModel: ViewModel() {
         // Live data is not updated simply by updating the ArrayList
         // Must also update the reference
         _selectedTags.value = _selectedTags.value
+    }
+
+    fun setSearchQuery(query: String) {
+        _searchQuery.value = query
     }
 }

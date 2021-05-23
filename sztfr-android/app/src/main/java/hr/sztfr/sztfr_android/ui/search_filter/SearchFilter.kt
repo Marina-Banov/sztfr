@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
 import com.google.android.material.chip.Chip
@@ -31,6 +32,19 @@ class SearchFilter(ctx: Context, attributeSet: AttributeSet? = null):
                     viewModel.updateSelectedTags(tag, chip.isChecked)
                 }
                 binding.filter.addView(chip)
+            }
+        })
+
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(query: String?): Boolean {
+                viewModel.setSearchQuery(query!!)
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.setSearchQuery(query!!)
+                binding.search.clearFocus()
+                return true
             }
         })
     }

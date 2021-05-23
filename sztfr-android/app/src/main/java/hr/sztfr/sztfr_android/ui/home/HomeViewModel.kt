@@ -36,4 +36,17 @@ class HomeViewModel(list: ArrayList<Event>, app: Application) : AndroidViewModel
             }
         }
     }
+
+    fun search(query: String) {
+        if (query.isEmpty()) {
+            _displayEvents.value = _events.value
+            return
+        }
+        _displayEvents.value = ArrayList()
+        for (event in _events.value!!) {
+            if (event.title.toLowerCase().contains(query.toLowerCase())) {
+                _displayEvents.value!!.add(event)
+            }
+        }
+    }
 }
