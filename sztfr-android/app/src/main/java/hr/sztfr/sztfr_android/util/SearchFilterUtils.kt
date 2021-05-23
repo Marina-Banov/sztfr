@@ -1,6 +1,7 @@
 package hr.sztfr.sztfr_android.util
 
 import hr.sztfr.sztfr_android.data.model.Filterable
+import hr.sztfr.sztfr_android.data.model.SurveyModel
 import java.util.ArrayList
 
 fun <T: Filterable> filterByTags(originalList: ArrayList<T>,
@@ -30,6 +31,17 @@ fun <T: Filterable> search(originalList: ArrayList<T>,
     val result = ArrayList<T>()
     for (item in originalList) {
         if (item.title.toLowerCase().contains(query.toLowerCase())) {
+            result.add(item)
+        }
+    }
+    return result
+}
+
+fun filterByStatus(originalList: ArrayList<SurveyModel>, status: Boolean):
+        ArrayList<SurveyModel> {
+    val result = ArrayList<SurveyModel>()
+    for (item in originalList) {
+        if (item.published == status) {
             result.add(item)
         }
     }

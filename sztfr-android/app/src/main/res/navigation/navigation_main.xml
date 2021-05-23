@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/surveyWebViewFragment"
-        android:name="hr.sztfr.sztfr_android.ui.survey.SurveyWebViewFragment"
+        android:name="hr.sztfr.sztfr_android.ui.survey_details.SurveyWebViewFragment"
         android:label="SurveyWebViewFragment" >
 
         <argument

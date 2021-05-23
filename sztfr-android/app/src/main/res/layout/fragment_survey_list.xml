@@ -6,15 +6,16 @@
     <data>
         <variable
             name="viewModel"
-            type="hr.sztfr.sztfr_android.ui.survey.SurveyViewModelSub" />
+            type="hr.sztfr.sztfr_android.ui.survey_list.SurveyListViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/current_surveys_list"
+        android:id="@+id/survey_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_margin="@dimen/spacing_small"
+        app:layoutManager="LinearLayoutManager"
         app:listData="@{viewModel.surveys}"
-        tools:listitem="@layout/layout_card_survey_new"/>
+        tools:listitem="@layout/layout_card_survey"/>
 
 </layout>

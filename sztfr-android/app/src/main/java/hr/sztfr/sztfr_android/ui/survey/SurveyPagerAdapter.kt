@@ -3,6 +3,7 @@ package hr.sztfr.sztfr_android.ui.survey
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import hr.sztfr.sztfr_android.ui.survey_list.SurveyListFragment
 
 class SurveyPagerAdapter(fm: FragmentManager)
     : FragmentPagerAdapter(fm,  BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -11,9 +12,9 @@ class SurveyPagerAdapter(fm: FragmentManager)
 
     override fun getItem(position: Int): Fragment {
         return if (position == 0) {
-            CurrentSurveysFragment()
+            SurveyListFragment(false)
         } else {
-            SurveyResultsFragment()
+            SurveyListFragment(true)
         }
     }
 
