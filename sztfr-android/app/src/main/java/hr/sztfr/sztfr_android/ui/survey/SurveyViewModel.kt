@@ -1,35 +1,45 @@
 package hr.sztfr.sztfr_android.ui.survey
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.storage.StorageReference
 import hr.sztfr.sztfr_android.data.model.SurveyModel
-import hr.sztfr.sztfr_android.data.FirestoreRepository
+import hr.sztfr.sztfr_android.data.repository.SurveyFilter
+import hr.sztfr.sztfr_android.data.repository.SurveysRepository
+import hr.sztfr.sztfr_android.util.filterByTags
+import hr.sztfr.sztfr_android.util.search
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import java.util.ArrayList
 
 class SurveyViewModel: ViewModel() {
+    private val surveysRepository = SurveysRepository()
+    private val viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    val TAG = "SURVEY_VIEW_MODEL"
-    private var firestoreRepository = FirestoreRepository()
-    private lateinit var storageReference : StorageReference
+    private val _surveys = MutableLiveData<ArrayList<SurveyModel>>()
+    private val _displaySurveys = MutableLiveData<ArrayList<SurveyModel>>()
+    val displaySurveys: LiveData<ArrayList<SurveyModel>>
+        get() = _displaySurveys
 
-
-    fun getPublishedSurveys() : FirestoreRecyclerOptions<SurveyModel>{
-        var query = firestoreRepository.getPublishedSurveys()
-        var options = FirestoreRecyclerOptions.Builder<SurveyModel>()
-                .setQuery(query, SurveyModel::class.java).build()
-
-        return options
+    init {
+        getSurveys()
     }
 
-    fun getUnpublishedSurveys() : FirestoreRecyclerOptions<SurveyModel>{
-        var query = firestoreRepository.getUnpublishedSurveys()
-        var options = FirestoreRecyclerOptions.Builder<SurveyModel>()
-                .setQuery(query, SurveyModel::class.java).build()
-
-        return options
+    private fun getSurveys() {
+        coroutineScope.launch {
+            _surveys.value = surveysRepository.get(SurveyFilter.ALL)
+            _displaySurveys.value = _surveys.value
+        }
     }
 
-    fun getImageReference(imageURL: String) : StorageReference {
-        return firestoreRepository.getImageReference(imageURL)
+    fun updateSurveys(tags: ArrayList<String>) {
+       // _displaySurveys.value = filterByTags(_surveys.value!!, tags)
+    }
+
+    fun updateSurveys(query: String) {
+      //  _displaySurveys.value = search(_surveys.value!!, query)
     }
 }

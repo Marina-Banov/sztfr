@@ -4,7 +4,7 @@ import hr.sztfr.sztfr_android.data.model.Filterable
 import java.util.ArrayList
 
 fun <T: Filterable> filterByTags(originalList: ArrayList<T>,
-                 tags: ArrayList<String>): ArrayList<T> {
+                                 tags: ArrayList<String>): ArrayList<T> {
     if (tags.size == 0) {
         return originalList
     }
@@ -22,7 +22,7 @@ fun <T: Filterable> filterByTags(originalList: ArrayList<T>,
 }
 
 fun <T: Filterable> search(originalList: ArrayList<T>,
-           query: String): ArrayList<T> {
+                           query: String): ArrayList<T> {
     if (query.isEmpty()) {
         return originalList
     }

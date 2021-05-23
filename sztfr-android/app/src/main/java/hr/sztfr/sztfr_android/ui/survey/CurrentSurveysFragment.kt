@@ -18,16 +18,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.data.GlideApp
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import hr.sztfr.sztfr_android.databinding.FragmentCurrentSurveysBinding
-import hr.sztfr.sztfr_android.data.GlideApp
 import hr.sztfr.sztfr_android.ui.MainFragmentDirections
 
 class CurrentSurveysFragment : Fragment() {
 
     private lateinit var currentSurveysList: RecyclerView
     private lateinit var adapter: SurveyFirestoreRecyclerAdapter
-    private lateinit var surveyViewModel: SurveyViewModel
+    private lateinit var surveyViewModel: SurveyViewModelSub
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,10 +35,15 @@ class CurrentSurveysFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = DataBindingUtil.inflate<FragmentCurrentSurveysBinding>(inflater, R.layout.fragment_current_surveys, container, false)
-        surveyViewModel = ViewModelProvider(this).get(SurveyViewModel::class.java)
+        surveyViewModel = ViewModelProvider(this).get(SurveyViewModelSub::class.java)
         currentSurveysList = binding.currentSurveysList
         adapter = SurveyFirestoreRecyclerAdapter(surveyViewModel.getUnpublishedSurveys())
         currentSurveysList.adapter = adapter
+
+        (parentFragment as SurveyFragment).viewModel.displaySurveys.observe(
+            viewLifecycleOwner,
+            { }
+        )
         return binding.root
     }
 

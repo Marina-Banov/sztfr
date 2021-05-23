@@ -26,7 +26,7 @@ class SurveyResultsFragment : Fragment() {
 
     private lateinit var surveyResultsList: RecyclerView
     private lateinit var adapter: SurveyResultsFirestoreRecyclerAdapter
-    private lateinit var surveyViewModel: SurveyViewModel
+    private lateinit var surveyViewModel: SurveyViewModelSub
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +34,7 @@ class SurveyResultsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = DataBindingUtil.inflate<FragmentSurveyResultsBinding>(inflater, R.layout.fragment_survey_results, container, false)
-        surveyViewModel = ViewModelProvider(this).get(SurveyViewModel::class.java)
+        surveyViewModel = ViewModelProvider(this).get(SurveyViewModelSub::class.java)
         surveyResultsList = binding.surveyResultsList
         adapter = SurveyResultsFirestoreRecyclerAdapter(surveyViewModel.getPublishedSurveys())
         surveyResultsList.adapter = adapter
