@@ -8,67 +8,10 @@
         android:background="?attr/screensBackgroundColor"
         tools:context=".ui.MainFragment">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/search_container"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginEnd="@dimen/spacing_normal">
-
-            <ImageButton
-                android:id="@+id/profile_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_profile"
-                android:tint="?attr/chipStrokeColor"
-                android:background="@drawable/circle"
-                app:backgroundTint="?attr/cardBackgroundColor" />
-
-            <SearchView
-                android:id="@+id/search"
-                android:background="?attr/cardBackgroundColor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_normal" />
-        </LinearLayout>
-
-        <HorizontalScrollView
-            android:id="@+id/filter_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/search_container"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:id="@+id/filter_text"
-                    style="@style/TextAppearance.SZTFR.DetailsDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_normal"
-                    android:text="@string/filter_by_tags" />
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_small"
-                    app:singleLine="true" />
-            </LinearLayout>
-        </HorizontalScrollView>
-
         <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/meow_menu"
-            android:layout_below="@id/filter_container"
             android:id="@+id/fragmentContainer" />
 
         <com.etebarian.meowbottomnavigation.MeowBottomNavigation

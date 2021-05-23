@@ -2,11 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<FrameLayout
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/screensBackgroundColor"
-    tools:context=".ui.survey.SurveyFragment">
+    tools:context=".ui.survey.SurveyFragment"
+    android:orientation="vertical">
+
+    <hr.sztfr.sztfr_android.ui.search_filter.SearchFilter
+        android:id="@+id/search_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
@@ -19,5 +25,5 @@
             app:tabIndicatorColor="?attr/chipStrokeColor"
             app:tabSelectedTextColor="?attr/chipStrokeColor"/>
     </androidx.viewpager.widget.ViewPager>
-</FrameLayout>
+</LinearLayout>
 </layout>

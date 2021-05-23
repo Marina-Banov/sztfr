@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
-import com.google.android.material.chip.Chip
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.databinding.FragmentMainBinding
 import java.util.Stack
@@ -26,7 +24,6 @@ class MainFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentMainBinding
-    private lateinit var viewModel: MainViewModel
     private val backStack: Stack<Int> = Stack()
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -35,28 +32,11 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         binding.lifecycleOwner = this
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.tags.observe(viewLifecycleOwner, {
-            for (tag in it) {
-                val chip = layoutInflater.inflate(R.layout.layout_chip, binding.filter, false) as Chip
-                chip.text = tag
-                binding.filter.addView(chip)
-            }
-        })
-
         binding.fragmentContainer.adapter = PagerAdapter(childFragmentManager)
         binding.fragmentContainer.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
             override fun onPageSelected(position: Int) {
-                // TODO not a great transition, something to think about
-                if (position == INFO) {
-                    binding.filterContainer.visibility = View.GONE
-                    binding.searchContainer.visibility = View.GONE
-                } else {
-                    binding.filterContainer.visibility = View.VISIBLE
-                    binding.searchContainer.visibility = View.VISIBLE
-                }
                 addToStack(position)
             }
         })

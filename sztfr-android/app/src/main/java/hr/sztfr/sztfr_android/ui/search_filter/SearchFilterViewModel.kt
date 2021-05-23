@@ -1,4 +1,4 @@
-package hr.sztfr.sztfr_android.ui
+package hr.sztfr.sztfr_android.ui.search_filter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import java.util.ArrayList
 import hr.sztfr.sztfr_android.data.repository.EnumsRepository
 import kotlinx.coroutines.*
 
-class MainViewModel: ViewModel() {
+class SearchFilterViewModel: ViewModel() {
     private val enumsRepository = EnumsRepository()
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
