@@ -1,25 +1,15 @@
-package hr.sztfr.sztfr_android.ui.survey
+package hr.sztfr.sztfr_android.ui.survey_details
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBinderMapperImpl
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.chip.Chip
 import hr.sztfr.sztfr_android.R
-import hr.sztfr.sztfr_android.databinding.FragmentEventDetailsBinding
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyDetailsBinding
-import hr.sztfr.sztfr_android.ui.MainFragmentDirections
-import hr.sztfr.sztfr_android.ui.event_details.EventDetailsFragmentArgs
-import hr.sztfr.sztfr_android.ui.event_details.EventDetailsViewModel
-import hr.sztfr.sztfr_android.ui.event_details.EventDetailsViewModelFactory
 
 
 class SurveyDetailsFragment : Fragment() {

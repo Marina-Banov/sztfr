@@ -2,24 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/current_surveys_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <SearchView
-            android:id="@+id/current_survey_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:showAsAction="always"
-            android:queryHint="@string/survey_search_hint" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/current_surveys_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/layout_card_survey_new"/>
-    </LinearLayout>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/layout_card_survey_new"/>
 
 </layout>

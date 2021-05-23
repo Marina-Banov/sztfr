@@ -1,4 +1,4 @@
-package hr.sztfr.sztfr_android.ui.survey
+package hr.sztfr.sztfr_android.ui.survey_details
 
 import android.app.Application
 import androidx.databinding.BindingAdapter

@@ -1,25 +1,19 @@
-package hr.sztfr.sztfr_android.ui.survey
+package hr.sztfr.sztfr_android.ui.survey_details
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ImageView.ScaleType
 import android.widget.LinearLayout
-import android.widget.PopupWindow
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.storage.StorageReference
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyResultsDetailsBinding
 import hr.sztfr.sztfr_android.data.GlideApp

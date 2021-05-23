@@ -27,6 +27,8 @@
     <string name="event_dummy_organisation">Organizator</string>
 
     <string name="survey_search_hint">Potraži anketu…</string>
+    <string name="survey_tab_title_new">NOVE ANKETE</string>
+    <string name="survey_tab_title_results">REZULTATI ANKETA</string>
     <string name="survey_dummy_title">SZ želi znati!</string>
     <string name="survey_complete">Riješi</string>
     <string name="survey_see_results">Prikaži rezultate</string>

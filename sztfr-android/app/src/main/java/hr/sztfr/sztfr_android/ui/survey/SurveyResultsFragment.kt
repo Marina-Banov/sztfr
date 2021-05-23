@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.SearchView
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -26,38 +25,19 @@ import hr.sztfr.sztfr_android.ui.MainFragmentDirections
 class SurveyResultsFragment : Fragment() {
 
     private lateinit var surveyResultsList: RecyclerView
-    private lateinit var searchView: SearchView
-    private lateinit var adapter: SurveyResultsFragment.SurveyResultsFirestoreRecyclerAdapter
+    private lateinit var adapter: SurveyResultsFirestoreRecyclerAdapter
     private lateinit var surveyViewModel: SurveyViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = DataBindingUtil.inflate<FragmentSurveyResultsBinding>(inflater, R.layout.fragment_survey_results, container, false)
         surveyViewModel = ViewModelProvider(this).get(SurveyViewModel::class.java)
         surveyResultsList = binding.surveyResultsList
-        searchView = binding.surveyResultsSearch
         adapter = SurveyResultsFirestoreRecyclerAdapter(surveyViewModel.getPublishedSurveys())
         surveyResultsList.adapter = adapter
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String?): Boolean {
-
-                val query = searchView.query.toString()
-                adapter.search(query)
-
-                return false
-            }
-
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                val query = searchView.query.toString()
-                searchView.hideKeyboard()
-                adapter.search(query)
-                return true
-            }
-        })
 
         return binding.root
     }
@@ -77,9 +57,9 @@ class SurveyResultsFragment : Fragment() {
         adapter.stopListening()
     }
 
-    private inner class SurveyResultsViewHolder internal constructor(private val view: View) : RecyclerView.ViewHolder(view){
-
-        internal fun setValues(surveyModel: SurveyModel){
+    private inner class SurveyResultsViewHolder(private val view: View) :
+        RecyclerView.ViewHolder(view) {
+        fun setValues(surveyModel: SurveyModel){
             val surveyResultsTitle = view.findViewById<TextView>(R.id.survey_results_title)
             val surveyResultsImage = view.findViewById<ImageView>(R.id.survey_results_img)
             val surveyResultsNavigationButton = view.findViewById<Button>(R.id.survey_results_navigation_button)
@@ -94,17 +74,10 @@ class SurveyResultsFragment : Fragment() {
             val storageReference = surveyViewModel.getImageReference(surveyModel.image)
             GlideApp.with(this@SurveyResultsFragment).load(storageReference).into(surveyResultsImage)
         }
-
-
-
     }
-    private inner class SurveyResultsFirestoreRecyclerAdapter internal constructor(options: FirestoreRecyclerOptions<SurveyModel>) : FirestoreRecyclerAdapter<SurveyModel, SurveyResultsFragment.SurveyResultsViewHolder>(options) {
-        private var searchText: String = ""
-        private val isSearch: Boolean
-            get() = searchText.isNotBlank()
 
-        private var searchItems: MutableList<SurveyModel> = mutableListOf()
-
+    private inner class SurveyResultsFirestoreRecyclerAdapter(options: FirestoreRecyclerOptions<SurveyModel>):
+        FirestoreRecyclerAdapter<SurveyModel, SurveyResultsFragment.SurveyResultsViewHolder>(options) {
         override fun onBindViewHolder(surveyResultsViewHolder: SurveyResultsFragment.SurveyResultsViewHolder, position: Int, surveyModel: SurveyModel) {
             surveyResultsViewHolder.setValues(surveyModel)
         }
@@ -112,36 +85,6 @@ class SurveyResultsFragment : Fragment() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SurveyResultsFragment.SurveyResultsViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_card_survey_results, parent, false)
             return SurveyResultsViewHolder(view)
-        }
-
-        override fun getItemCount(): Int {
-            return if (isSearch){
-                searchItems = mutableListOf()
-                for (position in 0 until super.getItemCount()){
-                    var item = super.getItem(position)
-                    if (item.title?.toLowerCase()?.contains(searchText) == true){
-                        searchItems.add(item)
-                    }
-                }
-                searchItems.size
-            }else{
-                super.getItemCount()
-            }
-        }
-
-        override fun getItem(position: Int): SurveyModel {
-            return if (!isSearch){
-                super.getItem(position)
-            }else{
-                searchItems[position]
-            }
-
-        }
-
-        fun search(text: String){
-            searchText = text.toLowerCase()
-            notifyDataSetChanged()
-
         }
     }
 }
