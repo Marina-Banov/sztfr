@@ -1,6 +1,7 @@
 package hr.sztfr.sztfr_android.data.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
+import hr.sztfr.sztfr_android.data.model.Filterable
 import hr.sztfr.sztfr_android.data.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -26,6 +27,17 @@ class UserRepository {
         }
     }
 
+    suspend fun addFavorite(item: Filterable) = withContext(Dispatchers.IO) {
+        try {
+            val result = usersCollection.document(FirestoreUser.value!!.uid)
+                .collection("favorites")
+                .add(item)
+                .await()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
 }
 
 object FirestoreUser {
