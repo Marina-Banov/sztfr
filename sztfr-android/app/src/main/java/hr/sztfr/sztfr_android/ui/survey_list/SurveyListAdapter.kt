@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import hr.sztfr.sztfr_android.data.FirestoreRepository
 import hr.sztfr.sztfr_android.data.GlideApp
 import hr.sztfr.sztfr_android.data.model.SurveyModel
+import hr.sztfr.sztfr_android.data.repository.FirestoreUser
 import hr.sztfr.sztfr_android.databinding.LayoutCardSurveyBinding
 import hr.sztfr.sztfr_android.util.handleClick
 
@@ -21,6 +22,7 @@ class SurveyListAdapter(private val fragment: Fragment,
         RecyclerView.ViewHolder(binding.root) {
         fun bind(survey: SurveyModel) {
             binding.survey = survey
+            binding.user = FirestoreUser.value
             binding.favoritesButton.setOnClickListener { handleClick(survey) }
             val storageReference = FirestoreRepository().getImageReference(survey.image)
             GlideApp.with(fragment).load(storageReference).into(binding.surveyImage)

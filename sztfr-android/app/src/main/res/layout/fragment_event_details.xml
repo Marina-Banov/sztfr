@@ -6,6 +6,9 @@
         <variable
             name="viewModel"
             type="hr.sztfr.sztfr_android.ui.event_details.EventDetailsViewModel" />
+        <variable
+            name="user"
+            type="hr.sztfr.sztfr_android.data.model.User" />
     </data>
 
     <RelativeLayout
@@ -53,7 +56,9 @@
                         android:layout_height="48dp"
                         android:layout_marginEnd="@dimen/spacing_normal"
                         app:cornerRadius="24dp"
-                        app:icon="@drawable/favorite"
+                        tools:icon="@drawable/favorite"
+                        app:item="@{viewModel.event}"
+                        app:user="@{user}"
                         app:iconGravity="top"
                         app:iconTint="?attr/accentTextColor"
                         app:layout_constraintBottom_toBottomOf="@+id/details_img"

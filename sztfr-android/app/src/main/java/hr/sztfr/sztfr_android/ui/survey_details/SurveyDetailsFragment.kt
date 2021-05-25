@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.data.repository.FirestoreUser
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyDetailsBinding
 import hr.sztfr.sztfr_android.util.handleClick
 
@@ -30,6 +31,7 @@ class SurveyDetailsFragment : Fragment() {
         val viewModelFactory = SurveyDetailsViewModelFactory(surveyModel, application)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(SurveyDetailsViewModel::class.java)
         binding.viewModel = viewModel
+        binding.user = FirestoreUser.value
 
         binding.surveyDetailsGoBackBtn.setOnClickListener { requireActivity().onBackPressed() }
 

@@ -11,5 +11,5 @@ data class User (
     var uid: String = "",
     var isAdmin: Boolean = false,
     var email: String = "",
-    var favorites: List<@RawValue Filterable> = listOf()
+    var favorites: ArrayList<@RawValue Filterable> = ArrayList()
 ) : Parcelable

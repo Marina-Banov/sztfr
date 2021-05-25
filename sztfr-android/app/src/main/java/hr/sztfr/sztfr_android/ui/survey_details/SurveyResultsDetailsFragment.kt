@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyResultsDetailsBinding
 import hr.sztfr.sztfr_android.data.GlideApp
+import hr.sztfr.sztfr_android.data.repository.FirestoreUser
 import hr.sztfr.sztfr_android.util.handleClick
 
 
@@ -40,6 +41,7 @@ class SurveyResultsDetailsFragment : Fragment() {
         val viewModelFactory = SurveyDetailsViewModelFactory(surveyModel, application)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(SurveyDetailsViewModel::class.java)
         binding.viewModel = viewModel
+        binding.user = FirestoreUser.value
 
 
         dialog = Dialog(this.requireContext())

@@ -7,6 +7,9 @@
         <variable
             name="survey"
             type="hr.sztfr.sztfr_android.data.model.SurveyModel" />
+        <variable
+            name="user"
+            type="hr.sztfr.sztfr_android.data.model.User" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -55,7 +58,9 @@
                 android:padding="@dimen/spacing_small"
                 android:layout_margin="@dimen/spacing_small"
                 app:backgroundTint="?attr/cardBackgroundColor"
-                app:srcCompat="@drawable/favorite"
+                tools:srcCompat="@drawable/favorite"
+                app:item="@{survey}"
+                app:user="@{user}"
                 app:tint="?attr/chipStrokeColor" />
 
             <ImageView
