@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyResultsDetailsBinding
 import hr.sztfr.sztfr_android.data.GlideApp
+import hr.sztfr.sztfr_android.util.handleClick
 
 
 class SurveyResultsDetailsFragment : Fragment() {
@@ -68,7 +69,7 @@ class SurveyResultsDetailsFragment : Fragment() {
 
         binding.surveyResultsDetailsGoBackBtn.setOnClickListener { requireActivity().onBackPressed() }
 
-
+        binding.favoritesButton.setOnClickListener { handleClick(viewModel.surveyModel.value!!) }
 
         return binding.root
     }

@@ -31,21 +31,17 @@ class SurveyListFragment(private val isPublished: Boolean): Fragment() {
             { viewModel.setSurveys(filterByStatus(it, isPublished)) }
         )
 
-        binding.surveyRecyclerView.adapter = SurveyListAdapter(
-            this,
-            {
-                if (it.published) {
-                    findNavController().navigate(
-                        MainFragmentDirections.actionMainFragmentToSurveyResultsDetailsFragment(it)
-                    )
-                } else {
-                    findNavController().navigate(
-                        MainFragmentDirections.actionMainFragmentToSurveyDetailsFragment(it)
-                    )
-                }
-            },
-            { Log.i("SurveyRecyclerView", "add favorite (" + it.documentId + ")") }
-        )
+        binding.surveyRecyclerView.adapter = SurveyListAdapter(this) {
+            if (it.published) {
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToSurveyResultsDetailsFragment(it)
+                )
+            } else {
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToSurveyDetailsFragment(it)
+                )
+            }
+        }
 
         return binding.root
     }

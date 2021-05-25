@@ -50,6 +50,7 @@
 
                     <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                        android:id="@+id/favorites_button"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginEnd="@dimen/spacing_normal"

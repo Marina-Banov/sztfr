@@ -1,14 +1,18 @@
 package hr.sztfr.sztfr_android.data.model
 
 import android.os.Parcelable
+import com.google.firebase.firestore.DocumentId
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Event(var id: String = "",
-            val imgSrcUrl: String = "",
-            override val title: String = "",
-            val startTime: String = "",
-            val location: String = "",
-            val organisation: String = "",
-            override val tags: List<String> = listOf(),
-            val description: String = "") : Parcelable, Filterable
+data class Event(
+    @DocumentId
+    override var documentId: String = "",
+    var imgSrcUrl: String = "",
+    override var title: String = "",
+    var startTime: String = "",
+    var location: String = "",
+    var organisation: String = "",
+    override var tags: List<String> = listOf(),
+    var description: String = ""
+) : Parcelable, Filterable

@@ -7,24 +7,23 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.databinding.LayoutCardEventBinding
+import hr.sztfr.sztfr_android.util.handleClick
 
-class HomeAdapter(private val showDetailsListener: (event: Event) -> Unit,
-                  private val addFavoritesListener: (event: Event) -> Unit) :
+class HomeAdapter(private val showDetailsListener: (event: Event) -> Unit) :
         ListAdapter<Event, HomeAdapter.ViewHolder>(DiffCallback) {
 
-    class ViewHolder(private var binding: LayoutCardEventBinding,
-                     private var addFavoritesListener: (event: Event) -> Unit):
+    class ViewHolder(private var binding: LayoutCardEventBinding):
             RecyclerView.ViewHolder(binding.root) {
         fun bind(event: Event) {
             binding.event = event
-            binding.addFavoriteButton.setOnClickListener { addFavoritesListener(event) }
+            binding.favoritesButton.setOnClickListener { handleClick(event) }
             binding.executePendingBindings()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = LayoutCardEventBinding.inflate(LayoutInflater.from(parent.context))
-        return ViewHolder(binding, addFavoritesListener)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
@@ -39,7 +38,7 @@ class HomeAdapter(private val showDetailsListener: (event: Event) -> Unit,
         }
 
         override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.documentId == newItem.documentId
         }
     }
 }

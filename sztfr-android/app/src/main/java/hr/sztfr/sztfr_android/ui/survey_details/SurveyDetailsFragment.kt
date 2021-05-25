@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyDetailsBinding
+import hr.sztfr.sztfr_android.util.handleClick
 
 
 class SurveyDetailsFragment : Fragment() {
@@ -37,9 +38,7 @@ class SurveyDetailsFragment : Fragment() {
             actionSurveyDetailsFragmentToSurveyWebViewFragment(viewModel.surveyModel.value!!.googleFormsURL))
         }
 
-
-
-
+        binding.favoritesButton.setOnClickListener { handleClick(viewModel.surveyModel.value!!) }
 
         return binding.root
     }

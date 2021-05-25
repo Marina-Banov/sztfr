@@ -47,7 +47,7 @@
                 tools:src="@drawable/ic_check" />
 
             <ImageButton
-                android:id="@+id/add_favorite_button"
+                android:id="@+id/favorites_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

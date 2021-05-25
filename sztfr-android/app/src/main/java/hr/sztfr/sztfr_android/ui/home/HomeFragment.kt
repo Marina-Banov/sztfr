@@ -52,11 +52,11 @@ class HomeFragment : Fragment() {
             viewModel.updateEvents(it)
         })
 
-        binding.homeRecyclerView.adapter = HomeAdapter(
-            { findNavController().navigate(
-                MainFragmentDirections.actionMainFragmentToEventDetailsFragment(it)) },
-            { Log.i("HomeRecyclerView", "add favorite (" + it.id + ")") }
-        )
+        binding.homeRecyclerView.adapter = HomeAdapter {
+            findNavController().navigate(
+                MainFragmentDirections.actionMainFragmentToEventDetailsFragment(it)
+            )
+        }
 
         return binding.root
     }

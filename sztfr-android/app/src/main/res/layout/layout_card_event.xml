@@ -90,7 +90,7 @@
                     app:backgroundTint="?attr/cardBackgroundColor" />
 
                 <ImageButton
-                    android:id="@+id/add_favorite_button"
+                    android:id="@+id/favorites_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"

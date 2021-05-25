@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.chip.Chip
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.databinding.FragmentEventDetailsBinding
+import hr.sztfr.sztfr_android.util.handleClick
 
 
 class EventDetailsFragment : Fragment() {
@@ -37,6 +38,7 @@ class EventDetailsFragment : Fragment() {
             }
         })
 
+        binding.favoritesButton.setOnClickListener { handleClick(viewModel.event.value!!) }
         binding.goBackBtn.setOnClickListener { requireActivity().onBackPressed() }
         return binding.root
     }

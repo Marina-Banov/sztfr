@@ -10,19 +10,18 @@ import hr.sztfr.sztfr_android.data.FirestoreRepository
 import hr.sztfr.sztfr_android.data.GlideApp
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import hr.sztfr.sztfr_android.databinding.LayoutCardSurveyBinding
+import hr.sztfr.sztfr_android.util.handleClick
 
 class SurveyListAdapter(private val fragment: Fragment,
-                        private val showDetailsListener: (survey: SurveyModel) -> Unit,
-                        private val addFavoritesListener: (survey: SurveyModel) -> Unit) :
+                        private val showDetailsListener: (survey: SurveyModel) -> Unit) :
     ListAdapter<SurveyModel, SurveyListAdapter.ViewHolder>(DiffCallback) {
 
     class ViewHolder(private val fragment: Fragment,
-                     private var binding: LayoutCardSurveyBinding,
-                     private var addFavoritesListener: (survey: SurveyModel) -> Unit):
+                     private var binding: LayoutCardSurveyBinding):
         RecyclerView.ViewHolder(binding.root) {
         fun bind(survey: SurveyModel) {
             binding.survey = survey
-            binding.addFavoriteButton.setOnClickListener { addFavoritesListener(survey) }
+            binding.favoritesButton.setOnClickListener { handleClick(survey) }
             val storageReference = FirestoreRepository().getImageReference(survey.image)
             GlideApp.with(fragment).load(storageReference).into(binding.surveyImage)
             binding.executePendingBindings()
@@ -31,7 +30,7 @@ class SurveyListAdapter(private val fragment: Fragment,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = LayoutCardSurveyBinding.inflate(LayoutInflater.from(parent.context))
-        return ViewHolder(fragment, binding, addFavoritesListener)
+        return ViewHolder(fragment, binding)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
