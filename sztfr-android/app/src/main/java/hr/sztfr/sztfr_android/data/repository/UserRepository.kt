@@ -27,3 +27,7 @@ class UserRepository {
     }
 
 }
+
+object FirestoreUser {
+    var value: User? = null
+}
