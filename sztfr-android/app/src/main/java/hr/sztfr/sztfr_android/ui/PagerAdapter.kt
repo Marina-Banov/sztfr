@@ -11,9 +11,7 @@ import hr.sztfr.sztfr_android.ui.survey.SurveyFragment
 class PagerAdapter(fragmentManager: FragmentManager)
     : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    override fun getCount(): Int {
-        return 4
-    }
+    override fun getCount(): Int = 4
 
     override fun getItem(position: Int): Fragment {
         return when (position) {

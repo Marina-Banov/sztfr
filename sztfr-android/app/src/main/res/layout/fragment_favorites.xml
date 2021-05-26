@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/screensBackgroundColor"
-    tools:context=".ui.favorites.FavoritesFragment">
+    tools:context=".ui.favorites.FavoritesFragment"
+    android:orientation="vertical">
+
+    <hr.sztfr.sztfr_android.ui.search_filter.SearchFilter
+        android:id="@+id/search_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -12,4 +18,4 @@
         android:layout_height="wrap_content"
         android:text="@string/hello_favorites_fragment" />
 
-</FrameLayout>
+</LinearLayout>

@@ -4,11 +4,11 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Event(var id: String,
-            val imgSrcUrl: String,
-            val title: String,
-            val startTime: String,
-            val location: String,
-            val organisation: String,
-            val tags: List<String>,
-            val description: String) : Parcelable
+class Event(var id: String = "",
+            val imgSrcUrl: String = "",
+            override val title: String = "",
+            val startTime: String = "",
+            val location: String = "",
+            val organisation: String = "",
+            override val tags: List<String> = listOf(),
+            val description: String = "") : Parcelable, Filterable

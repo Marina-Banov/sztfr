@@ -9,11 +9,17 @@
             type="hr.sztfr.sztfr_android.ui.home.HomeViewModel" />
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment"
-        android:background="?attr/screensBackgroundColor">
+        android:background="?attr/screensBackgroundColor"
+        android:orientation="vertical">
+
+        <hr.sztfr.sztfr_android.ui.search_filter.SearchFilter
+            android:id="@+id/search_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_recycler_view"
@@ -25,8 +31,8 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="@dimen/spacing_small"
             app:layoutManager="LinearLayoutManager"
-            app:listData="@{viewModel.events}"
+            app:listData="@{viewModel.displayEvents}"
             tools:listitem="@layout/layout_card_event"/>
 
-    </FrameLayout>
+    </LinearLayout>
 </layout>

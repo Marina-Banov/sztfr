@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/surveyDetailsFragment"
-        android:name="hr.sztfr.sztfr_android.ui.survey.SurveyDetailsFragment"
+        android:name="hr.sztfr.sztfr_android.ui.survey_details.SurveyDetailsFragment"
         android:label="fragment_survey_details"
         tools:layout="@layout/fragment_survey_details" >
         <argument
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/surveyResultsDetailsFragment"
-        android:name="hr.sztfr.sztfr_android.ui.survey.SurveyResultsDetailsFragment"
+        android:name="hr.sztfr.sztfr_android.ui.survey_details.SurveyResultsDetailsFragment"
         android:label="SurveyResultsDetailsFragment" >
         <argument
             android:name="surveyModel"
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/surveyWebViewFragment"
-        android:name="hr.sztfr.sztfr_android.ui.survey.SurveyWebViewFragment"
+        android:name="hr.sztfr.sztfr_android.ui.survey_details.SurveyWebViewFragment"
         android:label="SurveyWebViewFragment" >
 
         <argument

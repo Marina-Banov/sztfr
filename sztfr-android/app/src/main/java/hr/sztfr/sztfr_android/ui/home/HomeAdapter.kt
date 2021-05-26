@@ -13,12 +13,10 @@ class HomeAdapter(private val showDetailsListener: (event: Event) -> Unit,
         ListAdapter<Event, HomeAdapter.ViewHolder>(DiffCallback) {
 
     class ViewHolder(private var binding: LayoutCardEventBinding,
-                     private var showDetailsListener: (event: Event) -> Unit,
                      private var addFavoritesListener: (event: Event) -> Unit):
             RecyclerView.ViewHolder(binding.root) {
         fun bind(event: Event) {
             binding.event = event
-            binding.showDetailsButton.setOnClickListener { showDetailsListener(event) }
             binding.addFavoriteButton.setOnClickListener { addFavoritesListener(event) }
             binding.executePendingBindings()
         }
@@ -26,11 +24,12 @@ class HomeAdapter(private val showDetailsListener: (event: Event) -> Unit,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = LayoutCardEventBinding.inflate(LayoutInflater.from(parent.context))
-        return ViewHolder(binding, showDetailsListener, addFavoritesListener)
+        return ViewHolder(binding, addFavoritesListener)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val event = getItem(position)
+        viewHolder.itemView.setOnClickListener { showDetailsListener(event) }
         viewHolder.bind(event)
     }
 

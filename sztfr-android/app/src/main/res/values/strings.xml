@@ -14,6 +14,8 @@
     <string name="login_failed">Prijava nije uspjela</string>
     <string name="action_sign_out">Odjava</string>
 
+    <string name="filter_by_tags">Pretraga po tagovima:</string>
+
     <string name="tag">Tag</string>
     <string name="return_btn">Povratak</string>
     <string name="dummy_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
@@ -25,6 +27,8 @@
     <string name="event_dummy_organisation">Organizator</string>
 
     <string name="survey_search_hint">Potraži anketu…</string>
+    <string name="survey_tab_title_new">NOVE ANKETE</string>
+    <string name="survey_tab_title_results">REZULTATI ANKETA</string>
     <string name="survey_dummy_title">SZ želi znati!</string>
     <string name="survey_complete">Riješi</string>
     <string name="survey_see_results">Prikaži rezultate</string>

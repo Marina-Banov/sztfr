@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="hr.sztfr.sztfr_android.ui.survey.SurveyDetailsViewModel" />
+            type="hr.sztfr.sztfr_android.ui.survey_details.SurveyDetailsViewModel" />
     </data>
 
     <RelativeLayout

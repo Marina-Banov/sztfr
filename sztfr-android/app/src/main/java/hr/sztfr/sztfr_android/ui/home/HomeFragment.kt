@@ -43,11 +43,21 @@ class HomeFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)
                 .get(HomeViewModel::class.java)
         binding.viewModel = viewModel
+
+        binding.searchFilter.viewModel.selectedTags.observe(viewLifecycleOwner, {
+            viewModel.updateEvents(it)
+        })
+
+        binding.searchFilter.viewModel.searchQuery.observe(viewLifecycleOwner, {
+            viewModel.updateEvents(it)
+        })
+
         binding.homeRecyclerView.adapter = HomeAdapter(
             { findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToEventDetailsFragment(it)) },
             { Log.i("HomeRecyclerView", "add favorite (" + it.id + ")") }
         )
+
         return binding.root
     }
 
