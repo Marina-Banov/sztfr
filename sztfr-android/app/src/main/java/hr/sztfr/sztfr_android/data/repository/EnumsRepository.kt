@@ -1,5 +1,6 @@
 package hr.sztfr.sztfr_android.data.repository
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.data.model.Enums
 import hr.sztfr.sztfr_android.data.model.Tags
@@ -11,6 +12,7 @@ import java.util.ArrayList
 class EnumsRepository {
 
     companion object {
+        private const val TAG = "EnumsRepository"
         private const val COLLECTION_NAME = "enums"
         const val TAGS = "tags"
 
@@ -29,7 +31,10 @@ class EnumsRepository {
                 .get()
                 .await()
                 .toObject(getClass(enumType))?.values
-        } catch (e: Exception) { ArrayList<Any>() }
+        } catch (e: Exception) {
+            Log.e(TAG, e.toString())
+            ArrayList<Any>()
+        }
     }
 
 }

@@ -16,8 +16,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyResultsDetailsBinding
-import hr.sztfr.sztfr_android.data.GlideApp
-import hr.sztfr.sztfr_android.data.repository.FirestoreUser
+import hr.sztfr.sztfr_android.util.GlideApp
+import hr.sztfr.sztfr_android.data.FirestoreUser
 import hr.sztfr.sztfr_android.util.handleClick
 
 
@@ -30,7 +30,7 @@ class SurveyResultsDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val application = requireActivity().application
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_survey_results_details, container, false)
@@ -41,7 +41,10 @@ class SurveyResultsDetailsFragment : Fragment() {
         val viewModelFactory = SurveyDetailsViewModelFactory(surveyModel, application)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(SurveyDetailsViewModel::class.java)
         binding.viewModel = viewModel
-        binding.user = FirestoreUser.value
+        binding.userFavorites = FirestoreUser.value!!.favorites
+        FirestoreUser.observe(viewLifecycleOwner, {
+            binding.userFavorites = it.favorites
+        })
 
 
         dialog = Dialog(this.requireContext())
@@ -71,7 +74,9 @@ class SurveyResultsDetailsFragment : Fragment() {
 
         binding.surveyResultsDetailsGoBackBtn.setOnClickListener { requireActivity().onBackPressed() }
 
-        binding.favoritesButton.setOnClickListener { handleClick(viewModel.surveyModel.value!!) }
+        binding.favoritesButton.setOnClickListener {
+            handleClick(viewModel.surveyModel.value!!.documentId)
+        }
 
         return binding.root
     }

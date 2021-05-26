@@ -8,8 +8,8 @@
             name="survey"
             type="hr.sztfr.sztfr_android.data.model.SurveyModel" />
         <variable
-            name="user"
-            type="hr.sztfr.sztfr_android.data.model.User" />
+            name="userFavorites"
+            type="java.util.List&lt;String&gt;" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -32,10 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="@dimen/spacing_normal"
-                android:layout_marginTop="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_normal"
-                android:layout_marginBottom="@dimen/spacing_normal"
+                android:layout_margin="@dimen/spacing_small"
                 android:layout_toStartOf="@id/survey_image"
                 app:text="@{survey.title}"
                 tools:text="@string/survey_dummy_title" />
@@ -60,7 +57,7 @@
                 app:backgroundTint="?attr/cardBackgroundColor"
                 tools:srcCompat="@drawable/favorite"
                 app:item="@{survey}"
-                app:user="@{user}"
+                app:userFavorites="@{userFavorites}"
                 app:tint="?attr/chipStrokeColor" />
 
             <ImageView

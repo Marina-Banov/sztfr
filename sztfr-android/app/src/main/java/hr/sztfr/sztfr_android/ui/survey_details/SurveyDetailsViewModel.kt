@@ -9,7 +9,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.storage.StorageReference
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import hr.sztfr.sztfr_android.data.FirestoreRepository
-import hr.sztfr.sztfr_android.data.GlideApp
+import hr.sztfr.sztfr_android.util.GlideApp
 
 class SurveyDetailsViewModel(s: SurveyModel, app: Application) : AndroidViewModel(app) {
     var firestoreRepository = FirestoreRepository()

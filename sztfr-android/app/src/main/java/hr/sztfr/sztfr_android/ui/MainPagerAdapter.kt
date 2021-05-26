@@ -8,7 +8,7 @@ import hr.sztfr.sztfr_android.ui.home.HomeFragment
 import hr.sztfr.sztfr_android.ui.info.InfoFragment
 import hr.sztfr.sztfr_android.ui.survey.SurveyFragment
 
-class PagerAdapter(fragmentManager: FragmentManager)
+class MainPagerAdapter(fragmentManager: FragmentManager)
     : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getCount(): Int = 4

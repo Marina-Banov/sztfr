@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import hr.sztfr.sztfr_android.R
-import hr.sztfr.sztfr_android.data.repository.FirestoreUser
+import hr.sztfr.sztfr_android.data.FirestoreUser
 import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.ui.login.LoginActivity
 import kotlinx.coroutines.CoroutineScope

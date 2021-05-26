@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.data.FirestoreUser
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyListBinding
 import hr.sztfr.sztfr_android.ui.MainFragmentDirections
 import hr.sztfr.sztfr_android.ui.survey.SurveyFragment
@@ -42,6 +43,10 @@ class SurveyListFragment(private val isPublished: Boolean): Fragment() {
                 )
             }
         }
+
+        FirestoreUser.observe(viewLifecycleOwner, {
+            binding.surveyRecyclerView.adapter!!.notifyDataSetChanged()
+        })
 
         return binding.root
     }

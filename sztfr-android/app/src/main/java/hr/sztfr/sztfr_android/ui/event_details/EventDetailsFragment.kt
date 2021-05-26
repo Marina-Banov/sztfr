@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.chip.Chip
 import hr.sztfr.sztfr_android.R
-import hr.sztfr.sztfr_android.data.repository.FirestoreUser
+import hr.sztfr.sztfr_android.data.FirestoreUser
 import hr.sztfr.sztfr_android.databinding.FragmentEventDetailsBinding
 import hr.sztfr.sztfr_android.util.handleClick
 
@@ -29,7 +29,10 @@ class EventDetailsFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)
                 .get(EventDetailsViewModel::class.java)
         binding.viewModel = viewModel
-        binding.user = FirestoreUser.value
+        binding.userFavorites = FirestoreUser.value!!.favorites
+        FirestoreUser.observe(viewLifecycleOwner, {
+            binding.userFavorites = it.favorites
+        })
 
         viewModel.event.observe(viewLifecycleOwner, {
             for (tag in (it!!).tags) {
@@ -40,7 +43,9 @@ class EventDetailsFragment : Fragment() {
             }
         })
 
-        binding.favoritesButton.setOnClickListener { handleClick(viewModel.event.value!!) }
+        binding.favoritesButton.setOnClickListener {
+            handleClick(viewModel.event.value!!.documentId)
+        }
         binding.goBackBtn.setOnClickListener { requireActivity().onBackPressed() }
         return binding.root
     }

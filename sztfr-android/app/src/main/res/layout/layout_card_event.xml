@@ -8,8 +8,8 @@
             name="event"
             type="hr.sztfr.sztfr_android.data.model.Event" />
         <variable
-            name="user"
-            type="hr.sztfr.sztfr_android.data.model.User" />
+            name="userFavorites"
+            type="java.util.List&lt;String&gt;" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -102,7 +102,7 @@
                     android:layout_marginEnd="@dimen/spacing_small"
                     tools:srcCompat="@drawable/favorite"
                     app:item="@{event}"
-                    app:user="@{user}"
+                    app:userFavorites="@{userFavorites}"
                     app:tint="?attr/chipStrokeColor"
                     app:backgroundTint="?attr/cardBackgroundColor" />
 

@@ -1,19 +1,21 @@
 package hr.sztfr.sztfr_android.data.repository
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
-enum class SurveyFilter(val value: Int) {
-    ALL(0),
-    PUBLISHED(1),
-    UNPUBLISHED(2),
-}
-
 class SurveysRepository {
+    enum class SurveyFilter(val value: Int) {
+        ALL(0),
+        PUBLISHED(1),
+        UNPUBLISHED(2),
+    }
+
     companion object {
+        private const val TAG = "SurveysRepository"
         private const val COLLECTION_NAME = "surveys"
         private const val PUBLISHED = "published"
     }
@@ -36,7 +38,10 @@ class SurveysRepository {
                 result.add(survey.toObject(SurveyModel::class.java))
             }
             result
-        } catch (e: Exception) { ArrayList() }
+        } catch (e: Exception) {
+            Log.e(TAG, e.toString())
+            ArrayList()
+        }
     }
 
     suspend fun get(id: String) = withContext(Dispatchers.IO) {
@@ -45,6 +50,9 @@ class SurveysRepository {
                 .get()
                 .await()
                 .toObject(SurveyModel::class.java)
-        } catch (e: Exception) { SurveyModel() }
+        } catch (e: Exception) {
+            Log.e(TAG, e.toString())
+            SurveyModel()
+        }
     }
 }

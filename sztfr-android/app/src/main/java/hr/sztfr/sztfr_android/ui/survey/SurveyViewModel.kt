@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import hr.sztfr.sztfr_android.data.model.SurveyModel
-import hr.sztfr.sztfr_android.data.repository.SurveyFilter
+import hr.sztfr.sztfr_android.data.repository.SurveysRepository.SurveyFilter
 import hr.sztfr.sztfr_android.data.repository.SurveysRepository
 import hr.sztfr.sztfr_android.util.filterByTags
 import hr.sztfr.sztfr_android.util.search

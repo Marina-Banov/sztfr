@@ -1,4 +1,4 @@
-package hr.sztfr.sztfr_android.data
+package hr.sztfr.sztfr_android.util
 
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Registry

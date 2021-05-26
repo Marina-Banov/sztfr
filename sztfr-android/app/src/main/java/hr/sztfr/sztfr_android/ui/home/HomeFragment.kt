@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.data.FirestoreUser
 import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.databinding.FragmentHomeBinding
 import hr.sztfr.sztfr_android.ui.MainFragmentDirections
@@ -57,6 +58,10 @@ class HomeFragment : Fragment() {
                 MainFragmentDirections.actionMainFragmentToEventDetailsFragment(it)
             )
         }
+
+        FirestoreUser.observe(viewLifecycleOwner, {
+            binding.homeRecyclerView.adapter!!.notifyDataSetChanged()
+        })
 
         return binding.root
     }

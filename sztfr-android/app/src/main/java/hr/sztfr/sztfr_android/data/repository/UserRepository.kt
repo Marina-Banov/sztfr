@@ -1,10 +1,10 @@
 package hr.sztfr.sztfr_android.data.repository
 
+import android.util.Log
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import hr.sztfr.sztfr_android.data.model.Filterable
-import hr.sztfr.sztfr_android.data.model.SurveyModel
+import hr.sztfr.sztfr_android.data.FirestoreUser
 import hr.sztfr.sztfr_android.data.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -13,41 +13,45 @@ import kotlinx.coroutines.withContext
 class UserRepository {
 
     companion object {
+        private const val TAG = "UserRepository"
         private const val COLLECTION_NAME = "users"
+        private const val FAVORITES = "favorites"
     }
 
     private val db = FirebaseFirestore.getInstance()
     private val userDocument = db.collection(COLLECTION_NAME)
                                  .document(Firebase.auth.currentUser!!.uid)
+    init {
+        userDocument.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.w(TAG, "Listen failed.", e)
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null && snapshot.exists()) {
+                FirestoreUser.value = snapshot.toObject(User::class.java)
+            } else {
+                Log.d(TAG, "Current data: null")
+            }
+        }
+    }
 
     suspend fun get() = withContext(Dispatchers.IO) {
         try {
-            val user = userDocument.get().await().toObject(User::class.java)
-            val favorites = userDocument.collection("favorites")
-                                        .get()
-                                        .await()
-            for (f in favorites) {
-                user!!.favorites.add(f.toObject(SurveyModel::class.java))
-            }
-            user
+            userDocument.get().await().toObject(User::class.java)
         } catch (e: Exception) {
+            Log.e(TAG, e.toString())
             User()
         }
     }
 
-    suspend fun addFavorite(item: Filterable) = withContext(Dispatchers.IO) {
+    suspend fun updateFavorites(favorites: List<String>) = withContext(Dispatchers.IO) {
         try {
-            val result = userDocument.collection("favorites")
-                                     .document(item.documentId)
-                                     .set(item)
-                                     .await()
+            val result = userDocument.update(FAVORITES, favorites).await()
             true
         } catch (e: Exception) {
+            Log.e(TAG, e.toString())
             false
         }
     }
-}
-
-object FirestoreUser {
-    var value: User? = null
 }

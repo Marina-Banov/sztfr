@@ -7,8 +7,8 @@
             name="viewModel"
             type="hr.sztfr.sztfr_android.ui.event_details.EventDetailsViewModel" />
         <variable
-            name="user"
-            type="hr.sztfr.sztfr_android.data.model.User" />
+            name="userFavorites"
+            type="java.util.List&lt;String&gt;" />
     </data>
 
     <RelativeLayout
@@ -58,7 +58,7 @@
                         app:cornerRadius="24dp"
                         tools:icon="@drawable/favorite"
                         app:item="@{viewModel.event}"
-                        app:user="@{user}"
+                        app:userFavorites="@{userFavorites}"
                         app:iconGravity="top"
                         app:iconTint="?attr/accentTextColor"
                         app:layout_constraintBottom_toBottomOf="@+id/details_img"

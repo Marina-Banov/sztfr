@@ -1,4 +1,4 @@
-package hr.sztfr.sztfr_android.ui
+package hr.sztfr.sztfr_android.util
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -8,18 +8,17 @@ import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.data.model.Filterable
 import hr.sztfr.sztfr_android.data.model.SurveyModel
-import hr.sztfr.sztfr_android.data.model.User
 import hr.sztfr.sztfr_android.ui.home.HomeAdapter
 import hr.sztfr.sztfr_android.ui.survey_list.SurveyListAdapter
 
-@JvmName("bindRecyclerView1")
+@JvmName("eventListData")
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Event>?) {
     val adapter = recyclerView.adapter as HomeAdapter
     adapter.submitList(data)
 }
 
-@JvmName("bindRecyclerView2")
+@JvmName("surveyListData")
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<SurveyModel>?) {
     val adapter = recyclerView.adapter as SurveyListAdapter
@@ -36,19 +35,20 @@ fun ImageView.setStatusIcon(item: SurveyModel?) {
     }
 }
 
-@BindingAdapter(value=["item", "user"])
-fun MaterialButton.setDynamicIcon(item: Filterable?, user: User?) {
-    this.setIconResource(getFavoritesDrawable(item, user))
+@BindingAdapter(value=["item", "userFavorites"])
+fun MaterialButton.setDynamicIcon(item: Filterable?, userFavorites: List<String>?) {
+    this.setIconResource(getFavoritesDrawable(item!!.documentId, userFavorites))
 }
 
-@BindingAdapter(value=["item", "user"])
-fun ImageView.setFavoriteIcon(item: Filterable?, user: User?) {
-    this.setImageResource(getFavoritesDrawable(item, user))
+@BindingAdapter(value=["item", "userFavorites"])
+fun ImageView.setDynamicIcon(item: Filterable?, userFavorites: List<String>?) {
+    this.setImageResource(getFavoritesDrawable(item!!.documentId, userFavorites))
 }
 
-fun getFavoritesDrawable(item: Filterable?, user: User?): Int {
-    return when {
-        user!!.favorites.contains(item) -> R.drawable.favorite_filled
-        else -> R.drawable.favorite
+fun getFavoritesDrawable(id: String, userFavorites: List<String>?): Int {
+    return if (userFavorites!!.contains(id)) {
+        R.drawable.favorite_filled
+    } else {
+        R.drawable.favorite
     }
 }
