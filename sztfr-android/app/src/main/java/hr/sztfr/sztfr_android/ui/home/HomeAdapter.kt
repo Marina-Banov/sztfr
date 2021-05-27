@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.data.model.Event
-import hr.sztfr.sztfr_android.data.FirestoreUser
+import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.LayoutCardEventBinding
 import hr.sztfr.sztfr_android.util.handleClick
 
@@ -15,9 +16,11 @@ class HomeAdapter(private val showDetailsListener: (event: Event) -> Unit) :
 
     class ViewHolder(private var binding: LayoutCardEventBinding):
             RecyclerView.ViewHolder(binding.root) {
+        private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
+
         fun bind(event: Event) {
             binding.event = event
-            binding.userFavorites = FirestoreUser.value!!.favorites
+            binding.userFavorites = userRepository.user.value!!.favorites
             binding.favoritesButton.setOnClickListener {
                 handleClick(event.documentId)
             }

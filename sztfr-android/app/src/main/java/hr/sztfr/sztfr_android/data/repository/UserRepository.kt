@@ -1,26 +1,27 @@
 package hr.sztfr.sztfr_android.data.repository
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import hr.sztfr.sztfr_android.data.FirestoreUser
 import hr.sztfr.sztfr_android.data.model.User
-import kotlinx.coroutines.Dispatchers
+import hr.sztfr.sztfr_android.util.SingletonHolder
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
-class UserRepository {
+class UserRepository private constructor(db: FirebaseFirestore) {
 
-    companion object {
-        private const val TAG = "UserRepository"
-        private const val COLLECTION_NAME = "users"
-        private const val FAVORITES = "favorites"
-    }
+    private val TAG = "UserRepository"
+    private val COLLECTION_NAME = "users"
+    private val FAVORITES = "favorites"
 
-    private val db = FirebaseFirestore.getInstance()
+    companion object : SingletonHolder<UserRepository, FirebaseFirestore>(::UserRepository)
+
     private val userDocument = db.collection(COLLECTION_NAME)
                                  .document(Firebase.auth.currentUser!!.uid)
+    val user = MutableLiveData<User>()
+
     init {
         userDocument.addSnapshotListener { snapshot, e ->
             if (e != null) {
@@ -29,7 +30,7 @@ class UserRepository {
             }
 
             if (snapshot != null && snapshot.exists()) {
-                FirestoreUser.value = snapshot.toObject(User::class.java)
+                user.value = snapshot.toObject(User::class.java)
             } else {
                 Log.d(TAG, "Current data: null")
             }

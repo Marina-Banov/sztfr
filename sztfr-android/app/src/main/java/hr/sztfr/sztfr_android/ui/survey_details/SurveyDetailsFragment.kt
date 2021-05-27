@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
-import hr.sztfr.sztfr_android.data.FirestoreUser
+import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyDetailsBinding
 import hr.sztfr.sztfr_android.util.handleClick
 
@@ -17,6 +18,7 @@ import hr.sztfr.sztfr_android.util.handleClick
 class SurveyDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentSurveyDetailsBinding
+    private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,8 +33,9 @@ class SurveyDetailsFragment : Fragment() {
         val viewModelFactory = SurveyDetailsViewModelFactory(surveyModel, application)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(SurveyDetailsViewModel::class.java)
         binding.viewModel = viewModel
-        binding.userFavorites = FirestoreUser.value!!.favorites
-        FirestoreUser.observe(viewLifecycleOwner, {
+
+        binding.userFavorites = userRepository.user.value!!.favorites
+        userRepository.user.observe(viewLifecycleOwner, {
             binding.userFavorites = it.favorites
         })
 

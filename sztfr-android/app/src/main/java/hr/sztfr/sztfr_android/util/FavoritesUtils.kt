@@ -1,19 +1,21 @@
 package hr.sztfr.sztfr_android.util
 
-import hr.sztfr.sztfr_android.data.FirestoreUser
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.data.repository.UserRepository
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 fun handleClick(id: String) {
-    if (FirestoreUser.value != null) {
-        val favorites = FirestoreUser.value!!.favorites as ArrayList<String>
+    val userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
+
+    if (userRepository.user.value != null) {
+        val favorites = userRepository.user.value!!.favorites
         favorites.apply {
             if (contains(id)) { remove(id) } else { add(id) }
         }
 
-        GlobalScope.launch {
-            UserRepository().updateFavorites(favorites)
+        val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+        coroutineScope.launch {
+            userRepository.updateFavorites(favorites)
         }
     }
 }

@@ -1,7 +1,6 @@
 package hr.sztfr.sztfr_android.ui.survey_list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,15 +8,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
-import hr.sztfr.sztfr_android.data.FirestoreUser
+import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyListBinding
 import hr.sztfr.sztfr_android.ui.MainFragmentDirections
 import hr.sztfr.sztfr_android.ui.survey.SurveyFragment
 import hr.sztfr.sztfr_android.util.filterByStatus
 
 class SurveyListFragment(private val isPublished: Boolean): Fragment() {
+
     private lateinit var binding: FragmentSurveyListBinding
+    private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -44,7 +46,7 @@ class SurveyListFragment(private val isPublished: Boolean): Fragment() {
             }
         }
 
-        FirestoreUser.observe(viewLifecycleOwner, {
+        userRepository.user.observe(viewLifecycleOwner, {
             binding.surveyRecyclerView.adapter!!.notifyDataSetChanged()
         })
 

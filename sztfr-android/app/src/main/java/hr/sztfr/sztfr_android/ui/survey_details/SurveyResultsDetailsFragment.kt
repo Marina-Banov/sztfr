@@ -14,15 +14,18 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyResultsDetailsBinding
 import hr.sztfr.sztfr_android.util.GlideApp
-import hr.sztfr.sztfr_android.data.FirestoreUser
+import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.util.handleClick
 
 
 class SurveyResultsDetailsFragment : Fragment() {
+
     private lateinit var binding: FragmentSurveyResultsDetailsBinding
+    private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
     private lateinit var galery : LinearLayout
     private lateinit var dialog: Dialog
 
@@ -41,8 +44,9 @@ class SurveyResultsDetailsFragment : Fragment() {
         val viewModelFactory = SurveyDetailsViewModelFactory(surveyModel, application)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(SurveyDetailsViewModel::class.java)
         binding.viewModel = viewModel
-        binding.userFavorites = FirestoreUser.value!!.favorites
-        FirestoreUser.observe(viewLifecycleOwner, {
+
+        binding.userFavorites = userRepository.user.value!!.favorites
+        userRepository.user.observe(viewLifecycleOwner, {
             binding.userFavorites = it.favorites
         })
 

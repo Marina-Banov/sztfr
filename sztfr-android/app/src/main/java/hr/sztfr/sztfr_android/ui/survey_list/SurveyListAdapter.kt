@@ -6,10 +6,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.data.FirestoreRepository
 import hr.sztfr.sztfr_android.util.GlideApp
 import hr.sztfr.sztfr_android.data.model.SurveyModel
-import hr.sztfr.sztfr_android.data.FirestoreUser
+import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.LayoutCardSurveyBinding
 import hr.sztfr.sztfr_android.util.handleClick
 
@@ -20,9 +21,11 @@ class SurveyListAdapter(private val fragment: Fragment,
     class ViewHolder(private val fragment: Fragment,
                      private var binding: LayoutCardSurveyBinding):
         RecyclerView.ViewHolder(binding.root) {
+        private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
+
         fun bind(survey: SurveyModel) {
             binding.survey = survey
-            binding.userFavorites = FirestoreUser.value!!.favorites
+            binding.userFavorites = userRepository.user.value!!.favorites
             binding.favoritesButton.setOnClickListener {
                 handleClick(survey.documentId)
             }

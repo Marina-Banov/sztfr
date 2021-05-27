@@ -8,8 +8,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.chip.Chip
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
-import hr.sztfr.sztfr_android.data.FirestoreUser
+import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.FragmentEventDetailsBinding
 import hr.sztfr.sztfr_android.util.handleClick
 
@@ -17,6 +18,7 @@ import hr.sztfr.sztfr_android.util.handleClick
 class EventDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentEventDetailsBinding
+    private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -29,8 +31,9 @@ class EventDetailsFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)
                 .get(EventDetailsViewModel::class.java)
         binding.viewModel = viewModel
-        binding.userFavorites = FirestoreUser.value!!.favorites
-        FirestoreUser.observe(viewLifecycleOwner, {
+
+        binding.userFavorites = userRepository.user.value!!.favorites
+        userRepository.user.observe(viewLifecycleOwner, {
             binding.userFavorites = it.favorites
         })
 

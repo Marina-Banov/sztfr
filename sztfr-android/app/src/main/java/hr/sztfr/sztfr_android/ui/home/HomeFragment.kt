@@ -1,7 +1,6 @@
 package hr.sztfr.sztfr_android.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
-import hr.sztfr.sztfr_android.data.FirestoreUser
 import hr.sztfr.sztfr_android.data.model.Event
+import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.FragmentHomeBinding
 import hr.sztfr.sztfr_android.ui.MainFragmentDirections
 
@@ -19,6 +19,7 @@ import hr.sztfr.sztfr_android.ui.MainFragmentDirections
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -59,7 +60,7 @@ class HomeFragment : Fragment() {
             )
         }
 
-        FirestoreUser.observe(viewLifecycleOwner, {
+        userRepository.user.observe(viewLifecycleOwner, {
             binding.homeRecyclerView.adapter!!.notifyDataSetChanged()
         })
 
