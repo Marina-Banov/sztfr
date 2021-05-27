@@ -8,13 +8,25 @@ import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
 import com.google.android.material.chip.Chip
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.data.repository.EnumsRepository
 import hr.sztfr.sztfr_android.databinding.LayoutSearchFilterBinding
+import java.util.ArrayList
 
 class SearchFilter(ctx: Context, attributeSet: AttributeSet? = null):
     LinearLayout(ctx, attributeSet) {
+
     private var binding: LayoutSearchFilterBinding
-    var viewModel: SearchFilterViewModel
+    private var enumsRepository = EnumsRepository.getInstance(FirebaseFirestore.getInstance())
+
+    private val _selectedTags = MutableLiveData<ArrayList<String>>()
+    val selectedTags: LiveData<ArrayList<String>>
+        get() = _selectedTags
+
+    private val _searchQuery = MutableLiveData<String>()
+    val searchQuery: LiveData<String>
+        get() = _searchQuery
 
     init {
         this.orientation = VERTICAL
@@ -23,26 +35,30 @@ class SearchFilter(ctx: Context, attributeSet: AttributeSet? = null):
         binding = DataBindingUtil.inflate(inflater, R.layout.layout_search_filter, this, true)
         binding.lifecycleOwner = ctx as LifecycleOwner
 
-        viewModel = ViewModelProvider(ctx as ViewModelStoreOwner).get(SearchFilterViewModel::class.java)
-        viewModel.tags.observe(ctx as LifecycleOwner, Observer {
-            for (tag in it) {
-                val chip = inflater.inflate(R.layout.layout_chip, binding.filter, false) as Chip
-                chip.text = tag
-                chip.setOnClickListener {
-                    viewModel.updateSelectedTags(tag, chip.isChecked)
+        _selectedTags.value = ArrayList()
+
+        for (tag in enumsRepository.tags.value!!) {
+            val chip = inflater.inflate(R.layout.layout_chip, binding.filter, false) as Chip
+            chip.text = tag
+            chip.setOnClickListener {
+                _selectedTags.value?.apply {
+                    if (chip.isChecked) { add(tag) } else { remove(tag) }
                 }
-                binding.filter.addView(chip)
+                // Live data is not updated simply by updating the ArrayList
+                // Must also update the reference
+                _selectedTags.value = _selectedTags.value
             }
-        })
+            binding.filter.addView(chip)
+        }
 
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(query: String?): Boolean {
-                viewModel.setSearchQuery(query!!)
+                _searchQuery.value = query!!
                 return false
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.setSearchQuery(query!!)
+                _searchQuery.value = query!!
                 binding.search.clearFocus()
                 return true
             }

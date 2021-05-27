@@ -5,11 +5,18 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.data.FirestoreRepository
 import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.data.model.Filterable
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import hr.sztfr.sztfr_android.ui.home.HomeAdapter
 import hr.sztfr.sztfr_android.ui.survey_list.SurveyListAdapter
+
+@BindingAdapter("imageUrl")
+fun loadImage(view: ImageView, url: String) {
+    val storageReference = FirestoreRepository().getImageReference(url)
+    GlideApp.with(view.context).load(storageReference).into(view)
+}
 
 @JvmName("eventListData")
 @BindingAdapter("listData")
@@ -26,23 +33,21 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<SurveyModel>?) {
 }
 
 @BindingAdapter("surveyStatusIcon")
-fun ImageView.setStatusIcon(item: SurveyModel?) {
-    item?.let {
-        setImageResource(when (item.published) {
-            true -> R.drawable.ic_check
-            false -> R.drawable.ic_help
-        })
-    }
+fun setStatusIcon(view: ImageView, item: SurveyModel?) {
+    view.setImageResource(when (item!!.published) {
+        true -> R.drawable.ic_check
+        false -> R.drawable.ic_help
+    })
 }
 
 @BindingAdapter(value=["item", "userFavorites"])
-fun MaterialButton.setDynamicIcon(item: Filterable?, userFavorites: List<String>?) {
-    this.setIconResource(getFavoritesDrawable(item!!.documentId, userFavorites))
+fun setDynamicIcon(view: MaterialButton, item: Filterable?, userFavorites: List<String>?) {
+    view.setIconResource(getFavoritesDrawable(item!!.documentId, userFavorites))
 }
 
 @BindingAdapter(value=["item", "userFavorites"])
-fun ImageView.setDynamicIcon(item: Filterable?, userFavorites: List<String>?) {
-    this.setImageResource(getFavoritesDrawable(item!!.documentId, userFavorites))
+fun setDynamicIcon(view: ImageView, item: Filterable?, userFavorites: List<String>?) {
+    view.setImageResource(getFavoritesDrawable(item!!.documentId, userFavorites))
 }
 
 fun getFavoritesDrawable(id: String, userFavorites: List<String>?): Int {

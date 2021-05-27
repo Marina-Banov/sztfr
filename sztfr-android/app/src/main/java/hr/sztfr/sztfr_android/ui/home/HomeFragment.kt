@@ -46,11 +46,11 @@ class HomeFragment : Fragment() {
                 .get(HomeViewModel::class.java)
         binding.viewModel = viewModel
 
-        binding.searchFilter.viewModel.selectedTags.observe(viewLifecycleOwner, {
+        binding.searchFilter.selectedTags.observe(viewLifecycleOwner, {
             viewModel.updateEvents(it)
         })
 
-        binding.searchFilter.viewModel.searchQuery.observe(viewLifecycleOwner, {
+        binding.searchFilter.searchQuery.observe(viewLifecycleOwner, {
             viewModel.updateEvents(it)
         })
 

@@ -24,11 +24,11 @@ class SurveyFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(SurveyViewModel::class.java)
 
-        binding.searchFilter.viewModel.selectedTags.observe(viewLifecycleOwner, {
+        binding.searchFilter.selectedTags.observe(viewLifecycleOwner, {
             viewModel.updateSurveys(it)
         })
 
-        binding.searchFilter.viewModel.searchQuery.observe(viewLifecycleOwner, {
+        binding.searchFilter.searchQuery.observe(viewLifecycleOwner, {
             viewModel.updateSurveys(it)
         })
 

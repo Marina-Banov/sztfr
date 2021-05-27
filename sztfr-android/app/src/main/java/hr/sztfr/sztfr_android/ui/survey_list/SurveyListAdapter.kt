@@ -2,24 +2,19 @@ package hr.sztfr.sztfr_android.ui.survey_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
-import hr.sztfr.sztfr_android.data.FirestoreRepository
-import hr.sztfr.sztfr_android.util.GlideApp
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.LayoutCardSurveyBinding
 import hr.sztfr.sztfr_android.util.handleClick
 
-class SurveyListAdapter(private val fragment: Fragment,
-                        private val showDetailsListener: (survey: SurveyModel) -> Unit) :
+class SurveyListAdapter(private val showDetailsListener: (survey: SurveyModel) -> Unit) :
     ListAdapter<SurveyModel, SurveyListAdapter.ViewHolder>(DiffCallback) {
 
-    class ViewHolder(private val fragment: Fragment,
-                     private var binding: LayoutCardSurveyBinding):
+    class ViewHolder(private var binding: LayoutCardSurveyBinding):
         RecyclerView.ViewHolder(binding.root) {
         private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
 
@@ -29,15 +24,13 @@ class SurveyListAdapter(private val fragment: Fragment,
             binding.favoritesButton.setOnClickListener {
                 handleClick(survey.documentId)
             }
-            val storageReference = FirestoreRepository().getImageReference(survey.image)
-            GlideApp.with(fragment).load(storageReference).into(binding.surveyImage)
             binding.executePendingBindings()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = LayoutCardSurveyBinding.inflate(LayoutInflater.from(parent.context))
-        return ViewHolder(fragment, binding)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {

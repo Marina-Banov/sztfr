@@ -25,14 +25,14 @@ class UserRepository private constructor(db: FirebaseFirestore) {
     init {
         userDocument.addSnapshotListener { snapshot, e ->
             if (e != null) {
-                Log.w(TAG, "Listen failed.", e)
+                Log.i(TAG, "Listen failed.", e)
                 return@addSnapshotListener
             }
 
             if (snapshot != null && snapshot.exists()) {
                 user.value = snapshot.toObject(User::class.java)
             } else {
-                Log.d(TAG, "Current data: null")
+                Log.i(TAG, "Current data: null")
             }
         }
     }
