@@ -45,9 +45,9 @@ class SurveyResultsDetailsFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory).get(SurveyDetailsViewModel::class.java)
         binding.viewModel = viewModel
 
-        binding.userFavorites = userRepository.user.value!!.favorites
+        viewModel.updateFavorites(userRepository.user.value!!.favorites)
         userRepository.user.observe(viewLifecycleOwner, {
-            binding.userFavorites = it.favorites
+            viewModel.updateFavorites(it.favorites)
         })
 
 

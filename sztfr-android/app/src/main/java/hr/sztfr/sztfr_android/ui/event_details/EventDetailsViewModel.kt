@@ -11,7 +11,15 @@ class EventDetailsViewModel(e: Event, app: Application) : AndroidViewModel(app) 
     val event: LiveData<Event>
         get() = _event
 
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean>
+        get() = _isFavorite
+
     init {
         _event.value = e
+    }
+
+    fun updateFavorites(favorites: ArrayList<String>) {
+        _isFavorite.value = favorites.contains(_event.value!!.documentId)
     }
 }

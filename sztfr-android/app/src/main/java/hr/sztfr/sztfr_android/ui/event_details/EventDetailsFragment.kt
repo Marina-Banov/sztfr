@@ -32,9 +32,9 @@ class EventDetailsFragment : Fragment() {
                 .get(EventDetailsViewModel::class.java)
         binding.viewModel = viewModel
 
-        binding.userFavorites = userRepository.user.value!!.favorites
+        viewModel.updateFavorites(userRepository.user.value!!.favorites)
         userRepository.user.observe(viewLifecycleOwner, {
-            binding.userFavorites = it.favorites
+            viewModel.updateFavorites(it.favorites)
         })
 
         viewModel.event.observe(viewLifecycleOwner, {
