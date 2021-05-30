@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.FragmentFavoritesBinding
 import hr.sztfr.sztfr_android.ui.MainFragmentDirections
 
@@ -16,6 +18,7 @@ import hr.sztfr.sztfr_android.ui.MainFragmentDirections
 class FavoritesFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoritesBinding
+    private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -24,6 +27,19 @@ class FavoritesFragment : Fragment() {
         binding.lifecycleOwner = this
         val viewModel = ViewModelProvider(this).get(FavoritesViewModel::class.java)
         binding.viewModel = viewModel
+
+        binding.searchFilter.selectedTags.observe(viewLifecycleOwner, {
+            viewModel.updateFavorites(it)
+        })
+
+        binding.searchFilter.searchQuery.observe(viewLifecycleOwner, {
+            viewModel.updateFavorites(it)
+        })
+
+        userRepository.user.observe(viewLifecycleOwner, {
+            viewModel.filterFavorites()
+            binding.favoritesRecyclerView.adapter!!.notifyDataSetChanged()
+        })
 
         binding.favoritesRecyclerView.adapter = FavoritesAdapter({
             findNavController().navigate(

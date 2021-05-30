@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
-import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.FragmentHomeBinding
 import hr.sztfr.sztfr_android.ui.MainFragmentDirections
@@ -27,23 +26,7 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.lifecycleOwner = this
 
-        val application = requireNotNull(activity).application
-        val list = ArrayList<Event>()
-        for (i in 1..5) {
-            list.add(Event(
-                i.toString(),
-                "dummy",
-                getString(R.string.event_dummy_title) + " " + i.toString(),
-                getString(R.string.event_dummy_time),
-                getString(R.string.event_dummy_location),
-                getString(R.string.event_dummy_organisation),
-                listOf(getString(R.string.tag)),
-                getString(R.string.dummy_description)
-            ))
-        }
-        val viewModelFactory = HomeViewModelFactory(list, application)
-        val viewModel = ViewModelProvider(this, viewModelFactory)
-                .get(HomeViewModel::class.java)
+        val viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         binding.viewModel = viewModel
 
         binding.searchFilter.selectedTags.observe(viewLifecycleOwner, {
