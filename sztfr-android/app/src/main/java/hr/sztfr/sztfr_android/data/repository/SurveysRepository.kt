@@ -2,6 +2,7 @@ package hr.sztfr.sztfr_android.data.repository
 
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
+import hr.sztfr.sztfr_android.data.model.Question
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -17,6 +18,7 @@ class SurveysRepository {
     companion object {
         private const val TAG = "SurveysRepository"
         private const val COLLECTION_NAME = "surveys"
+        private const val QUESTION_COLLECTION_NAME = "questions"
         private const val PUBLISHED = "published"
     }
 
@@ -53,6 +55,23 @@ class SurveysRepository {
         } catch (e: Exception) {
             Log.e(TAG, e.toString())
             SurveyModel()
+        }
+    }
+
+
+    suspend fun getQuestions(id: String) = withContext(Dispatchers.IO) {
+        try {
+            val querySnapshot = surveysCollection.document(id).collection(QUESTION_COLLECTION_NAME)
+                    .get()
+                    .await()
+            val result = ArrayList<Question>()
+            for(question in querySnapshot){
+                result.add(question.toObject(Question::class.java))
+            }
+            result
+        }catch (e: Exception){
+            Log.e(TAG, e.toString())
+            Question()
         }
     }
 }
