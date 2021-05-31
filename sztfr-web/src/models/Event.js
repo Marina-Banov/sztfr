@@ -1,3 +1,4 @@
+import { SZTFR } from "appConstants";
 import { combineDateTime, getISOTime } from "utils/dateUtils";
 
 export default class Event {
@@ -12,7 +13,7 @@ export default class Event {
     this.location = form.location.online
       ? form.location.valueOnline
       : form.location.valueOnsite;
-    this.image = form.image;
+    this.imagePath = SZTFR.STORAGE_EVENTS_PATH + form.image.name;
     this.organisation = form.organisation;
     this.tags = form.tags;
   }

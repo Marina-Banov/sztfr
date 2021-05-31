@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 import app from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
+import "firebase/storage";
 import request from "superagent";
 
 import { buildURL } from "utils/buildURL";
@@ -32,6 +33,7 @@ export default class Firebase {
         this.userToken = "";
       }
     });
+    this.storage = app.storage();
   }
 
   sendLoginLink = (email) => {
@@ -64,8 +66,12 @@ export default class Firebase {
     return !!this.auth.currentUser;
   };
 
+  uploadFile = (filepath, file) => {
+    return this.storage.ref().child(filepath).put(file);
+  };
+
   firestoreCreate = (path, body) => {
-    return request()
+    return request
       .post(buildURL(process.env.REACT_APP_API_PATH, path))
       .set("Authorization", "Bearer " + this.userToken)
       .send(body);

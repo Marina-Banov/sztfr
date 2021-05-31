@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { SurveyFormFields as FormFields } from "models";
 
-export default function NewSurvey({ form, handleInputChange, errors }) {
+export default function CmsSurveys({ form, handleInputChange, errors }) {
   const { t } = useTranslation();
 
   return (

@@ -19,13 +19,14 @@ import {
   EventForm,
   EventFormFields,
   EventFormValidation,
+  Survey,
   SurveyForm,
   SurveyFormFields,
   SurveyFormValidation,
 } from "models";
 import useForm from "utils/useForm";
-import NewSurvey from "./NewSurvey";
-import NewEvent from "./NewEvent";
+import CmsSurveys from "./CmsSurveys";
+import CmsEvents from "./CmsEvents";
 import TagsCard from "./TagsCard";
 
 import "./index.scss";
@@ -68,16 +69,28 @@ export default function CmsPage(props) {
   }
 
   function onSubmit() {
+    let body;
+    let path;
     switch (props.location.pathname) {
       case "/events/new":
-        console.log(new Event(data));
-        // firebase.firestoreCreate(SZTFR.FIRESTORE_EVENTS_PATH, new Event(data));
+        body = new Event(data);
+        path = SZTFR.FIRESTORE_EVENTS_PATH;
         break;
       case "/surveys/new":
-        console.log("survey", data);
+        body = new Survey(data);
+        path = SZTFR.FIRESTORE_SURVEYS_PATH;
         break;
       default:
     }
+    firebase
+      .firestoreCreate(path, body)
+      .then((res) => {
+        firebase
+          .uploadFile(body.imagePath, data.image)
+          .then((res) => console.log("upload ok"))
+          .catch((err) => console.error(err));
+      })
+      .catch((err) => console.error(err));
   }
 
   return (
@@ -87,14 +100,14 @@ export default function CmsPage(props) {
           <BrowserRouter>
             <Switch>
               <Route path="/surveys/new">
-                <NewSurvey
+                <CmsSurveys
                   form={data}
                   handleInputChange={handleInputChange}
                   errors={errors.fields}
                 />
               </Route>
               <Route path="/events/new">
-                <NewEvent
+                <CmsEvents
                   form={data}
                   handleInputChange={handleInputChange}
                   setFormField={setFormField}

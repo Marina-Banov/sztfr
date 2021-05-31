@@ -26,7 +26,7 @@ export default function TagsCard({ errors, setFormField, FormFields, form }) {
       .firestoreRead(SZTFR.FIRESTORE_TAGS_PATH)
       .then((res) => {
         setLoading(false);
-        setTags(res.body.tags);
+        setTags(res.body.values);
       })
       .catch((err) => {
         setLoading(false);
@@ -58,7 +58,7 @@ export default function TagsCard({ errors, setFormField, FormFields, form }) {
     const t = [...tags];
     t.push(tagInput);
     firebase
-      .firestoreUpdate(SZTFR.FIRESTORE_TAGS_PATH, { tags: t })
+      .firestoreUpdate(SZTFR.FIRESTORE_TAGS_PATH, { values: t })
       .then((res) => {
         setTagInput("");
         getTags();

@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { EventFormFields as FormFields } from "models";
 import { DatePicker, TimePicker } from "components/common";
 
-export default function NewEvent({
+export default function CmsEvents({
   form,
   handleInputChange,
   setFormField,
