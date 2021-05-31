@@ -32,6 +32,7 @@ class UserRepository private constructor(db: FirebaseFirestore) {
             if (snapshot != null && snapshot.exists()) {
                 user.value = snapshot.toObject(User::class.java)
             } else {
+                user.value = User()
                 Log.i(TAG, "Current data: null")
             }
         }
@@ -39,7 +40,8 @@ class UserRepository private constructor(db: FirebaseFirestore) {
 
     suspend fun get() = withContext(Dispatchers.IO) {
         try {
-            userDocument.get().await().toObject(User::class.java)
+            val res = userDocument.get().await()
+            if (res.data == null) User() else res.toObject(User::class.java)
         } catch (e: Exception) {
             Log.e(TAG, e.toString())
             User()
