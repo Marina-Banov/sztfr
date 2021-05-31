@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route, Link, useLocation, Redirect } from "react-router-dom";
 
 import {
-  Chat,
   Header,
   Page,
   SidebarNav,
@@ -11,7 +10,6 @@ import {
   PageAlertProvider,
 } from "components/common";
 import { NotFound } from "components/pages";
-import avatar1 from "assets/images/avatar1.png";
 import usePrevious from "utils/usePrevious";
 import appRoutes from "appRoutes";
 import handleKeyAccessibility, {
@@ -25,7 +23,6 @@ export default function Home() {
   const prevLocation = usePrevious(location);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= MOBILE_SIZE);
-  const [showChat1, setShowChat1] = useState(true);
 
   function handleResize() {
     if (window.innerWidth <= MOBILE_SIZE) {
@@ -38,10 +35,6 @@ export default function Home() {
 
   function toggleSideCollapse() {
     setSidebarCollapsed(!sidebarCollapsed);
-  }
-
-  function closeChat() {
-    setShowChat1(false);
   }
 
   useEffect(() => {
@@ -113,17 +106,6 @@ export default function Home() {
               </span>
             </span>
           </footer>
-
-          <Chat.Container>
-            {showChat1 && (
-              <Chat.ChatBox
-                name="Messages"
-                status="online"
-                image={avatar1}
-                close={closeChat}
-              />
-            )}
-          </Chat.Container>
         </div>
       </PageAlertProvider>
     </PageLoaderProvider>

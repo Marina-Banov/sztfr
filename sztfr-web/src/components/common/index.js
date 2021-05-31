@@ -1,5 +1,4 @@
 import Avatar from "./Avatar";
-import Chat from "./Chat";
 import DatePicker from "./DatePicker";
 import Header from "./Header";
 import Loader from "../../vibe/components/Loader";
@@ -16,7 +15,6 @@ import TimePicker from "./TimePicker";
 
 export {
   Avatar,
-  Chat,
   DatePicker,
   Header,
   Main,
