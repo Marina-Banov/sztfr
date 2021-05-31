@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyResultsDetailsBinding
