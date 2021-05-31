@@ -32,13 +32,11 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         binding.lifecycleOwner = this
 
-        binding.fragmentContainer.adapter = PagerAdapter(childFragmentManager)
+        binding.fragmentContainer.adapter = MainPagerAdapter(childFragmentManager)
         binding.fragmentContainer.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-            override fun onPageSelected(position: Int) {
-                addToStack(position)
-            }
+            override fun onPageSelected(position: Int) { addToStack(position) }
         })
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,

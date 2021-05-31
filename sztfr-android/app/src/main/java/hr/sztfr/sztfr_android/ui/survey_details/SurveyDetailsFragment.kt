@@ -8,18 +8,22 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyDetailsBinding
+import hr.sztfr.sztfr_android.util.handleClick
 
 
 class SurveyDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentSurveyDetailsBinding
+    private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val application = requireActivity().application
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_survey_details, container, false)
@@ -30,6 +34,11 @@ class SurveyDetailsFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory).get(SurveyDetailsViewModel::class.java)
         binding.viewModel = viewModel
 
+        viewModel.updateFavorites(userRepository.user.value!!.favorites)
+        userRepository.user.observe(viewLifecycleOwner, {
+            viewModel.updateFavorites(it.favorites)
+        })
+
         binding.surveyDetailsGoBackBtn.setOnClickListener { requireActivity().onBackPressed() }
 
         binding.filloutSurveyButton.setOnClickListener {
@@ -37,9 +46,9 @@ class SurveyDetailsFragment : Fragment() {
             actionSurveyDetailsFragmentToSurveyWebViewFragment(viewModel.surveyModel.value!!.googleFormsURL))
         }
 
-
-
-
+        binding.favoritesButton.setOnClickListener {
+            handleClick(viewModel.surveyModel.value!!.documentId)
+        }
 
         return binding.root
     }

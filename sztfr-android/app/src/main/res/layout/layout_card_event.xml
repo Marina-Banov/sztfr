@@ -7,6 +7,9 @@
         <variable
             name="event"
             type="hr.sztfr.sztfr_android.data.model.Event" />
+        <variable
+            name="isFavorite"
+            type="Boolean" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -90,14 +93,15 @@
                     app:backgroundTint="?attr/cardBackgroundColor" />
 
                 <ImageButton
-                    android:id="@+id/add_favorite_button"
+                    android:id="@+id/favorites_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:padding="@dimen/spacing_small"
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:layout_marginEnd="@dimen/spacing_small"
-                    app:srcCompat="@drawable/favorite"
+                    tools:srcCompat="@drawable/favorite"
+                    app:favoriteIcon="@{isFavorite}"
                     app:tint="?attr/chipStrokeColor"
                     app:backgroundTint="?attr/cardBackgroundColor" />
 

@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class SurveyModel (
     @DocumentId
-    val documentId: String = "",
+    override var documentId: String = "",
     override var title: String = "",
     var image: String = "",
     override var tags: List<String> = listOf(),

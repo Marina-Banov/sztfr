@@ -1,42 +1,35 @@
 package hr.sztfr.sztfr_android.ui.survey_details
 
 import android.app.Application
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.storage.StorageReference
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import hr.sztfr.sztfr_android.data.FirestoreRepository
-import hr.sztfr.sztfr_android.data.GlideApp
 
 class SurveyDetailsViewModel(s: SurveyModel, app: Application) : AndroidViewModel(app) {
-    var firestoreRepository = FirestoreRepository()
+    private var firestoreRepository = FirestoreRepository()
 
-    companion object {
-        var firestoreRepository = FirestoreRepository()
-        @JvmStatic
-        @BindingAdapter("imageUrl")
-        fun loadImage(view: ShapeableImageView, url: String) {
-            var storageReference = firestoreRepository.getImageReference(url)
-            GlideApp.with(view.context).load(storageReference).into(view)
-        }
-    }
-    private val _studyModel = MutableLiveData<SurveyModel>()
+    private val _surveyModel = MutableLiveData<SurveyModel>()
     val surveyModel: LiveData<SurveyModel>
-        get() = _studyModel
+        get() = _surveyModel
 
     private val _resultImages = MutableLiveData<List<StorageReference>>()
     val resultsImages : LiveData<List<StorageReference>>
         get() = _resultImages
 
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean>
+        get() = _isFavorite
 
     init {
-        _studyModel.value = s
+        _surveyModel.value = s
         _resultImages.value = firestoreRepository.getImageReferences(s.resultImages)
     }
 
-
+    fun updateFavorites(favorites: ArrayList<String>) {
+        _isFavorite.value = favorites.contains(_surveyModel.value!!.documentId)
+    }
 
 }

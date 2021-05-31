@@ -5,24 +5,58 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.data.repository.UserRepository
+import hr.sztfr.sztfr_android.databinding.FragmentFavoritesBinding
+import hr.sztfr.sztfr_android.ui.MainFragmentDirections
 
 
 class FavoritesFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false)
-    }
+    private lateinit var binding: FragmentFavoritesBinding
+    private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
 
-    companion object {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorites, container, false)
+        binding.lifecycleOwner = this
+        val viewModel = ViewModelProvider(this).get(FavoritesViewModel::class.java)
+        binding.viewModel = viewModel
 
-        fun newInstance() =
-            FavoritesFragment().apply {
-                arguments = Bundle().apply {}
+        binding.searchFilter.selectedTags.observe(viewLifecycleOwner, {
+            viewModel.updateFavorites(it)
+        })
+
+        binding.searchFilter.searchQuery.observe(viewLifecycleOwner, {
+            viewModel.updateFavorites(it)
+        })
+
+        userRepository.user.observe(viewLifecycleOwner, {
+            viewModel.filterFavorites()
+            binding.favoritesRecyclerView.adapter!!.notifyDataSetChanged()
+        })
+
+        binding.favoritesRecyclerView.adapter = FavoritesAdapter({
+            findNavController().navigate(
+                MainFragmentDirections.actionMainFragmentToEventDetailsFragment(it)
+            )
+        }, {
+            if (it.published) {
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToSurveyResultsDetailsFragment(it)
+                )
+            } else {
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToSurveyDetailsFragment(it)
+                )
             }
+        })
+
+        return binding.root
     }
 }

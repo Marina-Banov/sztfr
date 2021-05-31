@@ -1,15 +1,23 @@
 package hr.sztfr.sztfr_android.ui.home
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import hr.sztfr.sztfr_android.data.model.Event
+import hr.sztfr.sztfr_android.data.repository.EventsRepository
 import hr.sztfr.sztfr_android.util.filterByTags
 import hr.sztfr.sztfr_android.util.search
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.util.ArrayList
 
-class HomeViewModel(list: ArrayList<Event>, app: Application) : AndroidViewModel(app) {
+class HomeViewModel : ViewModel() {
+
+    private val eventsRepository = EventsRepository()
+    private val viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val _events = MutableLiveData<ArrayList<Event>>()
     private val _displayEvents = MutableLiveData<ArrayList<Event>>()
@@ -17,15 +25,22 @@ class HomeViewModel(list: ArrayList<Event>, app: Application) : AndroidViewModel
         get() = _displayEvents
 
     init {
-        _events.value = list
-        _displayEvents.value = list
+        coroutineScope.launch {
+            val list = eventsRepository.get()
+            _events.value = list
+            _displayEvents.value = list
+        }
     }
 
     fun updateEvents(tags: ArrayList<String>) {
-        _displayEvents.value = filterByTags(_events.value!!, tags)
+        _events.value?.let {
+            _displayEvents.value = filterByTags(it, tags)
+        }
     }
 
     fun updateEvents(query: String) {
-        _displayEvents.value = search(_events.value!!, query)
+        _events.value?.let {
+            _displayEvents.value = search(it, query)
+        }
     }
 }

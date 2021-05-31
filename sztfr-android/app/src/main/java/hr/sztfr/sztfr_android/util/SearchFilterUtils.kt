@@ -5,8 +5,8 @@ import hr.sztfr.sztfr_android.data.model.SurveyModel
 import java.util.ArrayList
 
 fun <T: Filterable> filterByTags(originalList: ArrayList<T>,
-                                 tags: ArrayList<String>): ArrayList<T> {
-    if (tags.size == 0) {
+                                 tags: ArrayList<String>?): ArrayList<T> {
+    if (tags == null || tags.size == 0) {
         return originalList
     }
 
@@ -23,8 +23,8 @@ fun <T: Filterable> filterByTags(originalList: ArrayList<T>,
 }
 
 fun <T: Filterable> search(originalList: ArrayList<T>,
-                           query: String): ArrayList<T> {
-    if (query.isEmpty()) {
+                           query: String?): ArrayList<T> {
+    if (query == null || query.isEmpty()) {
         return originalList
     }
 

@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/screensBackgroundColor"
-    tools:context=".ui.favorites.FavoritesFragment"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <hr.sztfr.sztfr_android.ui.search_filter.SearchFilter
-        android:id="@+id/search_filter"
+    <data>
+        <variable
+            name="viewModel"
+            type="hr.sztfr.sztfr_android.ui.favorites.FavoritesViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:background="?attr/screensBackgroundColor"
+        tools:context=".ui.favorites.FavoritesFragment"
+        android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_favorites_fragment" />
+        <hr.sztfr.sztfr_android.ui.search_filter.SearchFilter
+            android:id="@+id/search_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favorites_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="@dimen/spacing_small"
+            app:layoutManager="LinearLayoutManager"
+            app:listData="@{viewModel.displayItems}"
+            tools:listitem="@layout/layout_card_event"/>
+
+    </LinearLayout>
+</layout>

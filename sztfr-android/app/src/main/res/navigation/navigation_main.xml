@@ -57,7 +57,8 @@
     <fragment
         android:id="@+id/surveyResultsDetailsFragment"
         android:name="hr.sztfr.sztfr_android.ui.survey_details.SurveyResultsDetailsFragment"
-        android:label="SurveyResultsDetailsFragment" >
+        android:label="SurveyResultsDetailsFragment"
+        tools:layout="@layout/fragment_survey_results_details">
         <argument
             android:name="surveyModel"
             app:argType="hr.sztfr.sztfr_android.data.model.SurveyModel" />
@@ -65,7 +66,8 @@
     <fragment
         android:id="@+id/surveyWebViewFragment"
         android:name="hr.sztfr.sztfr_android.ui.survey_details.SurveyWebViewFragment"
-        android:label="SurveyWebViewFragment" >
+        android:label="SurveyWebViewFragment"
+        tools:layout="@layout/fragment_survey_web_view">
 
         <argument
             android:name="surveyUrl"

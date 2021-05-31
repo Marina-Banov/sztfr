@@ -8,13 +8,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.chip.Chip
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
+import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.FragmentEventDetailsBinding
+import hr.sztfr.sztfr_android.util.handleClick
 
 
 class EventDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentEventDetailsBinding
+    private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -28,6 +32,11 @@ class EventDetailsFragment : Fragment() {
                 .get(EventDetailsViewModel::class.java)
         binding.viewModel = viewModel
 
+        viewModel.updateFavorites(userRepository.user.value!!.favorites)
+        userRepository.user.observe(viewLifecycleOwner, {
+            viewModel.updateFavorites(it.favorites)
+        })
+
         viewModel.event.observe(viewLifecycleOwner, {
             for (tag in (it!!).tags) {
                 val chip = layoutInflater.inflate(R.layout.layout_chip, binding.tagGroup, false) as Chip
@@ -37,6 +46,9 @@ class EventDetailsFragment : Fragment() {
             }
         })
 
+        binding.favoritesButton.setOnClickListener {
+            handleClick(viewModel.event.value!!.documentId)
+        }
         binding.goBackBtn.setOnClickListener { requireActivity().onBackPressed() }
         return binding.root
     }

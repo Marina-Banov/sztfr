@@ -50,11 +50,13 @@
 
                     <com.google.android.material.button.MaterialButton
                         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                        android:id="@+id/favorites_button"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginEnd="@dimen/spacing_normal"
                         app:cornerRadius="24dp"
-                        app:icon="@drawable/favorite"
+                        tools:icon="@drawable/favorite"
+                        app:favoriteIcon="@{viewModel.isFavorite}"
                         app:iconGravity="top"
                         app:iconTint="?attr/accentTextColor"
                         app:layout_constraintBottom_toBottomOf="@+id/survey_results_details_img"

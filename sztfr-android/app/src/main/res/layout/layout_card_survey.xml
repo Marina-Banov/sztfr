@@ -7,6 +7,9 @@
         <variable
             name="survey"
             type="hr.sztfr.sztfr_android.data.model.SurveyModel" />
+        <variable
+            name="isFavorite"
+            type="Boolean" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -29,10 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="@dimen/spacing_normal"
-                android:layout_marginTop="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_normal"
-                android:layout_marginBottom="@dimen/spacing_normal"
+                android:layout_margin="@dimen/spacing_small"
                 android:layout_toStartOf="@id/survey_image"
                 app:text="@{survey.title}"
                 tools:text="@string/survey_dummy_title" />
@@ -47,7 +47,7 @@
                 tools:src="@drawable/ic_check" />
 
             <ImageButton
-                android:id="@+id/add_favorite_button"
+                android:id="@+id/favorites_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -55,7 +55,8 @@
                 android:padding="@dimen/spacing_small"
                 android:layout_margin="@dimen/spacing_small"
                 app:backgroundTint="?attr/cardBackgroundColor"
-                app:srcCompat="@drawable/favorite"
+                tools:srcCompat="@drawable/favorite"
+                app:favoriteIcon="@{isFavorite}"
                 app:tint="?attr/chipStrokeColor" />
 
             <ImageView
@@ -64,6 +65,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:scaleType="centerCrop"
+                app:imageUrl="@{survey.image}"
                 tools:src="@drawable/dummy"
                 android:contentDescription="TODO" />
         </RelativeLayout>
