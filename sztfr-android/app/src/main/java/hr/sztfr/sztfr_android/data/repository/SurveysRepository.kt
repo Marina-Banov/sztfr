@@ -71,7 +71,7 @@ class SurveysRepository {
             result
         }catch (e: Exception){
             Log.e(TAG, e.toString())
-            Question()
+            ArrayList()
         }
     }
 }
