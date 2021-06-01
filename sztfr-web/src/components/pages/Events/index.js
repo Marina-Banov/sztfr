@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { LinearProgress } from "@material-ui/core";
-import { useFirebase } from "appFirebase";
 import { useTranslation } from "react-i18next";
 import { Button, Card, CardBody, Table } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import { SZTFR } from "appConstants";
+import { useFirebase } from "appFirebase";
 import { EventForm } from "models";
 
 export default function Events() {
@@ -14,8 +14,7 @@ export default function Events() {
   const [loading, setLoading] = useState();
   const [events, setEvents] = useState([]);
 
-  useEffect(() => {
-    setLoading(true);
+  const getEvents = useCallback(() => {
     firebase
       .firestoreRead(SZTFR.FIRESTORE_EVENTS_PATH)
       .then((res) => {
@@ -27,6 +26,29 @@ export default function Events() {
         setLoading(false);
       });
   }, [firebase]);
+
+  useEffect(() => {
+    setLoading(true);
+    getEvents();
+  }, [getEvents]);
+
+  function displayDate(e) {
+    return new Date(e.startTime._seconds * 1000).toLocaleString("hr", {
+      dateStyle: "long",
+      timeStyle: "short",
+    });
+  }
+
+  function deleteEvent(id) {
+    setLoading(true);
+    firebase
+      .firestoreDelete(SZTFR.FIRESTORE_EVENTS_PATH, id)
+      .then(() => getEvents())
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }
 
   return (
     <Card>
@@ -47,12 +69,13 @@ export default function Events() {
             <tr>
               <th>{t("title")}</th>
               <th>{t("events.start_time")}</th>
+              <th />
             </tr>
           </thead>
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={2} className="no-padding">
+                <td colSpan={3} className="no-padding">
                   <LinearProgress />
                 </td>
               </tr>
@@ -60,12 +83,22 @@ export default function Events() {
               events.map((e) => (
                 <tr key={e.id}>
                   <td>{e.title}</td>
-                  <td>{e.startTime}</td>
+                  <td>{displayDate(e)}</td>
+                  <td>
+                    <Button className="mr-2 mb-1 py-1">{t("edit")}</Button>
+                    <Button
+                      color="danger"
+                      className="py-1"
+                      onClick={() => deleteEvent(e.id)}
+                    >
+                      {t("delete")}
+                    </Button>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan={2} align="center">
+                <td colSpan={3} align="center">
                   {t("events.no_events")}
                 </td>
               </tr>

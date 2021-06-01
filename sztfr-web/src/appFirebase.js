@@ -2,7 +2,7 @@ import { SZTFR } from "appConstants";
 import { createContext, useContext } from "react";
 import app from "firebase/app";
 import "firebase/auth";
-import "firebase/database";
+import "firebase/firestore";
 import "firebase/storage";
 import request from "superagent";
 
@@ -33,6 +33,7 @@ export default class Firebase {
         this.userToken = "";
       }
     });
+    this.firestore = app.firestore();
     this.storage = app.storage();
   }
 
@@ -70,11 +71,10 @@ export default class Firebase {
     return this.storage.ref().child(filepath).put(file);
   };
 
-  firestoreCreate = (path, body) => {
-    return request
-      .post(buildURL(process.env.REACT_APP_API_PATH, path))
-      .set("Authorization", "Bearer " + this.userToken)
-      .send(body);
+  firestoreCreate = (collectionName, payload) => {
+    return this.firestore
+      .collection(collectionName)
+      .add(Object.assign({}, payload));
   };
 
   firestoreRead = (path) => {
@@ -86,5 +86,9 @@ export default class Firebase {
       .put(buildURL(process.env.REACT_APP_API_PATH, path))
       .set("Authorization", "Bearer " + this.userToken)
       .send(body);
+  };
+
+  firestoreDelete = (collectionName, id) => {
+    return this.firestore.collection(collectionName).doc(id).delete();
   };
 }

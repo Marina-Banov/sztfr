@@ -1,10 +1,11 @@
+import React, { useCallback, useEffect, useState } from "react";
 import { LinearProgress } from "@material-ui/core";
-import { useFirebase } from "appFirebase";
-import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Card, CardBody, Table } from "reactstrap";
 import { Link } from "react-router-dom";
 
+import { SZTFR } from "appConstants";
+import { useFirebase } from "appFirebase";
 import { SurveyForm } from "models";
 
 export default function Surveys() {
@@ -13,10 +14,9 @@ export default function Surveys() {
   const [loading, setLoading] = useState();
   const [surveys, setSurveys] = useState([]);
 
-  useEffect(() => {
-    setLoading(true);
-    /*firebase
-      .getSurveys()
+  const getSurveys = useCallback(() => {
+    firebase
+      .firestoreRead(SZTFR.FIRESTORE_SURVEYS_PATH)
       .then((res) => {
         setSurveys(res.body);
         setLoading(false);
@@ -24,8 +24,24 @@ export default function Surveys() {
       .catch((err) => {
         console.error(err);
         setLoading(false);
-      });*/
+      });
   }, [firebase]);
+
+  useEffect(() => {
+    setLoading(true);
+    getSurveys();
+  }, [getSurveys]);
+
+  function deleteSurvey(id) {
+    setLoading(true);
+    firebase
+      .firestoreDelete(SZTFR.FIRESTORE_SURVEYS_PATH, id)
+      .then(() => getSurveys())
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }
 
   return (
     <Card>
@@ -47,6 +63,7 @@ export default function Surveys() {
               <th>{t("title")}</th>
               <th>{t("surveys.number_of_answers")}</th>
               <th>{t("surveys.published")}</th>
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -66,11 +83,21 @@ export default function Surveys() {
                       className={`fa ${s.published ? "fa-check" : "fa-times"}`}
                     />
                   </td>
+                  <td>
+                    <Button className="mr-2 mb-1 py-1">{t("edit")}</Button>
+                    <Button
+                      color="danger"
+                      className="py-1"
+                      onClick={() => deleteSurvey(s.id)}
+                    >
+                      {t("delete")}
+                    </Button>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan={3} align="center">
+                <td colSpan={4} align="center">
                   {t("surveys.no_surveys")}
                 </td>
               </tr>

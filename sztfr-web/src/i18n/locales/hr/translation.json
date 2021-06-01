@@ -45,5 +45,7 @@
   "validation": {
     "required": "Molimo ispunite obavezna polja"
   },
-  "add": "Dodaj"
+  "add": "Dodaj",
+  "edit": "Uredi",
+  "delete": "Obriši"
 }
