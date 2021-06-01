@@ -19,9 +19,10 @@ import java.util.ArrayList
 
 class FavoritesViewModel: ViewModel() {
 
-    private val eventsRepository = EventsRepository()
+    private val firestore = FirebaseFirestore.getInstance()
+    private val eventsRepository = EventsRepository.getInstance(firestore)
     private val surveysRepository = SurveysRepository()
-    private val userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
+    private val userRepository = UserRepository.getInstance(firestore)
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 

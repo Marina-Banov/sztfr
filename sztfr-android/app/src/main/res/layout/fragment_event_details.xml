@@ -40,7 +40,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="250dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/dummy"
+                        app:imageUrl="@{viewModel.event.image}"
                         tools:src="@drawable/dummy"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -76,7 +76,7 @@
                     android:id="@+id/details_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.event.startTime}"
+                    android:text="@{viewModel.event.startTime.toLocaleString()}"
                     tools:text="@string/event_dummy_time"
                     style="@style/TextAppearance.SZTFR.DetailsDetails" />
 

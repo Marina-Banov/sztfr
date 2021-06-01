@@ -22,6 +22,10 @@ class EnumsRepository private constructor(db: FirebaseFirestore) {
     private val enumsCollection = db.collection(COLLECTION_NAME)
     val tags = MutableLiveData<ArrayList<String>>()
 
+    init {
+        tags.value = ArrayList()
+    }
+
     private fun getClass(enumType: String): Class<out Enums> = when(enumType) {
         TAGS -> Tags::class.java
         else -> Enums::class.java

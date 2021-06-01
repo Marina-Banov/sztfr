@@ -29,7 +29,7 @@
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="175dp"
-                android:src="@drawable/dummy"
+                app:imageUrl="@{event.image}"
                 tools:src="@drawable/dummy"
                 android:id="@+id/home_img"
                 android:scaleType="centerCrop"/>
@@ -57,7 +57,7 @@
                     android:id="@+id/home_row_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{event.startTime}"
+                    android:text="@{event.startTime.toLocaleString()}"
                     tools:text="@string/event_dummy_time"
                     style="@style/TextAppearance.SZTFR.DetailsDescription"/>
 
