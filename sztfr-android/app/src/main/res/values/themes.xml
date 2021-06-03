@@ -8,6 +8,7 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <item name="cardBackgroundColor">@color/white</item>
+        <item name="questionCardBackgroundColor">@color/purple_very_light</item>
         <item name="accentTextColor">@color/black</item>
         <item name="chipStrokeColor">@color/purple_sztfr</item>
         <item name="chipBackgroundColorChecked">@color/purple_sztfr</item>

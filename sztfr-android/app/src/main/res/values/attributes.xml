@@ -9,4 +9,5 @@
     <attr name="cardButtonBackground" format="reference|color" />
     <attr name="chipBackgroundColorChecked" format="reference|color" />
     <attr name="chipTextColorChecked" format="reference|color" />
+    <attr name="questionCardBackgroundColor" format="reference|color" />
 </resources>
