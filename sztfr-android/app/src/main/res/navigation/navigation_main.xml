@@ -70,7 +70,22 @@
         android:name="hr.sztfr.sztfr_android.ui.survey_questions.SurveyQuestionsFragment"
         android:label="SurveyQuestionsFragment" >
         <argument
-            android:name="surveyId"
-            app:argType="string" />
+            android:name="questions"
+            app:argType="hr.sztfr.sztfr_android.data.model.Questions" />
+
+        <argument
+            android:name="surveyModel"
+            app:argType="hr.sztfr.sztfr_android.data.model.SurveyModel" />
+        <action
+            android:id="@+id/action_surveyQuestionsFragment_to_surveyAnswersSubmittedFragment"
+            app:destination="@id/surveyAnswersSubmittedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/surveyAnswersSubmittedFragment"
+        android:name="hr.sztfr.sztfr_android.ui.survey_questions.SurveyAnswersSubmittedFragment"
+        android:label="SurveyAnswersSubmittedFragment" >
+        <argument
+            android:name="surveyModel"
+            app:argType="hr.sztfr.sztfr_android.data.model.SurveyModel" />
     </fragment>
 </navigation>
