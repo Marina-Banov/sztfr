@@ -15,7 +15,7 @@ import hr.sztfr.sztfr_android.data.model.SurveyModel
 import hr.sztfr.sztfr_android.ui.favorites.FavoritesAdapter
 import hr.sztfr.sztfr_android.ui.home.HomeAdapter
 import hr.sztfr.sztfr_android.ui.survey_list.SurveyListAdapter
-import hr.sztfr.sztfr_android.ui.survey_questions.SurveyQuestionsAdapter
+
 
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, url: String) {
@@ -44,12 +44,6 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Filterable>?) {
     adapter.submitList(data)
 }
 
-@JvmName("surveyQuestionsListData")
-@BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Question>?){
-    val adapter = recyclerView.adapter as SurveyQuestionsAdapter
-    adapter.submitList(data)
-}
 
 @BindingAdapter("surveyStatusIcon")
 fun setStatusIcon(view: ImageView, item: SurveyModel?) {
