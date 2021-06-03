@@ -23,6 +23,7 @@ class SurveyAnswersSubmittedFragment : Fragment() {
         var surveyTitle = binding.surveyTitle
         surveyTitle.text = surveyTitle.text.toString() + " " + surveyModel.title
 
+        //treba smislit neki drugi način za ovo
         binding.goBackButton.setOnClickListener {
             val fmManager: FragmentManager = requireActivity().supportFragmentManager
             fmManager.popBackStack()
