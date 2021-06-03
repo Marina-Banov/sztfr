@@ -12,4 +12,8 @@ data class Question(
         val type: String = "",
         val question: String = "",
         val choices: List<String> = listOf()
-) : Parcelable
+) : Parcelable {
+        override fun toString(): String {
+                return order + ". " + question
+        }
+}
