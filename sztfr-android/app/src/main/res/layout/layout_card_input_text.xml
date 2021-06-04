@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Odgovor"
-                />
+                android:theme="@style/ThemeOverlay.SZTFR.FormControl" />
 
 
         </LinearLayout>

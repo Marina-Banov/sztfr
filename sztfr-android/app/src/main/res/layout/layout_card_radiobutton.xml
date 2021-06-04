@@ -38,7 +38,8 @@
             <RadioGroup
                 android:id="@+id/radio_group"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:theme="@style/ThemeOverlay.SZTFR.FormControl" />
 
 
         </LinearLayout>

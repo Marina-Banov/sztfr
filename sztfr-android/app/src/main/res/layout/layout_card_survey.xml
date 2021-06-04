@@ -57,7 +57,7 @@
                 app:backgroundTint="?attr/cardBackgroundColor"
                 tools:srcCompat="@drawable/favorite"
                 app:favoriteIcon="@{isFavorite}"
-                app:tint="?attr/chipStrokeColor" />
+                app:tint="?attr/colorPrimary" />
 
             <ImageView
                 android:id="@+id/survey_image"
