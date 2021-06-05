@@ -70,6 +70,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.event.title}"
                     tools:text="@string/event_dummy_title"
+                    android:layout_marginBottom="@dimen/spacing_small"
                     style="@style/TextAppearance.SZTFR.DetailsTitle" />
 
                 <TextView
@@ -78,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.event.startTime.toLocaleString()}"
                     tools:text="@string/event_dummy_time"
+                    android:layout_marginBottom="@dimen/spacing_extra_small"
                     style="@style/TextAppearance.SZTFR.DetailsDetails" />
 
                 <TextView
@@ -87,6 +89,14 @@
                     app:textLocation="@{viewModel.event}"
                     tools:text="@string/event_dummy_location"
                     style="@style/TextAppearance.SZTFR.DetailsDetails" />
+                <TextView
+                    android:id="@+id/details_location_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:textLocationDetails="@{viewModel.event}"
+                    tools:text="@string/event_dummy_location"
+                    android:layout_marginBottom="@dimen/spacing_extra_small"
+                    style="@style/TextAppearance.SZTFR.DetailsDetails" />
 
                 <TextView
                     android:id="@+id/details_organizer"
@@ -94,13 +104,15 @@
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.event.organisation}"
                     tools:text="@string/event_dummy_organisation"
+                    android:layout_marginBottom="@dimen/spacing_extra_small"
                     style="@style/TextAppearance.SZTFR.DetailsDetails" />
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/tag_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:singleLine="true" />
+                    app:singleLine="true"
+                    android:layout_marginBottom="@dimen/spacing_small" />
 
                 <TextView
                     android:id="@+id/details_main"

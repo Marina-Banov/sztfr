@@ -1,10 +1,9 @@
 package hr.sztfr.sztfr_android.data.model
 
 import android.os.Parcelable
+import com.google.android.libraries.places.api.model.Place
 import com.google.firebase.firestore.DocumentId
-import com.google.firebase.firestore.GeoPoint
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 import java.util.*
 
 @Parcelize
@@ -15,8 +14,8 @@ data class Event(
     override var title: String = "",
     var startTime: Date = Date(),
     var online: Boolean = false,
-    var url: String? = null,
-    var location: @RawValue GeoPoint? = null,
+    var location: String = "",
+    var googlePlace: Place? = null,
     var organisation: String = "",
     override var tags: List<String> = listOf(),
     var description: String = ""

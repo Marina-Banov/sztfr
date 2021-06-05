@@ -2,6 +2,7 @@ package hr.sztfr.sztfr_android.data.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.android.libraries.places.api.model.Place
 import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.util.SingletonHolder
@@ -28,7 +29,16 @@ class EventsRepository private constructor(db: FirebaseFirestore) {
             val querySnapshot = eventsCollection.get().await()
             val result = ArrayList<Event>()
             for (event in querySnapshot) {
-                result.add(event.toObject(Event::class.java))
+                val e = event.toObject(Event::class.java)
+                if (!e.online) {
+                    e.googlePlace = PlacesRepository.get(e.location, listOf(
+                        Place.Field.ID,
+                        Place.Field.NAME,
+                        Place.Field.ADDRESS,
+                        Place.Field.LAT_LNG,
+                    ))
+                }
+                result.add(e)
             }
             result
         } catch (e: Exception) {
