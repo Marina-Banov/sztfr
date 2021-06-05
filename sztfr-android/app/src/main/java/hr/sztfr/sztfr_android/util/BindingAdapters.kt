@@ -3,6 +3,7 @@ package hr.sztfr.sztfr_android.util
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
@@ -59,4 +60,9 @@ fun setDynamicIcon(view: View, isFavorite: Boolean) {
     } else if (view is MaterialButton) {
         view.setIconResource(icon)
     }
+}
+
+@BindingAdapter("textLocation")
+fun setLocationText(view: TextView, event: Event) {
+    view.text = if (event.online) view.context.getString(R.string.event_online) else ""
 }

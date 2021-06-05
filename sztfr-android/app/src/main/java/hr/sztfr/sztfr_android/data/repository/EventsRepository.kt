@@ -28,7 +28,6 @@ class EventsRepository private constructor(db: FirebaseFirestore) {
             val querySnapshot = eventsCollection.get().await()
             val result = ArrayList<Event>()
             for (event in querySnapshot) {
-                Log.i(TAG, event.toString())
                 result.add(event.toObject(Event::class.java))
             }
             result
