@@ -11,10 +11,11 @@ export default class Event {
     this.endTime = new Date(
       combineDateTime(form.endDate, getISOTime(form.endTime))
     );
+    this.online = form.location.online;
     this.location = form.location.online
       ? form.location.valueOnline
-      : form.location.valueOnsite;
-    this.imagePath = SZTFR.STORAGE_EVENTS_PATH + form.image.name;
+      : form.location.valueOnsite.place_id;
+    this.image = SZTFR.STORAGE_EVENTS_PATH + form.image.name;
     this.organisation = form.organisation;
     this.tags = form.tags;
   }
