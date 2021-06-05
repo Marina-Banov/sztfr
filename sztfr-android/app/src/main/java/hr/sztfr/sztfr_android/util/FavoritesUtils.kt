@@ -7,7 +7,7 @@ import kotlinx.coroutines.*
 fun handleClick(id: String) {
     val userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
 
-    if (userRepository.user.value != null) {
+    if (userRepository.user.value!!.uid != "") {
         val favorites = userRepository.user.value!!.favorites
         favorites.apply {
             if (contains(id)) { remove(id) } else { add(id) }
@@ -17,5 +17,7 @@ fun handleClick(id: String) {
         coroutineScope.launch {
             userRepository.updateFavorites(favorites)
         }
+    } else {
+        // TODO
     }
 }
