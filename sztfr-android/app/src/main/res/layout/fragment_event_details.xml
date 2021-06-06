@@ -95,8 +95,13 @@
                     android:layout_height="wrap_content"
                     app:textLocationDetails="@{viewModel.event}"
                     tools:text="@string/event_dummy_location"
-                    android:layout_marginBottom="@dimen/spacing_extra_small"
                     style="@style/TextAppearance.SZTFR.DetailsDetails" />
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/details_organizer"
@@ -104,6 +109,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.event.organisation}"
                     tools:text="@string/event_dummy_organisation"
+                    android:layout_marginTop="@dimen/spacing_extra_small"
                     android:layout_marginBottom="@dimen/spacing_extra_small"
                     style="@style/TextAppearance.SZTFR.DetailsDetails" />
 
