@@ -52,7 +52,7 @@ fun setStatusIcon(view: ImageView, item: SurveyModel?) {
 }
 
 @BindingAdapter("favoriteIcon")
-fun setDynamicIcon(view: View, isFavorite: Boolean) {
+fun setFavoriteIcon(view: View, isFavorite: Boolean) {
     val icon = if (isFavorite) { R.drawable.favorite_filled }
                else { R.drawable.favorite }
     if (view is ImageButton) {
@@ -67,11 +67,19 @@ fun setLocationText(view: TextView, event: Event) {
     view.text = if (event.online) {
         view.context.getString(R.string.event_online)
     } else {
-        "@ " + event.googlePlace!!.name
+        event.googlePlace!!.name
     }
 }
 
 @BindingAdapter("textLocationDetails")
 fun setLocationDetails(view: TextView, event: Event) {
     view.text = if (event.online) event.location else event.googlePlace!!.address
+}
+
+@BindingAdapter("locationIcon")
+fun setLocationIcon(view: ImageView, event: Event) {
+    view.setImageResource(when (event.online) {
+        true -> R.drawable.ic_globe
+        false -> R.drawable.ic_place
+    })
 }

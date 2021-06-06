@@ -33,27 +33,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
-                    android:paddingBottom="@dimen/spacing_normal">
+                    android:layout_marginBottom="@dimen/spacing_normal">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/details_img"
                         android:layout_width="fill_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="230dp"
                         android:scaleType="centerCrop"
                         app:imageUrl="@{viewModel.event.image}"
-                        tools:src="@drawable/dummy"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearance.SZTFR.RoundedCorners" />
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.SZTFR.RoundedCorners"
+                        tools:src="@drawable/dummy" />
 
                     <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
                         android:id="@+id/favorites_button"
+                        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginEnd="@dimen/spacing_normal"
                         app:cornerRadius="24dp"
-                        tools:icon="@drawable/favorite"
                         app:favoriteIcon="@{viewModel.isFavorite}"
                         app:iconGravity="top"
                         app:iconTint="?attr/accentTextColor"
@@ -61,57 +60,89 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/details_img" />
+                        app:layout_constraintTop_toBottomOf="@+id/details_img"
+                        tools:icon="@drawable/favorite" />
+
+                    <TextView
+                        android:id="@+id/details_title"
+                        style="@style/TextAppearance.SZTFR.DetailsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:text="@{viewModel.event.title}"
+                        app:layout_constraintEnd_toStartOf="@+id/favorites_button"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/details_img"
+                        app:layout_constraintTop_toBottomOf="@+id/details_img"
+                        tools:text="@string/event_dummy_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/details_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.event.title}"
-                    tools:text="@string/event_dummy_title"
-                    android:layout_marginBottom="@dimen/spacing_small"
-                    style="@style/TextAppearance.SZTFR.DetailsTitle" />
-
-                <TextView
                     android:id="@+id/details_time"
+                    style="@style/TextAppearance.SZTFR.DetailsDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_small"
                     android:text="@{viewModel.event.startTime.toLocaleString()}"
                     tools:text="@string/event_dummy_time"
-                    android:layout_marginBottom="@dimen/spacing_extra_small"
-                    style="@style/TextAppearance.SZTFR.DetailsDetails" />
+                    app:drawableStartCompat="@drawable/ic_calendar"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:gravity="center"/>
 
                 <TextView
-                    android:id="@+id/details_location"
+                    android:id="@+id/details_organizer"
+                    style="@style/TextAppearance.SZTFR.DetailsDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:textLocation="@{viewModel.event}"
-                    tools:text="@string/event_dummy_location"
-                    style="@style/TextAppearance.SZTFR.DetailsDetails" />
-                <TextView
-                    android:id="@+id/details_location_details"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:text="@{viewModel.event.organisation}"
+                    tools:text="@string/event_dummy_organisation"
+                    app:drawableStartCompat="@drawable/ic_university"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:gravity="center" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:textLocationDetails="@{viewModel.event}"
-                    tools:text="@string/event_dummy_location"
-                    style="@style/TextAppearance.SZTFR.DetailsDetails" />
+                    android:layout_marginBottom="@dimen/spacing_small">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_small"
+                        app:locationIcon="@{viewModel.event}"
+                        tools:srcCompat="@drawable/ic_place"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/details_location"
+                            style="@style/TextAppearance.SZTFR.DetailsDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:textLocation="@{viewModel.event}"
+                            tools:text="@string/event_dummy_location" />
+
+                        <TextView
+                            android:id="@+id/details_location_details"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:textLocationDetails="@{viewModel.event}"
+                            tools:text="@string/event_dummy_location"
+                            style="@style/TextAppearance.SZTFR.DetailsDetails" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <com.google.android.gms.maps.MapView
                     android:id="@+id/mapView"
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
+                    android:layout_marginBottom="@dimen/spacing_small"
                     android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/details_organizer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.event.organisation}"
-                    tools:text="@string/event_dummy_organisation"
-                    android:layout_marginTop="@dimen/spacing_extra_small"
-                    android:layout_marginBottom="@dimen/spacing_extra_small"
-                    style="@style/TextAppearance.SZTFR.DetailsDetails" />
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/tag_group"

@@ -28,7 +28,7 @@
 
             <TextView
                 android:id="@+id/survey_title"
-                style="@style/TextAppearance.SZTFR.DetailsTitle"
+                style="@style/TextAppearance.SZTFR.CardDetailsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"

@@ -52,6 +52,7 @@ class EventDetailsFragment : Fragment() {
             val chip = layoutInflater.inflate(R.layout.layout_chip, binding.tagGroup, false) as Chip
             chip.text = tag
             chip.isClickable = false
+            chip.textSize = 16f
             binding.tagGroup.addView(chip)
         }
 

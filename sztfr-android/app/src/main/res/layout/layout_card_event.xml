@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{event.title}"
                     tools:text="@string/event_dummy_title"
-                    style="@style/TextAppearance.SZTFR.DetailsTitle"/>
+                    style="@style/TextAppearance.SZTFR.CardDetailsTitle"/>
 
                 <TextView
                     android:id="@+id/home_row_time"
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{event.startTime.toLocaleString()}"
                     tools:text="@string/event_dummy_time"
-                    style="@style/TextAppearance.SZTFR.DetailsDescription"/>
+                    style="@style/TextAppearance.SZTFR.CardDetails"/>
 
                 <TextView
                     android:id="@+id/home_row_location"
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     app:textLocation="@{event}"
                     tools:text="@string/event_dummy_location"
-                    style="@style/TextAppearance.SZTFR.DetailsDescription"/>
+                    style="@style/TextAppearance.SZTFR.CardDetails"/>
             </LinearLayout>
 
             <LinearLayout
