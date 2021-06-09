@@ -1,42 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
+import { Button, Col, FormGroup, Input, Label, Row } from "reactstrap";
 import { Divider } from "@material-ui/core";
 
 import { SZTFR } from "appConstants";
 
-export default function NewQuestion({ questionNumber, deleteQuestion }) {
+export default function NewQuestion({
+  question,
+  order,
+  deleteQuestion,
+  updateQuestion,
+}) {
   const { t } = useTranslation();
-  const [state, setState] = useState({
-    question: "",
-    type: SZTFR.SURVEY_QUESTION_TYPE_TEXT,
-    order: questionNumber + 1,
-  });
 
   function setType(event) {
+    let newQ;
     if (event.target.value === SZTFR.SURVEY_QUESTION_TYPE_TEXT) {
-      setState({
-        question: state.question,
+      newQ = {
+        question: question.question,
         type: event.target.value,
-        order: state.order,
-      });
-    } else if (state.type === SZTFR.SURVEY_QUESTION_TYPE_TEXT) {
-      setState({ ...state, type: event.target.value, options: ["", ""] });
+      };
+    } else if (question.type === SZTFR.SURVEY_QUESTION_TYPE_TEXT) {
+      newQ = { ...question, type: event.target.value, options: ["", ""] };
     } else {
-      setState({ ...state, type: event.target.value });
+      newQ = { ...question, type: event.target.value };
     }
+    updateQuestion(order, newQ);
   }
 
   function addChoice() {
-    const options = [...state.options];
+    const options = [...question.options];
     options.push("");
-    setState({ ...state, options });
+    let newQ = { ...question, options };
+    updateQuestion(order, newQ);
   }
 
   function removeChoice(index) {
-    const options = [...state.options];
+    const options = [...question.options];
     options.splice(index, 1);
-    setState({ ...state, options });
+    let newQ = { ...question, options };
+    updateQuestion(order, newQ);
   }
   /*
   function validateQuestion(questionText) {
@@ -59,7 +62,8 @@ export default function NewQuestion({ questionNumber, deleteQuestion }) {
   }
 */
   function handleQuestionChange(event) {
-    setState({ ...state, question: event.target.value });
+    let newQ = { ...question, question: event.target.value };
+    updateQuestion(order, newQ);
     /*const value = event.target.value;
     setState({
       ...state,
@@ -90,9 +94,10 @@ export default function NewQuestion({ questionNumber, deleteQuestion }) {
   }
 
   function handleChoiceChange(event, index) {
-    const options = [...state.options];
+    const options = [...question.options];
     options[index] = event.target.value;
-    setState({ ...state, options });
+    let newQ = { ...question, options };
+    updateQuestion(order, newQ);
     /*const choices = state.choices.slice();
     const value = event.target.value;
 
@@ -121,39 +126,42 @@ export default function NewQuestion({ questionNumber, deleteQuestion }) {
   }
 
   return (
-    <Form>
+    <>
       <Divider className="mb-2" />
+
       <div className="flex_space_between mb-2">
         <p className="m-0 h5">
-          {t("surveys.question_number", { number: state.order })}
+          {t("surveys.question_number", { number: order + 1 })}
         </p>
-        <Button color="danger" onClick={() => deleteQuestion(questionNumber)}>
+        <Button color="danger" onClick={() => deleteQuestion(order)}>
           <i className="fa fa-trash" /> &nbsp; {t("surveys.delete_question")}
         </Button>
       </div>
+
       <Row>
         <Col md={8} className="py-1">
           <FormGroup>
-            <Label for={"title-" + questionNumber.toString()}>
+            <Label for={"title-" + order.toString()}>
               {t("surveys.question_title")}
             </Label>
             <Input
-              id={"title-" + questionNumber.toString()}
+              id={"title-" + order.toString()}
               type="text"
-              value={state.question}
+              value={question.question}
               onChange={handleQuestionChange}
             />
           </FormGroup>
         </Col>
+
         <Col md={4} className="py-1">
           <FormGroup>
-            <Label for={"select-" + questionNumber.toString()}>
+            <Label for={"select-" + order.toString()}>
               {t("surveys.question_type")}
             </Label>
             <Input
-              id={"select-" + questionNumber.toString()}
+              id={"select-" + order.toString()}
               type="select"
-              value={state.type}
+              value={question.type}
               onChange={setType}
             >
               <option value={SZTFR.SURVEY_QUESTION_TYPE_TEXT}>
@@ -169,58 +177,42 @@ export default function NewQuestion({ questionNumber, deleteQuestion }) {
           </FormGroup>
         </Col>
       </Row>
-      {state.options?.map((choice, index) => (
-        <SurveyChoice
+
+      {question.options?.map((choice, index) => (
+        <FormGroup
           key={index}
-          choice={choice}
-          choiceNumber={index}
-          removeChoice={removeChoice}
-          handleChoiceChange={handleChoiceChange}
-          type={state.type}
-        />
+          className={
+            (index > 1 ? "flex_center_center input-with-button " : "") +
+            (question.type === SZTFR.SURVEY_QUESTION_TYPE_MULTIPLE
+              ? "multiple"
+              : "single")
+          }
+        >
+          <Input
+            placeholder={t("surveys.choice_number", { number: index + 1 })}
+            value={choice}
+            className={index > 1 ? "mr-2 " : ""}
+            onChange={(event) => handleChoiceChange(event, index)}
+          />
+          {index > 1 && (
+            <Button color="danger" onClick={() => removeChoice(index)}>
+              <i className="fa fa-trash" />
+            </Button>
+          )}
+        </FormGroup>
       ))}
-      {state.options && (
+
+      {question.options && (
         <Button
           className="mb-3"
           color="success"
           onClick={addChoice}
-          disabled={state.options.length === SZTFR.MAX_CHOICES}
+          disabled={question.options.length === SZTFR.MAX_CHOICES}
         >
           <i className="fa fa-plus" />
           &nbsp; {t("surveys.new_choice")}
         </Button>
       )}
-    </Form>
-  );
-}
-
-function SurveyChoice({
-  choice,
-  choiceNumber,
-  removeChoice,
-  handleChoiceChange,
-  type,
-}) {
-  const { t } = useTranslation();
-
-  return (
-    <FormGroup
-      className={
-        (choiceNumber > 1 ? "flex_center_center input-with-button " : "") +
-        (type === SZTFR.SURVEY_QUESTION_TYPE_MULTIPLE ? "multiple" : "single")
-      }
-    >
-      <Input
-        placeholder={t("surveys.choice_number", { number: choiceNumber + 1 })}
-        value={choice}
-        className={choiceNumber > 1 ? "mr-2 " : ""}
-        onChange={(event) => handleChoiceChange(event, choiceNumber)}
-      />
-      {choiceNumber > 1 && (
-        <Button color="danger" onClick={() => removeChoice(choiceNumber)}>
-          <i className="fa fa-trash" />
-        </Button>
-      )}
-    </FormGroup>
+    </>
   );
 }

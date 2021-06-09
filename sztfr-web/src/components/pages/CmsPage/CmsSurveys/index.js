@@ -17,13 +17,22 @@ export default function CmsSurveys({
 
   function addQuestion() {
     const t = [...form.questions];
-    t.push({ q: "one" });
+    t.push({
+      question: "",
+      type: SZTFR.SURVEY_QUESTION_TYPE_TEXT,
+    });
     setFormField(FormFields.questions, t);
   }
 
   function deleteQuestion(index) {
     const t = [...form.questions];
     t.splice(index, 1);
+    setFormField(FormFields.questions, t);
+  }
+
+  function updateQuestion(index, newQ) {
+    const t = [...form.questions];
+    t[index] = newQ;
     setFormField(FormFields.questions, t);
   }
 
@@ -54,7 +63,9 @@ export default function CmsSurveys({
       {form.questions.map((q, index) => (
         <NewQuestion
           key={index}
-          questionNumber={index}
+          question={q}
+          order={index}
+          updateQuestion={updateQuestion}
           deleteQuestion={deleteQuestion}
         />
       ))}
