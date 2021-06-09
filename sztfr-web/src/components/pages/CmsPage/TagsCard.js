@@ -93,7 +93,7 @@ export default function TagsCard({ errors, setFormField, FormFields, form }) {
         )}
         <FormGroup className="mt-3">
           <Label for="tag">{t("tags.add_new_tag")}</Label>
-          <div className="flex_center_center tag-form-group">
+          <div className="flex_center_center input-with-button">
             <Input
               id="tag"
               type="text"

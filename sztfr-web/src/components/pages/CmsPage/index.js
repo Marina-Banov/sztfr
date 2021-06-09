@@ -1,3 +1,4 @@
+import { CircularProgress } from "@material-ui/core";
 import React, { useState } from "react";
 import {
   Row,
@@ -8,7 +9,7 @@ import {
   Button,
   Alert,
 } from "reactstrap";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Camera } from "react-feather";
 
@@ -33,7 +34,9 @@ import "./index.scss";
 
 export default function CmsPage(props) {
   const { t } = useTranslation();
+  const history = useHistory();
   const firebase = useFirebase();
+  const [loading, setLoading] = useState(false);
   const [FormFields] = useState(
     props.location.pathname === "/events/new"
       ? EventFormFields
@@ -69,28 +72,43 @@ export default function CmsPage(props) {
   }
 
   function onSubmit() {
+    setLoading(true);
     let body;
-    let path;
+    let firestorePath;
+    let successPath;
+
     switch (props.location.pathname) {
       case "/events/new":
         body = new Event(data);
-        path = SZTFR.FIRESTORE_EVENTS_PATH;
+        firestorePath = SZTFR.FIRESTORE_EVENTS_PATH;
+        successPath = "/events";
         break;
       case "/surveys/new":
         body = new Survey(data);
-        path = SZTFR.FIRESTORE_SURVEYS_PATH;
+        firestorePath = SZTFR.FIRESTORE_SURVEYS_PATH;
+        successPath = "/surveys";
         break;
       default:
     }
+
     firebase
-      .firestoreCreate(path, body)
+      .firestoreCreate(firestorePath, body)
       .then((res) => {
         firebase
-          .uploadFile(body.imagePath, data.image)
-          .then((res) => console.log("upload ok"))
-          .catch((err) => console.error(err));
+          .uploadFile(body.image, data.image)
+          .then((res) => {
+            setLoading(false);
+            history.push(successPath);
+          })
+          .catch((err) => {
+            setLoading(false);
+            console.error(err);
+          });
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setLoading(false);
+        console.error(err);
+      });
   }
 
   return (
@@ -103,6 +121,7 @@ export default function CmsPage(props) {
                 <CmsSurveys
                   form={data}
                   handleInputChange={handleInputChange}
+                  setFormField={setFormField}
                   errors={errors.fields}
                 />
               </Route>
@@ -157,7 +176,12 @@ export default function CmsPage(props) {
               </Button>
             </Route>
             <Route path="/events/new">
-              <Button block color="primary" onClick={handleSubmit}>
+              <Button
+                block
+                color="primary"
+                onClick={handleSubmit}
+                disabled={loading}
+              >
                 {t("events.add_new_event")}
               </Button>
             </Route>
@@ -168,6 +192,11 @@ export default function CmsPage(props) {
             {t(error)}
           </Alert>
         ))}
+        {loading && (
+          <div className="flex_center_center">
+            <CircularProgress />
+          </div>
+        )}
       </Col>
     </Row>
   );

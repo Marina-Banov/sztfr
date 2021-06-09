@@ -1,11 +1,31 @@
 import React from "react";
-import { CardBody, FormGroup, Label, Input } from "reactstrap";
+import { CardBody, FormGroup, Label, Input, Button } from "reactstrap";
+import { Divider } from "@material-ui/core";
 import { useTranslation } from "react-i18next";
 
 import { SurveyFormFields as FormFields } from "models";
+import { SZTFR } from "appConstants";
+import NewQuestion from "./NewQuestion";
 
-export default function CmsSurveys({ form, handleInputChange, errors }) {
+export default function CmsSurveys({
+  form,
+  handleInputChange,
+  errors,
+  setFormField,
+}) {
   const { t } = useTranslation();
+
+  function addQuestion() {
+    const t = [...form.questions];
+    t.push({ q: "one" });
+    setFormField(FormFields.questions, t);
+  }
+
+  function deleteQuestion(index) {
+    const t = [...form.questions];
+    t.splice(index, 1);
+    setFormField(FormFields.questions, t);
+  }
 
   return (
     <CardBody>
@@ -31,18 +51,24 @@ export default function CmsSurveys({ form, handleInputChange, errors }) {
           invalid={errors.includes(FormFields.description)}
         />
       </FormGroup>
-      <FormGroup>
-        <Label for={FormFields.googleFormURL}>
-          {t("surveys.google_form_url")}
-        </Label>
-        <Input
-          id={FormFields.googleFormURL}
-          type="text"
-          name={FormFields.googleFormURL}
-          onChange={handleInputChange}
-          value={form.googleFormURL}
-          invalid={errors.includes(FormFields.googleFormURL)}
+      {form.questions.map((q, index) => (
+        <NewQuestion
+          key={index}
+          questionNumber={index}
+          deleteQuestion={deleteQuestion}
         />
+      ))}
+      <FormGroup>
+        <Divider className="mb-3" />
+        <Button
+          block
+          color="success"
+          onClick={addQuestion}
+          disabled={form.questions.length === SZTFR.MAX_QUESTIONS}
+        >
+          <i className="fa fa-plus" />
+          &nbsp; {t("surveys.new_question")}
+        </Button>
       </FormGroup>
     </CardBody>
   );

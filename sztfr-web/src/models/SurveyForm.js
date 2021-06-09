@@ -4,6 +4,7 @@ export const SurveyFormFields = {
   image: "image",
   tags: "tags",
   googleFormURL: "googleFormURL",
+  questions: "questions",
 };
 
 export default class SurveyForm {
@@ -13,6 +14,7 @@ export default class SurveyForm {
     this.image = "";
     this.tags = [];
     this.googleFormURL = "";
+    this.questions = [];
   }
 }
 

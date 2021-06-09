@@ -5,4 +5,11 @@ export const SZTFR = {
   FIRESTORE_SURVEYS_PATH: "/surveys",
   STORAGE_EVENTS_PATH: "event_images/",
   STORAGE_SURVEYS_PATH: "survey_images/",
+  MAX_QUESTIONS: 6,
+  MAX_CHOICES: 6,
+  POLL_QUESTION_MAX_LENGTH: 140,
+  POLL_CHOICE_MAX_LENGTH: 40,
+  SURVEY_QUESTION_TYPE_TEXT: "input-text",
+  SURVEY_QUESTION_TYPE_SINGLE: "single-choice",
+  SURVEY_QUESTION_TYPE_MULTIPLE: "multiple-choice",
 };
