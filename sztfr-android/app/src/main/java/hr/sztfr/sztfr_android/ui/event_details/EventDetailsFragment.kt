@@ -1,5 +1,7 @@
 package hr.sztfr.sztfr_android.ui.event_details
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.libraries.places.api.model.Place
 import com.google.android.material.chip.Chip
 import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
@@ -25,6 +28,11 @@ class EventDetailsFragment : Fragment() {
     private lateinit var viewModel: EventDetailsViewModel
     private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
     private var googleMap: GoogleMap? = null
+
+    companion object {
+        const val MAPS_QUERY = "https://www.google.com/maps/search/?api=1&query="
+        const val MAPS_QUERY_PLACE_ID = "&query_place_id="
+    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -45,7 +53,7 @@ class EventDetailsFragment : Fragment() {
         })
 
         if (!event.online) {
-            initMapView(savedInstanceState)
+            initMapView(savedInstanceState, event.googlePlace!!)
         }
 
         for (tag in event.tags) {
@@ -65,17 +73,21 @@ class EventDetailsFragment : Fragment() {
         return binding.root
     }
 
-    private fun initMapView(savedInstanceState: Bundle?) {
+    private fun initMapView(savedInstanceState: Bundle?, place: Place) {
         binding.mapView.onCreate(savedInstanceState)
         binding.mapView.onResume()
         binding.mapView.getMapAsync {
             googleMap = it
-            val pos = LatLng(
-                viewModel.event.value?.googlePlace?.latLng!!.latitude,
-                viewModel.event.value?.googlePlace?.latLng!!.longitude
-            )
+            val pos = LatLng(place.latLng!!.latitude, place.latLng!!.longitude)
             googleMap!!.addMarker(MarkerOptions().position(pos))
             googleMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 15f))
+            googleMap!!.setOnMapClickListener {
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("$MAPS_QUERY${pos.latitude},${pos.longitude}$MAPS_QUERY_PLACE_ID${place.id}")
+                )
+                startActivity(intent)
+            }
         }
         binding.mapView.visibility = View.VISIBLE
     }

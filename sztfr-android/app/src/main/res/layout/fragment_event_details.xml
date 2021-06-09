@@ -80,7 +80,7 @@
 
                 <TextView
                     android:id="@+id/details_time"
-                    style="@style/TextAppearance.SZTFR.DetailsDetails"
+                    style="@style/TextAppearance.SZTFR.DetailsDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_small"
@@ -92,7 +92,7 @@
 
                 <TextView
                     android:id="@+id/details_organizer"
-                    style="@style/TextAppearance.SZTFR.DetailsDetails"
+                    style="@style/TextAppearance.SZTFR.DetailsDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_small"
@@ -121,7 +121,7 @@
 
                         <TextView
                             android:id="@+id/details_location"
-                            style="@style/TextAppearance.SZTFR.DetailsDetails"
+                            style="@style/TextAppearance.SZTFR.DetailsDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:textLocation="@{viewModel.event}"
@@ -133,7 +133,7 @@
                             android:layout_height="wrap_content"
                             app:textLocationDetails="@{viewModel.event}"
                             tools:text="@string/event_dummy_location"
-                            style="@style/TextAppearance.SZTFR.DetailsDetails" />
+                            style="@style/TextAppearance.SZTFR.DetailsDescription" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -142,7 +142,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
                     android:layout_marginBottom="@dimen/spacing_small"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    app:uiZoomGestures="false"
+                    app:uiScrollGestures="false"
+                    app:uiRotateGestures="false"
+                    app:uiTiltGestures="false" />
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/tag_group"
