@@ -16,7 +16,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.data.model.Question
 import hr.sztfr.sztfr_android.data.model.Questions
@@ -34,6 +37,7 @@ class SurveyQuestionsFragment : Fragment() {
     private lateinit var binding: FragmentSurveyQuestionsBinding
     private var answers = hashMapOf<String, Any>()
     private var firestore = FirebaseFirestore.getInstance()
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -68,13 +72,6 @@ class SurveyQuestionsFragment : Fragment() {
 
         }
 
-
-
-
-
-
-
-
         binding.sendAnswersButton.setOnClickListener {
             if (validateAnswers()) saveAnswersAndRedirect(surveyModel)
             else Toast.makeText(this.context, "Svako pitanje mora biti ispunjeno!", Toast.LENGTH_LONG).show()
@@ -101,6 +98,8 @@ class SurveyQuestionsFragment : Fragment() {
         firestore.collection("surveys").document(surveyModel.documentId)
             .collection("results").add(answers)
             .addOnSuccessListener {
+                firestore.collection("users").document(Firebase.auth.currentUser!!.uid)
+                        .update("solved_surveys", FieldValue.arrayUnion(surveyModel.documentId))
                 var dialog = Dialog(this.requireContext())
                 dialog.setContentView(R.layout.survey_answered_dialog)
                 var surveyDialogTitle = dialog.findViewById<TextView>(R.id.survey_title)

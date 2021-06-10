@@ -44,6 +44,9 @@ class SurveyDetailsFragment : Fragment() {
         viewModel.updateFavorites(userRepository.user.value!!.favorites)
         userRepository.user.observe(viewLifecycleOwner, {
             viewModel.updateFavorites(it.favorites)
+            if (it.solved_surveys.contains(surveyModel.documentId)){
+                binding.filloutSurveyButton.visibility = View.GONE
+            }
         })
 
         viewModel.surveyModel.observe(viewLifecycleOwner, {
