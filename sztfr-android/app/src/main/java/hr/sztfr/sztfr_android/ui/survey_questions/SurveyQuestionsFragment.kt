@@ -1,5 +1,6 @@
 package hr.sztfr.sztfr_android.ui.survey_questions
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -23,6 +25,7 @@ import hr.sztfr.sztfr_android.databinding.*
 import hr.sztfr.sztfr_android.ui.survey.SurveyPagerAdapter
 import hr.sztfr.sztfr_android.ui.survey.SurveyViewModel
 import hr.sztfr.sztfr_android.ui.survey_details.SurveyDetailsFragmentDirections
+import hr.sztfr.sztfr_android.util.GlideApp
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -65,6 +68,13 @@ class SurveyQuestionsFragment : Fragment() {
 
         }
 
+
+
+
+
+
+
+
         binding.sendAnswersButton.setOnClickListener {
             if (validateAnswers()) saveAnswersAndRedirect(surveyModel)
             else Toast.makeText(this.context, "Svako pitanje mora biti ispunjeno!", Toast.LENGTH_LONG).show()
@@ -91,10 +101,20 @@ class SurveyQuestionsFragment : Fragment() {
         firestore.collection("surveys").document(surveyModel.documentId)
             .collection("results").add(answers)
             .addOnSuccessListener {
-                findNavController().navigate(
-                    SurveyQuestionsFragmentDirections.actionSurveyQuestionsFragmentToSurveyAnswersSubmittedFragment(surveyModel)
+                var dialog = Dialog(this.requireContext())
+                dialog.setContentView(R.layout.survey_answered_dialog)
+                var surveyDialogTitle = dialog.findViewById<TextView>(R.id.survey_title)
+                surveyDialogTitle.text = surveyModel.title
+                var goBackButton = dialog.findViewById<Button>(R.id.go_back_button)
+                goBackButton.setOnClickListener {
+                    val fmManager: FragmentManager = requireActivity().supportFragmentManager
+                    fmManager.popBackStack()
+                    dialog.dismiss()
 
-                )
+                }
+                dialog.setCancelable(false)
+                dialog.setCanceledOnTouchOutside(false)
+                dialog.show()
             }
             .addOnFailureListener {
                 Log.d("SurveyQuestionsFragment", it.toString())

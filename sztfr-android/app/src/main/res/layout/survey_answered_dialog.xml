@@ -3,39 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/input_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/spacing_small"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="200dp"
-            android:padding="36dp"
-            app:cardBackgroundColor="?attr/questionCardBackgroundColor"
-            app:cardCornerRadius="@dimen/spacing_small"
-            app:cardElevation="@dimen/spacing_extra_small"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="259dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/successText"
 
-                    android:layout_width="324dp"
-                    android:layout_height="59dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
@@ -52,7 +30,7 @@
 
                 <TextView
                     android:id="@+id/survey_title"
-                    android:layout_width="324dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
@@ -67,8 +45,8 @@
 
                 <Button
                     android:id="@+id/go_back_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="114dp"
+                    android:layout_height="59dp"
                     android:text="POVRATAK"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -77,6 +55,5 @@
                     app:layout_constraintTop_toBottomOf="@+id/successText"
                     app:layout_constraintVertical_bias="0.651" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
