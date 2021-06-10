@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import com.google.android.material.chip.Chip
 import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyResultsDetailsBinding
@@ -63,7 +64,6 @@ class SurveyResultsDetailsFragment : Fragment() {
             GlideApp.with(this).load(ref).into(imageView)
             galery.addView(imageView)
             imageView.setOnClickListener {
-                Toast.makeText(context, ref.toString(), Toast.LENGTH_SHORT).show()
                 dialog.setContentView(R.layout.image_popup)
                 var popup_image = dialog.findViewById<ImageView>(R.id.popup_image)
                 dialog.show()
@@ -76,6 +76,16 @@ class SurveyResultsDetailsFragment : Fragment() {
 
 
         }
+
+        viewModel.surveyModel.observe(viewLifecycleOwner, {
+            for (tag in (it!!).tags) {
+                val chip = layoutInflater.inflate(R.layout.layout_chip, binding.surveyTagGroup, false) as Chip
+                chip.text = tag
+                chip.isClickable = false
+                binding.surveyTagGroup.addView(chip)
+            }
+        })
+
 
         binding.surveyResultsDetailsGoBackBtn.setOnClickListener { requireActivity().onBackPressed() }
 

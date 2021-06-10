@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.chip.Chip
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import hr.sztfr.sztfr_android.R
@@ -43,6 +44,15 @@ class SurveyDetailsFragment : Fragment() {
         viewModel.updateFavorites(userRepository.user.value!!.favorites)
         userRepository.user.observe(viewLifecycleOwner, {
             viewModel.updateFavorites(it.favorites)
+        })
+
+        viewModel.surveyModel.observe(viewLifecycleOwner, {
+            for (tag in (it!!).tags) {
+                val chip = layoutInflater.inflate(R.layout.layout_chip, binding.surveyTagGroup, false) as Chip
+                chip.text = tag
+                chip.isClickable = false
+                binding.surveyTagGroup.addView(chip)
+            }
         })
 
         binding.surveyDetailsGoBackBtn.setOnClickListener { requireActivity().onBackPressed() }
