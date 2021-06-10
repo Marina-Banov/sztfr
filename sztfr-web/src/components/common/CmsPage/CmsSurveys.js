@@ -61,6 +61,7 @@ export default function CmsSurveys({
             invalid={errors.includes(FormFields.description)}
           />
         </FormGroup>
+
         {form.questions.map((q, index) => (
           <NewQuestion
             key={index}
@@ -70,6 +71,7 @@ export default function CmsSurveys({
             deleteQuestion={deleteQuestion}
           />
         ))}
+
         <FormGroup>
           <Divider className="mb-3" />
           <Button
