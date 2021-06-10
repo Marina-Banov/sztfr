@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Button, Card, CardBody, Table } from "reactstrap";
 import { Link } from "react-router-dom";
 
-import { SZTFR } from "appConstants";
+import constants from "appConstants";
 import { useFirebase } from "appFirebase";
 import { EventForm } from "models";
 
@@ -16,7 +16,7 @@ export default function Events() {
 
   const getEvents = useCallback(() => {
     firebase
-      .firestoreRead(SZTFR.FIRESTORE_EVENTS_PATH)
+      .firestoreRead(constants.FIRESTORE_EVENTS_PATH)
       .then((res) => {
         setEvents(res.body);
         setLoading(false);
@@ -42,7 +42,7 @@ export default function Events() {
   function deleteEvent(id) {
     setLoading(true);
     firebase
-      .firestoreDelete(SZTFR.FIRESTORE_EVENTS_PATH, id)
+      .firestoreDelete(constants.FIRESTORE_EVENTS_PATH, id)
       .then(() => getEvents())
       .catch((err) => {
         console.error(err);

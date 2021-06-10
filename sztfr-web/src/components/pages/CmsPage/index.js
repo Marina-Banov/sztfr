@@ -13,13 +13,14 @@ import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Camera } from "react-feather";
 
-import { SZTFR } from "appConstants";
+import constants from "appConstants";
 import { useFirebase } from "appFirebase";
 import {
   Event,
   EventForm,
   EventFormFields,
   EventFormValidation,
+  Questions,
   Survey,
   SurveyForm,
   SurveyFormFields,
@@ -71,7 +72,18 @@ export default function CmsPage(props) {
     }
   }
 
-  function onSubmit() {
+  async function handle(promise) {
+    try {
+      const data = await promise;
+      return [data, null];
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+      return [null, error];
+    }
+  }
+
+  async function onSubmit() {
     setLoading(true);
     let body;
     let firestorePath;
@@ -80,35 +92,36 @@ export default function CmsPage(props) {
     switch (props.location.pathname) {
       case "/events/new":
         body = new Event(data);
-        firestorePath = SZTFR.FIRESTORE_EVENTS_PATH;
+        firestorePath = constants.FIRESTORE_EVENTS_PATH;
         successPath = "/events";
         break;
       case "/surveys/new":
         body = new Survey(data);
-        firestorePath = SZTFR.FIRESTORE_SURVEYS_PATH;
+        firestorePath = constants.FIRESTORE_SURVEYS_PATH;
         successPath = "/surveys";
         break;
       default:
     }
 
-    firebase
-      .firestoreCreate(firestorePath, body)
-      .then((res) => {
-        firebase
-          .uploadFile(body.image, data.image)
-          .then((res) => {
-            setLoading(false);
-            history.push(successPath);
-          })
-          .catch((err) => {
-            setLoading(false);
-            console.error(err);
-          });
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.error(err);
-      });
+    const [doc, error] = await handle(
+      firebase.firestoreCreate(firestorePath, body)
+    );
+    if (error) return;
+
+    await handle(firebase.uploadFile(body.image, data.image));
+
+    if (firestorePath === constants.FIRESTORE_SURVEYS_PATH) {
+      const [success, error] = await handle(
+        firebase.firestoreCreateBulk(
+          constants.FIRESTORE_QUESTIONS_COLLECTION,
+          new Questions(data).questions,
+          doc
+        )
+      );
+      if (error) return;
+    }
+    setLoading(false);
+    history.push(successPath);
   }
 
   return (
@@ -171,7 +184,12 @@ export default function CmsPage(props) {
         <BrowserRouter>
           <Switch>
             <Route path="/surveys/new">
-              <Button block color="primary" onClick={handleSubmit}>
+              <Button
+                block
+                color="primary"
+                disabled={loading}
+                onClick={handleSubmit}
+              >
                 {t("surveys.add_new_survey")}
               </Button>
             </Route>
@@ -193,7 +211,7 @@ export default function CmsPage(props) {
           </Alert>
         ))}
         {loading && (
-          <div className="flex_center_center">
+          <div className="flex_center_center mt-3">
             <CircularProgress />
           </div>
         )}

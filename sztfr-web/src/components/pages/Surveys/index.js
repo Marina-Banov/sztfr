@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Button, Card, CardBody, Table } from "reactstrap";
 import { Link } from "react-router-dom";
 
-import { SZTFR } from "appConstants";
+import constants from "appConstants";
 import { useFirebase } from "appFirebase";
 import { SurveyForm } from "models";
 
@@ -16,7 +16,7 @@ export default function Surveys() {
 
   const getSurveys = useCallback(() => {
     firebase
-      .firestoreRead(SZTFR.FIRESTORE_SURVEYS_PATH)
+      .firestoreRead(constants.FIRESTORE_SURVEYS_PATH)
       .then((res) => {
         setSurveys(res.body);
         setLoading(false);
@@ -35,7 +35,7 @@ export default function Surveys() {
   function deleteSurvey(id) {
     setLoading(true);
     firebase
-      .firestoreDelete(SZTFR.FIRESTORE_SURVEYS_PATH, id)
+      .firestoreDelete(constants.FIRESTORE_SURVEYS_PATH, id)
       .then(() => getSurveys())
       .catch((err) => {
         console.error(err);

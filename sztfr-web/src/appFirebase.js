@@ -1,4 +1,3 @@
-import { SZTFR } from "appConstants";
 import { createContext, useContext } from "react";
 import app from "firebase/app";
 import "firebase/auth";
@@ -6,6 +5,7 @@ import "firebase/firestore";
 import "firebase/storage";
 import request from "superagent";
 
+import constants from "appConstants";
 import { buildURL } from "utils/buildURL";
 
 export const FirebaseContext = createContext({});
@@ -45,12 +45,16 @@ export default class Firebase {
   };
 
   verifyEmailLink = () => {
-    const email = window.localStorage.getItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL);
+    const email = window.localStorage.getItem(
+      constants.LOCAL_STORAGE_LOG_IN_EMAIL
+    );
     return this.auth.isSignInWithEmailLink(window.location.href) && !!email;
   };
 
   logInWithEmailLink = () => {
-    const email = window.localStorage.getItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL);
+    const email = window.localStorage.getItem(
+      constants.LOCAL_STORAGE_LOG_IN_EMAIL
+    );
     return this.auth.signInWithEmailLink(email, window.location.href);
   };
 
@@ -75,6 +79,15 @@ export default class Firebase {
     return this.firestore
       .collection(collectionName)
       .add(Object.assign({}, payload));
+  };
+
+  firestoreCreateBulk = (collectionName, payload, doc = this.firestore) => {
+    const batch = this.firestore.batch();
+    payload.forEach((p) => {
+      const docRef = doc.collection(collectionName).doc();
+      batch.set(docRef, Object.assign({}, p));
+    });
+    return batch.commit();
   };
 
   firestoreRead = (path) => {

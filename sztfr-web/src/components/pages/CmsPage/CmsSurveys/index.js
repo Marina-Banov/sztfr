@@ -4,7 +4,7 @@ import { Divider } from "@material-ui/core";
 import { useTranslation } from "react-i18next";
 
 import { SurveyFormFields as FormFields } from "models";
-import { SZTFR } from "appConstants";
+import constants from "appConstants";
 import NewQuestion from "./NewQuestion";
 
 export default function CmsSurveys({
@@ -19,7 +19,7 @@ export default function CmsSurveys({
     const t = [...form.questions];
     t.push({
       question: "",
-      type: SZTFR.SURVEY_QUESTION_TYPE_TEXT,
+      type: constants.SURVEY_QUESTION_TYPE_TEXT,
     });
     setFormField(FormFields.questions, t);
   }
@@ -75,7 +75,7 @@ export default function CmsSurveys({
           block
           color="success"
           onClick={addQuestion}
-          disabled={form.questions.length === SZTFR.MAX_QUESTIONS}
+          disabled={form.questions.length === constants.SURVEY_MAX_QUESTIONS}
         >
           <i className="fa fa-plus" />
           &nbsp; {t("surveys.new_question")}

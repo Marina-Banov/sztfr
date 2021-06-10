@@ -3,7 +3,7 @@ import { CircularProgress } from "@material-ui/core";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { SZTFR } from "appConstants";
+import constants from "appConstants";
 import { useFirebase } from "appFirebase";
 
 export default function EmailVerification() {
@@ -13,10 +13,11 @@ export default function EmailVerification() {
 
   useEffect(() => {
     if (
-      window.localStorage.getItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL) === "null"
+      window.localStorage.getItem(constants.LOCAL_STORAGE_LOG_IN_EMAIL) ===
+      "null"
     ) {
       const email = window.prompt(t("login.email_for_confirmation"));
-      window.localStorage.setItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL, email);
+      window.localStorage.setItem(constants.LOCAL_STORAGE_LOG_IN_EMAIL, email);
     }
 
     if (!firebase.verifyEmailLink()) {
@@ -25,7 +26,7 @@ export default function EmailVerification() {
       firebase
         .logInWithEmailLink()
         .then(() => {
-          window.localStorage.removeItem(SZTFR.LOCAL_STORAGE_LOG_IN_EMAIL);
+          window.localStorage.removeItem(constants.LOCAL_STORAGE_LOG_IN_EMAIL);
         })
         .catch(() => {
           setMessage("error_occurred");

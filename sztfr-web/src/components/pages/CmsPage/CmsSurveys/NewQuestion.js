@@ -3,8 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Button, Col, FormGroup, Input, Label, Row } from "reactstrap";
 import { Divider } from "@material-ui/core";
 
-import { SZTFR } from "appConstants";
+import constants from "appConstants";
 
+// TODO validation is hard
 export default function NewQuestion({
   question,
   order,
@@ -15,12 +16,12 @@ export default function NewQuestion({
 
   function setType(event) {
     let newQ;
-    if (event.target.value === SZTFR.SURVEY_QUESTION_TYPE_TEXT) {
+    if (event.target.value === constants.SURVEY_QUESTION_TYPE_TEXT) {
       newQ = {
         question: question.question,
         type: event.target.value,
       };
-    } else if (question.type === SZTFR.SURVEY_QUESTION_TYPE_TEXT) {
+    } else if (question.type === constants.SURVEY_QUESTION_TYPE_TEXT) {
       newQ = { ...question, type: event.target.value, options: ["", ""] };
     } else {
       newQ = { ...question, type: event.target.value };
@@ -41,56 +42,10 @@ export default function NewQuestion({
     let newQ = { ...question, options };
     updateQuestion(order, newQ);
   }
-  /*
-  function validateQuestion(questionText) {
-    if (questionText.length === 0) {
-      return {
-        validateStatus: "error",
-        errorMsg: "Please enter your question!",
-      };
-    } else if (questionText.length > SZTFR.POLL_QUESTION_MAX_LENGTH) {
-      return {
-        validateStatus: "error",
-        errorMsg: `Question is too long (Maximum ${SZTFR.POLL_QUESTION_MAX_LENGTH} characters allowed)`,
-      };
-    } else {
-      return {
-        validateStatus: "success",
-        errorMsg: null,
-      };
-    }
-  }
-*/
+
   function handleQuestionChange(event) {
     let newQ = { ...question, question: event.target.value };
     updateQuestion(order, newQ);
-    /*const value = event.target.value;
-    setState({
-      ...state,
-      question: {
-        text: value,
-        ...validateQuestion(value),
-      },
-    });
-  }
-
-  function validateChoice(choiceText) {
-    if (choiceText.length === 0) {
-      return {
-        validateStatus: "error",
-        errorMsg: "Please enter a choice!",
-      };
-    } else if (choiceText.length > SZTFR.POLL_CHOICE_MAX_LENGTH) {
-      return {
-        validateStatus: "error",
-        errorMsg: `Choice is too long (Maximum ${SZTFR.POLL_CHOICE_MAX_LENGTH} characters allowed)`,
-      };
-    } else {
-      return {
-        validateStatus: "success",
-        errorMsg: null,
-      };
-    }*/
   }
 
   function handleChoiceChange(event, index) {
@@ -98,31 +53,6 @@ export default function NewQuestion({
     options[index] = event.target.value;
     let newQ = { ...question, options };
     updateQuestion(order, newQ);
-    /*const choices = state.choices.slice();
-    const value = event.target.value;
-
-    choices[index] = {
-      text: value,
-      ...validateChoice(value),
-    };
-
-    setState({
-      ...state,
-      choices: choices,
-    });
-  }
-
-  function isFormInvalid() {
-    if (state.question.validateStatus !== "success") {
-      return true;
-    }
-
-    for (let i = 0; i < state.choices.length; i++) {
-      const choice = state.choices[i];
-      if (choice.validateStatus !== "success") {
-        return true;
-      }
-    }*/
   }
 
   return (
@@ -164,13 +94,13 @@ export default function NewQuestion({
               value={question.type}
               onChange={setType}
             >
-              <option value={SZTFR.SURVEY_QUESTION_TYPE_TEXT}>
+              <option value={constants.SURVEY_QUESTION_TYPE_TEXT}>
                 {t("surveys.input_text")}
               </option>
-              <option value={SZTFR.SURVEY_QUESTION_TYPE_MULTIPLE}>
+              <option value={constants.SURVEY_QUESTION_TYPE_MULTIPLE}>
                 {t("surveys.multiple_choice")}
               </option>
-              <option value={SZTFR.SURVEY_QUESTION_TYPE_SINGLE}>
+              <option value={constants.SURVEY_QUESTION_TYPE_SINGLE}>
                 {t("surveys.single_choice")}
               </option>
             </Input>
@@ -183,7 +113,7 @@ export default function NewQuestion({
           key={index}
           className={
             (index > 1 ? "flex_center_center input-with-button " : "") +
-            (question.type === SZTFR.SURVEY_QUESTION_TYPE_MULTIPLE
+            (question.type === constants.SURVEY_QUESTION_TYPE_MULTIPLE
               ? "multiple"
               : "single")
           }
@@ -207,7 +137,7 @@ export default function NewQuestion({
           className="mb-3"
           color="success"
           onClick={addChoice}
-          disabled={question.options.length === SZTFR.MAX_CHOICES}
+          disabled={question.options.length === constants.SURVEY_MAX_CHOICES}
         >
           <i className="fa fa-plus" />
           &nbsp; {t("surveys.new_choice")}

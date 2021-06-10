@@ -11,7 +11,7 @@ import {
   Label,
 } from "reactstrap";
 
-import { SZTFR } from "appConstants";
+import constants from "appConstants";
 import { useFirebase } from "appFirebase";
 
 export default function TagsCard({ errors, setFormField, FormFields, form }) {
@@ -23,7 +23,7 @@ export default function TagsCard({ errors, setFormField, FormFields, form }) {
 
   const getTags = useCallback(() => {
     firebase
-      .firestoreRead(SZTFR.FIRESTORE_TAGS_PATH)
+      .firestoreRead(constants.FIRESTORE_TAGS_PATH)
       .then((res) => {
         setLoading(false);
         setTags(res.body.values);
@@ -58,7 +58,7 @@ export default function TagsCard({ errors, setFormField, FormFields, form }) {
     const t = [...tags];
     t.push(tagInput);
     firebase
-      .firestoreUpdate(SZTFR.FIRESTORE_TAGS_PATH, { values: t })
+      .firestoreUpdate(constants.FIRESTORE_TAGS_PATH, { values: t })
       .then((res) => {
         setTagInput("");
         getTags();
