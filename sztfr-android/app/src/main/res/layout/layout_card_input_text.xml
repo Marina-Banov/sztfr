@@ -18,7 +18,7 @@
         android:layout_margin="@dimen/spacing_small"
         android:padding="36dp"
         app:cardUseCompatPadding="true"
-        app:cardBackgroundColor="?attr/questionCardBackgroundColor"
+        app:cardBackgroundColor="?attr/cardBackgroundColor"
         app:cardElevation="@dimen/spacing_extra_small"
         app:cardCornerRadius="@dimen/spacing_small">
 

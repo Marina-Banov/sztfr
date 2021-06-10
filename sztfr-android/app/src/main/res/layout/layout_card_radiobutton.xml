@@ -16,7 +16,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/spacing_small"
         app:cardUseCompatPadding="true"
-        app:cardBackgroundColor="?attr/questionCardBackgroundColor"
+        app:cardBackgroundColor="?attr/cardBackgroundColor"
         app:cardElevation="@dimen/spacing_extra_small"
         app:cardCornerRadius="@dimen/spacing_small">
 
