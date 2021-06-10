@@ -1,4 +1,7 @@
 import Avatar from "./Avatar";
+import CmsPage from "./CmsPage";
+import CmsEvents from "./CmsPage/CmsEvents";
+import CmsSurveys from "./CmsPage/CmsSurveys";
 import DatePicker from "./DatePicker";
 import Header from "./Header";
 import Loader from "../../vibe/components/Loader";
@@ -15,6 +18,9 @@ import TimePicker from "./TimePicker";
 
 export {
   Avatar,
+  CmsPage,
+  CmsEvents,
+  CmsSurveys,
   DatePicker,
   Header,
   Main,

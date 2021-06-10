@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 import constants from "appConstants";
 import { useFirebase } from "appFirebase";
-import { SurveyForm } from "models";
 
 export default function Surveys() {
   const { t } = useTranslation();
@@ -46,12 +45,7 @@ export default function Surveys() {
   return (
     <Card>
       <CardBody>
-        <Link
-          to={{
-            pathname: "/surveys/new",
-            state: { initialValue: new SurveyForm() },
-          }}
-        >
+        <Link to="/surveys/new">
           <Button className="m-b" color="success">
             <i className="fa fa-plus" />
             &nbsp; {t("surveys.new_survey")}

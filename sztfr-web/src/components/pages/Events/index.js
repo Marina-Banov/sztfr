@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 import constants from "appConstants";
 import { useFirebase } from "appFirebase";
-import { EventForm } from "models";
 
 export default function Events() {
   const { t } = useTranslation();
@@ -53,12 +52,7 @@ export default function Events() {
   return (
     <Card>
       <CardBody>
-        <Link
-          to={{
-            pathname: "/events/new",
-            state: { initialValue: new EventForm() },
-          }}
-        >
+        <Link to="/events/new">
           <Button className="m-b" color="success">
             <i className="fa fa-plus" />
             &nbsp; {t("events.new_event")}

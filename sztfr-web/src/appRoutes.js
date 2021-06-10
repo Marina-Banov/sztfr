@@ -1,7 +1,8 @@
 import {
-  CmsPage,
   Dashboard,
   Events,
+  NewEvent,
+  NewSurvey,
   NotFound,
   Surveys,
 } from "components/pages";
@@ -66,7 +67,7 @@ const mainRoutes = [
   {
     name: "Novi događaj",
     path: "/events/new",
-    component: CmsPage,
+    component: NewEvent,
   },
   {
     name: "Ankete",
@@ -76,7 +77,7 @@ const mainRoutes = [
   {
     name: "Nova anketa",
     path: "/surveys/new",
-    component: CmsPage,
+    component: NewSurvey,
   },
 ];
 

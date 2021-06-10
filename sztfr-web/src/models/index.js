@@ -1,5 +1,6 @@
 import Event from "./Event";
 import EventForm, { EventFormFields, EventFormValidation } from "./EventForm";
+import PromiseResult from "./PromiseResult";
 import Survey, { Questions } from "./Survey";
 import SurveyForm, {
   SurveyFormFields,
@@ -11,6 +12,7 @@ export {
   EventForm,
   EventFormFields,
   EventFormValidation,
+  PromiseResult,
   Questions,
   Survey,
   SurveyForm,
