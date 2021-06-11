@@ -18,5 +18,6 @@ export default class Event {
     this.image = constants.STORAGE_EVENTS_PATH + form.image.name;
     this.organisation = form.organisation;
     this.tags = form.tags;
+    this.subscribers = [];
   }
 }
