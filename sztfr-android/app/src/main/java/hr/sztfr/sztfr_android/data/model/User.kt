@@ -11,5 +11,7 @@ data class User (
     var uid: String = "",
     var isAdmin: Boolean = false,
     var email: String = "",
-    var favorites: ArrayList<String> = ArrayList()
+    var favorites: ArrayList<String> = ArrayList(),
+    var solved_surveys: ArrayList<String> = ArrayList(),
+
 ) : Parcelable

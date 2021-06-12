@@ -10,10 +10,12 @@ import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.data.FirestoreRepository
 import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.data.model.Filterable
+import hr.sztfr.sztfr_android.data.model.Question
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import hr.sztfr.sztfr_android.ui.favorites.FavoritesAdapter
 import hr.sztfr.sztfr_android.ui.home.HomeAdapter
 import hr.sztfr.sztfr_android.ui.survey_list.SurveyListAdapter
+
 
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, url: String) {
@@ -41,6 +43,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Filterable>?) {
     val adapter = recyclerView.adapter as FavoritesAdapter
     adapter.submitList(data)
 }
+
 
 @BindingAdapter("surveyStatusIcon")
 fun setStatusIcon(view: ImageView, item: SurveyModel?) {

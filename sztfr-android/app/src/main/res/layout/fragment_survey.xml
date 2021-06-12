@@ -22,8 +22,8 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="?attr/chipStrokeColor"
-            app:tabSelectedTextColor="?attr/chipStrokeColor"/>
+            app:tabIndicatorColor="?attr/colorPrimary"
+            app:tabSelectedTextColor="?attr/colorPrimary"/>
     </androidx.viewpager.widget.ViewPager>
 </LinearLayout>
 </layout>

@@ -2,6 +2,8 @@ package hr.sztfr.sztfr_android.data.repository
 
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import hr.sztfr.sztfr_android.data.model.Question
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -17,6 +19,7 @@ class SurveysRepository {
     companion object {
         private const val TAG = "SurveysRepository"
         private const val COLLECTION_NAME = "surveys"
+        private const val QUESTION_COLLECTION_NAME = "questions"
         private const val PUBLISHED = "published"
     }
 
@@ -55,4 +58,7 @@ class SurveysRepository {
             SurveyModel()
         }
     }
+
+
+
 }
