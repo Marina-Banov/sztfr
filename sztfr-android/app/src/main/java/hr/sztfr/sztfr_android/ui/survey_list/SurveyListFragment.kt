@@ -18,16 +18,19 @@ import hr.sztfr.sztfr_android.ui.survey.SurveyFragment
 import hr.sztfr.sztfr_android.util.filterByStatus
 
 class SurveyListFragment(private val isPublished: Boolean): Fragment() {
-
     private lateinit var binding: FragmentSurveyListBinding
     private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
+        val application = requireActivity().application
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_survey_list, container, false)
         binding.lifecycleOwner = this
 
+        /*val event = SurveyListFragmentArgs.fromBundle(requireArguments()).event
+        val viewModelFactory = SurveyListViewModelFactory(event, application)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(SurveyListViewModel::class.java)*/
         val viewModel = ViewModelProvider(this).get(SurveyListViewModel::class.java)
         binding.viewModel = viewModel
         (parentFragment as SurveyFragment).viewModel.displaySurveys.observe(
