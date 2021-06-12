@@ -111,10 +111,8 @@
         <item name="colorControlHighlight">?attr/colorPrimary</item>
     </style>
 
-
-
     <style name="TextAppearance.SZTFR.UserSettings" parent="">
         <item name="android:textColor">?attr/accentTextColor</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>
