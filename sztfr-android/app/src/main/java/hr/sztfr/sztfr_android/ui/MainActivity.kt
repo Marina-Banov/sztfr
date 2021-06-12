@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         private const val NOTIFICATION_ID = 1234
     }
 
-    private lateinit var binding: ActivityMainBinding
+    //private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
