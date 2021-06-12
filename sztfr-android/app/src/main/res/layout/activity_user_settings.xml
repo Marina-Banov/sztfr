@@ -7,4 +7,176 @@
     android:layout_height="match_parent"
     tools:context=".ui.user_settings.UserSettingsActivity">
 
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        tools:src="@drawable/ic_launcher_foreground"
+        app:tint="?attr/colorPrimary"
+        android:id="@+id/user_home_img"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/user_home_img"
+        android:gravity="center"
+        android:id="@+id/dark_mode">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        tools:src="@drawable/ic_dark_mode"
+        android:id="@+id/ic_dark_mode"
+        app:tint="?attr/colorPrimary"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:layout_margin="8dp"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_alignLeft="@+id/ic_event_notification"
+          android:layout_toEndOf="@+id/ic_event_notification"
+          android:text="Tamni način"
+          android:gravity="center"
+          style="@style/TextAppearance.SZTFR.UserSettings"/>
+
+
+      <Switch
+          android:id="@+id/sw_dark_mode"
+          android:layout_width="wrap_content"
+          android:layout_height="fill_parent"
+          android:text=""
+          android:padding="@dimen/spacing_normal"
+          android:layout_alignParentRight="true"
+          android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/dark_mode"
+        android:gravity="center"
+        android:id="@+id/event_notification">
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="fill_parent"
+          tools:src="@drawable/ic_event_notification"
+          android:id="@+id/ic_event_notification"
+          app:tint="?attr/colorPrimary"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentStart="true"
+          android:layout_weight="1"
+          android:layout_margin="8dp"/>
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_alignLeft="@+id/ic_event_notification"
+          android:layout_toEndOf="@+id/ic_event_notification"
+          android:text="Primaj obavijesti o najdražim događajima"
+          android:gravity="center"
+          style="@style/TextAppearance.SZTFR.UserSettings"/>
+
+      <Switch
+          android:id="@+id/sw_event_notification"
+          android:layout_width="wrap_content"
+          android:layout_height="fill_parent"
+          android:text=""
+          android:padding="@dimen/spacing_normal"
+          android:layout_="true"
+          android:layout_weight="1"
+          android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/event_notification"
+        android:gravity="center"
+        android:id="@+id/survey_notification">
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="fill_parent"
+          tools:src="@drawable/ic_survey_notification"
+          android:id="@+id/ic_survey_notification"
+          app:tint="?attr/colorPrimary"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentStart="true"
+          android:layout_weight="1"
+          android:layout_margin="8dp"/>
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_alignLeft="@+id/ic_survey_notification"
+          android:layout_toEndOf="@+id/ic_survey_notification"
+          android:text="Primaj obavijesti o najdražim anketama"
+          android:gravity="center"
+          style="@style/TextAppearance.SZTFR.UserSettings"/>
+
+      <Switch
+          android:id="@+id/sw_survey_notification"
+          android:layout_width="wrap_content"
+          android:layout_height="fill_parent"
+          android:text=""
+          android:padding="@dimen/spacing_normal"
+          android:layout_="true"
+          android:layout_weight="1"
+          android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/survey_notification"
+        android:gravity="center"
+        android:id="@+id/blank_space"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/blank_space"
+        android:gravity="center"
+        android:id="@+id/logout">
+
+      <ImageButton
+          android:layout_width="wrap_content"
+          android:layout_height="fill_parent"
+          tools:src="@drawable/ic_logout"
+          android:id="@+id/btn_logout"
+          app:tint="?attr/colorPrimary"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentStart="true"
+          android:layout_weight="1"
+          app:backgroundTint="?attr/cardBackgroundColor"/>
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_alignLeft="@+id/ic_survey_notification"
+          android:layout_toEndOf="@+id/ic_survey_notification"
+          android:text="Odjava"
+          android:gravity="center_vertical"
+          android:layout_weight="5"
+          style="@style/TextAppearance.SZTFR.UserSettings"/>
+
+    </LinearLayout>
+
+  </RelativeLayout>
   </androidx.constraintlayout.widget.ConstraintLayout>
