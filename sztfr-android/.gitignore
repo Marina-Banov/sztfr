@@ -80,3 +80,6 @@ lint/tmp/
 /local.properties
 .DS_Store
 .cxx
+
+# Other
+google_maps_api.xml

@@ -23,6 +23,7 @@ class UserRepository private constructor(db: FirebaseFirestore) {
     val user = MutableLiveData<User>()
 
     init {
+        user.value = User()
         userDocument.addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.i(TAG, "Listen failed.", e)

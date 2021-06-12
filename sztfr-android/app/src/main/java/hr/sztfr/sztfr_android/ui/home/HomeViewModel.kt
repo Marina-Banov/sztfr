@@ -3,6 +3,7 @@ package hr.sztfr.sztfr_android.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.data.repository.EventsRepository
 import hr.sztfr.sztfr_android.util.filterByTags
@@ -15,7 +16,7 @@ import java.util.ArrayList
 
 class HomeViewModel : ViewModel() {
 
-    private val eventsRepository = EventsRepository()
+    private val eventsRepository = EventsRepository.getInstance(FirebaseFirestore.getInstance())
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 

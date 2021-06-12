@@ -18,8 +18,8 @@ class MainFragment : Fragment() {
 
     companion object {
         const val HOME = 0
-        const val FAVORITES = 1
-        const val SURVEY = 2
+        const val SURVEY = 1
+        const val FAVORITES = 2
         const val INFO = 3
     }
 
@@ -47,8 +47,8 @@ class MainFragment : Fragment() {
 
         binding.meowMenu.apply {
             add(MeowBottomNavigation.Model(HOME, R.drawable.house))
-            add(MeowBottomNavigation.Model(FAVORITES, R.drawable.favorite))
             add(MeowBottomNavigation.Model(SURVEY, R.drawable.bar_chart))
+            add(MeowBottomNavigation.Model(FAVORITES, R.drawable.favorite))
             add(MeowBottomNavigation.Model(INFO, R.drawable.info))
             setOnClickMenuListener { binding.fragmentContainer.currentItem = it.id }
         }

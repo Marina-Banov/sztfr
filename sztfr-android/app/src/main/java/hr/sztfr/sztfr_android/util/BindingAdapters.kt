@@ -3,6 +3,7 @@ package hr.sztfr.sztfr_android.util
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
@@ -54,7 +55,7 @@ fun setStatusIcon(view: ImageView, item: SurveyModel?) {
 }
 
 @BindingAdapter("favoriteIcon")
-fun setDynamicIcon(view: View, isFavorite: Boolean) {
+fun setFavoriteIcon(view: View, isFavorite: Boolean) {
     val icon = if (isFavorite) { R.drawable.favorite_filled }
                else { R.drawable.favorite }
     if (view is ImageButton) {
@@ -62,4 +63,26 @@ fun setDynamicIcon(view: View, isFavorite: Boolean) {
     } else if (view is MaterialButton) {
         view.setIconResource(icon)
     }
+}
+
+@BindingAdapter("textLocation")
+fun setLocationText(view: TextView, event: Event) {
+    view.text = if (event.online) {
+        view.context.getString(R.string.event_online)
+    } else {
+        event.googlePlace!!.name
+    }
+}
+
+@BindingAdapter("textLocationDetails")
+fun setLocationDetails(view: TextView, event: Event) {
+    view.text = if (event.online) event.location else event.googlePlace!!.address
+}
+
+@BindingAdapter("locationIcon")
+fun setLocationIcon(view: ImageView, event: Event) {
+    view.setImageResource(when (event.online) {
+        true -> R.drawable.ic_globe
+        false -> R.drawable.ic_place
+    })
 }

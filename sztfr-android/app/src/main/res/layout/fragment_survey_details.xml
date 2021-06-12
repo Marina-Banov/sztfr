@@ -38,7 +38,7 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/survey_details_img"
                         android:layout_width="fill_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="230dp"
                         android:scaleType="centerCrop"
                         app:imageUrl="@{viewModel.surveyModel.image}"
                         tools:src="@drawable/dummy"
@@ -79,6 +79,7 @@
                     android:id="@+id/survey_details_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_small"
                     android:text="@{viewModel.surveyModel.title}"
                     tools:text="@string/survey_dummy_title"
                     style="@style/TextAppearance.SZTFR.DetailsTitle" />

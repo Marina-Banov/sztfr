@@ -37,19 +37,21 @@ class SearchFilter(ctx: Context, attributeSet: AttributeSet? = null):
 
         _selectedTags.value = ArrayList()
 
-        for (tag in enumsRepository.tags.value!!) {
-            val chip = inflater.inflate(R.layout.layout_chip, binding.filter, false) as Chip
-            chip.text = tag
-            chip.setOnClickListener {
-                _selectedTags.value?.apply {
-                    if (chip.isChecked) { add(tag) } else { remove(tag) }
+        enumsRepository.tags.observe(ctx, Observer {
+            for (tag in it) {
+                val chip = inflater.inflate(R.layout.layout_chip, binding.filter, false) as Chip
+                chip.text = tag
+                chip.setOnClickListener {
+                    _selectedTags.value?.apply {
+                        if (chip.isChecked) { add(tag) } else { remove(tag) }
+                    }
+                    // Live data is not updated simply by updating the ArrayList
+                    // Must also update the reference
+                    _selectedTags.value = _selectedTags.value
                 }
-                // Live data is not updated simply by updating the ArrayList
-                // Must also update the reference
-                _selectedTags.value = _selectedTags.value
+                binding.filter.addView(chip)
             }
-            binding.filter.addView(chip)
-        }
+        })
 
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(query: String?): Boolean {

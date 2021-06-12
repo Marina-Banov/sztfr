@@ -53,29 +53,25 @@
         <item name="cornerSize">8dp</item>
     </style>
 
-    <style name="TextAppearance.SZTFR.DetailsTitle" parent="">
+    <style name="TextAppearance.SZTFR.CardDetailsTitle" parent="">
         <item name="android:textColor">?attr/accentTextColor</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearance.SZTFR.SurveyTitle" parent="">
+    <style name="TextAppearance.SZTFR.DetailsTitle" parent="">
         <item name="android:textColor">?attr/accentTextColor</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearance.SZTFR.DetailsDetails" parent="">
-        <item name="android:textColor">?attr/accentTextColor</item>
+    <style name="TextAppearance.SZTFR.CardDetails" parent="">
+        <item name="android:textColor">?attr/lightTextColor</item>
     </style>
 
     <style name="TextAppearance.SZTFR.DetailsDescription" parent="">
         <item name="android:textColor">?attr/lightTextColor</item>
-    </style>
-
-    <style name="TextAppearance.SZTFR.SurveyDescription" parent="">
-        <item name="android:textColor">?attr/lightTextColor</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Widget.SZTFR.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
