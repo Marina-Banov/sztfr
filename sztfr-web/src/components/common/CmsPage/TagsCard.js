@@ -11,7 +11,7 @@ import {
   Label,
 } from "reactstrap";
 
-import { SZTFR } from "appConstants";
+import constants from "appConstants";
 import { useFirebase } from "appFirebase";
 
 export default function TagsCard({ errors, setFormField, FormFields, form }) {
@@ -23,10 +23,10 @@ export default function TagsCard({ errors, setFormField, FormFields, form }) {
 
   const getTags = useCallback(() => {
     firebase
-      .firestoreRead(SZTFR.FIRESTORE_TAGS_PATH)
+      .firestoreRead(constants.FIRESTORE_TAGS_PATH)
       .then((res) => {
         setLoading(false);
-        setTags(res.body.tags);
+        setTags(res.body.values);
       })
       .catch((err) => {
         setLoading(false);
@@ -58,7 +58,7 @@ export default function TagsCard({ errors, setFormField, FormFields, form }) {
     const t = [...tags];
     t.push(tagInput);
     firebase
-      .firestoreUpdate(SZTFR.FIRESTORE_TAGS_PATH, { tags: t })
+      .firestoreUpdate(constants.FIRESTORE_TAGS_PATH, { values: t })
       .then((res) => {
         setTagInput("");
         getTags();
@@ -93,7 +93,7 @@ export default function TagsCard({ errors, setFormField, FormFields, form }) {
         )}
         <FormGroup className="mt-3">
           <Label for="tag">{t("tags.add_new_tag")}</Label>
-          <div className="flex_center_center tag-form-group">
+          <div className="flex_center_center input-with-button">
             <Input
               id="tag"
               type="text"

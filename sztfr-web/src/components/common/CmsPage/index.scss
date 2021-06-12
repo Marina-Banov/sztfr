@@ -1,4 +1,4 @@
-.tag-form-group {
+.input-with-button {
   input[type="text"] {
     padding-right: 50px;
   }
@@ -28,3 +28,20 @@ input[type="file"] {
     width: calc(0.75em + 0.375rem);
   }
 }
+
+.multiple, .single {
+  margin-left: 30px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -24px;
+    border: 1px solid black;
+    height: 12px;
+    width: 12px;
+    transform: translate(0, -50%);
+  }
+}
+
+.single:before { border-radius: 20px}

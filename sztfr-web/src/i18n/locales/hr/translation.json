@@ -40,10 +40,22 @@
     "number_of_answers": "Broj odgovora",
     "published": "Objavljeno",
     "google_form_url": "URL Google ankete",
-    "add_new_survey": "Dodaj novu anketu"
+    "add_new_survey": "Dodaj novu anketu",
+    "question_number": "Pitanje {{number}}",
+    "new_question": "Novo pitanje",
+    "delete_question": "Obriši pitanje",
+    "question_title": "Tekst pitanja",
+    "question_type": "Vrsta pitanja",
+    "input_text": "Tekst",
+    "single_choice": "Jednostruki izbor",
+    "multiple_choice": "Višestruki izbor",
+    "new_choice": "Novi izbor",
+    "choice_number": "Izbor {{number}}"
   },
   "validation": {
     "required": "Molimo ispunite obavezna polja"
   },
-  "add": "Dodaj"
+  "add": "Dodaj",
+  "edit": "Uredi",
+  "delete": "Obriši"
 }

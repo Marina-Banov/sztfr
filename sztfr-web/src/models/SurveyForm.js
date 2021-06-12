@@ -3,7 +3,7 @@ export const SurveyFormFields = {
   description: "description",
   image: "image",
   tags: "tags",
-  googleFormURL: "googleFormURL",
+  questions: "questions",
 };
 
 export default class SurveyForm {
@@ -12,14 +12,13 @@ export default class SurveyForm {
     this.description = "";
     this.image = "";
     this.tags = [];
-    this.googleFormURL = "";
+    this.questions = [];
   }
 }
 
 export const SurveyFormValidation = {
   title: { required: true },
   description: { required: true },
-  googleFormURL: { required: true },
   image: { required: true },
   tags: { required: true },
 };

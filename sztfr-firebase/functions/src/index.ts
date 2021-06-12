@@ -7,6 +7,6 @@ admin.initializeApp();
 
 export const newUserSignUp = user.newUserSignUp;
 export const userDeleted = user.userDeleted;
-export const tags = functions.https.onRequest(crudOperations("tags"));
+export const enums = functions.https.onRequest(crudOperations("enums"));
 export const events = functions.https.onRequest(crudOperations("events"));
 export const surveys = functions.https.onRequest(crudOperations("surveys"));
