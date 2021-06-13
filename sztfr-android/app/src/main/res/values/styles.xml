@@ -115,4 +115,16 @@
         <item name="android:textColor">?attr/accentTextColor</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+
+
+    <style name="Widget.SZTFR.CompoundButton.Switch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+
+        <item name="colorControlNormal">?attr/colorPrimary</item>
+
+        <item name="colorSwitchThumbNormal">?attr/colorPrimary</item> <!-- inactive thumb color -->
+
+        <item name="android:colorForeground">?attr/colorPrimary</item><!-- inactive track color (30% transparency) -->
+    </style>
 </resources>

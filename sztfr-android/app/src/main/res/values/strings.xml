@@ -52,4 +52,8 @@
     <string name="channel_description">SZTFR notification</string>
     <string name="notification_title">Spam</string>
     <string name="notification_text">Lorem Ipsum</string>
+    <string name="default_notification_channel_id">1234</string>
+
+    <string name="msg_token_fmt" translatable="false">FCM registration Token: %s</string>
+    <string name="fcm_message">FCM Message</string>
 </resources>
