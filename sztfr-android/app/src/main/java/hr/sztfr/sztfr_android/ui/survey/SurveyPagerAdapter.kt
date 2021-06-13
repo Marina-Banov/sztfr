@@ -11,11 +11,7 @@ class SurveyPagerAdapter(fm: FragmentManager)
     override fun getCount(): Int  = 2
 
     override fun getItem(position: Int): Fragment {
-        return if (position == 0) {
-            SurveyListFragment(false)
-        } else {
-            SurveyListFragment(true)
-        }
+        return SurveyListFragment.newInstance(position != 0)
     }
 
     override fun getPageTitle(position: Int): CharSequence {

@@ -1,23 +1,15 @@
 package hr.sztfr.sztfr_android.ui
 
 import android.app.*
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.libraries.places.api.Places
 import androidx.core.app.NotificationCompat
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation.Model
-import com.google.firebase.auth.FirebaseAuth
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.data.repository.PlacesRepository
-import hr.sztfr.sztfr_android.ui.login.LoginActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -40,13 +32,6 @@ class MainActivity : AppCompatActivity() {
 
         createNotificationChannel()
     }
-  
-    private fun signOut() {
-        FirebaseAuth.getInstance().signOut()
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -66,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             }
             val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intentNottification, 0)
 
-            var builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            val builder = NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle(getString(R.string.notification_title))
                 .setContentText(getString(R.string.notification_text))
