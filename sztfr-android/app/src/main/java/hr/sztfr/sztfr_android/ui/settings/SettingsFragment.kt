@@ -24,6 +24,7 @@ class SettingsFragment : Fragment() {
             (activity as SettingsActivity).signOut()
         }
         
+        /* ovo ne radi ako povuces switch, radi samo na klik
         binding.swDarkMode.setOnClickListener {
             val isNightTheme = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
             when (isNightTheme) {
@@ -31,6 +32,18 @@ class SettingsFragment : Fragment() {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 Configuration.UI_MODE_NIGHT_NO ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+        }*/
+
+        binding.swDarkMode.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (buttonView.isShown) { //ako nema ovog nakon aktiviranja switcha kod se neprestano pokrece
+                val isNightTheme = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                when (isNightTheme) {
+                    Configuration.UI_MODE_NIGHT_YES ->
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    Configuration.UI_MODE_NIGHT_NO ->
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
             }
         }
 
