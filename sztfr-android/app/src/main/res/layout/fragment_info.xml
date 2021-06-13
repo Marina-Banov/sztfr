@@ -25,7 +25,7 @@
             android:paddingBottom="@dimen/spacing_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/dummy_description"
+            android:text="@string/about_us_text"
             style="@style/TextAppearance.SZTFR.DetailsDescription" />
 
         <ScrollView
