@@ -21,3 +21,16 @@ fun handleClick(id: String) {
         // TODO
     }
 }
+
+fun isInFavourites(id: String): Boolean {
+    val userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
+
+    if (userRepository.user.value!!.uid != "") {
+        val favorites = userRepository.user.value!!.favorites
+        favorites.apply {
+            if (contains(id)) { return false } else { return true }
+        }
+        // TODO
+    }
+    return false
+}
