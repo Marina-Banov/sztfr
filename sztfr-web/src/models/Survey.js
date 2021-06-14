@@ -14,7 +14,7 @@ export default class Survey {
 export class Questions {
   constructor(form) {
     const qs = [...form.questions];
-    qs.forEach((q, i) => (q.order = i + 1));
+    qs.forEach((q, i) => (q.order = (i + 1).toString()));
     this.questions = qs;
   }
 }

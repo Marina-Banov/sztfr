@@ -57,5 +57,8 @@
   },
   "add": "Dodaj",
   "edit": "Uredi",
-  "delete": "Obriši"
+  "delete": "Obriši",
+  "sztfr": "Studentski zbor Tehničkog fakulteta",
+  "home_p1": "Ovo je mjesto za upravljanje sadržajem na mobilnoj aplikaciji SZTFR. Rezervirano za članove SZ-a.",
+  "home_p2": "Dodaj, uredi ili obriši događaje koje organizira Studentski zbor ili postavi i obradi ankete svim studentima Tehničkog fakulteta."
 }
