@@ -18,6 +18,7 @@ import hr.sztfr.sztfr_android.data.model.Question
 import hr.sztfr.sztfr_android.data.model.Questions
 import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.FragmentSurveyDetailsBinding
+import hr.sztfr.sztfr_android.ui.settings.CreateNotification
 import hr.sztfr.sztfr_android.util.handleClick
 
 
@@ -83,6 +84,8 @@ class SurveyDetailsFragment : Fragment() {
 
         binding.favoritesButton.setOnClickListener {
             handleClick(viewModel.surveyModel.value!!.documentId)
+
+            CreateNotification.createNotificationChannel(activity, viewModel.surveyModel.value!!.documentId)
         }
 
         return binding.root

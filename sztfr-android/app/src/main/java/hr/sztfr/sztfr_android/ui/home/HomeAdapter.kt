@@ -8,6 +8,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.LayoutCardEventBinding
+import hr.sztfr.sztfr_android.ui.MainActivity
+import hr.sztfr.sztfr_android.ui.settings.CreateNotification
 import hr.sztfr.sztfr_android.util.DiffCallback
 import hr.sztfr.sztfr_android.util.handleClick
 
@@ -23,6 +25,8 @@ class HomeAdapter(private val showDetailsListener: (event: Event) -> Unit) :
             binding.isFavorite = userRepository.user.value!!.favorites.contains(event.documentId)
             binding.favoritesButton.setOnClickListener {
                 handleClick(event.documentId)
+
+                //CreateNotification.createNotificationChannel(activity, event.documentId) marina!!!
             }
             binding.executePendingBindings()
         }

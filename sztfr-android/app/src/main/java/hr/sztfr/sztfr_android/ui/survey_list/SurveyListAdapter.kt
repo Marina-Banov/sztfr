@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.LayoutCardSurveyBinding
+import hr.sztfr.sztfr_android.ui.settings.CreateNotification
 import hr.sztfr.sztfr_android.util.DiffCallback
 import hr.sztfr.sztfr_android.util.handleClick
 
@@ -23,6 +24,8 @@ class SurveyListAdapter(private val showDetailsListener: (survey: SurveyModel) -
             binding.isFavorite = userRepository.user.value!!.favorites.contains(survey.documentId)
             binding.favoritesButton.setOnClickListener {
                 handleClick(survey.documentId)
+
+                //CreateNotification.createNotificationChannel(activity, survey.documentId) marina!!!
             }
             binding.executePendingBindings()
         }

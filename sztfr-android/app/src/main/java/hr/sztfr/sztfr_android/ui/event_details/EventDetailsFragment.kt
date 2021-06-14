@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.FragmentEventDetailsBinding
+import hr.sztfr.sztfr_android.ui.settings.CreateNotification
 import hr.sztfr.sztfr_android.util.handleClick
 
 
@@ -66,6 +67,8 @@ class EventDetailsFragment : Fragment() {
 
         binding.favoritesButton.setOnClickListener {
             handleClick(viewModel.event.value!!.documentId)
+
+            CreateNotification.createNotificationChannel(activity, viewModel.event.value!!.documentId)
         }
 
         binding.goBackBtn.setOnClickListener { requireActivity().onBackPressed() }
@@ -119,4 +122,6 @@ class EventDetailsFragment : Fragment() {
             binding.mapView.onLowMemory()
         }
     }
+
+
 }
