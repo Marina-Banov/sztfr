@@ -23,6 +23,7 @@
         <item name="actionButtonBackground">@color/white</item>
         <item name="cardButtonBackground">@color/blue_light</item>
         <item name="background">@color/white</item>
+        <item name="borderColor">@color/purple_light</item>
 
         <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
     </style>

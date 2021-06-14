@@ -55,7 +55,7 @@
                 android:padding="@dimen/spacing_small"
                 android:layout_margin="@dimen/spacing_small"
                 app:backgroundTint="?attr/cardBackgroundColor"
-                tools:srcCompat="@drawable/favorite"
+                tools:srcCompat="@drawable/ic_favorite"
                 app:favoriteIcon="@{isFavorite}"
                 app:tint="?attr/colorPrimary" />
 

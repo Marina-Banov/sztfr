@@ -14,6 +14,10 @@
     <string name="login_failed">Prijava nije uspjela</string>
     <string name="action_sign_out">Odjava</string>
 
+    <string name="dark_mode">Tamni način</string>
+    <string name="event_notifications">Primaj obavijesti o najdražim događajima</string>
+    <string name="survey_notifications">Primaj obavijesti o najdražim anketama</string>
+
     <string name="filter_by_tags">Pretraga po tagovima:</string>
 
     <string name="tag">Tag</string>
