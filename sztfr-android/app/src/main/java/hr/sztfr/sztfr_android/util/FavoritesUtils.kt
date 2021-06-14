@@ -4,11 +4,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.data.repository.UserRepository
 import kotlinx.coroutines.*
 
-fun handleClick(id: String) {
+fun handleClick(id: String, sendNotification: (() -> Unit)?) {
     val userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
 
     if (userRepository.user.value!!.uid != "") {
         val favorites = userRepository.user.value!!.favorites
+        val shouldSendNotification = !favorites.contains(id)
         favorites.apply {
             if (contains(id)) { remove(id) } else { add(id) }
         }
@@ -16,6 +17,9 @@ fun handleClick(id: String) {
         val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
         coroutineScope.launch {
             userRepository.updateFavorites(favorites)
+            if (sendNotification != null && shouldSendNotification) {
+                sendNotification()
+            }
         }
     } else {
         // TODO

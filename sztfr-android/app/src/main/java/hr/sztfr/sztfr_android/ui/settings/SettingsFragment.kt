@@ -20,6 +20,7 @@ class SettingsFragment : Fragment() {
     companion object {
         private const val NIGHT_MODE = "NIGHT_MODE"
         private const val RECEIVE_NOTIFICATIONS = "RECEIVE_NOTIFICATIONS"
+        private const val RECEIVE_NOTIFICATIONS_SURVEYS = "RECEIVE_NOTIFICATIONS_SURVEYS"
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -34,7 +35,10 @@ class SettingsFragment : Fragment() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity())
 
         binding.swDarkMode.isChecked = getDarkMode() == Configuration.UI_MODE_NIGHT_YES
-
+        binding.swEventNotification.isChecked = sharedPreferences.getBoolean(
+            RECEIVE_NOTIFICATIONS, true)
+        binding.swSurveyNotification.isChecked = sharedPreferences.getBoolean(
+            RECEIVE_NOTIFICATIONS_SURVEYS, true)
 
         binding.swDarkMode.setOnCheckedChangeListener { buttonView, isChecked ->
             if (buttonView.isShown) { //ako nema ovog nakon aktiviranja switcha kod se neprestano pokrece
@@ -55,6 +59,13 @@ class SettingsFragment : Fragment() {
             if (buttonView.isShown) { //ako nema ovog nakon aktiviranja switcha kod se neprestano pokrece
                 val receiveNotification = sharedPreferences.getBoolean(RECEIVE_NOTIFICATIONS, true)
                 sharedPreferences.edit().putBoolean(RECEIVE_NOTIFICATIONS, !receiveNotification).apply()
+            }
+        }
+
+        binding.swSurveyNotification.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (buttonView.isShown) { //ako nema ovog nakon aktiviranja switcha kod se neprestano pokrece
+                val receiveNotification = sharedPreferences.getBoolean(RECEIVE_NOTIFICATIONS_SURVEYS, true)
+                sharedPreferences.edit().putBoolean(RECEIVE_NOTIFICATIONS_SURVEYS, !receiveNotification).apply()
             }
         }
 

@@ -14,7 +14,8 @@ import hr.sztfr.sztfr_android.ui.survey_list.SurveyListAdapter
 import hr.sztfr.sztfr_android.util.DiffCallback
 
 class  FavoritesAdapter(private val showEventDetailsListener: (event: Event) -> Unit,
-                        private val showSurveyDetailsListener: (survey: SurveyModel) -> Unit) :
+                        private val showSurveyDetailsListener: (survey: SurveyModel) -> Unit,
+                        private val sendNotification: () -> Unit) :
     ListAdapter<Filterable, RecyclerView.ViewHolder>(DiffCallback()) {
 
     private val EVENT = 0
@@ -39,7 +40,7 @@ class  FavoritesAdapter(private val showEventDetailsListener: (event: Event) -> 
         viewHolder.apply {
             if (this is HomeAdapter.ViewHolder) {
                 itemView.setOnClickListener { showEventDetailsListener(item as Event) }
-                bind(item as Event)
+                bind(item as Event, sendNotification)
             } else if (this is SurveyListAdapter.ViewHolder) {
                 itemView.setOnClickListener { showSurveyDetailsListener(item as SurveyModel) }
                 bind(item as SurveyModel)
