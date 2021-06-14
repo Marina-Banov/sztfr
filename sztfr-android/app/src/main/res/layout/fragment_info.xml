@@ -59,6 +59,7 @@
                 android:textColor="?attr/accentTextColor" />
 
             <Button
+                android:id="@+id/feedback_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/about_feedback"
