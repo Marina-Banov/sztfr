@@ -1,9 +1,7 @@
 import React from "react";
 
-import spin from "./spin.svg";
-import bars from "./bars.svg";
-import puff from "./puff.svg";
-import dots from "./dots.svg";
+import spin from "assets/spin.svg";
+import bars from "assets/bars.svg";
 
 export default function Loader({ small, type }) {
   let loaderType;
@@ -14,10 +12,6 @@ export default function Loader({ small, type }) {
     loaderType = spin;
   } else if (type === "bars") {
     loaderType = bars;
-  } else if (type === "puff") {
-    loaderType = puff;
-  } else if (type === "dots") {
-    loaderType = dots;
   } else {
     loaderType = spin;
   }

@@ -7,7 +7,6 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Badge,
   Button,
 } from "reactstrap";
 import { matchPath } from "react-router-dom";
@@ -47,19 +46,6 @@ export default function Header({ toggleSidebar, isSidebarCollapsed }) {
           />
           <div className="page-heading">{getPageTitle()}</div>
           <Nav className="ml-auto" navbar vertical="false">
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                New
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>Project</DropdownItem>
-                <DropdownItem>User</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Message <Badge color="primary">10</Badge>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav>
                 <Avatar

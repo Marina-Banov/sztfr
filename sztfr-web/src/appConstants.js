@@ -6,7 +6,7 @@ const constants = {
   FIRESTORE_QUESTIONS_COLLECTION: "questions",
   STORAGE_EVENTS_PATH: "event_images/",
   STORAGE_SURVEYS_PATH: "survey_images/",
-  SURVEY_MAX_QUESTIONS: 6,
+  SURVEY_MAX_QUESTIONS: 20,
   SURVEY_MAX_CHOICES: 6,
   SURVEY_QUESTION_TYPE_TEXT: "input-text",
   SURVEY_QUESTION_TYPE_SINGLE: "single-choice",

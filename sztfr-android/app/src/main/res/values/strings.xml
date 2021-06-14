@@ -5,6 +5,25 @@
 
     <string name="welcome_title_text">Dobrodošao/la u aplikaciju SZTFR!</string>
     <string name="welcome_description_text">U ovoj aplikaciji možeš vidjeti najnovije događaje organizirane od strane tvog studentskog zbora i pomoći nam u tome da studentima Tehničkog fakulteta ponudimo još zanimljivog sadržaja odgovaranjem na naše ankete. Da bi započeo korištenje ove aplikacije, prijavi se:</string>
+    <string name="about_us_text">
+        Cilj Studentskog zbora Tehničkog fakulteta je osigurati da se dostojanstveno postiže akademski uspjeh te popularizirati
+        studente kao vrijednu zajednicu i značajan dio hrvatskog društva. Kako bi uspješno savladali sve prepreke važno je pravovremeno
+        primiti svaku informaciju koja može kritično utjecati na vaš studij. Zato vas odabrani studenti predstavljaju u odlučujućim
+        tijelima Sveučilišta u Rijeci te samoga Tehničkog fakulteta te čuvaju i bore se za poboljšanje vaših prava.
+
+        \n\nStudentski život podrazumijeva radove, kolokvije ispite i mnoge druge obaveze. u tom dijelu sudjeluje u financiranju
+        studentskih projekata, organiziranju raznih predavanja, tečajeva za dobivanje dodatnog iskustva i znanja, pomoć pri
+        ostvarivanju mobilnosti itd.
+
+        \n\nOsim nastavnih postoje i posebne izvannastavne aktivnosti koje spajaju ugodno sa korisnim tako da se organiziraju izleti,
+        kazališne predstave, brucošijade itd.
+
+        \n\nKako bi se bolje povezali sa našim studentima kreirana je mobilna aplikacija. U ovoj aplikaciji možeš vidjeti najnovije događaje
+        organizirane od strane tvog studentskog zbora. Možeš nam pomoći u tome da studentima Tehničkog fakulteta poboljšamo kvalitetu
+        studiranja i ponudimo još zanimljivog sadržaj odgovaranjem na naše ankete.
+
+
+    </string>
     <string name="prompt_email">E-mail</string>
     <string name="invalid_email">E-mail nije ispravan</string>
     <string name="login_with_email">Prijava s e-mail adresom</string>
