@@ -22,7 +22,7 @@ export default function NewQuestion({
         type: event.target.value,
       };
     } else if (question.type === constants.SURVEY_QUESTION_TYPE_TEXT) {
-      newQ = { ...question, type: event.target.value, options: ["", ""] };
+      newQ = { ...question, type: event.target.value, choices: ["", ""] };
     } else {
       newQ = { ...question, type: event.target.value };
     }
@@ -30,16 +30,16 @@ export default function NewQuestion({
   }
 
   function addChoice() {
-    const options = [...question.options];
-    options.push("");
-    let newQ = { ...question, options };
+    const choices = [...question.choices];
+    choices.push("");
+    let newQ = { ...question, choices };
     updateQuestion(order, newQ);
   }
 
   function removeChoice(index) {
-    const options = [...question.options];
-    options.splice(index, 1);
-    let newQ = { ...question, options };
+    const choices = [...question.choices];
+    choices.splice(index, 1);
+    let newQ = { ...question, choices };
     updateQuestion(order, newQ);
   }
 
@@ -49,9 +49,9 @@ export default function NewQuestion({
   }
 
   function handleChoiceChange(event, index) {
-    const options = [...question.options];
-    options[index] = event.target.value;
-    let newQ = { ...question, options };
+    const choices = [...question.choices];
+    choices[index] = event.target.value;
+    let newQ = { ...question, choices };
     updateQuestion(order, newQ);
   }
 
@@ -108,7 +108,7 @@ export default function NewQuestion({
         </Col>
       </Row>
 
-      {question.options?.map((choice, index) => (
+      {question.choices?.map((choice, index) => (
         <FormGroup
           key={index}
           className={
@@ -132,12 +132,12 @@ export default function NewQuestion({
         </FormGroup>
       ))}
 
-      {question.options && (
+      {question.choices && (
         <Button
           className="mb-3"
           color="success"
           onClick={addChoice}
-          disabled={question.options.length === constants.SURVEY_MAX_CHOICES}
+          disabled={question.choices.length === constants.SURVEY_MAX_CHOICES}
         >
           <i className="fa fa-plus" />
           &nbsp; {t("surveys.new_choice")}

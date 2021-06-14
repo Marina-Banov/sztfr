@@ -4,7 +4,7 @@ import CmsEvents from "./CmsPage/CmsEvents";
 import CmsSurveys from "./CmsPage/CmsSurveys";
 import DatePicker from "./DatePicker";
 import Header from "./Header";
-import Loader from "../../vibe/components/Loader";
+import Loader from "./Loader";
 import Main from "./Main";
 import Page from "./Page";
 import PageAlert from "./Page/PageAlert";
