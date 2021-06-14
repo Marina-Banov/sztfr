@@ -1,11 +1,12 @@
 package hr.sztfr.sztfr_android.ui.login
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -42,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
         private const val GOOGLE_SIGN_IN_REQ_CODE = 123
         private const val USER_EMAIL_KEY = "USER_EMAIL"
         // private const val EMAIL_AUTH_LINK_KEY = "EMAIL_AUTH_LINK"
+        private const val NIGHT_MODE = "NIGHT_MODE"
     }
 
     private val _loading = MutableLiveData(false)
@@ -51,8 +53,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        sharedPreferences = this.getPreferences(Context.MODE_PRIVATE)
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         auth = Firebase.auth
+
+        val nightMode = sharedPreferences.getInt(NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        AppCompatDelegate.setDefaultNightMode(nightMode)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
