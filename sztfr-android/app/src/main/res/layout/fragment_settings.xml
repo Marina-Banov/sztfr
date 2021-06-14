@@ -85,7 +85,8 @@
       <ImageButton
           android:id="@+id/btn_logout"
           style="@style/Widget.SZTFR.SettingsItemIcon"
-          app:srcCompat="@drawable/ic_logout" />
+          app:srcCompat="@drawable/ic_logout"
+          android:backgroundTint="?attr/screensBackgroundColor"/>
 
       <TextView
           style="@style/TextAppearance.SZTFR.UserSettings"
