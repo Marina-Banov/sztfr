@@ -50,7 +50,7 @@
 
     <style name="ShapeAppearance.SZTFR.RoundedCorners" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">8dp</item>
+        <item name="cornerSize">@dimen/spacing_small</item>
     </style>
 
     <style name="TextAppearance.SZTFR.CardDetailsTitle" parent="">
@@ -72,6 +72,9 @@
     <style name="TextAppearance.SZTFR.DetailsDescription" parent="">
         <item name="android:textColor">?attr/lightTextColor</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textIsSelectable">true</item>
+        <item name="android:autoLink">web|phone|email</item>
+        <item name="android:textColorLink">?attr/colorPrimary</item>
     </style>
 
     <style name="Widget.SZTFR.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
@@ -109,5 +112,46 @@
     <style name="ThemeOverlay.SZTFR.FormControl" parent="">
         <item name="colorControlActivated">?attr/colorPrimary</item>
         <item name="colorControlHighlight">?attr/colorPrimary</item>
+    </style>
+
+    <style name="TextAppearance.SZTFR.UserSettings" parent="">
+        <item name="android:textColor">?attr/accentTextColor</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_weight">6</item>
+    </style>
+
+    <style name="Widget.SZTFR.SettingsItem" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/settings_layout_border</item>
+    </style>
+
+    <style name="Widget.SZTFR.SettingsSwitch" parent="">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">@dimen/spacing_normal</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:theme">@style/Widget.SZTFR.CompoundButton.Switch</item>
+    </style>
+
+    <style name="Widget.SZTFR.SettingsItemIcon" parent="">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="tint">?attr/colorPrimary</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:layout_marginTop">@dimen/spacing_extra_small</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_extra_small</item>
+        <item name="android:padding">@dimen/spacing_small</item>
+    </style>
+
+    <style name="Widget.SZTFR.CompoundButton.Switch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="colorControlNormal">?attr/colorPrimary</item>
+        <item name="colorSwitchThumbNormal">?attr/lightTextColor</item> <!-- inactive thumb color -->
+        <item name="android:colorForeground">?attr/lightTextColor</item><!-- inactive track color (30% transparency) -->
     </style>
 </resources>

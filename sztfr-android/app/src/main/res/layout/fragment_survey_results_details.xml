@@ -55,7 +55,7 @@
                         android:layout_height="48dp"
                         android:layout_marginEnd="@dimen/spacing_normal"
                         app:cornerRadius="24dp"
-                        tools:icon="@drawable/favorite"
+                        tools:icon="@drawable/ic_favorite"
                         app:favoriteIcon="@{viewModel.isFavorite}"
                         app:iconGravity="top"
                         app:iconTint="?attr/accentTextColor"

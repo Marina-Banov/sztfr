@@ -89,7 +89,7 @@
                     android:layout_gravity="bottom"
                     android:padding="@dimen/spacing_small"
                     android:layout_marginBottom="@dimen/spacing_small"
-                    app:srcCompat="@drawable/more"
+                    app:srcCompat="@drawable/ic_more"
                     app:backgroundTint="?attr/cardBackgroundColor" />
 
                 <ImageButton
@@ -100,7 +100,7 @@
                     android:padding="@dimen/spacing_small"
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:layout_marginEnd="@dimen/spacing_small"
-                    tools:srcCompat="@drawable/favorite"
+                    tools:srcCompat="@drawable/ic_favorite"
                     app:favoriteIcon="@{isFavorite}"
                     app:tint="?attr/colorPrimary"
                     app:backgroundTint="?attr/cardBackgroundColor" />

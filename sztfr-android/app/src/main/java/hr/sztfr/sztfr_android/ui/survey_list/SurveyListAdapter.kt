@@ -22,7 +22,7 @@ class SurveyListAdapter(private val showDetailsListener: (survey: SurveyModel) -
             binding.survey = survey
             binding.isFavorite = userRepository.user.value!!.favorites.contains(survey.documentId)
             binding.favoritesButton.setOnClickListener {
-                handleClick(survey.documentId)
+                handleClick(survey.documentId, null)
             }
             binding.executePendingBindings()
         }

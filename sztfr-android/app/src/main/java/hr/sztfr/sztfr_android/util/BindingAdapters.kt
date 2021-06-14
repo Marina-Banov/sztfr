@@ -11,7 +11,6 @@ import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.data.FirestoreRepository
 import hr.sztfr.sztfr_android.data.model.Event
 import hr.sztfr.sztfr_android.data.model.Filterable
-import hr.sztfr.sztfr_android.data.model.Question
 import hr.sztfr.sztfr_android.data.model.SurveyModel
 import hr.sztfr.sztfr_android.ui.favorites.FavoritesAdapter
 import hr.sztfr.sztfr_android.ui.home.HomeAdapter
@@ -56,8 +55,8 @@ fun setStatusIcon(view: ImageView, item: SurveyModel?) {
 
 @BindingAdapter("favoriteIcon")
 fun setFavoriteIcon(view: View, isFavorite: Boolean) {
-    val icon = if (isFavorite) { R.drawable.favorite_filled }
-               else { R.drawable.favorite }
+    val icon = if (isFavorite) { R.drawable.ic_favorite_filled }
+               else { R.drawable.ic_favorite }
     if (view is ImageButton) {
         view.setImageResource(icon)
     } else if (view is MaterialButton) {

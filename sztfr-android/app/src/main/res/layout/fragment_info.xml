@@ -45,6 +45,16 @@
         </ScrollView>
 
 
+        <Button
+                android:id="@+id/feedback_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/about_feedback"
+                android:layout_centerInParent="true"
+                android:layout_alignParentEnd="true"
+                style="@style/Widget.SZTFR.ActionButton"
+                android:text="@string/about_feedback_btn"/>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/about_version"

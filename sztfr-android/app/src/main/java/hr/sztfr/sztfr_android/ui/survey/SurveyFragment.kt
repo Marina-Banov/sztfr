@@ -35,5 +35,4 @@ class SurveyFragment : Fragment() {
         binding.pager.adapter = SurveyPagerAdapter(childFragmentManager)
         return binding.root
     }
-
 }

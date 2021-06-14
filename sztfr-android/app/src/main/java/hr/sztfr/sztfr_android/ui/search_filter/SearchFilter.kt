@@ -1,10 +1,12 @@
 package hr.sztfr.sztfr_android.ui.search_filter
 
 import android.content.Context
+import android.content.Intent
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
 import com.google.android.material.chip.Chip
@@ -12,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.data.repository.EnumsRepository
 import hr.sztfr.sztfr_android.databinding.LayoutSearchFilterBinding
+import hr.sztfr.sztfr_android.ui.settings.SettingsActivity
 import java.util.ArrayList
 
 class SearchFilter(ctx: Context, attributeSet: AttributeSet? = null):
@@ -34,6 +37,11 @@ class SearchFilter(ctx: Context, attributeSet: AttributeSet? = null):
         val inflater = ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = DataBindingUtil.inflate(inflater, R.layout.layout_search_filter, this, true)
         binding.lifecycleOwner = ctx as LifecycleOwner
+
+        binding.profileButton.setOnClickListener {
+            val intent = Intent(ctx, SettingsActivity::class.java)
+            startActivity(ctx, intent, null)
+        }
 
         _selectedTags.value = ArrayList()
 

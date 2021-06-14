@@ -46,10 +46,10 @@ class MainFragment : Fragment() {
         )
 
         binding.meowMenu.apply {
-            add(MeowBottomNavigation.Model(HOME, R.drawable.house))
-            add(MeowBottomNavigation.Model(SURVEY, R.drawable.bar_chart))
-            add(MeowBottomNavigation.Model(FAVORITES, R.drawable.favorite))
-            add(MeowBottomNavigation.Model(INFO, R.drawable.info))
+            add(MeowBottomNavigation.Model(HOME, R.drawable.ic_home))
+            add(MeowBottomNavigation.Model(SURVEY, R.drawable.ic_chart))
+            add(MeowBottomNavigation.Model(FAVORITES, R.drawable.ic_favorite))
+            add(MeowBottomNavigation.Model(INFO, R.drawable.ic_info))
             setOnClickMenuListener { binding.fragmentContainer.currentItem = it.id }
         }
 

@@ -1,8 +1,10 @@
 package hr.sztfr.sztfr_android.ui.event_details
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
 import hr.sztfr.sztfr_android.data.repository.UserRepository
 import hr.sztfr.sztfr_android.databinding.FragmentEventDetailsBinding
+import hr.sztfr.sztfr_android.util.CreateNotification
 import hr.sztfr.sztfr_android.util.handleClick
 
 
@@ -28,10 +31,12 @@ class EventDetailsFragment : Fragment() {
     private lateinit var viewModel: EventDetailsViewModel
     private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
     private var googleMap: GoogleMap? = null
+    private lateinit var sharedPreferences: SharedPreferences
 
     companion object {
         const val MAPS_QUERY = "https://www.google.com/maps/search/?api=1&query="
         const val MAPS_QUERY_PLACE_ID = "&query_place_id="
+        private const val RECEIVE_NOTIFICATIONS = "RECEIVE_NOTIFICATIONS"
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -40,6 +45,8 @@ class EventDetailsFragment : Fragment() {
         val application = requireActivity().application
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_event_details, container, false)
         binding.lifecycleOwner = this
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity())
 
         val event = EventDetailsFragmentArgs.fromBundle(requireArguments()).event
         val viewModelFactory = EventDetailsViewModelFactory(event, application)
@@ -65,12 +72,18 @@ class EventDetailsFragment : Fragment() {
         }
 
         binding.favoritesButton.setOnClickListener {
-            handleClick(viewModel.event.value!!.documentId)
+            handleClick(viewModel.event.value!!.documentId, this::sendNotification)
         }
 
         binding.goBackBtn.setOnClickListener { requireActivity().onBackPressed() }
 
         return binding.root
+    }
+
+    private fun sendNotification() {
+        if (sharedPreferences.getBoolean(RECEIVE_NOTIFICATIONS, true)) {
+            CreateNotification.createNotificationChannel(activity)
+        }
     }
 
     private fun initMapView(savedInstanceState: Bundle?, place: Place) {
@@ -119,4 +132,6 @@ class EventDetailsFragment : Fragment() {
             binding.mapView.onLowMemory()
         }
     }
+
+
 }

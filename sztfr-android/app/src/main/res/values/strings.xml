@@ -33,6 +33,10 @@
     <string name="login_failed">Prijava nije uspjela</string>
     <string name="action_sign_out">Odjava</string>
 
+    <string name="dark_mode">Tamni način</string>
+    <string name="event_notifications">Primaj obavijesti o najdražim događajima</string>
+    <string name="survey_notifications">Primaj obavijesti o najdražim anketama</string>
+
     <string name="filter_by_tags">Pretraga po tagovima:</string>
 
     <string name="tag">Tag</string>
@@ -64,4 +68,18 @@
     <string name="povratak">POVRATAK</string>
     <string name="send_answers">POŠALJI ODGOVORE</string>
 
+    <string name="hello_survey_fragment">Hello survey fragment</string>
+    <string name="hello_info_fragment">Hello info fragment</string>
+
+    <string name="channel_name">SZTFR app</string>
+    <string name="channel_description">SZTFR notification</string>
+    <string name="notification_title">Pripremi se!</string>
+    <string name="notification_text">Uskoro počinje događaj Studentskog Zbora!</string>
+    <string name="default_notification_channel_id">1234</string>
+
+    <string name="msg_token_fmt" translatable="false">FCM registration Token: %s</string>
+    <string name="fcm_message">FCM Message</string>
+
+    <string name="theme">day</string>
+    <string name="notifications">Y</string>
 </resources>

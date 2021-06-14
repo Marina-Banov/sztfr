@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ImageView.ScaleType
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -90,7 +89,7 @@ class SurveyResultsDetailsFragment : Fragment() {
         binding.surveyResultsDetailsGoBackBtn.setOnClickListener { requireActivity().onBackPressed() }
 
         binding.favoritesButton.setOnClickListener {
-            handleClick(viewModel.surveyModel.value!!.documentId)
+            handleClick(viewModel.surveyModel.value!!.documentId, null)
         }
 
         return binding.root

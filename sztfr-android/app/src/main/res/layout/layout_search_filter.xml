@@ -13,21 +13,25 @@
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_marginEnd="@dimen/spacing_normal">
 
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search"
+            android:background="@drawable/search_view_bg"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/spacing_normal" />
+
         <ImageButton
             android:id="@+id/profile_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_profile"
-            android:tint="?attr/colorPrimary"
+            app:srcCompat="@drawable/ic_settings"
+            android:tint="?attr/accentTextColor"
             android:background="@drawable/circle"
+            android:padding="@dimen/spacing_small"
             app:backgroundTint="?attr/cardBackgroundColor" />
-
-        <SearchView
-            android:id="@+id/search"
-            android:background="?attr/cardBackgroundColor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal" />
     </LinearLayout>
 
     <HorizontalScrollView

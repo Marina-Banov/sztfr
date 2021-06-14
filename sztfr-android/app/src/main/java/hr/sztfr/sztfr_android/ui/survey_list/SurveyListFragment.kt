@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import hr.sztfr.sztfr_android.R
@@ -17,10 +16,27 @@ import hr.sztfr.sztfr_android.ui.MainFragmentDirections
 import hr.sztfr.sztfr_android.ui.survey.SurveyFragment
 import hr.sztfr.sztfr_android.util.filterByStatus
 
-class SurveyListFragment(private val isPublished: Boolean): Fragment() {
-
+class SurveyListFragment : Fragment() {
     private lateinit var binding: FragmentSurveyListBinding
     private var userRepository = UserRepository.getInstance(FirebaseFirestore.getInstance())
+    private var isPublished: Boolean = false
+
+    companion object {
+        const val IS_PUBLISHED = "isPublished"
+
+        fun newInstance(isPublished: Boolean): SurveyListFragment {
+            val bundle = Bundle(1)
+            bundle.putBoolean(IS_PUBLISHED, isPublished)
+            val fragment = SurveyListFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isPublished = requireArguments().getBoolean(IS_PUBLISHED)
+    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,

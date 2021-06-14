@@ -61,7 +61,7 @@
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/details_img"
-                        tools:icon="@drawable/favorite" />
+                        tools:icon="@drawable/ic_favorite" />
 
                     <TextView
                         android:id="@+id/details_title"
@@ -83,6 +83,7 @@
                     style="@style/TextAppearance.SZTFR.DetailsDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:autoLink="none"
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:text="@{viewModel.event.startTime.toLocaleString()}"
                     tools:text="@string/event_dummy_time"
